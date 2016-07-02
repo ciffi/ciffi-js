@@ -22,7 +22,7 @@ ciffi setup projectName
 
 * rispondere alle domande per genereare i file di configurazione dell'app
 
-###verranno modificati i file scss:###
+###verranno generati i file scss:###
 * dev/styles/config/config-dev.scss
 * dev/styles/config/config-local.scss
 * dev/styles/config/config-stage.scss
