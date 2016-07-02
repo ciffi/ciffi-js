@@ -1,3 +1,4 @@
+var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
@@ -21,6 +22,9 @@ module.exports = {
 		]
 	},
 	plugins: [
+		new OpenBrowserPlugin({
+			url: 'http://localhost:8080'
+		}),
 		new HtmlWebpackPlugin({
 			template: __dirname + '/dev/index.html',
 			filename: 'index.html',
