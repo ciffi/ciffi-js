@@ -6,6 +6,10 @@ var Page = (function() {
 		console.log('example page loaded');
 	}
 
+	Page.prototype.setData = function(data) {
+		console.log(data);
+	};
+
 	return new Page();
 
 })();

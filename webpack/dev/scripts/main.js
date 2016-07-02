@@ -26,19 +26,23 @@ $(document).ready(function() {
 			name: 'home',
 			element: '.js-router--home'
 		},{
-			name: 'two',
+			name: 'example',
 			element: '.js-router--example',
 			onLoad: function() {
-				console.log('example page');
+				console.log('example');
 			}
 		}],
 		onLoadSuccess: function(data) {
 			switch(data.currentRoute) {
 				case 'home':
-					require('./pages/home');
+					require('./pages/home').setData({
+						config: CONFIG.config
+					});
 					break;
 				case 'example':
-					require('./pages/example');
+					require('./pages/example').setData({
+						config: CONFIG.config
+					});
 					break;
 				default:
 					break;
