@@ -13,7 +13,10 @@
   "license": "ISC",
   "homepage": "https://github.com/ciffi/ciffi-frontend-generator",
   "dependencies": {
+    "foreach": "^2.0.5",
     "meow": "^3.7.0",
+    "prompt": "^1.0.0",
+    "replace-in-file": "^1.1.1",
     "shelljs": "^0.7.0"
   },
   "bin": {
