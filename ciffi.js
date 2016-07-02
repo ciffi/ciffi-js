@@ -27,6 +27,8 @@ if(!cmd) {
 		showCommandListMsg();
 	}else if(opts.v) {
 		console.log(pkg.version);
+	}else if(opts.a) {
+		console.log(pkg.author.name);
 	}else {
 		showDefaultMsg();
 	}

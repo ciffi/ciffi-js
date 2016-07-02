@@ -28,7 +28,7 @@ var AppSetup = (function() {
       console.log('');
       console.log('-- ciffi build for generate build package --');
       console.log('');
-      console.log(pkg.author+' ^_^');
+      console.log(pkg.author.name+' ^_^');
       console.log('');
     }
 
