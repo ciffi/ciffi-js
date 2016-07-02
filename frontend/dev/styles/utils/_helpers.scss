@@ -1,0 +1,14 @@
+@mixin ratio($w,$h) {
+  @if $w == 0  {
+    &:before {
+      display: none;
+    }
+  }@else {
+    &:before {
+      display: block;
+      content: '';
+      width: 100%;
+      padding-bottom: ($h/$w)*100%;
+    }
+  }
+}
