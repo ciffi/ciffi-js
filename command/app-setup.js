@@ -1,7 +1,7 @@
 var each = require('foreach');
 var prompt = require('prompt');
 var replace = require('replace-in-file');
-var pkg = require('./package.json');
+var pkg = require('../package.json');
 
 var AppSetup = (function() {
 
