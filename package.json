@@ -5,7 +5,7 @@
   "main": "ciffidesign.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:ciffi/ciffi-frontend-generator.git"
+    "url": "github.com:ciffi/ciffi-frontend-generator.git"
   },
   "author": {
     "name": "Ciffi"
