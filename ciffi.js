@@ -25,7 +25,7 @@ if(!cmd) {
 	if(opts.h) {
 		showCommandListMsg();
 	}else if(opts.v) {
-		console.log(process.evn.version);
+		console.log(process.env.version);
 	}else {
 		showDefaultMsg();
 	}
