@@ -5,7 +5,7 @@
 ```
 #!javascript
 
-npm install -g bitbucket:purplenetwork/frontend-webpack-build.git
+npm install -g git:ciffi/ciffi-frontend-generator.git
 
 ```
 
@@ -16,7 +16,7 @@ npm install -g bitbucket:purplenetwork/frontend-webpack-build.git
 ```
 #!javascript
 
-ciffidesign:setup
+ciffi setup projectName
 
 ```
 
@@ -48,6 +48,6 @@ e collegarsi all'indirizzo http://localhost:8080
 ```
 #!javascript
 
-npm run dev
+npm run build
 
 ```
