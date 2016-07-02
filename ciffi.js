@@ -11,6 +11,7 @@ var cli = meow({
 var opts = cli.flags;
 var args = cli.input;
 var cmd = args[0];
+var pkg = cli.pkg;
 var projectName = args[1];
 
 Object.keys(opts).forEach(function (key) {
@@ -25,7 +26,7 @@ if(!cmd) {
 	if(opts.h) {
 		showCommandListMsg();
 	}else if(opts.v) {
-		console.log(process.env.version);
+		console.log(pkg.version);
 	}else {
 		showDefaultMsg();
 	}

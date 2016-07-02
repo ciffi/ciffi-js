@@ -1,6 +1,7 @@
 var each = require('foreach');
 var prompt = require('prompt');
 var replace = require('replace-in-file');
+var pkg = require('./package.json');
 
 var AppSetup = (function() {
 
@@ -27,7 +28,7 @@ var AppSetup = (function() {
       console.log('');
       console.log('-- ciffi build for generate build package --');
       console.log('');
-      console.log(process.env.npm_package_author_name+' ^_^');
+      console.log(pkg.author+' ^_^');
       console.log('');
     }
 
