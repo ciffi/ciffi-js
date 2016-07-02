@@ -1,20 +1,31 @@
 #! /usr/bin/env node
 var shell = require('shelljs');
 
-var _modulePath = process.config.variables.node_prefix+'/lib/node_modules/ciffi/webpack/*';
-var _projectPath = process.env.PWD+'/';
+var Setup = (function() {
 
-shell.cp('-R',_modulePath,_projectPath);
+	function Setup(config) {
+		console.log('asdsadada',config);
+	}
 
-var npm = require('npm');
-npm.load(function(err) {
+	var _modulePath = process.config.variables.node_prefix+'/lib/node_modules/ciffi/webpack/*';
+	var _projectPath = process.env.PWD+'/';
 
-  npm.commands.run(['setup'], function(er, data) {
-    
-  });
+	shell.cp('-R',_modulePath,_projectPath);
 
-  npm.on('log', function(message) {
-    console.log(message);
-  });
+	var npm = require('npm');
+	npm.load(function(err) {
 
-});
+	  npm.commands.run(['setup'], function(er, data) {
+	    
+	  });
+
+	  npm.on('log', function(message) {
+	    console.log(message);
+	  });
+
+	});
+
+	return Setup;
+})();
+
+module.exports = Setup;

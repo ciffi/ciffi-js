@@ -27,9 +27,10 @@ if(!cmd) {
 }else {
 	switch(cmd) {
 		case 'setup':
-			console.log(args);
-			console.log(cmd);
-			console.log(projectName);
+			var Setup = require('./command/setup');
+			var newProject = new Setup({
+				projectName: projectName
+			});
 			break;
 		default:
 			console.log('Comando non disponibile - ciffi -c per la lista dei comandi disponibili');
