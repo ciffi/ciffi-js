@@ -2,7 +2,7 @@
   "name": "ciffi",
   "version": "1.0.0",
   "description": "CifFi Frontend Generator",
-  "main": "ciffidesign.js",
+  "main": "ciffi.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ciffi/ciffi-frontend-generator.git"
@@ -13,6 +13,7 @@
   "license": "ISC",
   "homepage": "https://github.com/ciffi/ciffi-frontend-generator",
   "dependencies": {
+    "chalk": "^1.1.3",
     "foreach": "^2.0.5",
     "meow": "^3.7.0",
     "prompt": "^1.0.0",

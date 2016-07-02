@@ -1,6 +1,9 @@
 {
   "name": "webpack-base-project",
   "version": "1.0.0",
+  "author": {
+    "name": "ciffi"
+  },
   "description": "Webpack Base Project",
   "main": "app-setup.js",
   "repository": {
@@ -38,12 +41,5 @@
     "setup": "npm install",
     "dev": "webpack-dev-server --progress --inline",
     "build": "webpack -p && npm run copyImages && npm run copyFonts && npm run copyPdf"
-  },
-  "gitHead": "a529fa70bd88ab6a7709b69c7f2c993f764a8f62",
-  "readme": "# frontend - webpack build system #\n\n##scaricare zip ed estrarre##\n\n* [download zip](https://bitbucket.org/purplenetwork/frontend-webpack-build/downloads)\n\n##installare tramite npm##\n\n* npm install bitbucket:purplenetwork/frontend-webpack-build.git\n\n##setup e configurazione##\n\n* modificare file .gitignore nella root\n\n* dalla linea di comando eseguire npm run setup\n\n```\n#!javascript\n\nnpm run setup\n\n```\n\n* rispondere alle domande per genereare i file di configurazione dell'app\n\n###verranno modificati i file scss:###\n* dev/styles/config/config-dev.scss\n* dev/styles/config/config-local.scss\n* dev/styles/config/config-stage.scss\n* dev/styles/config/config-prod.scss\n\n###verrà generato il file javascipt:###\n* dev/scripts/config/config.js\n\n##sviluppo locale##\n\n```\n#!javascript\n\nnpm run dev\n\n```\ne collegarsi all'indirizzo http://localhost:8080\n\n##build##\n\n```\n#!javascript\n\nnpm run dev\n\n```",
-  "readmeFilename": "README.md",
-  "_id": "webpack-base-project@1.0.0",
-  "_shasum": "fc0d8f4a2cd02a50d36ac1c97ecf7c7a9acea1cc",
-  "_from": "bitbucket:purplenetwork/frontend-webpack-build",
-  "_resolved": "git+ssh://git@bitbucket.org/purplenetwork/frontend-webpack-build.git#a529fa70bd88ab6a7709b69c7f2c993f764a8f62"
+  }
 }

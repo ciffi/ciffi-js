@@ -2,6 +2,7 @@
 'use strict';
 
 var meow = require('meow');
+var chalk = require('chalk');
 var pkg = require('./package.json');
 
 var cli = meow({
@@ -26,9 +27,11 @@ if(!cmd) {
 	if(opts.h) {
 		showCommandListMsg();
 	}else if(opts.v) {
-		console.log(pkg.version);
+		console.log(chalk.magenta.bold(pkg.version));
 	}else if(opts.a) {
-		console.log(pkg.author.name);
+		console.log(chalk.blue(pkg.author.name));
+	}else if(opts.logo) {
+		showLogo();
 	}else {
 		showDefaultMsg();
 	}
@@ -47,7 +50,7 @@ if(!cmd) {
 			require('./command/app-build');
 			break;
 		default:
-			console.log('Comando non disponibile - ciffi -h per la lista dei comandi disponibili');
+			console.log(chalk.yellow('Comando non disponibile - ciffi -h per la lista dei comandi disponibili'));
 			break;
 	}
 }
@@ -55,32 +58,58 @@ if(!cmd) {
 function showDefaultMsg() {
 	console.log('');
 	console.log('');
-	console.log('CiffiDesign Frontend Generator');
+	console.log(chalk.green('CiffiDesign Frontend Generator'));
 	console.log('');
+	console.log(chalk.yellow('ciffi -h per la lista dei comandi disponibili'));
 	console.log('');
 }
 
 function showCommandListMsg() {
 	console.log('');
 	console.log('');
-	console.log('CiffiDesign Frontend Generator');
+	console.log(chalk.green('CiffiDesign Frontend Generator'));
 	console.log('');
 	console.log('');
 	console.log('Comandi disponibili:');
 	console.log('');
 	console.log('- setup progetto');
 	console.log('');
-	console.log('ciffi setup projectName');
+	console.log(chalk.blue('ciffi setup projectName'));
 	console.log('');
 	console.log('');
 	console.log('- sviluppo locale progetto');
 	console.log('');
-	console.log('ciffi dev');
+	console.log(chalk.blue('ciffi dev'));
 	console.log('');
 	console.log('');
 	console.log('- build progetto');
 	console.log('');
-	console.log('ciffi build');
+	console.log(chalk.blue('ciffi build'));
 	console.log('');
 	console.log('');
+}
+
+function showLogo() {
+	console.log(chalk.black(''));
+	console.log(chalk.black('           `-+shmNNNNNNmhy+:`           '));
+	console.log(chalk.black('        .odNmmNNNNNNNNNNNNmmNdo-        '));
+	console.log(chalk.black('      /dNmmNMMMMMMMMMMMMsmMMNmmNm+      '));
+	console.log(chalk.black('    :mNmNMMMMMMm:NMMMMMM:NMMMMMNmNN/    '));
+	console.log(chalk.black('   sMmNMMMMMMMMMm:NMMMMM-MMMMMMMMhmMh`  '));
+	console.log(chalk.black('  hMdMhssymMMMMMMd:MMMMyoMMMMMNs+dMdNm` '));
+	console.log(chalk.black(' yMdMMMMMNhsoyNMMMsoMMy+MMMMmoomMMMMdMd '));
+	console.log(chalk.black(':MdMMMMMMMMMMNsosNM-NsoMmysosNMMMMMMMdM+'));
+	console.log(chalk.black('hMdMMMMMMMMMMdos:-+:+-s::+sssssNMMMMMmMm'));
+	console.log(chalk.black('mMmMMMMMMMMNy.dMdM:-mmooddohMMMMMMMMMMdM'));
+	console.log(chalk.black('mMmMMMMMMMMNy.mMmM:-mmoodhohMMMMMMMMMMdM'));
+	console.log(chalk.black('hMdMMMMMMMMMMdos:-/:+-o-:osssssNMMMMMmNm'));
+	console.log(chalk.black(':MdMMMMMMMMMMNyosNM-NsoMmysoyMMMMMMMMdMo'));
+	console.log(chalk.black(' yMdMMMMMNhsosmMMMyoMMy+MMMMmooNMMMMdNm '));
+	console.log(chalk.black(' `dMdMhssydMMMMMMd:MMMMyoMMMMMNsodMmNm. '));
+	console.log(chalk.black('   yMmNMMMMMMMMMm:NMMMMM-MMMMMMMMhmMh`  '));
+	console.log(chalk.black('    :mNmNMMMMMMm:NMMMMMM:NMMMMMNmNN+    '));
+	console.log(chalk.black('      /dNmmNMMMMMMMMMMMMsmMMNmmNm+`     '));
+	console.log(chalk.black('        .odNmmNNNNNMMMNNNNmmNms-        '));
+	console.log(chalk.black('           `:oydmNNNNNNmdyo:`           '));
+	console.log(chalk.black(''));
 }
