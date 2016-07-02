@@ -22,18 +22,29 @@ Object.keys(opts).forEach(function (key) {
 });
 
 if(!cmd) {
-	console.log(opts);
-	showDefaultMsg();
+	if(opts.h) {
+		showCommandListMsg();
+	}else if(opts.v) {
+		console.log(process.evn.version);
+	}else {
+		showDefaultMsg();
+	}
 }else {
 	switch(cmd) {
 		case 'setup':
-			var Setup = require('./command/setup');
+			var Setup = require('./command/app-setup');
 			var newProject = new Setup({
 				projectName: projectName
 			});
 			break;
+		case 'dev':
+			require('./command/app-dev');
+			break;
+		case 'build':
+			require('./command/app-build');
+			break;
 		default:
-			console.log('Comando non disponibile - ciffi -c per la lista dei comandi disponibili');
+			console.log('Comando non disponibile - ciffi -h per la lista dei comandi disponibili');
 			break;
 	}
 }
