@@ -11,7 +11,7 @@ var cli = meow({
 var opts = cli.flags;
 var args = cli.input;
 var cmd = args[0];
-var pkg = cli.pkg;
+var projectName = args[1];
 
 Object.keys(opts).forEach(function (key) {
 	var legacyKey = key.replace(/[A-Z]/g, function (m) {
@@ -22,15 +22,30 @@ Object.keys(opts).forEach(function (key) {
 });
 
 if(!cmd) {
+	console.log(opts);
 	showDefaultMsg();
 }else {
-	console.log(opts);
-	console.log(args);
-	console.log(cmd);
-	console.log(pkg);
+	switch(cmd) {
+		case 'setup':
+			console.log(args);
+			console.log(cmd);
+			console.log(projectName);
+			break;
+		default:
+			console.log('Comando non disponibile - ciffi -c per la lista dei comandi disponibili');
+			break;
+	}
 }
 
 function showDefaultMsg() {
+	console.log('');
+	console.log('');
+	console.log('CiffiDesign Frontend Generator');
+	console.log('');
+	console.log('');
+}
+
+function showCommandListMsg() {
 	console.log('');
 	console.log('');
 	console.log('CiffiDesign Frontend Generator');

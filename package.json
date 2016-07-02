@@ -1,7 +1,7 @@
 {
   "name": "ciffi",
   "version": "1.0.0",
-  "description": "Webpack Base Project",
+  "description": "CifFi Frontend Generator",
   "main": "ciffidesign.js",
   "repository": {
     "type": "git",
