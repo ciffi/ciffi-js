@@ -11,6 +11,7 @@ var cli = meow({
 var opts = cli.flags;
 var args = cli.input;
 var cmd = args[0];
+var pkg = cli.pkg;
 
 Object.keys(opts).forEach(function (key) {
 	var legacyKey = key.replace(/[A-Z]/g, function (m) {
@@ -20,18 +21,36 @@ Object.keys(opts).forEach(function (key) {
 	opts[legacyKey] = opts[key];
 });
 
-console.log('');
-console.log('');
-console.log('CiffiDesign Frontend Generator');
-console.log('');
-console.log('');
-console.log('Comandi disponibili:');
-console.log('');
-console.log('- setup progetto');
-console.log('');
-console.log('ciffidesign:setup');
-console.log('');
-console.log('');
-console.log(opts);
-console.log(args);
-console.log(cmd);
+if(!cmd) {
+	showDefaultMsg();
+}else {
+	console.log(opts);
+	console.log(args);
+	console.log(cmd);
+	console.log(pkg);
+}
+
+function showDefaultMsg() {
+	console.log('');
+	console.log('');
+	console.log('CiffiDesign Frontend Generator');
+	console.log('');
+	console.log('');
+	console.log('Comandi disponibili:');
+	console.log('');
+	console.log('- setup progetto');
+	console.log('');
+	console.log('ciffi setup projectName');
+	console.log('');
+	console.log('');
+	console.log('- sviluppo locale progetto');
+	console.log('');
+	console.log('ciffi dev');
+	console.log('');
+	console.log('');
+	console.log('- build progetto');
+	console.log('');
+	console.log('ciffi build');
+	console.log('');
+	console.log('');
+}

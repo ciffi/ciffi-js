@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 var shell = require('shelljs');
 
-var _modulePath = process.config.variables.node_prefix+'/lib/node_modules/webpack-base-project/frontend/*';
+var _modulePath = process.config.variables.node_prefix+'/lib/node_modules/ciffi/webpack/*';
 var _projectPath = process.env.PWD+'/';
 
 shell.cp('-R',_modulePath,_projectPath);

@@ -3,18 +3,16 @@
 ##installare globalmente tramite npm##
 
 ```
-#!javascript
 
-npm install -g git:ciffi/ciffi-frontend-generator.git
+npm install -g github:ciffi/ciffi-frontend-generator.git
 
 ```
 
 ##utilizzo##
 
-* dalla linea di comando posizionarsi nella root del nuovo progetto ed eseguire il comando ciffidesign:setup
+* dalla linea di comando posizionarsi nella root del nuovo progetto ed eseguire il comando ciffi setup nomeprogetto (il nome del progetto definirà anche le url di base del configuratore)
 
 ```
-#!javascript
 
 ciffi setup projectName
 
@@ -36,9 +34,8 @@ ciffi setup projectName
 ##sviluppo locale##
 
 ```
-#!javascript
 
-npm run dev
+ciffi dev
 
 ```
 e collegarsi all'indirizzo http://localhost:8080
@@ -46,8 +43,7 @@ e collegarsi all'indirizzo http://localhost:8080
 ##build##
 
 ```
-#!javascript
 
-npm run build
+ciffi build
 
 ```
