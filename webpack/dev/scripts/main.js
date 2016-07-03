@@ -64,9 +64,8 @@ $(document).ready(function() {
 	});
 
 	cookiesPrivacy.write();
-	cookiesPrivacy.read(function(res) {
-		console.log(res);
-	});
+	var _privacy = cookiesPrivacy.read();
+	console.log(_privacy);
 	cookiesPrivacy.remove();
 	*/
 	/* COOKIES */

@@ -27,7 +27,7 @@ var Cookies = (function() {
 		document.cookie = this.config.name+'='+JSON.stringify(this.config.value)+expires+'; path=/';
 	};
 
-	Cookies.prototype.read = function(callback) {
+	Cookies.prototype.read = function() {
 		var nameEQ = this.config.name + '=';
 		var ca = document.cookie.split(';');
 		for(var i=0;i < ca.length;i++) {
@@ -36,10 +36,10 @@ var Cookies = (function() {
 		    	c = c.substring(1,c.length);
 		    }
 		    if (c.indexOf(nameEQ) === 0) {
-		    	callback(JSON.parse(c.substring(nameEQ.length,c.length)));
+		    	return JSON.parse(c.substring(nameEQ.length,c.length));
 		    }
 		}
-		callback(null);
+		return null;
 	};
 
 	Cookies.prototype.remove = function() {
