@@ -250,11 +250,11 @@ var AppSetup = (function() {
         },
         apiUrl: {
           message: 'stage apiUrl:',
-          default: 'http://'+appConfig.projectName+'.ppreview.it/app_dev.php'
+          default: 'http://'+appConfig.projectName+'.ppreview.it/app_stage.php'
         },
         shareUrl: {
           message: 'stage shareUrl:',
-          default: 'http://'+appConfig.projectName+'.ppreview.it/app_dev.php'
+          default: 'http://'+appConfig.projectName+'.ppreview.it/app_stage.php'
         },
         assetsUrl: {
           message: 'stage assetsUrl:',
