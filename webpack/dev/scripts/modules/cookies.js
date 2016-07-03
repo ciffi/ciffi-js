@@ -39,7 +39,7 @@ var Cookies = (function() {
 		    	callback(JSON.parse(c.substring(nameEQ.length,c.length)));
 		    }
 		}
-		return null;
+		callback(null);
 	};
 
 	Cookies.prototype.remove = function() {
