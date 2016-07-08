@@ -39,7 +39,7 @@
     "copyFonts": "copyfiles -u 1 dev/fonts/* dist/",
     "copyPdf": "copyfiles -u 1 dev/pdf/* dist/",
     "setup": "npm install",
-    "dev": "webpack-dev-server --progress --inline",
+    "dev": "webpack-dev-server --progress --inline --hot",
     "build": "webpack -p && npm run copyImages && npm run copyFonts && npm run copyPdf"
   }
 }
