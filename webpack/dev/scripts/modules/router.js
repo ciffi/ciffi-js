@@ -1,33 +1,33 @@
+/* CONFIG */
+
+var DefaulConfig = require('../config/config');
+var Config = require('./config');
+var CONFIG = new Config(JSON.parse(DefaulConfig).envs);
+
+/* CONFIG */
+
 var $ = require('jquery');
 var Router = (function() {
 
 	'use strict';
 	
-	function Router(config) {
-		checkConfig(config,$.proxy(function() {
-			this.init(config);
+	function Router(pages) {
+		checkConfig(pages,$.proxy(function() {
+			this.pages = pages;
+			this.init();
 		},this));
 	}
 
-	function checkConfig(config,successCallback) {
+	function checkConfig(pages,successCallback) {
 		var errorMessage = false;
-		if(config && typeof config === 'object') {
-
-			if(!config.routes && typeof config.routes !== 'object') {
-				errorMessage = 'Router - check config.routes object';
-				console.error(errorMessage);
-			}
-
-			if(!config.onLoadSuccess && typeof config.onLoadSuccess !== 'function') {
-				errorMessage = 'Router - check config.onLoadSuccess function';
-				console.error(errorMessage);
-			}
+		if(pages && typeof pages === 'object') {
 
 			if(!errorMessage) {
 				successCallback();
 			}
+
 		}else {
-			errorMessage = 'Router - cehck config object';
+			errorMessage = 'Router - check pages object';
 			console.error(errorMessage);
 		}
 	}
@@ -35,27 +35,29 @@ var Router = (function() {
 	function checkRoute(routes) {
 		var _currentRoute;
 		$.each(routes,function(index,route) {
-			if($(route.element).length > 0) {
-				_currentRoute = route.name;
-				if(route.onLoad) {
-					if(typeof route.onLoad !== 'function') {
-						var errorMessage = 'Router - check config.routes.'+route.name+'.onLoad function';
-						console.error(errorMessage);
-					}else {
-						route.onLoad();
-					}
-				}
+			if($(route).length > 0) {
+				_currentRoute = index;
 			}
 		});
 		return _currentRoute;
 	}
 
-	Router.prototype.init = function(config) {
-		var _routes = config.routes;
-		var _start = config.onLoadSuccess;
-		_start({
-			currentRoute: checkRoute(_routes)
+	function onPagesLoaded(pages,currentRoute) {
+		
+		require('../pages/allpages').setData({
+			config: CONFIG.config
 		});
+
+		if(pages[currentRoute]) {
+			require('../pages/'+currentRoute).setData({
+				config: CONFIG.config
+			});
+		}
+	}
+
+	Router.prototype.init = function() {
+		var _routes = this.pages;
+		onPagesLoaded(_routes,checkRoute(_routes));
 	};
 
 	Router.prototype.getCurrentRoute = function() {

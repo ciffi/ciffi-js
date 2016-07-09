@@ -1,11 +1,3 @@
-/* CONFIG */
-
-var DefaulConfig = require('./config/config');
-var Config = require('./modules/config');
-var CONFIG = new Config(JSON.parse(DefaulConfig).envs);
-
-/* CONFIG */
-
 // importo libreria npm jquery
 var $ = require('jquery');
 
@@ -20,37 +12,15 @@ $('body').addClass('appIsReady');
 $(document).ready(function() {
 
 	/* ROUTER */
-
-	var routerConfig = {
-		routes: [{
-			name: 'home',
-			element: '.js-router--home'
-		},{
-			name: 'example',
-			element: '.js-router--example',
-			onLoad: function() {
-				console.log('example');
-			}
-		}],
-		onLoadSuccess: function(data) {
-			switch(data.currentRoute) {
-				case 'home':
-					require('./pages/home').setData({
-						config: CONFIG.config
-					});
-					break;
-				case 'example':
-					require('./pages/example').setData({
-						config: CONFIG.config
-					});
-					break;
-				default:
-					break;
-			}
-		}
+	
+	var pages = {
+		'home': '.js-router--home',
+		'example': '.js-router--example',
 	};
 
-	var appRouter = new Router(routerConfig);
+	var appRouter = new Router(pages);
+
+	/* ROUTER */
 
 	/* ROUTER */
 
