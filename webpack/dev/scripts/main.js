@@ -22,8 +22,6 @@ $(document).ready(function() {
 
 	/* ROUTER */
 
-	/* ROUTER */
-
 	/* COOKIES */
 	/*
 	var cookiesPrivacy = new Cookies({
