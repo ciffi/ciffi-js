@@ -6,6 +6,10 @@ var CONFIG = new Config(DefaulConfig.envs);
 
 /* CONFIG */
 
+/* PAGES */
+var Pages = require('../config/pages');
+/* PAGES */
+
 var $ = require('jquery');
 var Router = (function() {
 
@@ -64,7 +68,7 @@ var Router = (function() {
 		
 	};
 
-	return Router;
+	return new Router(Pages);
 
 })();
 

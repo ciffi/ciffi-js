@@ -1,26 +1,17 @@
 // importo libreria npm jquery
 var $ = require('jquery');
 
+// router
+require('./modules/router');
+
 // importo moduli .js
 var Device = require('./modules/device');
 var Cookies = require('./modules/cookies');
-var Router = require('./modules/router');
 var Utils = require('./modules/utils');
 
 $('body').addClass('appIsReady');
 
 $(document).ready(function() {
-
-	/* ROUTER */
-	
-	var pages = {
-		'home': '.js-router--home',
-		'example': '.js-router--example',
-	};
-
-	var appRouter = new Router(pages);
-
-	/* ROUTER */
 
 	/* COOKIES */
 	/*
