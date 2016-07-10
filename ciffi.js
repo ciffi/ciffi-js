@@ -4,6 +4,7 @@
 var meow = require('meow');
 var chalk = require('chalk');
 var pkg = require('./package.json');
+var cliCursor = require('cli-cursor');
 
 var cli = meow({
 	pkg: pkg
@@ -32,12 +33,20 @@ if(!cmd) {
 		console.log(chalk.blue(pkg.author.name));
 	}else if(opts.logo) {
 		showLogo();
+	}else if(opts.postsetup) {
+		console.log('');
+		console.log(chalk.green.bold('-- fine installazione dipendenze --'));
+		console.log('');
+		console.log('');
+		cliCursor.show();
+		showGreetings();
 	}else {
 		showDefaultMsg();
 	}
 }else {
 	switch(cmd) {
 		case 'setup':
+			cliCursor.hide();
 			var Setup = require('./command/app-setup');
 			var newProject = new Setup({
 				projectName: projectName
@@ -70,33 +79,44 @@ if(!cmd) {
 function showDefaultMsg() {
 	console.log('');
 	console.log('');
-	console.log(chalk.green('CiffiDesign Frontend Generator'));
+	console.log(chalk.green.bold('-- CiffiDesign Frontend Generator --'));
 	console.log('');
-	console.log(chalk.yellow('ciffi -h per la lista dei comandi disponibili'));
+	console.log(chalk.blue('ciffi -h')+chalk.green(' -- lista dei comandi disponibili --'));
 	console.log('');
+}
+
+function showGreetings() {
+  console.log('');
+  console.log('');
+  console.log(chalk.blue('ciffi dev')+chalk.green(' -- avvia lo sviluppo in locale --'));
+  console.log('');
+  console.log(chalk.blue('ciffi build')+chalk.green(' -- genera la build di local/stage/produzione --'));
+  console.log('');
+  console.log(chalk.blue('ciffi newpage nomepagina')+chalk.green(' -- genera una nuova pagina --'));
+  console.log('');
+  console.log(chalk.blue('ciffi newmodule nomemodulo')+chalk.green(' -- genera un nuovo modulo --'));
+  console.log('');
+  console.log(chalk.blue.bold(pkg.author.name)+chalk.blue.bold(' ^_^'));
+  console.log('');
 }
 
 function showCommandListMsg() {
 	console.log('');
 	console.log('');
-	console.log(chalk.green('CiffiDesign Frontend Generator'));
+	console.log(chalk.green.bold('-- CiffiDesign Frontend Generator --'));
 	console.log('');
 	console.log('');
 	console.log('Comandi disponibili:');
 	console.log('');
-	console.log('- setup progetto');
+	console.log(chalk.blue('ciffi setup nomeprogetto')+chalk.green(' -- genera un nuovo progetto --'));
 	console.log('');
-	console.log(chalk.blue('ciffi setup projectName'));
+	console.log(chalk.blue('ciffi dev')+chalk.green(' -- avvia lo sviluppo in locale --'));
 	console.log('');
+	console.log(chalk.blue('ciffi build')+chalk.green(' -- genera la build di local/stage/produzione --'));
 	console.log('');
-	console.log('- sviluppo locale progetto');
+	console.log(chalk.blue('ciffi newpage nomepagina')+chalk.green(' -- genera una nuova pagina --'));
 	console.log('');
-	console.log(chalk.blue('ciffi dev'));
-	console.log('');
-	console.log('');
-	console.log('- build progetto');
-	console.log('');
-	console.log(chalk.blue('ciffi build'));
+	console.log(chalk.blue('ciffi newmodule nomemodulo')+chalk.green(' -- genera un nuovo modulo --'));
 	console.log('');
 	console.log('');
 }

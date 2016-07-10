@@ -37,7 +37,7 @@
     "copyImages": "copyfiles -u 1 dev/images/*.* dev/images/**/*.* dist/",
     "copyFonts": "copyfiles -u 1 dev/fonts/* dist/",
     "copyPdf": "copyfiles -u 1 dev/pdf/* dist/",
-    "setup": "npm install",
+    "setup": "npm install && ciffi --postsetup",
     "dev": "webpack-dev-server --progress --inline --hot",
     "build": "webpack -p && npm run copyImages && npm run copyFonts && npm run copyPdf"
   }

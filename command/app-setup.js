@@ -1,7 +1,9 @@
 var each = require('foreach');
+var chalk = require('chalk');
 var prompt = require('prompt');
 var replace = require('replace-in-file');
 var pkg = require('../package.json');
+var emptydir = require('empty-dir');
 
 var AppSetup = (function() {
 
@@ -18,20 +20,6 @@ var AppSetup = (function() {
 
     process.env.PN_APP = JSON.stringify({});
 
-    function showGreeting() {
-      console.log('');
-      console.log('');
-      console.log('-- Webpack Project Configurator --');
-      console.log('');
-      console.log('');
-      console.log('-- ciffi dev for local development --');
-      console.log('');
-      console.log('-- ciffi build for generate build package --');
-      console.log('');
-      console.log(pkg.author.name+' ^_^');
-      console.log('');
-    }
-
     function replaceAssets(env,url,callback) {
       replace({
         files: [
@@ -43,7 +31,7 @@ var AppSetup = (function() {
         if(error) {
           return console.error('Error occurred:', error);
         }
-        console.log('Generate scss $assets variable in: ' + changedFiles.join(', '));
+        //console.log('Generate scss $assets variable in: ' + changedFiles.join(', '));
         callback();
       });
     }
@@ -59,261 +47,42 @@ var AppSetup = (function() {
         if(error) {
           return console.error('Error occurred:', error);
         }
-        console.log('Generate DefaultConfig in: ' + changedFiles.join(', '));
+        //console.log('Generate DefaultConfig in: ' + changedFiles.join(', '));
         callback();
       });
     }
 
-    function askForDev(callback) {
-      prompt.get(generateDev,function(err,results) {
+    emptydir(process.env.PWD+'/', function (err, result) {
+      if(err) {
+        console.log(err);
+      }else {
+        if(result) {
+          console.log('');
+          console.log('');
+          console.log(chalk.green.bold('-- CiffiDesign Frontend Generator --'));
+          console.log('');
 
-        if(!results.generateDev || results.generateDev === 'y') {
-
-          appConfig.envs.dev = {};
-
-          var _end = 'assetsUrl';
-          prompt.get(configDev,function(err,results) {
-            each(results,function(result,index) {
-
-              appConfig.envs.dev[index] = result;
-
-              if(index === _end) {
-                replaceAssets('dev',appConfig.envs.dev.assetsUrl,function() {
-                  callback();
-                });
-              }
-            });
+          replaceConfig(config.projectName,function() {
+            require('./moveApp');
           });
+
+          console.log('');
+          console.log(chalk.green.bold('-- nuovo progetto ')+chalk.blue.bold(config.projectName)+chalk.green.bold(' generato --'));
+          console.log('');
+          console.log(chalk.green.bold('-- inizio installazione dipendenze --'));
+          console.log('');
 
         }else {
-          callback();
-        }
-      });
-    }
-
-    function askForLocal(callback) {
-      prompt.get(generateLocal,function(err,results) {
-
-        if(!results.generateLocal || results.generateLocal === 'y') {
-
-          appConfig.envs.local = {};
-
-          var _end = 'assetsUrl';
-          prompt.get(configLocal,function(err,results) {
-            each(results,function(result,index) {
-
-              appConfig.envs.local[index] = result;
-
-              if(index === _end) {
-                replaceAssets('local',appConfig.envs.local.assetsUrl,function() {
-                  callback();
-                });
-              }
-            });
-          });
-
-        }else {
-          callback();
-        }
-      });
-    }
-
-    function askForStage(callback) {
-      prompt.get(generateStage,function(err,results) {
-
-        if(!results.generateStage || results.generateStage === 'y') {
-
-          appConfig.envs.stage = {};
-
-          var _end = 'assetsUrl';
-          prompt.get(configStage,function(err,results) {
-            each(results,function(result,index) {
-
-              appConfig.envs.stage[index] = result;
-
-              if(index === _end) {
-                replaceAssets('stage',appConfig.envs.stage.assetsUrl,function() {
-                  callback();
-                });
-              }
-            });
-          });
-
-        }else {
-          callback();
-        }
-      });
-    }
-
-    function askForProd(callback) {
-      prompt.get(generateProd,function(err,results) {
-
-        if(!results.generateProd || results.generateProd === 'y') {
-
-          appConfig.envs.prod = {};
-
-          var _end = 'assetsUrl';
-          prompt.get(configProd,function(err,results) {
-            each(results,function(result,index) {
-
-              appConfig.envs.prod[index] = result;
-
-              if(index === _end) {
-                replaceAssets('prod',appConfig.envs.prod.assetsUrl,function() {
-                  callback();
-                });
-              }
-            });
-          });
-
-        }else {
-          callback();
-        }
-      });
-    }
-
-
-    var generateDev = {
-      properties: {
-        generateDev: {
-          message: 'Generate dev enviroment?',
-          default: 'y'
+          console.log('');
+          console.log('');
+          console.log(chalk.green.bold('-- CiffiDesign Frontend Generator --'));
+          console.log('');
+          console.log(chalk.red.bold('Setup progetto fallito:')+' '+chalk.blue('la directory deve essere vuota'));
+          console.log('');
         }
       }
-    };
-
-    var configDev = {
-      properties: {
-        baseUrl: {
-          message: 'dev baseUrl:',
-          default: 'http://localhost'
-        },
-        apiUrl: {
-          message: 'dev apiUrl:',
-          default: 'http://'+appConfig.projectName+'.local/app_dev.php'
-        },
-        shareUrl: {
-          message: 'dev shareUrl:',
-          default: 'http://localhost'
-        },
-        assetsUrl: {
-          message: 'dev assetsUrl:',
-          default: '/dev/'
-        }
-      }
-    };
-
-    var generateLocal = {
-      properties: {
-        generateLocal: {
-          message: 'Generate local enviroment?',
-          default: 'y'
-        }
-      }
-    };
-
-    var configLocal = {
-      properties: {
-        baseUrl: {
-          message: 'local baseUrl:',
-          default: 'http://'+appConfig.projectName+'.local'
-        },
-        apiUrl: {
-          message: 'local apiUrl:',
-          default: 'http://'+appConfig.projectName+'.local/app_dev.php'
-        },
-        shareUrl: {
-          message: 'local shareUrl:',
-          default: 'http://'+appConfig.projectName+'.local/app_dev.php'
-        },
-        assetsUrl: {
-          message: 'local assetsUrl:',
-          default: 'http://'+appConfig.projectName+'.local/assets/'
-        }
-      }
-    };
-
-    var generateStage = {
-      properties: {
-        generateStage: {
-          message: 'Generate stage enviroment?',
-          default: 'y'
-        }
-      }
-    };
-
-    var configStage = {
-      properties: {
-        baseUrl: {
-          message: 'stage baseUrl:',
-          default: 'http://'+appConfig.projectName+'.ppreview.it'
-        },
-        apiUrl: {
-          message: 'stage apiUrl:',
-          default: 'http://'+appConfig.projectName+'.ppreview.it/app_stage.php'
-        },
-        shareUrl: {
-          message: 'stage shareUrl:',
-          default: 'http://'+appConfig.projectName+'.ppreview.it/app_stage.php'
-        },
-        assetsUrl: {
-          message: 'stage assetsUrl:',
-          default: 'http://'+appConfig.projectName+'.ppreview.it/assets/'
-        }
-      }
-    };
-
-    var generateProd = {
-      properties: {
-        generateProd: {
-          message: 'Generate prod enviroment?',
-          default: 'y'
-        }
-      }
-    };
-
-    var configProd = {
-      properties: {
-        baseUrl: {
-          message: 'prod baseUrl:',
-          default: 'http://www.'+appConfig.projectName+'.it'
-        },
-        apiUrl: {
-          message: 'prod apiUrl:',
-          default: 'http://www.'+appConfig.projectName+'.it'
-        },
-        shareUrl: {
-          message: 'prod shareUrl:',
-          default: 'http://www.'+appConfig.projectName+'.it'
-        },
-        assetsUrl: {
-          message: 'prod assetsUrl:',
-          default: 'http://www.'+appConfig.projectName+'.it/assets/'
-        }
-      }
-    };
-
-    prompt.start();
-
-    console.log('');
-    console.log('');
-    console.log('-- Webpack Project Configurator --');
-    console.log('');
-
-    askForDev(function() {
-      askForLocal(function() {
-        askForStage(function() {
-          askForProd(function() {
-            process.env.PN_APP = JSON.stringify(appConfig);
-            replaceConfig(JSON.stringify(appConfig),function() {
-              require('./moveApp');
-              showGreeting();
-            });
-          });
-        });
-      });
     });
-    
+
   }
 
   return AppSetup;
