@@ -37,7 +37,7 @@ ciffi build
 
 ```
 
-ciffi newpge nomepagina
+ciffi newpage nomepagina
 
 ```
 
