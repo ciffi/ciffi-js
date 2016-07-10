@@ -49,6 +49,18 @@ if(!cmd) {
 		case 'build':
 			require('./command/app-build');
 			break;
+		case 'newpage':
+			var Page = require('./command/app-newpage');
+			var newPage = new Page({
+				pageName: projectName
+			});
+			break;
+		case 'newmodule':
+			var Module = require('./command/app-newmodule');
+			var newModule = new Module({
+				moduleName: projectName
+			});
+			break;
 		default:
 			console.log(chalk.yellow('Comando non disponibile - ciffi -h per la lista dei comandi disponibili'));
 			break;
