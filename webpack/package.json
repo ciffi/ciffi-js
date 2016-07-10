@@ -1,10 +1,10 @@
 {
-  "name": "webpack-base-project",
+  "name": "ciffi-base-project",
   "version": "1.0.0",
   "author": {
     "name": "ciffi"
   },
-  "description": "Webpack Base Project",
+  "description": "Frontend Base Project",
   "main": "app-setup.js",
   "repository": {
     "type": "git",
@@ -14,7 +14,6 @@
     "name": "Ciffi"
   },
   "license": "ISC",
-  "homepage": "https://bitbucket.org/purplenetwork/frontend-webpack-build#readme",
   "devDependencies": {
     "autoprefixer": "^6.3.3",
     "base64-font-loader": "0.0.4",
