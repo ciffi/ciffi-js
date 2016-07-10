@@ -23,7 +23,6 @@ ciffi setup nomeprogetto
 ciffi dev
 
 ```
-e collegarsi all'indirizzo http://localhost:8080
 
 ##build##
 
