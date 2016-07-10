@@ -2,7 +2,7 @@
 
 var DefaulConfig = require('../config/config');
 var Config = require('./config');
-var CONFIG = new Config(JSON.parse(DefaulConfig).envs);
+var CONFIG = new Config(DefaulConfig.envs);
 
 /* CONFIG */
 
