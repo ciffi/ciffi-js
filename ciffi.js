@@ -41,7 +41,7 @@ if(!cmd) {
 		cliCursor.show();
 		showGreetings();
 	}else {
-		showDefaultMsg();
+		showCommandErrorMessage();
 	}
 }else {
 	switch(cmd) {
@@ -71,9 +71,18 @@ if(!cmd) {
 			});
 			break;
 		default:
-			console.log(chalk.yellow('Comando non disponibile - ciffi -h per la lista dei comandi disponibili'));
+			showCommandErrorMessage();
 			break;
 	}
+}
+
+function showCommandErrorMessage() {
+	console.log('');
+	console.log('');
+	console.log(chalk.red.bold('Comando non disponibile'));
+	console.log('');
+	console.log(chalk.blue('ciffi -h')+chalk.green(' -- lista dei comandi disponibili --'));
+	console.log('');
 }
 
 function showDefaultMsg() {
