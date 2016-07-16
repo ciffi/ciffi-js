@@ -16,7 +16,7 @@ var Page = (function() {
 		$('.js-module--storelocator').each(function(index,item) {
 			maps.push(new Storelocator({
 				triggerEl: $(item),
-				apiKey: 'AIzaSyB49HzEf49E8XREeBH6RFU8oxvfZfSWIKw',
+				apiKey: '',
 				el: 'gmap--'+index,
 				elClass: 'mapContainer',
 				map: {
