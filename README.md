@@ -4,7 +4,7 @@
 
 ```
 
-npm install -g github:ciffi/ciffi-frontend-generator.git
+npm install -g ciffi
 
 ```
 
