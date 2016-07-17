@@ -11,10 +11,11 @@ var TempApp = (function() {
 		pathExists(_tempPath).then(function(res) {
 			if(!res) {
 				shell.mkdir(_tempPath);
+				shell.cp('-R',_modulePath,_tempPath);
+			}else {
+				shell.cp('-R',_modulePath,_tempPath);
 			}
 		});
-
-		shell.cp('-R',_modulePath,_tempPath);
 	}
 
 	return new TempApp();
