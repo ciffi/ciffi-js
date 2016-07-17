@@ -1,49 +1,26 @@
 # CiffiDesign Frontend Generator #
 
-##installare globalmente tramite npm##
-
+#### installare globalmente tramite npm
 ```
-
 npm install -g ciffi
-
 ```
-
-##setup e configurazione##
-
+#### setup new project
 ```
-
-ciffi setup nomeprogetto
-
+ciffi setup projectname
 ```
-
-##sviluppo locale##
-
+#### local dev
 ```
-
 ciffi dev
-
 ```
-
-##build##
-
+#### generate build
 ```
-
 ciffi build
-
 ```
-
-##nuova pagina##
-
+#### new page html and js
 ```
-
-ciffi newpage nomepagina
-
+ciffi newpage pagename
 ```
-
-##nuovo modulo##
-
+#### new js module
 ```
-
-ciffi newmodule nomemodulo
-
+ciffi newmodule modulename
 ```
