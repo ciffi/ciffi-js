@@ -35,7 +35,7 @@ if(!cmd) {
 		showLogo();
 	}else if(opts.postsetup) {
 		console.log('');
-		console.log(chalk.green.bold('-- fine installazione dipendenze --'));
+		console.log(chalk.green.bold('-- end download and install npm dependencies --'));
 		console.log('');
 		console.log('');
 		cliCursor.show();
@@ -79,9 +79,9 @@ if(!cmd) {
 function showCommandErrorMessage() {
 	console.log('');
 	console.log('');
-	console.log(chalk.red.bold('Comando non disponibile'));
+	console.log(chalk.red.bold('Command not found'));
 	console.log('');
-	console.log(chalk.blue('ciffi -h')+chalk.green(' -- lista dei comandi disponibili --'));
+	console.log(chalk.blue('ciffi -h')+chalk.green(' -- commands list --'));
 	console.log('');
 }
 
@@ -90,20 +90,20 @@ function showDefaultMsg() {
 	console.log('');
 	console.log(chalk.green.bold('-- CiffiDesign Frontend Generator --'));
 	console.log('');
-	console.log(chalk.blue('ciffi -h')+chalk.green(' -- lista dei comandi disponibili --'));
+	console.log(chalk.blue('ciffi -h')+chalk.green(' -- commands list --'));
 	console.log('');
 }
 
 function showGreetings() {
   console.log('');
   console.log('');
-  console.log(chalk.blue('ciffi dev')+chalk.green(' -- avvia lo sviluppo in locale --'));
+  console.log(chalk.blue('ciffi dev')+chalk.green(' -- start local dev --'));
   console.log('');
-  console.log(chalk.blue('ciffi build')+chalk.green(' -- genera la build di local/stage/produzione --'));
+  console.log(chalk.blue('ciffi build')+chalk.green(' -- generate build --'));
   console.log('');
-  console.log(chalk.blue('ciffi newpage nomepagina')+chalk.green(' -- genera una nuova pagina --'));
+  console.log(chalk.blue('ciffi newpage pagename')+chalk.green(' -- create new html and js page --'));
   console.log('');
-  console.log(chalk.blue('ciffi newmodule nomemodulo')+chalk.green(' -- genera un nuovo modulo --'));
+  console.log(chalk.blue('ciffi newmodule modulename')+chalk.green(' -- create new js module --'));
   console.log('');
   console.log(chalk.blue.bold(pkg.author.name)+chalk.blue.bold(' ^_^'));
   console.log('');
@@ -117,15 +117,15 @@ function showCommandListMsg() {
 	console.log('');
 	console.log('Comandi disponibili:');
 	console.log('');
-	console.log(chalk.blue('ciffi setup nomeprogetto')+chalk.green(' -- genera un nuovo progetto --'));
+	console.log(chalk.blue('ciffi setup projectname')+chalk.green(' -- create a new project --'));
 	console.log('');
-	console.log(chalk.blue('ciffi dev')+chalk.green(' -- avvia lo sviluppo in locale --'));
+	console.log(chalk.blue('ciffi dev')+chalk.green(' -- start local dev --'));
 	console.log('');
-	console.log(chalk.blue('ciffi build')+chalk.green(' -- genera la build di local/stage/produzione --'));
+	console.log(chalk.blue('ciffi build')+chalk.green(' -- generate build --'));
 	console.log('');
-	console.log(chalk.blue('ciffi newpage nomepagina')+chalk.green(' -- genera una nuova pagina --'));
+	console.log(chalk.blue('ciffi newpage pagename')+chalk.green(' -- create new html and js page --'));
 	console.log('');
-	console.log(chalk.blue('ciffi newmodule nomemodulo')+chalk.green(' -- genera un nuovo modulo --'));
+	console.log(chalk.blue('ciffi newmodule modulename')+chalk.green(' -- create new js module --'));
 	console.log('');
 	console.log('');
 }

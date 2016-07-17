@@ -67,9 +67,9 @@ var AppSetup = (function() {
           });
 
           console.log('');
-          console.log(chalk.green.bold('-- nuovo progetto ')+chalk.blue.bold(config.projectName)+chalk.green.bold(' generato --'));
+          console.log(chalk.green.bold('-- new project ')+chalk.blue.bold(config.projectName)+chalk.green.bold(' created --'));
           console.log('');
-          console.log(chalk.green.bold('-- inizio installazione dipendenze --'));
+          console.log(chalk.green.bold('-- start download and install npm dependencies --'));
           console.log('');
 
         }else {
@@ -77,7 +77,7 @@ var AppSetup = (function() {
           console.log('');
           console.log(chalk.green.bold('-- CiffiDesign Frontend Generator --'));
           console.log('');
-          console.log(chalk.red.bold('Setup progetto fallito:')+' '+chalk.blue('la directory deve essere vuota'));
+          console.log(chalk.red.bold('Project setup failed:')+' '+chalk.blue('the path must be empty'));
           console.log('');
         }
       }
