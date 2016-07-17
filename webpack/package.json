@@ -20,6 +20,7 @@
     "copyfiles": "^0.2.1",
     "css-loader": "^0.23.1",
     "file-loader": "^0.8.5",
+    "happypack": "^2.1.1",
     "html-webpack-plugin": "^2.10.0",
     "node-sass": "^3.4.2",
     "open-browser-webpack-plugin": "0.0.2",
@@ -35,10 +36,11 @@
   },
   "scripts": {
     "copyImages": "copyfiles -u 1 dev/images/*.* dev/images/**/*.* dist/",
+    "copyVideos": "copyfiles -u 1 dev/videos/* dist/",
     "copyFonts": "copyfiles -u 1 dev/fonts/* dist/",
     "copyPdf": "copyfiles -u 1 dev/pdf/* dist/",
     "setup": "npm install && ciffi --postsetup",
     "dev": "webpack-dev-server --progress --inline --hot",
-    "build": "webpack -p && npm run copyImages && npm run copyFonts && npm run copyPdf"
+    "build": "webpack -p --progress --json > build-stats.json && npm run copyImages && npm run copyFonts && npm run copyPdf && npm run copyVideos"
   }
 }
