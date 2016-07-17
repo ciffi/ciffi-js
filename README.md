@@ -1,6 +1,6 @@
 # CiffiDesign Frontend Generator #
 
-#### installare globalmente tramite npm
+#### install ciffi
 ```
 npm install -g ciffi
 ```
