@@ -52,7 +52,11 @@ var AppSetup = (function() {
       });
     }
 
-    emptydir(process.env.PWD+'/', function (err, result) {
+    function filter(filepath) {
+      return !/(^|\/)\.[^\/\.]/g.test(filepath);
+    }
+
+    emptydir(process.env.PWD+'/', filter, function (err, result) {
       if(err) {
         console.log(err);
       }else {
