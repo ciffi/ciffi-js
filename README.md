@@ -8,7 +8,11 @@ npm install -g ciffi
 ```
 ciffi setup projectname
 ```
-#### local dev
+#### local dev server
+```
+ciffi serve
+```
+#### local dev build
 ```
 ciffi dev
 ```
