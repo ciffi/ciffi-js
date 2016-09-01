@@ -1,28 +1,28 @@
 var npm = require('npm');
 var shell = require('shelljs');
 
-var MoveApp = (function() {
+var MoveApp = (function () {
 
-	function MoveApp() {
-		var _tempPath = process.config.variables.node_prefix+'/lib/node_modules/ciffi/tmp/*';
-		var _projectPath = process.env.PWD+'/';
+    function MoveApp() {
+        var _tempPath = process.config.variables.node_prefix + '/lib/node_modules/ciffi/tmp/*';
+        var _projectPath = process.env.PWD + '/';
 
-		shell.cp('-R',_tempPath,_projectPath);
-		shell.rm('-rf', _tempPath);
+        shell.cp('-R', _tempPath, _projectPath);
+        shell.rm('-rf', _tempPath);
 
-		npm.load(function(err) {
+        npm.load(function (err) {
 
-		  npm.commands.run(['setup'], function(er, data) {
-		  });
+            npm.commands.run(['setup'], function (er, data) {
+            });
 
-		  npm.on('log', function(message) {
-		    console.log(message);
-		  });
+            npm.on('log', function (message) {
+                console.log(message);
+            });
 
-		});
-	}
+        });
+    }
 
-	return new MoveApp();
+    return new MoveApp();
 })();
 
 module.exports = MoveApp;

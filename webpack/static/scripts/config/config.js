@@ -5,7 +5,7 @@ var Config = {
 			baseUrl: 'http://localhost',
 			apiUrl: 'http://@REPLACE__CONFIG@.local/app_dev.php',
 			shareUrl: 'http://localhost',
-			assetsUrl: '/dev/'
+			assetsUrl: '/assets/'
 		},
 		local: {
 			baseUrl: 'http://@REPLACE__CONFIG@.local',

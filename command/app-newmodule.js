@@ -19,8 +19,8 @@ var Newmodule = (function () {
 
         var _tempFileJs = _tempPath + moduleName + '.js';
         var _resourceJs = process.config.variables.node_prefix + '/lib/node_modules/ciffi/resources/webpack/newmodule/module.js';
-        var _projectModules = process.env.PWD + '/dev/scripts/modules/';
-        var _projectFileJs = process.env.PWD + '/dev/scripts/modules/' + moduleName + '.js';
+        var _projectModules = process.env.PWD + '/static/scripts/modules/';
+        var _projectFileJs = process.env.PWD + '/static/scripts/modules/' + moduleName + '.js';
 
         if (fileExists(_projectFileJs)) {
             console.log(chalk.red('File already exists: ' + _projectFileJs));
