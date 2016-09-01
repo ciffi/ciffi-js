@@ -8,7 +8,6 @@ module.exports = {
         path: './dist',
         filename: '[name].js'
     },
-    watch: true,
     plugins: [
         new OpenBrowserPlugin({
             url: 'http://localhost:8080'

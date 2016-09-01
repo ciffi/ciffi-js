@@ -88,19 +88,12 @@ function showCommandErrorMessage() {
     console.log('');
 }
 
-function showDefaultMsg() {
-    console.log('');
-    console.log('');
-    console.log(chalk.green.bold('-- CiffiDesign Frontend Generator --'));
-    console.log('');
-    console.log(chalk.blue('ciffi -h') + chalk.green(' -- commands list --'));
-    console.log('');
-}
-
 function showGreetings() {
     console.log('');
     console.log('');
-    console.log(chalk.blue('ciffi dev') + chalk.green(' -- start local dev --'));
+    console.log(chalk.blue('ciffi serve') + chalk.green(' -- start webpack local server css/js --'));
+    console.log('');
+    console.log(chalk.blue('ciffi dev') + chalk.green(' -- start livereload server and generate local build with watch --'));
     console.log('');
     console.log(chalk.blue('ciffi build') + chalk.green(' -- generate build --'));
     console.log('');
@@ -118,11 +111,13 @@ function showCommandListMsg() {
     console.log(chalk.green.bold('-- CiffiDesign Frontend Generator --'));
     console.log('');
     console.log('');
-    console.log('Comandi disponibili:');
+    console.log('Available commands:');
     console.log('');
     console.log(chalk.blue('ciffi setup projectname') + chalk.green(' -- create a new project --'));
     console.log('');
-    console.log(chalk.blue('ciffi dev') + chalk.green(' -- start local dev --'));
+    console.log(chalk.blue('ciffi serve') + chalk.green(' -- start webpack local server css/js --'));
+    console.log('');
+    console.log(chalk.blue('ciffi dev') + chalk.green(' -- start livereload server and generate local build with watch --'));
     console.log('');
     console.log(chalk.blue('ciffi build') + chalk.green(' -- generate build --'));
     console.log('');

@@ -44,14 +44,15 @@
     "copy-images": "copyfiles -u 1 static/images/*.* static/images/**/*.* dist/",
     "copy-pdf": "copyfiles -u 1 static/pdf/* dist/",
     "copy-videos": "copyfiles -u 1 static/videos/* dist/",
-    "css": "sass --sourcemap=none static/styles/config.scss:dist/main.css",
-    "live-css": "sass static/styles/config.scss:dist/main.css --watch",
+    "css": "sass --sourcemap=none static/styles/config/config.scss:dist/main.css",
+    "js": "webpack --config build.config.js -p --progress --json > build-stats.json",
+    "live-css": "sass static/styles/config/config.scss:dist/main.css --watch",
     "live-js": "webpack --config dev.config.js --progress",
     "live-server": "livereload \"dist/\"",
     "styles": "npm run css && npm run autoprefixer && npm run cleancss",
     "setup": "npm install && ciffi --postsetup",
     "serve": "webpack-dev-server --config serve.config.js --progress --inline --hot",
-    "dev": "webpack --config dev.config.js --progress",
-    "build": "webpack --config build.config.js -p --progress --json > build-stats.json && npm run assets"
+    "dev": "concurrently --kill-others \"npm run live-server\" \"npm run live-css\" \"npm run live-js\"",
+    "build": "npm run css && npm run js && npm run assets"
   }
 }
