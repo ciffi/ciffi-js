@@ -2,28 +2,30 @@
   "name": "ciffi-base-project",
   "version": "1.0.0",
   "author": {
-    "name": "ciffi"
+    "name": "Ciffi"
   },
   "description": "Frontend Base Project",
   "main": "app-setup.js",
   "repository": {
     "type": "git",
-    "url": "git+https://bitbucket.org/purplenetwork/frontend-webpack-build.git"
-  },
-  "author": {
-    "name": "Ciffi"
+    "url": "git+https://github.com/ciffi/ciffi-frontend-generator.git"
   },
   "license": "ISC",
+  "homepage": "https://github.com/ciffi/ciffi-frontend-generator/tree/master/webpack",
   "devDependencies": {
     "autoprefixer": "^6.3.3",
     "base64-font-loader": "0.0.4",
+    "clean-css": "^3.4.19",
+    "concurrently": "^2.2.0",
     "copyfiles": "^0.2.1",
     "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
-    "happypack": "^2.1.1",
     "html-webpack-plugin": "^2.10.0",
+    "livereload": "^0.5.0",
     "node-sass": "^3.4.2",
     "open-browser-webpack-plugin": "0.0.2",
+    "postcss-cli": "^2.6.0",
     "postcss-loader": "^0.8.1",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
@@ -35,12 +37,21 @@
     "jquery": "^2.2.3"
   },
   "scripts": {
-    "copyImages": "copyfiles -u 1 dev/images/*.* dev/images/**/*.* dist/",
-    "copyVideos": "copyfiles -u 1 dev/videos/* dist/",
-    "copyFonts": "copyfiles -u 1 dev/fonts/* dist/",
-    "copyPdf": "copyfiles -u 1 dev/pdf/* dist/",
+    "assets": "npm run copy-images && npm run copy-fonts && npm run copy-pdf && npm run copy-videos",
+    "autoprefixer": "postcss --use autoprefixer --autoprefixer.browsers 'last 12 versions' -o dist/main.css dist/main.css",
+    "cleancss": "cleancss -o dist/main.css dist/main.css",
+    "copy-fonts": "copyfiles -u 1 dev/fonts/* dist/",
+    "copy-images": "copyfiles -u 1 dev/images/*.* dev/images/**/*.* dist/",
+    "copy-pdf": "copyfiles -u 1 dev/pdf/* dist/",
+    "copy-videos": "copyfiles -u 1 dev/videos/* dist/",
+    "css": "sass --sourcemap=none dev/styles/main.scss:dist/main.css",
+    "live-css": "sass dev/styles/main.scss:dist/main.css --watch",
+    "live-js": "webpack --config dev.config.js --progress",
+    "live-server": "livereload \"dist/\"",
+    "styles": "npm run css && npm run autoprefixer && npm run cleancss",
     "setup": "npm install && ciffi --postsetup",
-    "dev": "webpack-dev-server --progress --inline --hot",
-    "build": "webpack -p --progress --json > build-stats.json && npm run copyImages && npm run copyFonts && npm run copyPdf && npm run copyVideos"
+    "serve": "webpack-dev-server --config serve.config.js --progress --inline --hot",
+    "dev": "webpack --config dev.config.js --progress",
+    "build": "webpack --config build.config.js -p --progress --json > build-stats.json && npm run assets"
   }
 }

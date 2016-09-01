@@ -1,10 +1,10 @@
 var npm = require('npm');
-var Build = (function () {
+var Serve = (function () {
 
-    function Build() {
+    function Serve() {
         npm.load(function (err) {
 
-            npm.commands.run(['build'], function (er, data) {
+            npm.commands.run(['serve'], function (er, data) {
 
             });
 
@@ -15,7 +15,7 @@ var Build = (function () {
         });
     }
 
-    return new Build();
+    return new Serve();
 })();
 
-module.exports = Build;
+module.exports = Serve;
