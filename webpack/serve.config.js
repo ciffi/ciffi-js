@@ -13,6 +13,7 @@ function newPage(page) {
 
 module.exports = {
     entry: {
+        styles: './static/scripts/styles.js',
         scripts: './static/scripts/main.js'
     },
     output: {

@@ -1,16 +1,16 @@
-var Page = (function() {
+var Page = (function () {
 
-	'use strict';
+    'use strict';
 
-	function Page() {
-		console.log('example page loaded');
-	}
+    function Page() {
+        console.log('example page loaded');
+    }
 
-	Page.prototype.setData = function(data) {
-		console.log(data);
-	};
+    Page.prototype.setData = function (data) {
+        console.log(data);
+    };
 
-	return new Page();
+    return new Page();
 
 })();
 
