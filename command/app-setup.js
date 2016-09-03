@@ -31,6 +31,7 @@ var AppSetup = (function () {
                 }
                 replace({
                     files: [
+                        process.config.variables.node_prefix + '/lib/node_modules/ciffi/tmp/static/scripts/config/config.js',
                         process.config.variables.node_prefix + '/lib/node_modules/ciffi/tmp/static/styles/utils/_vars.scss'
                     ],
                     replace: /@REPLACE__ASSETS__NAME@/g,
