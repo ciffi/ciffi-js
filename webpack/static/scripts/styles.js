@@ -1,4 +1,4 @@
 /*
     styles - serve only
 */
-require('../styles/config/config.scss');
+require('../styles/main.scss');

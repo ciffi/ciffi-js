@@ -38,21 +38,22 @@
   },
   "scripts": {
     "assets": "npm run copy-images && npm run copy-fonts && npm run copy-pdf && npm run copy-videos",
-    "autoprefixer": "postcss --use autoprefixer --autoprefixer.browsers 'last 12 versions' -o dist/main.css dist/main.css",
-    "cleancss": "cleancss -o dist/main.css dist/main.css",
-    "copy-fonts": "copyfiles -u 1 static/fonts/* dist/",
-    "copy-images": "copyfiles -u 1 static/images/*.* static/images/**/*.* dist/",
-    "copy-pdf": "copyfiles -u 1 static/pdf/* dist/",
-    "copy-videos": "copyfiles -u 1 static/videos/* dist/",
-    "css": "sass --sourcemap=none static/styles/config/config.scss:dist/main.css",
+    "autoprefixer": "postcss --use autoprefixer --autoprefixer.browsers 'last 12 versions' -o @REPLACE__ASSETS@/main.css @REPLACE__ASSETS@/main.css",
+    "cleancss": "cleancss -o @REPLACE__ASSETS@/main.css @REPLACE__ASSETS@/main.css",
+    "copy-fonts": "copyfiles -u 1 static/fonts/* @REPLACE__ASSETS@/",
+    "copy-images": "copyfiles -u 1 static/images/*.* static/images/**/*.* @REPLACE__ASSETS@/",
+    "copy-pdf": "copyfiles -u 1 static/pdf/* @REPLACE__ASSETS@/",
+    "copy-videos": "copyfiles -u 1 static/videos/* @REPLACE__ASSETS@/",
+    "css": "sass --sourcemap=none static/styles/main.scss:@REPLACE__ASSETS@/main.css",
     "js": "webpack --config build.config.js -p --progress --json > build-stats.json",
-    "live-css": "sass static/styles/config/config.scss:dist/main.css --watch",
+    "live-css": "sass static/styles/main.scss:@REPLACE__ASSETS@/main.css --watch",
     "live-js": "webpack --config dev.config.js --progress",
-    "live-server": "livereload \"dist/\"",
+    "live-server": "livereload \"@REPLACE__ASSETS@/\"",
     "styles": "npm run css && npm run autoprefixer && npm run cleancss",
     "setup": "npm install && ciffi --postsetup",
+    "clean-dist": "rm -rf @REPLACE__ASSETS@/*",
     "serve": "webpack-dev-server --config serve.config.js --progress --inline --hot",
-    "dev": "concurrently --kill-others \"npm run live-server\" \"npm run live-css\" \"npm run live-js\"",
-    "build": "npm run css && npm run js && npm run assets"
+    "dev": "npm run assets && concurrently --kill-others \"npm run live-server\" \"npm run live-css\" \"npm run live-js\"",
+    "build": "npm run clean-dist && npm run css && npm run js && npm run assets"
   }
 }

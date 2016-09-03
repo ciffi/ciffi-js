@@ -46,7 +46,6 @@ if (!cmd) {
 } else {
     switch (cmd) {
         case 'setup':
-            cliCursor.hide();
             var Setup = require('./command/app-setup');
             new Setup({
                 projectName: projectName

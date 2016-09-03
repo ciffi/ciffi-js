@@ -1,11 +1,34 @@
-$inputBorder: #1c69d4;
-$inputError: #f00;
-$gray: #757575;
+$assets: '/@REPLACE__ASSETS__NAME@';
 
-$light: 'Conv_bmwtype_light';
-$bold: 'Conv_bmwtype_bold';
+/* font */
+$fa-font-path: '#{$assets}/fonts';
+$icon: 'FontAwesome';
+$font: 'Lato', sans-serif;
+$light: 300;
+$regular: 400;
+$medium: 500;
+$bold: 700;
+$heavy: 900;
+/* font */
 
+/* colors */
+$color-main: #0C6F9C;
+$gray: #565656;
+$facebook-light: #8B9DC3;
+$facebook: #3B5998;
+
+$header-bg: #efefef;
+$footer-bg: #626264;
+
+$button-bg: #1188BE;
+$button-bg--hover: #0C6F9C;
+$button-bg--disabled: rgba(17, 136, 190, .4);
+
+$input-border: #cdcdcd;
+$input-error: #f00;
+/* colors */
+
+/* breakpoint */
 $tablet: 768px;
-$desk-small: 991px;
-$menu-desk-small: 1020px;
-$desk: 1280px;
+$desktop: 1280px;
+/* breakpoint */

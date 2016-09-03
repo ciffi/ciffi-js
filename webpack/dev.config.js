@@ -5,13 +5,13 @@ module.exports = {
         main: './static/scripts/main.js',
     },
     output: {
-        path: './dist',
+        path: '@REPLACE__ASSETS@',
         filename: '[name].js'
     },
     watch: true,
     plugins: [
         new OpenBrowserPlugin({
-            url: 'http://localhost:8080'
+            url: 'http://@REPLACE__CONFIG@.local/app_dev.php'
         })
     ]
 };
