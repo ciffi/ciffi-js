@@ -1,16 +1,18 @@
+'use strict';
+
 var Page = (function () {
 
-    'use strict';
+	function Page() {
 
-    function Page() {
-        console.log('example page loaded');
-    }
+		console.log('example page loaded');
 
-    Page.prototype.setData = function (data) {
-        console.log(data);
-    };
+	}
 
-    return new Page();
+	Page.prototype.setData = function (data) {
+		console.log(data);
+	};
+
+	return new Page();
 
 })();
 

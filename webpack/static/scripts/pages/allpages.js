@@ -1,16 +1,16 @@
+'use strict';
+
 var Page = (function () {
 
-    'use strict';
+	function Page() {
+		document.body.classList.add('appIsReady');
+	}
 
-    function Page() {
-        document.body.classList.add('appIsReady');
-    }
+	Page.prototype.setData = function () {
 
-    Page.prototype.setData = function (data) {
+	};
 
-    };
-
-    return new Page();
+	return new Page();
 
 })();
 

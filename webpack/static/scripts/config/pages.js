@@ -1,3 +1,5 @@
+'use strict';
+
 var Pages = {
 	index: '.js-router--home',
 	example: '.js-router--example'

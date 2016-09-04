@@ -1,13 +1,15 @@
-var Page = (function() {
+'use strict';
 
-	'use strict';
+var Page = (function () {
 
 	function Page() {
 		console.log('@REPLACE__PAGENAME@ page loaded');
 	}
 
-	Page.prototype.setData = function(data) {
+	Page.prototype.setData = function (data) {
+
 		console.log(data);
+
 	};
 
 	return new Page();

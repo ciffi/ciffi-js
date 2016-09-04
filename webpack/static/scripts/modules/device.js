@@ -1,6 +1,6 @@
-var Device = (function() {
+'use strict';
 
-	'use strict';
+var Device = (function () {
 
 	function Device() {
 		this.init();
@@ -9,14 +9,14 @@ var Device = (function() {
 	function checkTouch() {
 		var isTouch = 'ontouchstart' in document.documentElement;
 
-		if(isTouch) {
+		if (isTouch) {
 			document.getElementsByTagName('html')[0].className = document.getElementsByTagName('html')[0].className += ' touch';
-		}else {
+		} else {
 			document.getElementsByTagName('html')[0].className = document.getElementsByTagName('html')[0].className += ' no-touch';
 		}
 	}
 
-	Device.prototype.init = function() {
+	Device.prototype.init = function () {
 		checkTouch();
 	};
 

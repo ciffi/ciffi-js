@@ -1,6 +1,6 @@
-var @REPLACE__MODULENAME@ = (function() {
+'use strict';
 
-	'use strict';
+var @REPLACE__MODULENAME@ = (function() {
 
 	function @REPLACE__MODULENAME@() {
 		this.init();

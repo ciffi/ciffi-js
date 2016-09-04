@@ -1,9 +1,7 @@
 @import '../../node_modules/breakpoint-sass/stylesheets/breakpoint';
 
-@import 'utils/vars';
+@import 'config/config';
 @import 'font-awesome/font-awesome';
 @import 'utils/fonts';
 @import 'utils/helpers';
-
 @import 'modules/layout';
-@import 'modules/storelocator';

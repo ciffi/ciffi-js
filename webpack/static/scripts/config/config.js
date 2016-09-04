@@ -1,3 +1,5 @@
+'use strict';
+
 var Config = {
 	projectName: '@REPLACE__CONFIG@',
 	envs: {

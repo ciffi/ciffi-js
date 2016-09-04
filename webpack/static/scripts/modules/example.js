@@ -1,17 +1,15 @@
-var Example = (function() {
+'use strict';
 
-	'use strict';
+var Example = (function () {
 
 	function Example() {
 		this.init();
 	}
 
-	Example.prototype.init = function() {
-		console.log('new Example initialiazed');
-	};
+	Example.prototype.init = function () {
 
-	Example.prototype.write = function(val) {
-		console.log('Example method --> .write(\'val\')',val);
+		console.log('new Example initialiazed');
+
 	};
 
 	return Example;

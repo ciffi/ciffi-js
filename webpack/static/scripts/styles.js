@@ -1,3 +1,5 @@
+'use strict';
+
 /*
     styles - serve only
 */
