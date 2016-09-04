@@ -15,6 +15,7 @@
 #### Removed Storeslocator module
 * Storeslocator will become a javascript module
 
+
 ### v0.0.15 (2016-09-03)
 
 #### Added Changelog file
