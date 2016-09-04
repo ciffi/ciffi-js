@@ -32,18 +32,16 @@ var SetupHiddenFiles = (function () {
 			pathExists(_projectRoot).then(function (res) {
 				if (res) {
 					shell.cp(_resource, _tempFile);
-					replacePageName(_tempFile, fileName, function () {
-						shell.cp(_tempFile, _projectFile);
-						shell.rm('-rf', _tempFile);
-						console.log(chalk.green('New file created: ' + _projectFile));
-					});
+					shell.cp(_tempFile, _projectFile);
+					shell.rm('-rf', _tempFile);
+					console.log(chalk.green('New file created: ' + _projectFile));
 				}
 			});
 		}
 
 	}
 
-	return SetupHiddenFiles;
+	return new SetupHiddenFiles();
 
 })();
 

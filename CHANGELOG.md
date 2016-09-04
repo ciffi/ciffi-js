@@ -1,7 +1,14 @@
+### v0.0.18 (2016-09-04)
+
+#### Fixed task - setup
+* Fixed creation of .gitignore and .eslintrc files during setup task
+
+
 ### v0.0.17 (2016-09-04)
 
 #### Fixed task - setup
 * Fixed creation of .gitignore and .eslintrc files during setup task
+
 
 ### v0.0.16 (2016-09-04)
 
