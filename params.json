@@ -1,0 +1,6 @@
+{
+  "name": "Ciffi-frontend-generator",
+  "tagline": "frontend project generator",
+  "body": "# CiffiDesign Frontend Generator #\r\n\r\n#### install ciffi\r\n```\r\nnpm install -g ciffi\r\n```\r\n#### setup new project\r\n```\r\nciffi setup projectname\r\n```\r\n#### local dev server\r\n```\r\nciffi serve\r\n```\r\n#### local dev build\r\n```\r\nciffi dev\r\n```\r\n#### generate build\r\n```\r\nciffi build\r\n```\r\n#### new page html and js\r\n```\r\nciffi newpage pagename\r\n```\r\n#### new js module\r\n```\r\nciffi newmodule modulename\r\n```",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
