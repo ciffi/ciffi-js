@@ -38,6 +38,9 @@ if (!cmd) {
         console.log(chalk.green.bold('-- end download and install npm dependencies --'));
         console.log('');
         console.log('');
+        require('./command/app-sethiddenfile');
+        console.log('');
+        console.log('');
         cliCursor.show();
         showGreetings();
     } else {

@@ -79,7 +79,7 @@ var AppSetup = (function () {
 
                     prompt.get([{
                         name: 'assetsUrl',
-                        default: './dist'
+                        default: '../static'
                     }],function (err,res) {
 
                         replaceBuildPath(res.assetsUrl, function () {

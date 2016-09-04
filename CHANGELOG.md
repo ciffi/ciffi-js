@@ -1,3 +1,8 @@
+### v0.0.17 (2016-09-04)
+
+#### Fixed task - setup
+* Fixed creation of .gitignore and .eslintrc files during setup task
+
 ### v0.0.16 (2016-09-04)
 
 #### Refactoring base project structure
@@ -21,4 +26,4 @@
 #### Added Changelog file
 
 #### Fixed task - setup
-* Fixed replace assets url name when create new projectFixed bug that prevented the raplace of the assets' path in static/scripts/config/congif.js file
+* Fixed replace assets url name when create new projectFixed bug that prevented the raplace of the assets path in static/scripts/config/congif.js file
