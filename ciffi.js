@@ -63,6 +63,15 @@ if (!cmd) {
         case 'build':
             require('./command/app-build');
             break;
+        case 'moka':
+            require('./command/app-test').moka();
+            break;
+        case 'test':
+            require('./command/app-test').cucumber();
+            break;
+        case 'dev-test':
+            require('./command/app-test').cucumber('dev');
+            break;
         case 'newpage':
             var Page = require('./command/app-newpage');
             new Page({

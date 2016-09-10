@@ -21,7 +21,9 @@ var AppSetup = (function () {
                     process.config.variables.node_prefix + '/lib/node_modules/ciffi/tmp/static/scripts/config/config.js',
                     process.config.variables.node_prefix + '/lib/node_modules/ciffi/tmp/dev.config.js',
                     process.config.variables.node_prefix + '/lib/node_modules/ciffi/tmp/build.config.js',
-                    process.config.variables.node_prefix + '/lib/node_modules/ciffi/tmp/package.json'
+                    process.config.variables.node_prefix + '/lib/node_modules/ciffi/tmp/package.json',
+                    process.config.variables.node_prefix + '/lib/node_modules/ciffi/tmp/test/cucumber.conf.js',
+                    process.config.variables.node_prefix + '/lib/node_modules/ciffi/tmp/test/cucumber/config.js'
                 ],
                 replace: /@REPLACE__ASSETS@/g,
                 with: config

@@ -2,7 +2,9 @@
   "env": {
     "browser": true,
     "commonjs": true,
-    "node": true
+    "node": true,
+    "jquery": true,
+    "mocha": true
   },
   "extends": "eslint:recommended",
   "globals": {},

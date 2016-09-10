@@ -1,3 +1,22 @@
+### v0.0.19 (2016-09-10)
+
+#### Added Test Suite (moka - chai - cucumber)
+
+New available commands
+
+* test local dev server with moka and chai
+```
+ciffi moka
+```
+* test build with cucumber
+```
+ciffi test
+```
+* test local dev serer with cucumber
+```
+ciffi dev-test
+```
+
 ### v0.0.18 (2016-09-04)
 
 #### Fixed task - setup
