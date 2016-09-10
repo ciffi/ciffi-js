@@ -1,3 +1,8 @@
+### v0.0.20 (2016-09-10)
+
+#### Fixed commands - serve / test
+* Fixed core modules
+
 ### v0.0.19 (2016-09-10)
 
 #### Added Test Suite (moka - chai - cucumber)
