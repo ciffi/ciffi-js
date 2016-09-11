@@ -20,17 +20,9 @@ ciffi dev
 ```
 ciffi build
 ```
-#### test local dev server with moka and chai
+#### unit test local dev server with moka and cucumber
 ```
-ciffi moka
-```
-#### test build with cucumber
-```
-ciffi test
-```
-#### test local dev serer with cucumber
-```
-ciffi dev-test
+ciffi unit
 ```
 #### new page html and js
 ```

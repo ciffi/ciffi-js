@@ -1,6 +1,6 @@
 {
   "name": "ciffi",
-  "version": "0.0.20",
+  "version": "0.1.1",
   "description": "Ciffi Frontend Generator",
   "main": "ciffi.js",
   "repository": {
@@ -27,7 +27,10 @@
     "stack",
     "generator",
     "generate",
-    "app"
+    "app",
+    "test",
+    "cucumberjs",
+    "karma"
   ],
   "license": "ISC",
   "homepage": "https://github.com/ciffi/ciffi-frontend-generator",

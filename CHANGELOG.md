@@ -1,7 +1,26 @@
+### v0.1.1 (2016-09-11)
+Ok, now it should be quite stable :D
+
+
+### v0.1.0 (2016-09-11)
+I think now is quite stable
+
+#### Removed mocha and chai from test suite and relative tasks
+* I prefer to use karma and cucumber for unit test
+
+#### Added new command unit for testing
+* Unit test with karma, cucumber and gherkin syntax for features files
+* Refactoring test/ path
+
+#### Removed dev test tasks
+* It had some problems with live url
+
+
 ### v0.0.20 (2016-09-10)
 
 #### Fixed commands - serve / test
 * Fixed core modules
+
 
 ### v0.0.19 (2016-09-10)
 

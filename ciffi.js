@@ -63,14 +63,8 @@ if (!cmd) {
         case 'build':
             require('./command/app-build');
             break;
-        case 'moka':
-            require('./command/app-test').moka();
-            break;
-        case 'test':
-            require('./command/app-test').cucumber();
-            break;
-        case 'dev-test':
-            require('./command/app-test').cucumber('dev');
+        case 'unit':
+            require('./command/app-test').unit();
             break;
         case 'newpage':
             var Page = require('./command/app-newpage');
@@ -108,6 +102,8 @@ function showGreetings() {
     console.log('');
     console.log(chalk.blue('ciffi build') + chalk.green(' -- generate build --'));
     console.log('');
+    console.log(chalk.blue('ciffi unit') + chalk.green(' -- start local unit test development with karma and cucumber --'));
+    console.log('');
     console.log(chalk.blue('ciffi newpage pagename') + chalk.green(' -- create new html and js page --'));
     console.log('');
     console.log(chalk.blue('ciffi newmodule modulename') + chalk.green(' -- create new js module --'));
@@ -131,6 +127,8 @@ function showCommandListMsg() {
     console.log(chalk.blue('ciffi dev') + chalk.green(' -- start livereload server and generate local build with watch --'));
     console.log('');
     console.log(chalk.blue('ciffi build') + chalk.green(' -- generate build --'));
+    console.log('');
+    console.log(chalk.blue('ciffi unit') + chalk.green(' -- start local unit test development with karma and cucumber --'));
     console.log('');
     console.log(chalk.blue('ciffi newpage pagename') + chalk.green(' -- create new html and js page --'));
     console.log('');

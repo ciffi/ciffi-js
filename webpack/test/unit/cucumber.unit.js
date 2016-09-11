@@ -1,18 +1,15 @@
 'use strict';
 
 var autoprefixer = require('autoprefixer');
+var cucumberConfig = require('./config');
 
 module.exports = function (config) {
 	config.set({
 		basePath: '',
-		frameworks: ['mocha', 'chai'],
-		files: [{
-			pattern: 'mocha/**/*.js',
-			watched: false
-		}],
+		frameworks: ['cucumberjs'],
+		files: cucumberConfig,
 		preprocessors: {
-			'mocha/*.js': ['webpack'],
-			'mocha/**/*.js': ['webpack']
+			'./features/**/*.js': ['webpack']
 		},
 		webpack: {
 			module: {
