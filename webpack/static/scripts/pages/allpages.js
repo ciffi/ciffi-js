@@ -3,11 +3,16 @@
 var Page = (function () {
 
 	function Page() {
-		document.body.classList.add('appIsReady');
+		console.log('all page constructor');
 	}
 
 	Page.prototype.setData = function () {
 
+	};
+	
+	Page.prototype.load = function () {
+		document.body.classList.add('appIsReady');
+		console.log('all page load');
 	};
 
 	return new Page();

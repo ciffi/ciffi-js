@@ -24,6 +24,10 @@ ciffi build
 ```
 ciffi unit
 ```
+#### e2e test with nightwatch and cucumber (default configuration)
+```
+ciffi e2e
+```
 #### new page html and js
 ```
 ciffi newpage pagename

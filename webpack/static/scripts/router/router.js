@@ -1,20 +1,24 @@
 'use strict';
 
 /* CONFIG */
-
-var DefaulConfig = require('../config/config');
-var Config = require('./router-config');
-var CONFIG = new Config(DefaulConfig.envs);
-
+var UserConfig = require('../config/config');
+var RouterConfig = require('./router-config');
+var CONFIG = new RouterConfig(UserConfig.envs);
 /* CONFIG */
 
 /* PAGES */
 var Pages = require('../config/pages');
 /* PAGES */
 
+/* PUSHSTATE */
+var PushState = require('./pushstate');
+/* PUSHSTATE */
+
 var $ = require('jquery');
 var Router = (function () {
 
+	var ALLPAGES = 'allpages';
+	
 	function Router(pages) {
 		checkConfig(pages, $.proxy(function () {
 			this.pages = pages;
@@ -42,25 +46,83 @@ var Router = (function () {
 		});
 		return _currentRoute;
 	}
+	
+	// function checkRequestRoute(routes) {
+	// 	var _currentRoute = false;
+	// 	$.each(routes, function (index, route) {
+	// 		if ($(route).length > 0) {
+	// 			_currentRoute = index;
+	// 		}
+	// 	});
+	// 	return _currentRoute;
+	// }
 
 	function onPagesLoaded(pages, currentRoute) {
-
-		var _baseRoute = 'allpages';
-
-		require('../pages/' + _baseRoute).setData({
+		
+		require('../pages/' + ALLPAGES).setData({
 			config: CONFIG.config
 		});
+		
+		require('../pages/' + ALLPAGES).load();
 
 		if (pages[currentRoute]) {
+			
 			require('../pages/' + currentRoute).setData({
+				config: CONFIG.config
+			});
+		}
+	}
+	
+	function onPushStateChange(pages, currentRoute) {
+		
+		require('../pages/' + ALLPAGES).load({
+			config: CONFIG.config
+		});
+		
+		if (pages[currentRoute]) {
+			require('../pages/' + currentRoute).load({
 				config: CONFIG.config
 			});
 		}
 	}
 
 	Router.prototype.init = function () {
-		var _routes = this.pages;
-		onPagesLoaded(_routes, checkRoute(_routes));
+		
+	};
+	
+	Router.prototype.pushState = function (val) {
+		
+		if (val) {
+			
+			require('../pages/' + ALLPAGES).setData({
+				config: CONFIG.config
+			});
+			
+			this.isPushStateEnabled = PushState.checkSupport();
+			
+			if (this.isPushStateEnabled) {
+				PushState.watcher(this.pages, $.proxy(function (data) {
+					var _routes = this.pages;
+					var _currentRoute = data.url;
+					onPushStateChange(_routes, _currentRoute);
+				}, this));
+			}
+			
+			var _requestRoute = window.location.pathname.replace('/', '');
+			if (this.pages.hasOwnProperty(_requestRoute)) {
+				PushState.push({url: _requestRoute}, _requestRoute);
+			}else {
+				PushState.push({url: 'index'}, '');
+			}
+			
+			return this.isPushStateEnabled;
+		} else {
+			
+			var _routes = this.pages;
+			onPagesLoaded(_routes, checkRoute(_routes));
+			
+			return 'pushState disabled';
+		}
 	};
 
 	return new Router(Pages);

@@ -10,6 +10,7 @@ module.exports = {
 		path: '@REPLACE__ASSETS@',
 		filename: '[name].js'
 	},
+	devtool: 'eval',
 	watch: true,
 	plugins: [
 		new OpenBrowserPlugin({

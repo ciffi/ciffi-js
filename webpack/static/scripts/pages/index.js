@@ -1,10 +1,11 @@
 'use strict';
+var $ = require('jquery');
 
 var Page = (function () {
 
 	function Page() {
 
-		console.log('home page loaded');
+		console.log('home page constructor');
 
 	}
 
@@ -12,6 +13,12 @@ var Page = (function () {
 
 		console.log(data);
 
+	};
+	
+	Page.prototype.load = function () {
+		console.log('home page load');
+		
+		$('h1').text('pagina index!!');
 	};
 
 	return new Page();

@@ -3,7 +3,7 @@
 var Page = (function () {
 
 	function Page() {
-		console.log('@REPLACE__PAGENAME@ page loaded');
+		console.log('@REPLACE__PAGENAME@ page constructor');
 	}
 
 	Page.prototype.setData = function (data) {
@@ -11,9 +11,13 @@ var Page = (function () {
 		console.log(data);
 
 	};
+	
+	Page.prototype.load = function () {
+		
+		console.log('@REPLACE__PAGENAME@ page load');
+		
+	};
 
 	return new Page();
 
 })();
-
-module.exports = Page;
