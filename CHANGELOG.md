@@ -1,4 +1,13 @@
-### v0.1.2 (2016-09-11)
+### v0.2.0 (2016-10-15)
+
+#### ready for new version 0.2.0
+- fix changelog
+- fix console.log
+- new readme
+- fix commands list
+- new task "ciffi e2e chrome" //default, chrome or firefox
+
+### v0.1.2 (2016-10-15)
 
 #### Improved test suite
 - with e2e, nightwatchjs and cucumber

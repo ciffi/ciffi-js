@@ -114,7 +114,7 @@ function showGreetings() {
 	console.log('');
 	console.log(chalk.blue('ciffi e2e') + chalk.green(' -- e2e test with nightwatch and cucumber (default configuration) --'));
 	console.log('');
-	console.log(chalk.blue('ciffi e2e chrome') + chalk.green(' -- e2e test with nightwatch and cucumber (custom configuration) --'));
+	console.log(chalk.blue('ciffi e2e chrome //default, chrome or firefox') + chalk.green(' -- e2e test with nightwatch and cucumber (custom configuration) --'));
 	console.log('');
 	console.log(chalk.blue('ciffi newpage pagename') + chalk.green(' -- create new html and js page --'));
 	console.log('');
@@ -144,7 +144,7 @@ function showCommandListMsg() {
 	console.log('');
 	console.log(chalk.blue('ciffi e2e') + chalk.green(' -- e2e test with nightwatch and cucumber (default configuration) --'));
 	console.log('');
-	console.log(chalk.blue('ciffi e2e chrome') + chalk.green(' -- e2e test with nightwatch and cucumber (custom configuration) --'));
+	console.log(chalk.blue('ciffi e2e chrome //default, chrome or firefox') + chalk.green(' -- e2e test with nightwatch and cucumber (custom configuration) --'));
 	console.log('');
 	console.log(chalk.blue('ciffi newpage pagename') + chalk.green(' -- create new html and js page --'));
 	console.log('');

@@ -20,7 +20,6 @@ var Test = (function () {
 			});
 		},
 		e2e: function (args) {
-			console.log('asdasdsad ' + args);
 			var _cmd = (!args) ? 'test-e2e' : 'test-e2e-' + args[1];
 			npm.load(function (err) {
 				npm.commands.run([_cmd], function (er, data) {
