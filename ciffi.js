@@ -68,7 +68,11 @@ if (!cmd) {
 			require('./command/app-test').unit();
 			break;
 		case 'e2e':
-			require('./command/app-test').e2e();
+			var _args = false;
+			if (args[1]) {
+				_args = args;
+			}
+			require('./command/app-test').e2e(_args);
 			break;
 		case 'newpage':
 			var Page = require('./command/app-newpage');
@@ -108,6 +112,10 @@ function showGreetings() {
 	console.log('');
 	console.log(chalk.blue('ciffi unit') + chalk.green(' -- start local unit test development with karma and cucumber --'));
 	console.log('');
+	console.log(chalk.blue('ciffi e2e') + chalk.green(' -- e2e test with nightwatch and cucumber (default configuration) --'));
+	console.log('');
+	console.log(chalk.blue('ciffi e2e chrome') + chalk.green(' -- e2e test with nightwatch and cucumber (custom configuration) --'));
+	console.log('');
 	console.log(chalk.blue('ciffi newpage pagename') + chalk.green(' -- create new html and js page --'));
 	console.log('');
 	console.log(chalk.blue('ciffi newmodule modulename') + chalk.green(' -- create new js module --'));
@@ -133,6 +141,10 @@ function showCommandListMsg() {
 	console.log(chalk.blue('ciffi build') + chalk.green(' -- generate build --'));
 	console.log('');
 	console.log(chalk.blue('ciffi unit') + chalk.green(' -- start local unit test development with karma and cucumber --'));
+	console.log('');
+	console.log(chalk.blue('ciffi e2e') + chalk.green(' -- e2e test with nightwatch and cucumber (default configuration) --'));
+	console.log('');
+	console.log(chalk.blue('ciffi e2e chrome') + chalk.green(' -- e2e test with nightwatch and cucumber (custom configuration) --'));
 	console.log('');
 	console.log(chalk.blue('ciffi newpage pagename') + chalk.green(' -- create new html and js page --'));
 	console.log('');

@@ -28,6 +28,10 @@ ciffi unit
 ```
 ciffi e2e
 ```
+#### e2e test with nightwatch and cucumber (custom configuration)
+```
+ciffi e2e chrome //default, chrome o firefox
+```
 #### new page html and js
 ```
 ciffi newpage pagename
