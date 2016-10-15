@@ -1,6 +1,12 @@
+### v0.2.1 (2016-10-15)
+
+#### Added javascript documentations generator with jsdoc
+- generate javascript documentation with jsdoc located in ./jsdoc/index.html
+- new task "ciffi jsdoc"
+
 ### v0.2.0 (2016-10-15)
 
-#### ready for new version 0.2.0
+#### Ready for new version 0.2.0
 - fix changelog
 - fix console.log
 - new readme

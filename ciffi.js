@@ -86,6 +86,9 @@ if (!cmd) {
 				moduleName: projectName
 			});
 			break;
+		case 'jsdoc':
+			require('./command/app-jsdoc');
+			break;
 		default:
 			showCommandErrorMessage();
 			break;
@@ -120,6 +123,8 @@ function showGreetings() {
 	console.log('');
 	console.log(chalk.blue('ciffi newmodule modulename') + chalk.green(' -- create new js module --'));
 	console.log('');
+	console.log(chalk.blue('ciffi jsdoc') + chalk.green(' -- generate javascript documentation with jsdoc into ./jsdoc path --'));
+	console.log('');
 	console.log(chalk.blue.bold(pkg.author.name) + chalk.blue.bold(' ^_^'));
 	console.log('');
 }
@@ -149,6 +154,8 @@ function showCommandListMsg() {
 	console.log(chalk.blue('ciffi newpage pagename') + chalk.green(' -- create new html and js page --'));
 	console.log('');
 	console.log(chalk.blue('ciffi newmodule modulename') + chalk.green(' -- create new js module --'));
+	console.log('');
+	console.log(chalk.blue('ciffi jsdoc') + chalk.green(' -- generate javascript documentation with jsdoc into ./jsdoc path --'));
 	console.log('');
 	console.log('');
 }

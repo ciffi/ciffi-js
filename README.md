@@ -20,7 +20,7 @@ ciffi dev
 ```
 ciffi build
 ```
-#### unit test local dev server with moka and cucumber
+#### start local unit test development with karma and cucumber
 ```
 ciffi unit
 ```
@@ -39,4 +39,8 @@ ciffi newpage pagename
 #### new js module
 ```
 ciffi newmodule modulename
+```
+#### generate javascript documentation with jsdoc into ./jsdoc path
+```
+ciffi jsdoc
 ```
