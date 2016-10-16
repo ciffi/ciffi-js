@@ -1,19 +1,48 @@
 'use strict';
 
+/**
+ * Custom select js module
+ * @module Customselect
+ * @requires jquery
+ */
+
 var $ = require('jquery');
+
 var Customselect = (function () {
 	
+	/**
+	 * This initialize new Customselect for each $('.js-customselect') element
+	 * @memberof Customselect
+	 * @inner
+	 */
 	function canStart() {
 		$('.js-customselect').each(function () {
 			new Customselect(this);
 		});
 	}
 	
+	/**
+	 * This initialize new Customselect
+	 * @exports Customselect
+	 * @class
+	 * @param {jQuery} el - jQuery select $('.js-customselect')
+	 * @example
+	 * <select class="js-customselect">
+	 *     <option value="0">0</option>
+	 *     <option value="1">1</option>
+	 *     ...
+	 *     <option value="x">x</option>
+	 * </select>
+	 */
 	function Customselect(el) {
 		this.el = $(el);
 		this.init();
 	}
 	
+	/**
+	 * This create new tag and append it to the DOM, then wrap original select into it
+	 * @memberof Customselect
+	 */
 	Customselect.prototype.init = function () {
 		var _parentClass = this.el.attr('data-class') || '';
 		var _showArrow = this.el.attr('data-arrow') || 'true';

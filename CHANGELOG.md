@@ -1,3 +1,15 @@
+### v0.2.3 (2016-10-16)
+
+#### Fixed serve task
+
+### v0.2.2 (2016-10-16)
+
+#### Added documentation for some default components
+- cookies
+- customselect
+- device
+- utils
+
 ### v0.2.1 (2016-10-15)
 
 #### Added javascript documentations generator with jsdoc

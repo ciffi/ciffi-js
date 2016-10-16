@@ -70,6 +70,7 @@
     "styles": "npm run css && npm run autoprefixer && npm run cleancss",
     "setup": "npm install && ciffi --postsetup",
     "clean-dist": "rm -rf @REPLACE__ASSETS@/*",
+    "serve": "./node_modules/.bin/webpack-dev-server --config serve.config.js --progress --inline --hot",
     "dev": "npm run live-css-first && npm run assets && concurrently --kill-others \"npm run live-server\" \"npm run live-css\" \"npm run live-js\"",
     "build": "npm run clean-dist && npm run css && npm run js && npm run assets",
     "test-unit": "./node_modules/karma/bin/karma start test/unit/cucumber.unit.js",

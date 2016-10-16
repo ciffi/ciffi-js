@@ -1,17 +1,35 @@
 'use strict';
 
+/**
+ * Utils js module
+ * @module Utils
+ * @requires jquery
+ */
+
 var $ = require('jquery');
 
 var Utils = (function () {
-
+	
+	/**
+	 * This contains various utility like loading, image preload, resizeEnd or scrollEnd watcher
+	 * @exports Utils
+	 * @class
+	 * @example
+	 * var Utils = require('./path/to/utils.js');
+	 * var utils = new Utils();
+	 */
 	function Utils() {
 
 	}
-
-	Utils.prototype.init = function () {
-
-	};
-
+	
+	/**
+	 * This add/remove hidden class to $('.js-loading') DOM element
+	 * @param {string} action - hide/show to add/remove hidden class to $('.js-loading') DOM element
+	 * @memberOf Utils
+	 * @example
+	 * utils.loading('show');
+	 * utils.loading('hide');
+	 */
 	Utils.prototype.loading = function (action) {
 		switch (action) {
 			case 'show':
@@ -24,7 +42,24 @@ var Utils = (function () {
 				break;
 		}
 	};
-
+	
+	/**
+	 * Preload array of images
+	 * @param {array} images - array of images to preload
+	 * @param {function} allCallback - function called when all images has been loaded
+	 * @param {function} singleCallback - function called when single image has been loaded
+	 * @memberOf Utils
+	 * @example
+	 * var imagesArray = ['a.jpg','b.png','c.gif'];
+	 * function allCallback() {
+	 *  console.log('all images has been loaded');
+	 * }
+	 * function singleCallback(res) {
+	 *  console.log('index of image just loaded ' + res.index);
+	 *  console.log('url of image just loaded ' + res.src);
+	 * }
+	 * utils.preloadImages(imagesArray, allCallback, singleCallback);
+	 */
 	Utils.prototype.preloadImages = function (images, allCallback, singleCallback) {
 		var _loaded = 0;
 		$.each(images, function (index, url) {
@@ -49,7 +84,20 @@ var Utils = (function () {
 			}
 		});
 	};
-
+	
+	/**
+	 * This detects the end of the resize of window
+	 * @param {function} endCallback - function called when resize finish
+	 * @param {number} time - delay in millisecond
+	 * @memberOf Utils
+	 * @example
+	 * var time = 500;
+	 * function endCallback(res) {
+	 *  console.log('window width and height when resize action start ' + res.old.width + ' - ' + res.old.height);
+	 *  console.log('window width and height when resize action finish ' + res.new.width + ' - ' + res.new.height);
+	 * }
+	 * utils.resizeEnd(endCallback, time);
+	 */
 	Utils.prototype.resizeEnd = function (endCallback, time) {
 
 		var _old = {
@@ -88,7 +136,22 @@ var Utils = (function () {
 		});
 
 	};
-
+	
+	/**
+	 * This detects the end of the resize of window by default or user defined element
+	 * @param {function} endCallback - function called when resize finish
+	 * @param {string} element - jQuery element selector
+	 * @param {number} time - delay in millisecond
+	 * @memberOf Utils
+	 * @example
+	 * var time = 500;
+	 * var element = '.my-element';
+	 * function endCallback(res) {
+	 *  console.log('scroll position when event start ' + res.old);
+	 *  console.log('scroll position when event finish ' + res.new);
+	 * }
+	 * utils.scrollEnd(endCallback, element, time);
+	 */
 	Utils.prototype.scrollEnd = function (endCallback, element, time) {
 
 		var _rtime = new Date('2000-01-01');

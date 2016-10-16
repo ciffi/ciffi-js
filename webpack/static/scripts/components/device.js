@@ -1,24 +1,38 @@
 'use strict';
 
+/**
+ * Device js module
+ * @module Device
+ */
 var Device = (function () {
-
+	
+	/**
+	 * This get html tag and run some check to detect device specifications then add relative class to the html tag
+	 * @exports Device
+	 * @class
+	 * @example
+	 * require('./path/to/device.js');
+	 */
 	function Device() {
-		this.init();
+		var _el = document.getElementsByTagName('html')[0];
+		checkTouch(_el);
 	}
-
-	function checkTouch() {
+	
+	/**
+	 * This check if device support ontouchstart event
+	 * @param {DOM} el - html tag
+	 * @memberOf Device
+	 * @inner
+	 */
+	function checkTouch(el) {
 		var isTouch = 'ontouchstart' in document.documentElement;
-
+		
 		if (isTouch) {
-			document.getElementsByTagName('html')[0].className = document.getElementsByTagName('html')[0].className += ' touch';
+			el.classList.add('touch');
 		} else {
-			document.getElementsByTagName('html')[0].className = document.getElementsByTagName('html')[0].className += ' no-touch';
+			el.classList.add('no-touch');
 		}
 	}
-
-	Device.prototype.init = function () {
-		checkTouch();
-	};
 
 	return new Device();
 
