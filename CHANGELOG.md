@@ -1,3 +1,8 @@
+### v0.2.4 (2016-10-16)
+
+#### Auto load livereload script
+- Livereload script tag is now append to body when you run "ciffi dev" task 
+
 ### v0.2.3 (2016-10-16)
 
 #### Fixed serve task
