@@ -33,6 +33,7 @@
     "karma-chrome-launcher": "^2.0.0",
     "karma-cucumberjs": "0.0.3",
     "karma-webpack": "^1.8.0",
+    "kss": "^3.0.0-beta.15",
     "livereload": "^0.5.0",
     "nightwatch": "^0.9.8",
     "nightwatch-cucumber": "^5.0.1",
@@ -41,10 +42,11 @@
     "phantomjs-prebuilt": "^2.1.12",
     "postcss-cli": "^2.6.0",
     "postcss-loader": "^0.8.1",
+    "sass-loader": "^3.1.2",
+    "sassdoc": "^2.1.20",
     "selenium-chromedriver": "0.0.2",
     "selenium-server": "^2.53.1",
     "selenium-webdriver": "^2.53.3",
-    "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
@@ -62,7 +64,7 @@
     "copy-pdf": "./node_modules/copyfiles/copyfiles -u 1 static/pdf/* @REPLACE__ASSETS@/",
     "copy-videos": "./node_modules/copyfiles/copyfiles -u 1 static/videos/* @REPLACE__ASSETS@/",
     "css": "./node_modules/node-sass/bin/node-sass static/styles/main.scss @REPLACE__ASSETS@/main.css",
-    "js": "./node_modules/webpack/bin/webpack.js --config build.config.js -p --progress --json > build-stats.json",
+    "js": "./node_modules/webpack/bin/webpack.js --config build.config.js -p --progress",
     "live-css-first": "./node_modules/node-sass/bin/node-sass static/styles/main.scss @REPLACE__ASSETS@/main.css --source-map true",
     "live-css": "./node_modules/node-sass/bin/node-sass static/styles/main.scss @REPLACE__ASSETS@/main.css --watch --source-map true",
     "live-js": "./node_modules/webpack/bin/webpack.js --config dev.config.js --progress",
@@ -75,6 +77,8 @@
     "build": "npm run clean-dist && npm run css && npm run js && npm run assets",
     "test-unit": "./node_modules/karma/bin/karma start test/unit/cucumber.unit.js",
     "test-e2e": "./node_modules/.bin/nightwatch -c ./test/e2e/config.js",
-    "jsdoc": "rm -rf ./jsdoc && ./node_modules/.bin/jsdoc ./static/scripts/components -d ./jsdoc"
+    "jsdoc": "rm -rf ./jsdoc && ./node_modules/.bin/jsdoc @REPLACE__ASSETS@/scripts/components -d ./jsdoc",
+    "cssdoc": "rm -rf ./cssdoc && ./node_modules/.bin/sassdoc @REPLACE__ASSETS@/styles -d ./cssdoc",
+    "styleguide": "rm -rf ./styleguide && ./node_modules/.bin/kss --source @REPLACE__ASSETS@/styles/ --destination ./styleguide --css ../@REPLACE__ASSETS@/main.css --js ../@REPLACE__ASSETS@/main.js"
   }
 }

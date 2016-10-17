@@ -4,7 +4,7 @@ var shell = require('shelljs');
 var MoveApp = (function () {
 
     function MoveApp() {
-        var _tempPath = process.config.variables.node_prefix + '/lib/node_modules/ciffi/tmp/*';
+        var _tempPath = process.env.PWD + '/.ciffi/*';
         var _projectPath = process.env.PWD + '/';
 
         shell.cp('-R', _tempPath, _projectPath);

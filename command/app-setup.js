@@ -18,10 +18,10 @@ var AppSetup = (function () {
             var _pathName = config.split('/')[config.split('/').length - 1];
             replace({
                 files: [
-                    process.config.variables.node_prefix + '/lib/node_modules/ciffi/tmp/static/scripts/config/config.js',
-                    process.config.variables.node_prefix + '/lib/node_modules/ciffi/tmp/dev.config.js',
-                    process.config.variables.node_prefix + '/lib/node_modules/ciffi/tmp/build.config.js',
-                    process.config.variables.node_prefix + '/lib/node_modules/ciffi/tmp/package.json'
+                    process.env.PWD + '/.ciffi/static/scripts/config/config.js',
+                    process.env.PWD + '/.ciffi/dev.config.js',
+                    process.env.PWD + '/.ciffi/build.config.js',
+                    process.env.PWD + '/.ciffi/package.json'
                 ],
                 replace: /@REPLACE__ASSETS@/g,
                 with: config
@@ -31,8 +31,8 @@ var AppSetup = (function () {
                 }
                 replace({
                     files: [
-                        process.config.variables.node_prefix + '/lib/node_modules/ciffi/tmp/static/scripts/config/config.js',
-                        process.config.variables.node_prefix + '/lib/node_modules/ciffi/tmp/static/styles/config/_config.scss'
+                        process.env.PWD + '/.ciffi/static/scripts/config/config.js',
+                        process.env.PWD + '/.ciffi/static/styles/config/_config.scss'
                     ],
                     replace: /@REPLACE__ASSETS__NAME@/g,
                     with: _pathName
@@ -48,8 +48,8 @@ var AppSetup = (function () {
         function replaceConfig(config, callback) {
             replace({
                 files: [
-                    process.config.variables.node_prefix + '/lib/node_modules/ciffi/tmp/static/scripts/config/config.js',
-                    process.config.variables.node_prefix + '/lib/node_modules/ciffi/tmp/dev.config.js'
+                    process.env.PWD + '/.ciffi/static/scripts/config/config.js',
+                    process.env.PWD + '/.ciffi/dev.config.js'
                 ],
                 replace: /@REPLACE__CONFIG@/g,
                 with: config

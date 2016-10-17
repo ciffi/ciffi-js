@@ -1,4 +1,4 @@
-# CiffiDesign Frontend Generator #
+# Ciffi Frontend Generator #
 
 #### install ciffi
 ```
@@ -40,7 +40,22 @@ ciffi newpage pagename
 ```
 ciffi newmodule modulename
 ```
-#### generate javascript documentation with jsdoc into ./jsdoc path
+#### generate javascript documentation
+- with jsdoc into ./jsdoc path
+- ./jsdoc/index.html
 ```
 ciffi jsdoc
+```
+#### generate css documentation
+- with sassdoc into ./cssdoc path
+- ./cssdoc/index.html
+```
+ciffi cssdoc
+```
+#### generate styleguides
+- with kss into ./styleguides path
+- it need build or dev task before
+- ./styleguides/index.html
+```
+ciffi styleguide
 ```

@@ -1,3 +1,10 @@
+### v0.3.0 (2016-10-17)
+
+#### Added new task for documentation and style guides generation
+- new task "ciffi cssdoc"
+- new task "ciffi styleguides"
+- fix setup task
+
 ### v0.2.4 (2016-10-16)
 
 #### Auto load livereload script

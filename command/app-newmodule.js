@@ -8,8 +8,8 @@ var Newmodule = (function () {
     function Newmodule(config) {
 
         var moduleName = config.moduleName;
-
-        var _tempPath = process.config.variables.node_prefix + '/lib/node_modules/ciffi/tmp/';
+    
+        var _tempPath = process.env.PWD + '/.ciffi/';
 
         pathExists(_tempPath).then(function (res) {
             if (!res) {

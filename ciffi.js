@@ -87,7 +87,13 @@ if (!cmd) {
 			});
 			break;
 		case 'jsdoc':
-			require('./command/app-jsdoc');
+			require('./command/app-doc').jsdoc();
+			break;
+		case 'cssdoc':
+			require('./command/app-doc').cssdoc();
+			break;
+		case 'styleguide':
+			require('./command/app-doc').styleguide();
 			break;
 		default:
 			showCommandErrorMessage();
