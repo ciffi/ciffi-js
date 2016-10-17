@@ -8,8 +8,7 @@ var Page = (function () {
 
 	Page.prototype.setData = function (data) {
 		if (data.config.env === 'local') {
-			var _body = document.body;
-			_body.innerHTML += '<script src="' + data.config.baseUrl + ':35729/livereload.js?snipver=1" async="" defer=""></script>';
+			document.write('<script src="' + data.config.baseUrl + ':35729/livereload.js?snipver=1"></script>');
 		}
 	};
 	

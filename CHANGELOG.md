@@ -1,3 +1,7 @@
+### v0.3.1 (2016-10-17)
+
+#### Fix livereload
+
 ### v0.3.0 (2016-10-17)
 
 #### Added new task for documentation and style guides generation
