@@ -1,3 +1,11 @@
+### v0.3.2 (2016-10-24)
+
+#### Improved pushState router
+- now can use subfolders for the sub routes 
+
+#### Modified livereload scripts
+- now livereload script is loaded by router
+
 ### v0.3.1 (2016-10-17)
 
 #### Fix livereload

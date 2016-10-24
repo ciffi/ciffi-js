@@ -59,6 +59,10 @@ var Router = (function () {
 
 	function onPagesLoaded(pages, currentRoute) {
 		
+		if (CONFIG.config.env === 'local') {
+			document.write('<script src="' + CONFIG.config.baseUrl + ':35729/livereload.js?snipver=1" async="" defer=""></script>');
+		}
+		
 		require('../pages/' + ALLPAGES).setData({
 			config: CONFIG.config
 		});

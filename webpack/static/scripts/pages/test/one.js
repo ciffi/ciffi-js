@@ -1,18 +1,22 @@
 'use strict';
+var $ = require('jquery');
 
 var Page = (function () {
 
 	function Page() {
-		console.log('all page constructor');
+
+		console.log('one page constructor');
+
 	}
 
 	Page.prototype.setData = function (data) {
-		
+		console.log(data);
 	};
 	
 	Page.prototype.load = function () {
-		document.body.classList.add('appIsReady');
-		console.log('all page load');
+		console.log('one page load');
+		
+		$('h1').text('pagina one!!');
 	};
 
 	return new Page();

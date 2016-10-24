@@ -12,6 +12,11 @@ var PushState = (function () {
 		$(document).on('click', 'a[href]:not([data-push="false"])', function (e) {
 			e.preventDefault();
 			var _url = $(this).attr('href');
+			
+			if (_url.indexOf('/') === 0) {
+				_url = _url.replace('/', '');
+			}
+			
 			var _data = {
 				url: _url
 			};
@@ -35,7 +40,7 @@ var PushState = (function () {
 	
 	function newUrl(data, url, Pushstate) {
 		if (!Pushstate.currentRoute || Pushstate.currentRoute !== url) {
-			window.history.pushState(data, null, url);
+			window.history.pushState(data, null, '/' + url);
 		}
 		return url;
 	}
