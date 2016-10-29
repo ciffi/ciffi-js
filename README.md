@@ -1,3 +1,12 @@
+[npm-month]: https://img.shields.io/npm/dm/ciffi.svg
+[npm-total]: https://img.shields.io/npm/dt/ciffi.svg
+[npm-version]: https://img.shields.io/npm/v/ciffi.svg
+[npm-url]: https://www.npmjs.com/package/ciffi
+
+[![npm-version][npm-version]][npm-url]
+[![npm-month][npm-month]][npm-url]
+[![npm-total][npm-total]][npm-url]
+
 # Ciffi Frontend Generator #
 
 #### install ciffi
