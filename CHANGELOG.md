@@ -1,3 +1,14 @@
+### v0.3.4 (2016-10-29)
+
+#### Fix setup path
+
+### v0.3.3 (2016-10-29)
+
+#### Some fix
+- fix ruter
+- fix app setup
+- fix assets' path name
+
 ### v0.3.2 (2016-10-24)
 
 #### Improved pushState router

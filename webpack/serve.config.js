@@ -7,7 +7,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 function newPage(page) {
 	return new HtmlWebpackPlugin({
-		template: __dirname + '/static/' + page + '.html',
+		template: __dirname + '/@REPLACE__ASSETS__NAME@/' + page + '.html',
 		filename: page + '.html',
 		inject: 'body'
 	});
@@ -15,8 +15,8 @@ function newPage(page) {
 
 module.exports = {
 	entry: {
-		styles: './static/scripts/styles.js',
-		scripts: './static/scripts/main.js'
+		styles: './@REPLACE__ASSETS__NAME@/scripts/styles.js',
+		scripts: './@REPLACE__ASSETS__NAME@/scripts/main.js'
 	},
 	output: {
 		path: './dist',

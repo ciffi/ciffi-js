@@ -16,7 +16,7 @@ var PushState = require('./pushstate');
 
 var $ = require('jquery');
 var Router = (function () {
-
+	
 	var ALLPAGES = 'allpages';
 	
 	function Router(pages) {
@@ -25,18 +25,18 @@ var Router = (function () {
 			this.init();
 		}, this));
 	}
-
+	
 	function checkConfig(pages, successCallback) {
 		var errorMessage = false;
 		if (pages && typeof pages === 'object') {
-
+			
 			if (!errorMessage) {
 				successCallback();
 			}
-
+			
 		}
 	}
-
+	
 	function checkRoute(routes) {
 		var _currentRoute = false;
 		$.each(routes, function (index, route) {
@@ -47,28 +47,14 @@ var Router = (function () {
 		return _currentRoute;
 	}
 	
-	// function checkRequestRoute(routes) {
-	// 	var _currentRoute = false;
-	// 	$.each(routes, function (index, route) {
-	// 		if ($(route).length > 0) {
-	// 			_currentRoute = index;
-	// 		}
-	// 	});
-	// 	return _currentRoute;
-	// }
-
 	function onPagesLoaded(pages, currentRoute) {
-		
-		if (CONFIG.config.env === 'local') {
-			document.write('<script src="' + CONFIG.config.baseUrl + ':35729/livereload.js?snipver=1" async="" defer=""></script>');
-		}
 		
 		require('../pages/' + ALLPAGES).setData({
 			config: CONFIG.config
 		});
 		
 		require('../pages/' + ALLPAGES).load();
-
+		
 		if (pages[currentRoute]) {
 			
 			require('../pages/' + currentRoute).setData({
@@ -89,9 +75,11 @@ var Router = (function () {
 			});
 		}
 	}
-
+	
 	Router.prototype.init = function () {
-		
+		if (CONFIG.config.env === 'local') {
+			document.write('<script src="' + CONFIG.config.baseUrl + ':35729/livereload.js?snipver=1" async="" defer=""></script>');
+		}
 	};
 	
 	Router.prototype.pushState = function (val) {
@@ -115,7 +103,7 @@ var Router = (function () {
 			var _requestRoute = window.location.pathname.replace('/', '');
 			if (this.pages.hasOwnProperty(_requestRoute)) {
 				PushState.push({url: _requestRoute}, _requestRoute);
-			}else {
+			} else {
 				PushState.push({url: 'index'}, '');
 			}
 			
@@ -128,9 +116,9 @@ var Router = (function () {
 			return 'pushState disabled';
 		}
 	};
-
+	
 	return new Router(Pages);
-
+	
 })();
 
 module.exports = Router;
