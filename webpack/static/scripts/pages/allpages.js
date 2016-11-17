@@ -7,7 +7,7 @@ var Page = (function () {
 	}
 
 	Page.prototype.setData = function (data) {
-		
+		console.log(data);
 	};
 	
 	Page.prototype.load = function () {

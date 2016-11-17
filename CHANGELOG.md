@@ -1,3 +1,7 @@
+### v0.3.7 (2016-11-17)
+
+#### Fix serve task first run eslint check
+
 ### v0.3.6 (2016-11-17)
 
 #### Fix app setup and serve task
