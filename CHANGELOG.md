@@ -1,3 +1,7 @@
+### v0.3.6 (2016-11-17)
+
+#### Fix app setup and serve task
+
 ### v0.3.5 (2016-11-17)
 
 #### Added yarn for fast depndencies downloading

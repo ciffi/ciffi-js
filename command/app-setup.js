@@ -33,6 +33,7 @@ var AppSetup = (function () {
 						process.env.PWD + '/.ciffi/static/scripts/config/config.js',
 						process.env.PWD + '/.ciffi/static/styles/config/_config.scss',
 						process.env.PWD + '/.ciffi/package.json',
+						process.env.PWD + '/.ciffi/serve.config.js',
 						process.env.PWD + '/.ciffi/dev.config.js',
 						process.env.PWD + '/.ciffi/build.config.js',
 						process.env.PWD + '/.ciffi/package.json'
