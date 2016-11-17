@@ -1,3 +1,7 @@
+### v0.3.5 (2016-11-17)
+
+#### Added yarn for fast depndencies downloading
+
 ### v0.3.4 (2016-10-29)
 
 #### Fix setup path
