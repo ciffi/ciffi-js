@@ -30,6 +30,7 @@ var AppSetup = (function () {
 				}
 				replace({
 					files: [
+						process.env.PWD + '/.ciffi/static/scripts/styles.js',
 						process.env.PWD + '/.ciffi/static/scripts/config/config.js',
 						process.env.PWD + '/.ciffi/static/styles/config/_config.scss',
 						process.env.PWD + '/.ciffi/package.json',

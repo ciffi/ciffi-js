@@ -1,3 +1,11 @@
+### v0.3.9 (2016-11-19)
+
+#### Removed yarn from setup
+
+### v0.3.8 (2016-11-18)
+
+#### Fix styleguide task
+
 ### v0.3.7 (2016-11-17)
 
 #### Fix serve task first run eslint check

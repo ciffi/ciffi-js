@@ -3,4 +3,4 @@
 /*
     styles - serve only
 */
-require('../styles/main.scss');
+require('../@REPLACE__ASSETS__NAME@/main.scss');

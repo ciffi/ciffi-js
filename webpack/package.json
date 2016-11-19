@@ -70,7 +70,7 @@
     "live-js": "./node_modules/webpack/bin/webpack.js --config dev.config.js --progress",
     "live-server": "./node_modules/livereload/bin/livereload.js \"@REPLACE__ASSETS@/\"",
     "styles": "npm run css && npm run autoprefixer && npm run cleancss",
-    "setup": "yarn || npm install && ciffi --postsetup",
+    "setup": "npm install && ciffi --postsetup",
     "clean-dist": "rm -rf @REPLACE__ASSETS@/*",
     "serve": "./node_modules/.bin/webpack-dev-server --config serve.config.js --progress --inline --hot",
     "dev": "npm run live-css-first && npm run assets && concurrently --kill-others \"npm run live-server\" \"npm run live-css\" \"npm run live-js\"",
@@ -79,6 +79,6 @@
     "test-e2e": "./node_modules/.bin/nightwatch -c ./test/e2e/config.js",
     "jsdoc": "rm -rf ./jsdoc && ./node_modules/.bin/jsdoc @REPLACE__ASSETS__NAME@/scripts/components -d ./jsdoc",
     "cssdoc": "rm -rf ./cssdoc && ./node_modules/.bin/sassdoc @REPLACE__ASSETS__NAME@/styles -d ./cssdoc",
-    "styleguide": "rm -rf ./styleguide && ./node_modules/.bin/kss --source @REPLACE__ASSETS@/styles/ --destination ./styleguide --css @REPLACE__ASSETS@/main.css --js @REPLACE__ASSETS@/main.js"
+    "styleguide": "rm -rf ./styleguide && ./node_modules/.bin/kss --source @REPLACE__ASSETS@/styles/ --destination ./styleguide --css ../@REPLACE__ASSETS@/main.css --js ../@REPLACE__ASSETS@/main.js"
   }
 }
