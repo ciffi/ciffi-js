@@ -1,3 +1,7 @@
+### v0.3.10 (2016-11-19)
+
+#### Fix styleguide task
+
 ### v0.3.9 (2016-11-19)
 
 #### Removed yarn from setup

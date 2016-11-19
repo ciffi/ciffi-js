@@ -79,6 +79,6 @@
     "test-e2e": "./node_modules/.bin/nightwatch -c ./test/e2e/config.js",
     "jsdoc": "rm -rf ./jsdoc && ./node_modules/.bin/jsdoc @REPLACE__ASSETS__NAME@/scripts/components -d ./jsdoc",
     "cssdoc": "rm -rf ./cssdoc && ./node_modules/.bin/sassdoc @REPLACE__ASSETS__NAME@/styles -d ./cssdoc",
-    "styleguide": "rm -rf ./styleguide && ./node_modules/.bin/kss --source @REPLACE__ASSETS@/styles/ --destination ./styleguide --css ../@REPLACE__ASSETS@/main.css --js ../@REPLACE__ASSETS@/main.js"
+    "styleguide": "rm -rf ./styleguide && ./node_modules/.bin/kss --source ./@REPLACE__ASSETS__NAME@/styles/ --destination ./styleguide --css ../@REPLACE__ASSETS@/main.css --js ../@REPLACE__ASSETS@/main.js"
   }
 }
