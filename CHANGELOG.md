@@ -1,3 +1,9 @@
+### v0.3.11 (2016-11-30)
+
+#### Added new tasks
+- dev-unit
+- build-prod
+
 ### v0.3.10 (2016-11-19)
 
 #### Fix styleguide task

@@ -5,6 +5,20 @@ var Test = (function () {
 	}
 	
 	Test.prototype = {
+		devUnit: function () {
+			npm.load(function (err) {
+				npm.commands.run(['dev-unit'], function (er, data) {
+					if (er) {
+						console.log('ciffi dev-unit error: ' + er);
+					}
+				});
+				
+				npm.on('log', function (message) {
+					console.log(message);
+				});
+				
+			});
+		},
 		unit: function () {
 			npm.load(function (err) {
 				npm.commands.run(['test-unit'], function (er, data) {

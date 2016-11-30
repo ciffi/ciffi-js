@@ -64,6 +64,12 @@ if (!cmd) {
 		case 'build':
 			require('./command/app-build');
 			break;
+		case 'build-prod':
+			require('./command/app-build-prod');
+			break;
+		case 'dev-unit':
+			require('./command/app-test').devUnit();
+			break;
 		case 'unit':
 			require('./command/app-test').unit();
 			break;
