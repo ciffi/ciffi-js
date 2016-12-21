@@ -1,3 +1,11 @@
+### v0.3.12 (2016-12-21)
+
+#### Fix newpage task
+- missing "modue.export" in new page file
+
+#### Added newcomponent task
+- new task newcomponent available
+
 ### v0.3.11 (2016-11-30)
 
 #### Added new tasks

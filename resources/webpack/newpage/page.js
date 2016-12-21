@@ -21,3 +21,5 @@ var Page = (function () {
 	return new Page();
 
 })();
+
+module.exports = Page;

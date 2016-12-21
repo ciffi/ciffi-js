@@ -45,6 +45,10 @@ ciffi e2e chrome //default, chrome or firefox
 ```
 ciffi newpage pagename
 ```
+#### new js component
+```
+ciffi newcomponent componentname
+```
 #### new js module
 ```
 ciffi newmodule modulename

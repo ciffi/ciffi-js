@@ -92,6 +92,12 @@ if (!cmd) {
 				moduleName: projectName
 			});
 			break;
+		case 'newcomponent':
+			var Component = require('./command/app-newcomponent');
+			new Component({
+				componentName: projectName
+			});
+			break;
 		case 'jsdoc':
 			require('./command/app-doc').jsdoc();
 			break;
@@ -132,6 +138,8 @@ function commandList() {
 	console.log(chalk.blue('ciffi newpage pagename') + chalk.green(' -- create new html and js page --'));
 	console.log('');
 	console.log(chalk.blue('ciffi newmodule modulename') + chalk.green(' -- create new js module --'));
+	console.log('');
+	console.log(chalk.blue('ciffi newcomponent componentname') + chalk.green(' -- create new js component --'));
 	console.log('');
 	console.log(chalk.blue('ciffi jsdoc') + chalk.green(' -- generate javascript documentation with jsdoc into ./jsdoc path --'));
 	console.log('');
