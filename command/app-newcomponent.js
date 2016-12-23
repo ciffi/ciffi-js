@@ -3,7 +3,7 @@ var shell = require('shelljs');
 var fileExists = require('file-exists');
 var pathExists = require('path-exists');
 var replace = require('replace-in-file');
-var Newmocomponent = (function () {
+var Newcomponent = (function () {
 	
 	function Newcomponent(config) {
 		

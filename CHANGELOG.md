@@ -1,7 +1,12 @@
+### v0.3.13 (2016-12-23)
+
+#### Fix newcomponent task
+- fix module name definition
+
 ### v0.3.12 (2016-12-21)
 
 #### Fix newpage task
-- missing "modue.export" in new page file
+- missing "module.export" in new page file
 
 #### Added newcomponent task
 - new task newcomponent available
