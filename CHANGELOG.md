@@ -1,3 +1,13 @@
+### v0.3.15 (2016-12-27)
+
+#### Fix docs re-generation path
+- fix rm command
+
+### v0.3.14 (2016-12-23)
+
+#### Fix docs generation path
+- now the docs will be generated in build folder
+
 ### v0.3.13 (2016-12-23)
 
 #### Fix newcomponent task
