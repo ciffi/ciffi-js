@@ -1,21 +1,30 @@
+### v0.3.16 (2016-12-28)
+
+#### Added cli completion
+- cli completion for ciffi commands
+
+#### Improved readme
+- cli completion
+- workflow
+
 ### v0.3.15 (2016-12-27)
 
-#### Fix docs re-generation path
+#### Fixed docs re-generation path
 - fix rm command
 
 ### v0.3.14 (2016-12-23)
 
-#### Fix docs generation path
+#### Fixed docs generation path
 - now the docs will be generated in build folder
 
 ### v0.3.13 (2016-12-23)
 
-#### Fix newcomponent task
+#### Fixed newcomponent task
 - fix module name definition
 
 ### v0.3.12 (2016-12-21)
 
-#### Fix newpage task
+#### Fixed newpage task
 - missing "module.export" in new page file
 
 #### Added newcomponent task
@@ -29,7 +38,7 @@
 
 ### v0.3.10 (2016-11-19)
 
-#### Fix styleguide task
+#### Fixed styleguide task
 
 ### v0.3.9 (2016-11-19)
 
@@ -37,15 +46,15 @@
 
 ### v0.3.8 (2016-11-18)
 
-#### Fix styleguide task
+#### Fixed styleguide task
 
 ### v0.3.7 (2016-11-17)
 
-#### Fix serve task first run eslint check
+#### Fixed serve task first run eslint check
 
 ### v0.3.6 (2016-11-17)
 
-#### Fix app setup and serve task
+#### Fixed app setup and serve task
 
 ### v0.3.5 (2016-11-17)
 
@@ -53,7 +62,7 @@
 
 ### v0.3.4 (2016-10-29)
 
-#### Fix setup path
+#### Fixed setup path
 
 ### v0.3.3 (2016-10-29)
 
@@ -72,7 +81,7 @@
 
 ### v0.3.1 (2016-10-17)
 
-#### Fix livereload
+#### Fixed livereload
 
 ### v0.3.0 (2016-10-17)
 

@@ -10,6 +10,7 @@ require('nightwatch-cucumber')({
 	openReport: true,
 	jsonReport: './test/e2e/reports/cucumber.json',
 	htmlReport: './test/e2e/reports/cucumber.html',
+	nightwatchClientAsParameter: true
 });
 
 module.exports = {

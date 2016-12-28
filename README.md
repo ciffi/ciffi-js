@@ -29,7 +29,7 @@ ciffi dev
 ```
 ciffi build
 ```
-#### start local unit test development with karma and cucumber
+#### start local test development with karma and cucumber
 ```
 ciffi unit
 ```
@@ -72,3 +72,24 @@ ciffi cssdoc
 ```
 ciffi styleguide
 ```
+- - -
+
+## CLI COMPLETION
+
+- add this snippet to your .bash_profile
+ 
+```
+# ciffi completion
+if [ -f /usr/local/lib/node_modules/ciffi/ciffi.bash ]; then
+  . /usr/local/lib/node_modules/ciffi/ciffi.bash
+fi
+```
+- - -
+
+## WORKFLOW
+
+1. create folder (I usually use frontend in the root of project), then browse inside it and run setup task
+2. project name is the name of your development host (if host is myapp.local your project name is myapp)
+3. answer the question about build folder (it must be out of our frontend project setup folder)
+4. run dev task and start to write code
+5. run build task and you are ready to deploy
