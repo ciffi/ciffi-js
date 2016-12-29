@@ -1,3 +1,9 @@
+### v0.3.17 (2016-12-29)
+
+#### Fixed e2e with env task
+- fixed task ciffi e2e chrome
+- fixed task ciffi e2e firefox
+
 ### v0.3.16 (2016-12-28)
 
 #### Added cli completion

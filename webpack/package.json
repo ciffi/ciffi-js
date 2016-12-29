@@ -79,6 +79,8 @@
     "dev-unit": "./node_modules/karma/bin/karma start test/unit/cucumber.unit.js --no-single-run",
     "test-unit": "./node_modules/karma/bin/karma start test/unit/cucumber.unit.js --single-run",
     "test-e2e": "./node_modules/.bin/nightwatch -c ./test/e2e/config.js",
+    "test-e2e-chrome": "./node_modules/.bin/nightwatch -c ./test/e2e/config.js --env chrome",
+    "test-e2e-firefox": "./node_modules/.bin/nightwatch -c ./test/e2e/config.js --env firefox",
     "jsdoc": "rm -rf @REPLACE__ASSETS@/../jsdoc && ./node_modules/.bin/jsdoc @REPLACE__ASSETS__NAME@/scripts/components -d @REPLACE__ASSETS@/../jsdoc",
     "cssdoc": "rm -rf @REPLACE__ASSETS@/../cssdoc && ./node_modules/.bin/sassdoc @REPLACE__ASSETS__NAME@/styles -d @REPLACE__ASSETS@/../cssdoc",
     "styleguide": "rm -rf @REPLACE__ASSETS@/../styleguide && ./node_modules/.bin/kss --source ./@REPLACE__ASSETS__NAME@/styles/ --destination @REPLACE__ASSETS@/../styleguide --css @REPLACE__ASSETS@/main.css --js @REPLACE__ASSETS@/main.js"
