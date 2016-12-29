@@ -3,10 +3,11 @@
 var seleniumServer = require('selenium-server');
 var phantomjs = require('phantomjs-prebuilt');
 var chromedriver = require('chromedriver');
+var firefoxdriver = require('geckodriver');
 
 require('nightwatch-cucumber')({
 	featureFiles: ['./test/e2e/features'],
-	stepDefinitions: ['./test/e2e/features/step_definitions'],
+	stepDefinitions: ['./test/e2e/features'],
 	openReport: true,
 	jsonReport: './test/e2e/reports/cucumber.json',
 	htmlReport: './test/e2e/reports/cucumber.html',
@@ -64,7 +65,13 @@ module.exports = {
 			desiredCapabilities: {
 				browserName: 'firefox',
 				javascriptEnabled: true,
-				acceptSslCerts: true
+				acceptSslCerts: true,
+				marionette: true
+			},
+			selenium: {
+				cli_args: {
+					'webdriver.gecko.driver': firefoxdriver.path
+				}
 			}
 		}
 	}

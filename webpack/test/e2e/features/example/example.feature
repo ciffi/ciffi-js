@@ -1,3 +1,4 @@
+@example
 Feature: ciffi.it
 
   Scenario: Check ciffi.it

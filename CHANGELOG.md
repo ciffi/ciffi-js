@@ -1,3 +1,8 @@
+### v0.3.20 (2016-12-29)
+
+#### Fixed e2e firefox task
+- now use geckodriver for selenium with marionette
+
 ### v0.3.19 (2016-12-29)
 
 #### Fixed update task
