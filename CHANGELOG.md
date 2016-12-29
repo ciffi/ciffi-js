@@ -1,3 +1,8 @@
+### v0.3.18 (2016-12-29)
+
+#### Added update task for upgrade ciffi core
+- new task ciffi update is now available
+
 ### v0.3.17 (2016-12-29)
 
 #### Fixed e2e with env task

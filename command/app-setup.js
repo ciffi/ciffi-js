@@ -102,6 +102,14 @@ var AppSetup = (function () {
 								console.log('');
 								console.log(chalk.green.bold('-- new project ') + chalk.blue.bold(config.projectName) + chalk.green.bold(' created --'));
 								console.log('');
+								require('./app-sethiddenfile');
+								console.log('');
+								require('./app-createsettings').setData({
+									projectName: config.projectName,
+									assetsPath: res.assetsUrl,
+									pathName: _pathName
+								});
+								console.log('');
 								console.log(chalk.green.bold('-- start download and install npm dependencies --'));
 								console.log('');
 							});

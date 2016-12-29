@@ -39,9 +39,6 @@ if (!cmd) {
 		console.log(chalk.green.bold('-- end download and install npm dependencies --'));
 		console.log('');
 		console.log('');
-		require('./command/app-sethiddenfile');
-		console.log('');
-		console.log('');
 		cliCursor.show();
 		showGreetings();
 	} else {
@@ -54,6 +51,9 @@ if (!cmd) {
 			new Setup({
 				projectName: projectName
 			});
+			break;
+		case 'update':
+			require('./command/app-update');
 			break;
 		case 'serve':
 			require('./command/app-serve');
@@ -123,6 +123,10 @@ function showCommandErrorMessage() {
 }
 
 function commandList() {
+	console.log(chalk.blue('ciffi setup projectname') + chalk.green(' -- create new project --'));
+	console.log('');
+	console.log(chalk.blue('ciffi update') + chalk.green(' -- update ciffi --'));
+	console.log('');
 	console.log(chalk.blue('ciffi serve') + chalk.green(' -- start webpack local server css/js --'));
 	console.log('');
 	console.log(chalk.blue('ciffi dev') + chalk.green(' -- start livereload server and generate local build with watch --'));
