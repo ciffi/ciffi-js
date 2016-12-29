@@ -1,3 +1,8 @@
+### v0.3.19 (2016-12-29)
+
+#### Fixed update task
+- fixed update global ciffi
+
 ### v0.3.18 (2016-12-29)
 
 #### Added update task for upgrade ciffi core

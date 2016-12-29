@@ -5,7 +5,8 @@ var emptydir = require('empty-dir');
 var cliCursor = require('cli-cursor');
 var pathExists = require('path-exists');
 var shell = require('shelljs');
-var spawn = require('child_process').spawn;
+var exec = require('child_process').exec;
+var log = require('single-line-log').stdout;
 var configFile = process.env.PWD + '/.ciffisettings';
 var appConfig = require(configFile);
 
@@ -21,11 +22,21 @@ var AppUpdate = (function () {
 		var _tempPath = process.env.PWD + '/.ciffi/';
 		var _tempFile = _tempPath + '/package.json';
 		
-		var _update = spawn('npm install ciffi', ['-g']);
+		var _count = 0;
+		var _string = '.';
+		var _interval = setInterval(function () {
+			for (var _i = 0; _i <= _count; _i++) {
+				_string += '.';
+			}
+			;
+			log(chalk.green('Update in progress: ' + _string));
+		}, 250);
 		
-		_update.stdout.on('data', function (res) {
+		exec('npm install ciffi -g', function (errors, data) {
 			
-			console.log(res);
+			clearInterval(_interval);
+			
+			console.log(data);
 			
 			shell.rm('-rf', _packageFile);
 			
@@ -52,6 +63,7 @@ var AppUpdate = (function () {
 				});
 			});
 		});
+		
 		
 	}
 	
