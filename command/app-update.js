@@ -32,7 +32,7 @@ var AppUpdate = (function () {
 			log(chalk.green('Update in progress: ' + _string));
 		}, 250);
 		
-		exec('npm install ciffi -g', function (errors, data) {
+		exec('npm install ciffi -g && npm install', function (errors, data) {
 			
 			clearInterval(_interval);
 			
