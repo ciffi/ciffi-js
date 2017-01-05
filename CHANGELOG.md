@@ -1,3 +1,8 @@
+### v0.3.21 (2017-01-05)
+
+#### Fixed styleguide generated assets references
+- solved assets name replace bug
+
 ### v0.3.20 (2016-12-29)
 
 #### Fixed e2e firefox task
