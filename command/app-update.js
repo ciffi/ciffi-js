@@ -3,12 +3,11 @@ var prompt = require('prompt');
 var replace = require('replace-in-file');
 var emptydir = require('empty-dir');
 var cliCursor = require('cli-cursor');
+var fileExists = require('file-exists');
 var pathExists = require('path-exists');
 var shell = require('shelljs');
 var exec = require('child_process').exec;
 var log = require('single-line-log').stdout;
-var configFile = process.env.PWD + '/.ciffisettings';
-var appConfig = require(configFile);
 
 var AppUpdate = (function () {
 	
@@ -32,36 +31,47 @@ var AppUpdate = (function () {
 			log(chalk.green('Update in progress: ' + _string));
 		}, 250);
 		
-		exec('npm install ciffi -g && npm install', function (errors, data) {
+		exec('npm install ciffi -g && npm run setup', function (errors, data) {
 			
 			clearInterval(_interval);
 			
+			console.log('');
 			console.log(data);
 			
-			shell.rm('-rf', _packageFile);
+			var _configFile = process.env.PWD + '/.ciffisettings';
 			
-			pathExists(_tempPath).then(function (res) {
-				if (!res) {
-					shell.mkdir(_tempPath);
-				}
-			});
-			
-			shell.cp(_resource, _tempFile);
-			
-			replaceBuildPath(appConfig.assetsPath, _tempFile, function () {
+			if (fileExists(_configFile)) {
 				
-				replaceConfig(appConfig.projectName, _tempFile, function () {
-					
-					pathExists(_projectRoot).then(function (res) {
-						if (res) {
-							shell.cp(_tempFile, _packageFile);
-							shell.rm('-rf', _tempFile);
-							console.log(chalk.green('New file created: ' + _packageFile));
-						}
-					});
-					
+				var _appConfig = require(_configFile);
+				
+				shell.rm('-rf', _packageFile);
+				
+				pathExists(_tempPath).then(function (res) {
+					if (!res) {
+						shell.mkdir(_tempPath);
+					}
 				});
-			});
+				
+				shell.cp(_resource, _tempFile);
+				
+				replaceBuildPath(_appConfig.assetsPath, _tempFile, function () {
+					
+					replaceConfig(_appConfig.projectName, _tempFile, function () {
+						
+						pathExists(_projectRoot).then(function (res) {
+							if (res) {
+								shell.cp(_tempFile, _packageFile);
+								shell.rm('-rf', _tempFile);
+								console.log(chalk.green('New file created: ' + _packageFile));
+							}
+						});
+						
+					});
+				});
+				
+			} else {
+				console.log(chalk.red('Current project cannot be updated: .ciffisettings file not found'));
+			}
 		});
 		
 		

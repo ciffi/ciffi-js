@@ -1,3 +1,8 @@
+### v0.3.22 (2017-01-05)
+
+#### Fixed update
+- prevent loss package.json
+
 ### v0.3.21 (2017-01-05)
 
 #### Fixed styleguide generated assets references
