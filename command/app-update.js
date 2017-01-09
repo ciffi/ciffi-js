@@ -19,7 +19,7 @@ var AppUpdate = (function () {
 		var _projectRoot = process.env.PWD + '/';
 		var _packageFile = process.env.PWD + '/package.json';
 		var _tempPath = process.env.PWD + '/.ciffi/';
-		var _tempFile = _tempPath + '/package.json';
+		var _tempFile = _tempPath + 'package.json';
 		
 		var _count = 0;
 		var _string = '.';

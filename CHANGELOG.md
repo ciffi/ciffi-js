@@ -1,3 +1,8 @@
+### v0.3.23 (2017-01-09)
+
+#### Fixed update
+- fix double slash for package.json
+
 ### v0.3.22 (2017-01-05)
 
 #### Fixed update
