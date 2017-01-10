@@ -19,24 +19,25 @@ var AppUpdate = (function () {
 		var _projectRoot = process.env.PWD + '/';
 		var _packageFile = process.env.PWD + '/package.json';
 		var _tempPath = process.env.PWD + '/.ciffi/';
-		var _tempFile = _tempPath + 'package.json';
+		var _tempFile = _tempPath + '/package.json';
 		
 		var _count = 0;
-		var _string = '.';
+		var _strings = [' |', ' /', ' -', ' \\'];
 		var _interval = setInterval(function () {
-			for (var _i = 0; _i <= _count; _i++) {
-				_string += '.';
+			if (_count < 4) {
+				log(chalk.green('Update in progress: ' + _strings[_count++]));
+			} else {
+				_count = 0;
 			}
-			;
-			log(chalk.green('Update in progress: ' + _string));
 		}, 250);
 		
-		exec('npm install ciffi -g && npm run setup', function (errors, data) {
-			
-			clearInterval(_interval);
+		cliCursor.hide();
+		
+		exec('npm install ciffi -g', function (errors, data) {
 			
 			console.log('');
 			console.log(data);
+			console.log(chalk.green('ciffi successfully updated'));
 			
 			var _configFile = process.env.PWD + '/.ciffisettings';
 			
@@ -69,9 +70,21 @@ var AppUpdate = (function () {
 					});
 				});
 				
+				exec('npm run setup', function (errors, data) {
+					
+					clearInterval(_interval);
+					
+					console.log('');
+					console.log(chalk.green(data));
+					console.log('');
+					console.log(chalk.green('Project successfully updated'));
+					console.log('');
+				});
+				
 			} else {
 				console.log(chalk.red('Current project cannot be updated: .ciffisettings file not found'));
 			}
+			
 		});
 		
 		

@@ -1,3 +1,9 @@
+### v0.3.24 (2017-01-10)
+
+#### Fixed update
+- fix cli log
+- fix tasks timing
+
 ### v0.3.23 (2017-01-09)
 
 #### Fixed update
