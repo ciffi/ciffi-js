@@ -1,3 +1,8 @@
+### v0.3.26 (2017-01-26)
+
+#### Fixed package.json task
+- fixed setup task with yarn default
+
 ### v0.3.25 (2017-01-26)
 
 #### Minor fix and reinsert Yarn
