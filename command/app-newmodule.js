@@ -40,9 +40,15 @@ var Newmodule = (function () {
         }
 
     }
-
+    
     function capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
+        var _capitalized = string.charAt(0).toUpperCase() + string.slice(1);
+        var _stringArray = _capitalized.split('-');
+        var _result = '';
+        for (var i = 0; i < _stringArray.length; i++) {
+            _result += _stringArray[i].charAt(0).toUpperCase() + _stringArray[i].slice(1)
+        }
+        return _result;
     }
 
     function replaceModuleName(file, moduleName, callback) {

@@ -1,3 +1,9 @@
+### v0.3.25 (2017-01-26)
+
+#### Minor fix and reinsert Yarn
+- fixed rename of new js module/component/page
+- try to install dependencies with yarn
+
 ### v0.3.24 (2017-01-10)
 
 #### Fixed update
