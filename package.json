@@ -5,7 +5,7 @@
   "main": "ciffi.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ciffi/ciffi-frontend-generator.git"
+    "url": "git+https://github.com/ciffi/ciffi-js"
   },
   "author": {
     "name": "Ciffi"
@@ -33,7 +33,7 @@
     "karma"
   ],
   "license": "ISC",
-  "homepage": "https://github.com/ciffi/ciffi-frontend-generator",
+  "homepage": "https://github.com/ciffi/ciffi-js",
   "preferGlobal": true,
   "dependencies": {
     "chalk": "^1.1.3",

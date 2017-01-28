@@ -1,3 +1,8 @@
+### v0.4.1 (2017-01-28)
+
+#### We Are On Line!!
+- git repo is now public :)
+
 ### v0.4.0 (2017-01-28)
 
 #### Fixed assets path
