@@ -1,3 +1,8 @@
+### v0.4.0 (2017-01-28)
+
+#### Fixed assets path
+- fixed assets during setup
+
 ### v0.3.26 (2017-01-26)
 
 #### Fixed package.json task

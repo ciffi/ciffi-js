@@ -49,7 +49,7 @@
     "selenium-server": "^2.53.1",
     "selenium-webdriver": "^2.53.3",
     "style-loader": "^0.13.0",
-    "webpack": "^1.12.14",
+    "webpack": "^1.14.0",
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
@@ -71,7 +71,7 @@
     "live-js": "./node_modules/webpack/bin/webpack.js --config dev.config.js --progress",
     "live-server": "./node_modules/livereload/bin/livereload.js \"@REPLACE__ASSETS@/\"",
     "styles": "npm run css && npm run autoprefixer && npm run cleancss",
-    "setup": "npm install && ciffi --postsetup",
+    "setup": "yarn || npm install && ciffi --postsetup",
     "clean-dist": "rm -rf @REPLACE__ASSETS@/*",
     "serve": "./node_modules/.bin/webpack-dev-server --config serve.config.js --progress --inline --hot",
     "dev": "npm run live-css-first && npm run assets && concurrently --kill-others \"npm run live-server\" \"npm run live-css\" \"npm run live-js\"",
