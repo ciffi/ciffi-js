@@ -104,7 +104,12 @@ var Router = (function () {
 			if (this.pages.hasOwnProperty(_requestRoute)) {
 				PushState.push({url: _requestRoute}, _requestRoute);
 			} else {
-				PushState.push({url: 'index'}, '');
+				var _count = 0;
+				$.each(this.pages, function (url) {
+					if (_count++ === 0) {
+						PushState.push({url: url}, '');
+					}
+				});
 			}
 			
 			return this.isPushStateEnabled;

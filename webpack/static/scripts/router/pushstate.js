@@ -40,7 +40,11 @@ var PushState = (function () {
 	
 	function newUrl(data, url, Pushstate) {
 		if (!Pushstate.currentRoute || Pushstate.currentRoute !== url) {
-			window.history.pushState(data, null, '/' + url);
+			if (url === '') {
+				window.history.pushState(data, null, window.location.pathname);
+			} else {
+				window.history.pushState(data, null, '/' + url);
+			}
 		}
 		return url;
 	}

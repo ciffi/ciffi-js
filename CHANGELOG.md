@@ -1,3 +1,8 @@
+### v0.4.2 (2017-01-29)
+
+#### Fixed pushState router
+- pushState native sub-folder support
+
 ### v0.4.1 (2017-01-28)
 
 #### We Are On Line!!
