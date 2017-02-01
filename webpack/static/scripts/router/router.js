@@ -3,7 +3,7 @@
 /* CONFIG */
 var UserConfig = require('../config/config');
 var RouterConfig = require('./router-config');
-var CONFIG = new RouterConfig(UserConfig.envs);
+var CONFIG = new RouterConfig(UserConfig.env);
 /* CONFIG */
 
 /* PAGES */

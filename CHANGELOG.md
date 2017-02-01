@@ -1,3 +1,8 @@
+### v0.4.3 (2017-02-01)
+
+#### New default config.js
+- check scripts/config/config.js after setup and configure yours env
+
 ### v0.4.2 (2017-01-29)
 
 #### Fixed pushState router
