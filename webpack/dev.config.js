@@ -1,5 +1,12 @@
 'use strict';
 
+/*
+ *
+ * replace _indexUrl variable with your development index page
+ *
+ * */
+var _indexUrl = 'http://@REPLACE__CONFIG@.local/app_dev.php';
+
 var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 module.exports = {
@@ -12,9 +19,21 @@ module.exports = {
 	},
 	devtool: 'eval',
 	watch: true,
+	module: {
+		preLoaders: [
+			{
+				test: /\.js$/,
+				loader: 'eslint-loader',
+				exclude: './node_modules'
+			}
+		]
+	},
 	plugins: [
 		new OpenBrowserPlugin({
-			url: 'http://@REPLACE__CONFIG@.local/app_dev.php'
+			url: _indexUrl
 		})
-	]
+	],
+	eslint: {
+		configFile: './.eslintrc'
+	}
 };

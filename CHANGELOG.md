@@ -1,3 +1,14 @@
+### v0.4.4 (2017-02-04)
+
+#### New dev config
+- after setup check dev_config.js to configure yours local dev url
+
+#### Added ESLint validation to dev task
+- ESLint validation error in your console
+
+#### Improved readme
+- setup and config
+
 ### v0.4.3 (2017-02-01)
 
 #### New default config.js
