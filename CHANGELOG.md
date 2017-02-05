@@ -1,3 +1,8 @@
+### v0.4.5 (2017-02-05)
+
+#### New dev config and env config.js
+- after setup check dev_config.js to configure yours local dev url and scripts/config/config.js to configure yours env
+
 ### v0.4.4 (2017-02-04)
 
 #### New dev config

@@ -5,7 +5,7 @@
  * replace _indexUrl variable with your development index page
  *
  * */
-var _indexUrl = 'http://@REPLACE__CONFIG@.local/app_dev.php';
+var _indexUrl = 'http://@REPLACE__CONFIG@.local/';
 
 var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
