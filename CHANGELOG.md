@@ -1,3 +1,8 @@
+### v0.4.6 (2017-02-07)
+
+#### Fixed newpage, newmodule and newcomponent tasks
+- there was an error if source path is different from "static"
+
 ### v0.4.5 (2017-02-05)
 
 #### New dev config and env config.js

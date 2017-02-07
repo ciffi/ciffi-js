@@ -5,6 +5,8 @@ var pathExists = require('path-exists');
 var replace = require('replace-in-file');
 var Newpage = (function () {
 	
+	var ASSETSPATHNAME = 'static';
+	
 	function Newpage(config) {
 		
 		var pageName = config.pageName;
@@ -17,10 +19,19 @@ var Newpage = (function () {
 			}
 		});
 		
+		var _configFile = process.env.PWD + '/.ciffisettings';
+		
+		if (fileExists(_configFile)) {
+			
+			var _appConfig = require(_configFile);
+			ASSETSPATHNAME = _appConfig.assetsPathName;
+			
+		}
+		
 		var _tempFileJs = _tempPath + pageName + '.js';
 		var _resourceJs = process.config.variables.node_prefix + '/lib/node_modules/ciffi/resources/webpack/newpage/page.js';
-		var _projectPagesJs = process.env.PWD + '/static/scripts/pages/';
-		var _projectFileJs = process.env.PWD + '/static/scripts/pages/' + pageName + '.js';
+		var _projectPagesJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/pages/';
+		var _projectFileJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/pages/' + pageName + '.js';
 		
 		if (fileExists(_projectFileJs)) {
 			console.log(chalk.red('File already exists: ' + _projectFileJs));
@@ -41,8 +52,8 @@ var Newpage = (function () {
 		
 		var _tempFileHtml = _tempPath + pageName + '.html';
 		var _resourceHtml = process.config.variables.node_prefix + '/lib/node_modules/ciffi/resources/webpack/newpage/page.html';
-		var _projectDevPath = process.env.PWD + '/static/';
-		var _projectFileHtml = process.env.PWD + '/static/' + pageName + '.html';
+		var _projectDevPath = process.env.PWD + '/' + ASSETSPATHNAME + '/';
+		var _projectFileHtml = process.env.PWD + '/' + ASSETSPATHNAME + '/' + pageName + '.html';
 		
 		if (fileExists(_projectFileHtml)) {
 			console.log(chalk.red('File already exists: ' + _projectFileHtml));

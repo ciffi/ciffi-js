@@ -5,6 +5,8 @@ var pathExists = require('path-exists');
 var replace = require('replace-in-file');
 var Newcomponent = (function () {
 	
+	var ASSETSPATHNAME = 'static';
+	
 	function Newcomponent(config) {
 		
 		var componentName = config.componentName;
@@ -17,10 +19,19 @@ var Newcomponent = (function () {
 			}
 		});
 		
+		var _configFile = process.env.PWD + '/.ciffisettings';
+		
+		if (fileExists(_configFile)) {
+			
+			var _appConfig = require(_configFile);
+			ASSETSPATHNAME = _appConfig.assetsPathName;
+			
+		}
+		
 		var _tempFileJs = _tempPath + componentName + '.js';
 		var _resourceJs = process.config.variables.node_prefix + '/lib/node_modules/ciffi/resources/webpack/newcomponent/component.js';
-		var _projectComponents = process.env.PWD + '/static/scripts/components/';
-		var _projectFileJs = process.env.PWD + '/static/scripts/components/' + componentName + '.js';
+		var _projectComponents = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/components/';
+		var _projectFileJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/components/' + componentName + '.js';
 		
 		if (fileExists(_projectFileJs)) {
 			console.log(chalk.red('File already exists: ' + _projectFileJs));
