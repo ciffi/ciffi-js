@@ -1,3 +1,11 @@
+### v0.5.0 (2017-03-05)
+
+#### Added fastclick by default 
+- fastclick required in main.js
+
+#### Reorganized main.js require order  
+- moved router at last loaded module position after fastclick and device component
+
 ### v0.4.6 (2017-02-07)
 
 #### Fixed newpage, newmodule and newcomponent tasks

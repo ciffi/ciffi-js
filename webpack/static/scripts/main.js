@@ -1,6 +1,10 @@
 'use strict';
 
-// router
-require('./router/router').pushState(false);
+// fastclick
+require('fastclick').attach(document.body);
+
 // device
 require('./components/device');
+
+// router
+require('./router/router').pushState(false);
