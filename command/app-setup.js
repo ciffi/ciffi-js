@@ -14,6 +14,7 @@ var AppSetup = (function () {
 		require('./tempApp');
 		
 		function replaceBuildPath(config, callback) {
+			
 			var _pathName = config.split('/')[config.split('/').length - 1];
 			replace({
 				files: [
@@ -86,13 +87,19 @@ var AppSetup = (function () {
 						default: '../static'
 					}], function (err, res) {
 						
-						replaceBuildPath(res.assetsUrl, function () {
+						var _fixedAssetsUrl = res.assetsUrl;
+						
+						if (_fixedAssetsUrl.substring(_fixedAssetsUrl.length - 1, _fixedAssetsUrl.length) === '/') {
+							_fixedAssetsUrl = _fixedAssetsUrl.substring(0, _fixedAssetsUrl.length - 1)
+						}
+						
+						replaceBuildPath(_fixedAssetsUrl, function () {
 							
 							cliCursor.hide();
 							
 							replaceConfig(config.projectName, function () {
 								
-								var _pathName = res.assetsUrl.split('/')[res.assetsUrl.split('/').length - 1];
+								var _pathName = _fixedAssetsUrl.split('/')[_fixedAssetsUrl.split('/').length - 1];
 								
 								shell.mv(process.env.PWD + '/.ciffi/static/', process.env.PWD + '/.ciffi/' + _pathName + '/');
 								
@@ -105,7 +112,7 @@ var AppSetup = (function () {
 								console.log('');
 								require('./app-createsettings').setData({
 									projectName: config.projectName,
-									assetsPath: res.assetsUrl,
+									assetsPath: _fixedAssetsUrl,
 									pathName: _pathName
 								});
 								console.log('');

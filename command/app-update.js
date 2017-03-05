@@ -91,11 +91,18 @@ var AppUpdate = (function () {
 	}
 	
 	function replaceBuildPath(config, file, callback) {
-		var _pathName = config.split('/')[config.split('/').length - 1];
+		
+		var _fixedAssetsUrl = config;
+		
+		if (_fixedAssetsUrl.substring(_fixedAssetsUrl.length - 1, _fixedAssetsUrl.length) === '/') {
+			_fixedAssetsUrl = _fixedAssetsUrl.substring(0, _fixedAssetsUrl.length - 1)
+		}
+		
+		var _pathName = _fixedAssetsUrl.split('/')[_fixedAssetsUrl.split('/').length - 1];
 		replace({
 			files: [file],
 			replace: /@REPLACE__ASSETS@/g,
-			with: config
+			with: _fixedAssetsUrl
 		}, function (error) {
 			if (error) {
 				return console.error('Error occurred:', error);

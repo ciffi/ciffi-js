@@ -1,3 +1,8 @@
+### v0.5.1 (2017-03-05)
+
+#### Fixed setup and update tasks 
+- if build path finished with slash
+
 ### v0.5.0 (2017-03-05)
 
 #### Added fastclick by default 
