@@ -7,7 +7,7 @@
 [![npm-month][npm-month]][npm-url]
 [![npm-total][npm-total]][npm-url]
 
-# Ciffi Frontend Generator #
+# Ciffi js - Frontend Generator #
 
 #### install ciffi
 ```
