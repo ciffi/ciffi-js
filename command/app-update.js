@@ -15,6 +15,12 @@ var AppUpdate = (function () {
 	
 	function AppUpdate() {
 		
+		var _disabled = true;
+		
+		if (_disabled) {
+			return console.log(chalk.red.bold('Sorry, but project update is still not available'));
+		}
+		
 		var _resource = process.config.variables.node_prefix + '/lib/node_modules/ciffi/webpack/package.json';
 		var _projectRoot = process.env.PWD + '/';
 		var _packageFile = process.env.PWD + '/package.json';

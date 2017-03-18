@@ -11,6 +11,10 @@ var AppSetup = (function () {
 	
 	function AppSetup(config) {
 		
+		if(!config.projectName) {
+			return console.log(chalk.red.bold('Project setup failed:') + ' ' + chalk.blue('project name must be specified'));
+		}
+		
 		require('./tempApp');
 		
 		function replaceBuildPath(config, callback) {

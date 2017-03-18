@@ -1,3 +1,11 @@
+### v0.5.2 (2017-03-18)
+
+#### Fixed setup js module creation tasks 
+- now project, page, component and modules names are required
+
+#### Disabled update task 
+- update task is disabled for work in progress
+
 ### v0.5.1 (2017-03-05)
 
 #### Fixed setup and update tasks 

@@ -11,6 +11,10 @@ var Newpage = (function () {
 		
 		var pageName = config.pageName;
 		
+		if (!pageName) {
+			return console.log(chalk.red.bold('Page creation failed:') + ' ' + chalk.blue('page name must be specified'));
+		}
+		
 		var _tempPath = process.env.PWD + '/.ciffi/';
 		
 		pathExists(_tempPath).then(function (res) {

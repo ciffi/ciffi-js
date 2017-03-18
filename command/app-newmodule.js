@@ -11,6 +11,10 @@ var Newmodule = (function () {
 		
 		var moduleName = config.moduleName;
 		
+		if (!moduleName) {
+			return console.log(chalk.red.bold('Module creation failed:') + ' ' + chalk.blue('module name must be specified'));
+		}
+		
 		var _tempPath = process.env.PWD + '/.ciffi/';
 		
 		pathExists(_tempPath).then(function (res) {

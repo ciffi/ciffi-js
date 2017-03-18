@@ -11,6 +11,10 @@ var Newcomponent = (function () {
 		
 		var componentName = config.componentName;
 		
+		if (!componentName) {
+			return console.log(chalk.red.bold('Component creation failed:') + ' ' + chalk.blue('component name must be specified'));
+		}
+		
 		var _tempPath = process.env.PWD + '/.ciffi/';
 		
 		pathExists(_tempPath).then(function (res) {
