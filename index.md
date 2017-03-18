@@ -77,8 +77,6 @@ ciffi cssdoc
 ciffi styleguide
 ```
 
-- - -
-
 ## CLI COMPLETION
 
 - add this snippet to your .bash_profile
@@ -89,7 +87,6 @@ if [ -f /usr/local/lib/node_modules/ciffi/ciffi.bash ]; then
   . /usr/local/lib/node_modules/ciffi/ciffi.bash
 fi
 ```
-- - -
 
 ## WORKFLOW
 
