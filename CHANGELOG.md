@@ -1,3 +1,9 @@
+### v0.6.1 (2017-04-03)
+
+#### Fixed device and grid variables 
+- added $grid-max-width variable in _config.scss
+- fixed js error in device.js
+
 ### v0.6.0 (2017-04-03)
 
 #### Added new features and update dependencies 

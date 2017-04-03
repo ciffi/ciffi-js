@@ -16,7 +16,7 @@ var Device = (function () {
 	function Device() {
 		var _el = document.getElementsByTagName('html')[0];
 		checkTouch(_el);
-		isSafari(el)
+		isSafari(_el);
 	}
 	
 	/**
