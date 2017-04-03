@@ -11,7 +11,7 @@ var Page = (function () {
 	};
 	
 	Page.prototype.load = function () {
-		document.body.classList.add('appIsReady');
+		document.body.classList.add('app-is-ready');
 		console.log('all page load');
 	};
 

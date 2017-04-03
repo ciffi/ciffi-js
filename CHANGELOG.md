@@ -1,3 +1,13 @@
+### v0.6.0 (2017-04-03)
+
+#### Added new features and update dependencies 
+- added default [reset css](https://www.npmjs.com/package/reset-css)
+- added grid.scss in styles/utils
+- added safari detection to device component
+- improved custom-select component
+- updated [fontawesome](http://fontawesome.io/icons/) to version 4.7
+- fix meta in default html files
+
 ### v0.5.2 (2017-03-18)
 
 #### Fixed setup js module creation tasks 

@@ -16,6 +16,7 @@ var Device = (function () {
 	function Device() {
 		var _el = document.getElementsByTagName('html')[0];
 		checkTouch(_el);
+		isSafari(el)
 	}
 	
 	/**
@@ -33,9 +34,25 @@ var Device = (function () {
 			el.classList.add('no-touch');
 		}
 	}
-
+	
+	/**
+	 * This check if browser is safari
+	 * @param {DOM} el - html tag
+	 * @memberOf Device
+	 * @inner
+	 */
+	function isSafari(el) {
+		var _isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+		
+		if (_isSafari) {
+			el.classList.add('safari');
+		} else {
+			el.classList.remove('safari');
+		}
+	}
+	
 	return new Device();
-
+	
 })();
 
 module.exports = Device;

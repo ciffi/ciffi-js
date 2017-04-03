@@ -55,7 +55,8 @@
   "dependencies": {
     "breakpoint-sass": "^2.7.0",
     "fastclick": "^1.0.6",
-    "jquery": "^3.1.0"
+    "jquery": "^3.1.0",
+    "reset-css": "^2.2.0"
   },
   "scripts": {
     "assets": "npm run copy-images && npm run copy-fonts && npm run copy-pdf && npm run copy-videos",
