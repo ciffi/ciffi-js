@@ -1,3 +1,8 @@
+### v0.6.2 (2017-04-04)
+
+#### Improved assets task 
+- now support nested path
+
 ### v0.6.1 (2017-04-03)
 
 #### Fixed device and grid variables 
