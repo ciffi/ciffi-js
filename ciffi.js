@@ -127,15 +127,9 @@ function showCommandErrorMessage() {
 function commandList() {
 	console.log(chalk.blue('ciffi setup projectname') + chalk.green(' -- create new project --'));
 	console.log('');
-	console.log(chalk.blue('ciffi update') + chalk.green(' -- update ciffi --'));
-	console.log('');
-	console.log(chalk.blue('ciffi serve') + chalk.green(' -- start webpack local server css/js --'));
-	console.log('');
 	console.log(chalk.blue('ciffi dev') + chalk.green(' -- start livereload server and generate local build with watch --'));
 	console.log('');
 	console.log(chalk.blue('ciffi build') + chalk.green(' -- generate build --'));
-	console.log('');
-	console.log(chalk.blue('ciffi unit') + chalk.green(' -- start local unit test development with karma and cucumber --'));
 	console.log('');
 	console.log(chalk.blue('ciffi e2e') + chalk.green(' -- e2e test with nightwatch and cucumber (default configuration) --'));
 	console.log('');
