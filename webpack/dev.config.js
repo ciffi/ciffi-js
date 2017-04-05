@@ -20,11 +20,15 @@ module.exports = {
 	devtool: 'eval',
 	watch: true,
 	module: {
-		preLoaders: [
+		rules: [
 			{
 				test: /\.js$/,
+				enforce: 'pre',
 				loader: 'eslint-loader',
-				exclude: './node_modules'
+				exclude: './node_modules',
+				options: {
+					configFile: './.eslintrc'
+				}
 			}
 		]
 	},
@@ -32,8 +36,5 @@ module.exports = {
 		new OpenBrowserPlugin({
 			url: _indexUrl
 		})
-	],
-	eslint: {
-		configFile: './.eslintrc'
-	}
+	]
 };

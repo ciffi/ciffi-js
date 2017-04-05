@@ -1,4 +1,3 @@
-'use strict';
 var $ = require('jquery');
 
 var Page = (function () {

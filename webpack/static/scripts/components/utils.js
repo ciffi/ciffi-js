@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Utils js module
  * @module Utils

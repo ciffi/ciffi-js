@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Cookies js module
  * @module Cookies

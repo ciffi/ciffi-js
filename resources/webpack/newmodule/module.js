@@ -1,5 +1,3 @@
-'use strict';
-
 var @REPLACE__MODULENAME@ = (function() {
 
 	function @REPLACE__MODULENAME@() {
@@ -18,4 +16,4 @@ var @REPLACE__MODULENAME@ = (function() {
 
 })();
 
-module.exports = @REPLACE__MODULENAME@;
+export default @REPLACE__MODULENAME@;

@@ -1,3 +1,22 @@
+### v0.7.0 (2017-04-06)
+
+#### Switch to [webpack2](https://webpack.js.org/) 
+- added .npmignore file
+- added .eslintrc for ciffi-js main package development check
+- updated development dependencies
+- updated dev.config.js settings
+- updated esLint settings
+- updated scripts/modules/example.js for tree shaking support
+- updated newmodule and newcomponent task result for tree shaking support
+- fixed [fontawesome](http://fontawesome.io/icons/) fonts
+- temporary disabled serve task
+- temporary disabled unit task
+- temporary disabled dev-unit task
+- temporary disabled build-prod task
+- updated unused development dependencies
+- removed styles.js used in serve task
+- removed 'use-strict' in all js files - is unnecessary in module pattern
+
 ### v0.6.2 (2017-04-04)
 
 #### Improved assets task 

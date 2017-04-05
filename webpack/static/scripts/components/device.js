@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Device js module
  * @module Device

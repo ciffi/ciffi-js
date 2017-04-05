@@ -1,5 +1,3 @@
-'use strict';
-
 /* CONFIG */
 var UserConfig = require('../config/config');
 var RouterConfig = require('./router-config');

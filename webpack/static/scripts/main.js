@@ -1,5 +1,3 @@
-'use strict';
-
 // fastclick
 require('fastclick').attach(document.body);
 

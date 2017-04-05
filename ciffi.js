@@ -68,10 +68,12 @@ if (!cmd) {
 			require('./command/app-build-prod');
 			break;
 		case 'dev-unit':
-			require('./command/app-test').devUnit();
+			console.log(chalk.red.bold('Sorry, but dev-unit task is still not available'));
+			//require('./command/app-test').devUnit();
 			break;
 		case 'unit':
-			require('./command/app-test').unit();
+			console.log(chalk.red.bold('Sorry, but unit task is still not available'));
+			//require('./command/app-test').unit();
 			break;
 		case 'e2e':
 			var _args = false;

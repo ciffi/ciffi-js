@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Custom select js module
  * @module CustomSelect
