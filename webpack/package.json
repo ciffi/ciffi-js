@@ -58,7 +58,6 @@
     "live-js": "./node_modules/webpack/bin/webpack.js --config dev.config.js --progress",
     "live-server": "./node_modules/livereload/bin/livereload.js '@REPLACE__ASSETS@'",
     "styles": "npm run css && npm run autoprefixer && npm run cleancss",
-    "setup": "yarn || npm install && ciffi --postsetup",
     "clean-dist": "rm -rf @REPLACE__ASSETS@/*",
     "dev": "npm run live-css-first && npm run assets && concurrently --kill-others 'npm run live-server' 'npm run live-css' 'npm run live-js'",
     "build": "npm run clean-dist && npm run css && npm run js && npm run assets",

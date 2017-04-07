@@ -17,14 +17,6 @@ npm install -g ciffi
 ```
 ciffi setup projectname
 ```
-#### update current project
-```
-ciffi update
-```
-#### local dev server
-```
-ciffi serve
-```
 #### local dev build
 ```
 ciffi dev
@@ -32,10 +24,6 @@ ciffi dev
 #### generate build
 ```
 ciffi build
-```
-#### start local test development with karma and cucumber
-```
-ciffi unit
 ```
 #### e2e test with nightwatch and cucumber (default configuration)
 ```

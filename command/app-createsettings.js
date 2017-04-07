@@ -3,14 +3,23 @@ var shell = require('shelljs');
 var replace = require('replace-in-file');
 var fileExists = require('file-exists');
 var pathExists = require('path-exists');
+var Loading = require('./loading');
+
 var CreateSettingsFile = (function () {
-
+	
 	function CreateSettingsFile() {
-
+		
 	}
 	
 	CreateSettingsFile.prototype.setData = function (config) {
+		
+		console.log('');
+		
+		Loading.start('Generate ' + chalk.blue('.ciffisettings'));
+		
 		yeah('ciffisettings', config);
+		
+		Loading.stop('Generate ' + chalk.blue('.ciffisettings') + chalk.green.bold(' OK'));
 	};
 	
 	function replaceBuildPath(config, file, callback) {
@@ -48,17 +57,17 @@ var CreateSettingsFile = (function () {
 			callback();
 		});
 	}
-
+	
 	function yeah(fileName, appConfig) {
-
+		
 		var _tempPath = process.env.PWD + '/.ciffi/';
-
+		
 		pathExists(_tempPath).then(function (res) {
 			if (!res) {
 				shell.mkdir(_tempPath);
 			}
 		});
-
+		
 		var _tempFile = _tempPath + fileName;
 		var _resource = process.config.variables.node_prefix + '/lib/node_modules/ciffi/resources/core/' + fileName;
 		var _projectRoot = process.env.PWD + '/';
@@ -77,18 +86,17 @@ var CreateSettingsFile = (function () {
 						if (res) {
 							shell.cp(_tempFile, _projectFile);
 							shell.rm('-rf', _tempFile);
-							console.log(chalk.green('New file created: ' + _projectFile));
 						}
 					});
 				}
 				
 			});
 		});
-
+		
 	}
-
+	
 	return new CreateSettingsFile();
-
+	
 })();
 
 module.exports = CreateSettingsFile;

@@ -4,14 +4,13 @@ var replace = require('replace-in-file');
 var emptydir = require('empty-dir');
 var cliCursor = require('cli-cursor');
 var shell = require('shelljs');
+var Loading = require('./loading');
 
 var AppSetup = (function () {
 	
-	'use strict';
-	
 	function AppSetup(config) {
 		
-		if(!config.projectName) {
+		if (!config.projectName) {
 			return console.log(chalk.red.bold('Project setup failed:') + ' ' + chalk.blue('project name must be specified'));
 		}
 		
@@ -82,12 +81,17 @@ var AppSetup = (function () {
 					console.log('');
 					console.log(chalk.green.bold('-- CiffiDesign Frontend Generator --'));
 					console.log('');
+					console.log('');
 					
 					prompt.start();
 					
 					prompt.get([{
 						name: 'assetsUrl',
-						default: '../static'
+						description: chalk.green.bold('Specify relative build path'),
+						default: '../static',
+						type: 'string',
+						pattern: /..\/\w+$/,
+						message: chalk.red('☠️  Build path must be out of this project setup folder ☠️')
 					}], function (err, res) {
 						
 						var _fixedAssetsUrl = res.assetsUrl;
@@ -100,27 +104,29 @@ var AppSetup = (function () {
 							
 							cliCursor.hide();
 							
+							console.log('');
+							
+							Loading.start('Generate project tree for ' + chalk.blue(config.projectName));
+							
 							replaceConfig(config.projectName, function () {
 								
 								var _pathName = _fixedAssetsUrl.split('/')[_fixedAssetsUrl.split('/').length - 1];
 								
-								shell.mv(process.env.PWD + '/.ciffi/static/', process.env.PWD + '/.ciffi/' + _pathName + '/');
+								if (_pathName != 'static') {
+									shell.mv(process.env.PWD + '/.ciffi/static/', process.env.PWD + '/.ciffi/' + _pathName + '/');
+								}
 								
-								require('./moveApp');
+								Loading.stop('Generate project tree for ' + chalk.blue(config.projectName) + chalk.green.bold(' OK'));
 								
-								console.log('');
-								console.log(chalk.green.bold('-- new project ') + chalk.blue.bold(config.projectName) + chalk.green.bold(' created --'));
-								console.log('');
 								require('./app-sethiddenfile');
-								console.log('');
 								require('./app-createsettings').setData({
 									projectName: config.projectName,
 									assetsPath: _fixedAssetsUrl,
 									pathName: _pathName
 								});
-								console.log('');
-								console.log(chalk.green.bold('-- start download and install npm dependencies --'));
-								console.log('');
+								
+								require('./moveApp');
+								
 							});
 						});
 						

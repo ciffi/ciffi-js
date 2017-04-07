@@ -1,3 +1,9 @@
+### v0.8.0 (2017-04-07)
+
+#### New setup
+- new silent setup process with funny emoji loading
+- update [README.md](https://github.com/ciffi/ciffi-js/blob/master/README.md)  
+
 ### v0.7.0 (2017-04-06)
 
 #### Switch to [webpack2](https://webpack.js.org/) 
