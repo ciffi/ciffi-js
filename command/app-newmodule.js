@@ -29,11 +29,12 @@ var Newmodule = (function () {
 			
 			var _appConfig = require(_configFile);
 			ASSETSPATHNAME = _appConfig.assetsPathName;
+			ASSETSBUNDLE = _appConfig.bundle;
 			
 		}
 		
 		var _tempFileJs = _tempPath + moduleName + '.js';
-		var _resourceJs = process.config.variables.node_prefix + '/lib/node_modules/ciffi/resources/webpack/newmodule/module.js';
+		var _resourceJs = process.config.variables.node_prefix + '/lib/node_modules/ciffi/resources/' + ASSETSBUNDLE + '/newmodule/module.js';
 		var _projectModules = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/modules/';
 		var _projectFileJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/modules/' + moduleName + '.js';
 		

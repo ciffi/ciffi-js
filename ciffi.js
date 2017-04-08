@@ -62,7 +62,8 @@ if (!cmd) {
 			require('./command/app-build');
 			break;
 		case 'build-prod':
-			require('./command/app-build-prod');
+			console.log(chalk.red.bold('Sorry, but dev-unit task is still not available'));
+			//require('./command/app-build-prod');
 			break;
 		case 'dev-unit':
 			console.log(chalk.red.bold('Sorry, but dev-unit task is still not available'));

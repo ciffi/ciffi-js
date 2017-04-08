@@ -1,6 +1,6 @@
 {
   "name": "ciffi",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Ciffi Frontend Generator",
   "main": "ciffi.js",
   "repository": {
@@ -43,10 +43,10 @@
     "empty-dir": "^0.2.0",
     "file-exists": "^1.0.0",
     "foreach": "^2.0.5",
+    "inquirer": "^3.0.6",
     "meow": "^3.7.0",
     "ora": "^1.2.0",
     "path-exists": "^3.0.0",
-    "prompt": "^1.0.0",
     "replace-in-file": "^1.1.1",
     "shelljs": "^0.7.0",
     "single-line-log": "^1.1.2"

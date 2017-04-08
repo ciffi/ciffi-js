@@ -1,3 +1,5 @@
+'use strict';
+
 var @REPLACE__COMPONENTNAME@ = (function() {
 
 	function @REPLACE__COMPONENTNAME@() {
@@ -16,4 +18,4 @@ var @REPLACE__COMPONENTNAME@ = (function() {
 
 })();
 
-export default @REPLACE__COMPONENTNAME;
+module.exports = @REPLACE__COMPONENTNAME@;

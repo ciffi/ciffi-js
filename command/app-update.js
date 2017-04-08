@@ -1,7 +1,6 @@
 var chalk = require('chalk');
 var prompt = require('prompt');
 var replace = require('replace-in-file');
-var emptydir = require('empty-dir');
 var cliCursor = require('cli-cursor');
 var fileExists = require('file-exists');
 var pathExists = require('path-exists');

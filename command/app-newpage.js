@@ -29,11 +29,12 @@ var Newpage = (function () {
 			
 			var _appConfig = require(_configFile);
 			ASSETSPATHNAME = _appConfig.assetsPathName;
+			ASSETSBUNDLE = _appConfig.bundle;
 			
 		}
 		
 		var _tempFileJs = _tempPath + pageName + '.js';
-		var _resourceJs = process.config.variables.node_prefix + '/lib/node_modules/ciffi/resources/webpack/newpage/page.js';
+		var _resourceJs = process.config.variables.node_prefix + '/lib/node_modules/ciffi/resources/' + ASSETSBUNDLE + '/newpage/page.js';
 		var _projectPagesJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/pages/';
 		var _projectFileJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/pages/' + pageName + '.js';
 		

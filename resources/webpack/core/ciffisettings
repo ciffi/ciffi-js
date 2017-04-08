@@ -1,0 +1,10 @@
+'use strict';
+
+var CiffiSettings = {
+	projectName: '@REPLACE__CONFIG@',
+	assetsPath: '@REPLACE__ASSETS@',
+	assetsPathName: '@REPLACE__ASSETS__NAME@',
+	bundle: '@REPLACE__BUNDLE__NAME@'
+};
+
+module.exports = CiffiSettings;

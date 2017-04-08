@@ -26,6 +26,16 @@ var Loading = (function () {
 					"  🐢   ",
 					" 🐢    "
 				]
+			},
+			track: {
+				"interval": 280,
+				"frames": [
+					"     🚚",
+					"    🚚 ",
+					"   🚚  ",
+					"  🚚   ",
+					" 🚚    "
+				]
 			}
 		};
 	}
@@ -34,12 +44,18 @@ var Loading = (function () {
 		var _spinners = this.spinners;
 		this.current = Ora({
 			text: text,
-			spinner: _spinners.bike
+			spinner: _spinners.track
 		}).start();
 		
 		setTimeout(function () {
+			this.current.text = text + ' -- don\'t worry';
+			this.current.spinner = _spinners.bike
+		}.bind(this), 15000);
+		
+		setTimeout(function () {
+			this.current.text = text + ' -- almost finish';
 			this.current.spinner = _spinners.turtle
-		}.bind(this), 10000);
+		}.bind(this), 30000);
 	};
 	
 	Loading.prototype.stop = function (text) {

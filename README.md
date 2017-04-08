@@ -15,7 +15,11 @@ npm install -g ciffi
 ```
 #### setup new project
 ```
-ciffi setup projectname
+ciffi setup [projectname]
+```
+#### local dev server (is not available for webpack2 installation)
+```
+ciffi serve
 ```
 #### local dev build
 ```
@@ -82,15 +86,15 @@ fi
 
 1. create folder (I usually use frontend in the root of project), then browse inside it and run setup task
 2. project name is the name of your development host (if host is myapp.local your project name is myapp)
-3. answer the question about build folder (it must be out of our frontend project setup folder) 
-4. run dev task and start to write code
+3. answer the setup process questions 
+4. run serve or dev task and start to write code
 5. run build task and you are ready to deploy
 
 ## DEV CONFIGURATION
 
 dev task opens your default browser on url set in relative config file, open dev_config.js and change variable "_indexUrl"
 
-## JS PROJECT ENV CONFIGURATIONS
+## JS PROJECT ENV CONFIGURATION
 
 in scripts/config/config.js you can configure your env variables that router component return to each page with .setData() method
 

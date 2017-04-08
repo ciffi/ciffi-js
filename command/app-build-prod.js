@@ -1,3 +1,4 @@
+var chalk = require('chalk');
 var npm = require('npm');
 var Build = (function () {
 	
