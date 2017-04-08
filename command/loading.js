@@ -47,12 +47,12 @@ var Loading = (function () {
 			spinner: _spinners.track
 		}).start();
 		
-		setTimeout(function () {
+		this.timeoutBike = setTimeout(function () {
 			this.current.text = text + ' -- don\'t worry';
 			this.current.spinner = _spinners.bike
 		}.bind(this), 15000);
 		
-		setTimeout(function () {
+		this.timeoutTurtle = setTimeout(function () {
 			this.current.text = text + ' -- almost finish';
 			this.current.spinner = _spinners.turtle
 		}.bind(this), 30000);
@@ -63,6 +63,9 @@ var Loading = (function () {
 			text: text,
 			symbol: '🦄 '
 		});
+		
+		clearTimeout(this.timeoutBike);
+		clearTimeout(this.timeoutTurtle);
 	};
 	
 	return new Loading();
