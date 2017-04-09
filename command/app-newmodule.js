@@ -1,20 +1,20 @@
 var chalk = require('chalk');
 var shell = require('shelljs');
 var fileExists = require('file-exists');
+var inquirer = require('inquirer');
 var pathExists = require('path-exists');
 var replace = require('replace-in-file');
-var Newmodule = (function () {
+var NewModule = (function () {
 	
 	var ASSETSPATHNAME = 'static';
 	
-	function Newmodule(config) {
+	function NewModule(config) {
 		
-		var moduleName = config.moduleName;
+		askForName(config.moduleName, start);
 		
-		if (!moduleName) {
-			return console.log(chalk.red.bold('Module creation failed:') + ' ' + chalk.blue('module name must be specified'));
-		}
-		
+	}
+	
+	function start(moduleName) {
 		var _tempPath = process.env.PWD + '/.ciffi/';
 		
 		pathExists(_tempPath).then(function (res) {
@@ -39,7 +39,7 @@ var Newmodule = (function () {
 		var _projectFileJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/modules/' + moduleName + '.js';
 		
 		if (fileExists(_projectFileJs)) {
-			console.log(chalk.red('File already exists: ' + _projectFileJs));
+			console.log(chalk.red('☠️  File already exists: ' + _projectFileJs + ' ☠️'));
 		} else {
 			pathExists(_projectModules).then(function (res) {
 				if (res) {
@@ -50,11 +50,10 @@ var Newmodule = (function () {
 						console.log(chalk.green('New file created: ' + _projectFileJs));
 					});
 				} else {
-					console.log(chalk.red('Modules path not exists: ' + _projectModules));
+					console.log(chalk.red('☠️  Modules path does not exists: ' + _projectModuless + ' ☠️'));
 				}
 			});
 		}
-		
 	}
 	
 	function capitalizeFirstLetter(string) {
@@ -82,8 +81,42 @@ var Newmodule = (function () {
 		});
 	}
 	
-	return Newmodule;
+	function askForName(name, callback) {
+		var _name = name;
+		if (!_name) {
+			inquirer.prompt({
+				type: 'input',
+				name: 'name',
+				message: 'Specify module name',
+				default: 'new-module',
+				validate: function (res) {
+					
+					var done = this.async();
+					
+					setTimeout(function () {
+						
+						var _test = new RegExp(/^$|\s+|\w\s+|[\/]|^\.|\.$/);
+						var _testResult = _test.test(res);
+						
+						if (typeof res !== 'string' || _testResult) {
+							done('☠️  Module must have real name ☠️');
+							return;
+						}
+						
+						done(null, true);
+						
+					}, 10);
+				}
+			}).then(function (res) {
+				callback(res.name);
+			});
+		} else {
+			callback(_name);
+		}
+	}
+	
+	return NewModule;
 	
 })();
 
-module.exports = Newmodule;
+module.exports = NewModule;

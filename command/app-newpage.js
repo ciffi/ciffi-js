@@ -1,20 +1,19 @@
 var chalk = require('chalk');
 var shell = require('shelljs');
 var fileExists = require('file-exists');
+var inquirer = require('inquirer');
 var pathExists = require('path-exists');
 var replace = require('replace-in-file');
-var Newpage = (function () {
+var NewPage = (function () {
 	
 	var ASSETSPATHNAME = 'static';
 	
-	function Newpage(config) {
+	function NewPage(config) {
 		
-		var pageName = config.pageName;
-		
-		if (!pageName) {
-			return console.log(chalk.red.bold('Page creation failed:') + ' ' + chalk.blue('page name must be specified'));
-		}
-		
+		askForName(config.pageName, start);
+	}
+	
+	function start(pageName) {
 		var _tempPath = process.env.PWD + '/.ciffi/';
 		
 		pathExists(_tempPath).then(function (res) {
@@ -39,7 +38,7 @@ var Newpage = (function () {
 		var _projectFileJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/pages/' + pageName + '.js';
 		
 		if (fileExists(_projectFileJs)) {
-			console.log(chalk.red('File already exists: ' + _projectFileJs));
+			console.log(chalk.red('☠️  File already exists: ' + _projectFileJs + ' ☠️'));
 		} else {
 			pathExists(_projectPagesJs).then(function (res) {
 				if (res) {
@@ -50,7 +49,7 @@ var Newpage = (function () {
 						console.log(chalk.green('New file created: ' + _projectFileJs));
 					});
 				} else {
-					console.log(chalk.red('Pages path not exists: ' + _projectPagesJs));
+					console.log(chalk.red('☠️  Pages path does not exists: ' + _projectModuless + ' ☠️'));
 				}
 			});
 		}
@@ -61,7 +60,7 @@ var Newpage = (function () {
 		var _projectFileHtml = process.env.PWD + '/' + ASSETSPATHNAME + '/' + pageName + '.html';
 		
 		if (fileExists(_projectFileHtml)) {
-			console.log(chalk.red('File already exists: ' + _projectFileHtml));
+			console.log(chalk.red('☠️  File already exists: ' + _projectFileHtml + ' ☠️'));
 		} else {
 			pathExists(_projectDevPath).then(function (res) {
 				if (res) {
@@ -72,11 +71,10 @@ var Newpage = (function () {
 						console.log(chalk.green('New file created: ' + _projectFileHtml));
 					});
 				} else {
-					console.log(chalk.red('Project dev path not exists: ' + _projectDevPath));
+					console.log(chalk.red('☠️  Project dev does not exists: ' + _projectDevPath + ' ☠️'));
 				}
 			});
 		}
-		
 	}
 	
 	function capitalizeFirstLetter(string) {
@@ -104,8 +102,42 @@ var Newpage = (function () {
 		});
 	}
 	
-	return Newpage;
+	function askForName(name, callback) {
+		var _name = name;
+		if (!_name) {
+			inquirer.prompt({
+				type: 'input',
+				name: 'name',
+				message: 'Specify page name',
+				default: 'page-name',
+				validate: function (res) {
+					
+					var done = this.async();
+					
+					setTimeout(function () {
+						
+						var _test = new RegExp(/^$|\s+|\w\s+|[\/]|^\.|\.$/);
+						var _testResult = _test.test(res);
+						
+						if (typeof res !== 'string' || _testResult) {
+							done('☠️  Page must have real name ☠️');
+							return;
+						}
+						
+						done(null, true);
+						
+					}, 10);
+				}
+			}).then(function (res) {
+				callback(res.name);
+			});
+		} else {
+			callback(_name);
+		}
+	}
+	
+	return NewPage;
 	
 })();
 
-module.exports = Newpage;
+module.exports = NewPage;

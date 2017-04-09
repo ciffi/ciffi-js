@@ -1,20 +1,19 @@
 var chalk = require('chalk');
 var shell = require('shelljs');
 var fileExists = require('file-exists');
+var inquirer = require('inquirer');
 var pathExists = require('path-exists');
 var replace = require('replace-in-file');
-var Newcomponent = (function () {
+var NewComponent = (function () {
 	
 	var ASSETSPATHNAME = 'static';
 	
-	function Newcomponent(config) {
+	function NewComponent(config) {
 		
-		var componentName = config.componentName;
-		
-		if (!componentName) {
-			return console.log(chalk.red.bold('Component creation failed:') + ' ' + chalk.blue('component name must be specified'));
-		}
-		
+		askForName(config.componentName, start);
+	}
+	
+	function start(componentName) {
 		var _tempPath = process.env.PWD + '/.ciffi/';
 		
 		pathExists(_tempPath).then(function (res) {
@@ -39,7 +38,7 @@ var Newcomponent = (function () {
 		var _projectFileJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/components/' + componentName + '.js';
 		
 		if (fileExists(_projectFileJs)) {
-			console.log(chalk.red('File already exists: ' + _projectFileJs));
+			console.log(chalk.red('☠️  File already exists: ' + _projectFileJs + ' ☠️'));
 		} else {
 			pathExists(_projectComponents).then(function (res) {
 				if (res) {
@@ -50,11 +49,10 @@ var Newcomponent = (function () {
 						console.log(chalk.green('New file created: ' + _projectFileJs));
 					});
 				} else {
-					console.log(chalk.red('Components path not exists: ' + _projectComponents));
+					console.log(chalk.red('☠️  Components path does not exists: ' + _projectComponents + ' ☠️'));
 				}
 			});
 		}
-		
 	}
 	
 	function capitalizeFirstLetter(string) {
@@ -82,8 +80,42 @@ var Newcomponent = (function () {
 		});
 	}
 	
-	return Newcomponent;
+	function askForName(name, callback) {
+		var _name = name;
+		if (!_name) {
+			inquirer.prompt({
+				type: 'input',
+				name: 'name',
+				message: 'Specify component name',
+				default: 'new-component',
+				validate: function (res) {
+					
+					var done = this.async();
+					
+					setTimeout(function () {
+						
+						var _test = new RegExp(/^$|\s+|\w\s+|[\/]|^\.|\.$/);
+						var _testResult = _test.test(res);
+						
+						if (typeof res !== 'string' || _testResult) {
+							done('☠️  Component must have real name ☠️');
+							return;
+						}
+						
+						done(null, true);
+						
+					}, 10);
+				}
+			}).then(function (res) {
+				callback(res.name);
+			});
+		} else {
+			callback(_name);
+		}
+	}
+	
+	return NewComponent;
 	
 })();
 
-module.exports = Newcomponent;
+module.exports = NewComponent;

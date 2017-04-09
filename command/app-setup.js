@@ -203,7 +203,7 @@ var AppSetup = (function () {
 				
 				console.log('');
 				console.log('');
-				console.log(chalk.green.bold('-- CiffiDesign Frontend Generator --'));
+				console.log(chalk.green.bold('-- Ciffi Frontend Generator --'));
 				console.log('');
 				
 				if (result) {

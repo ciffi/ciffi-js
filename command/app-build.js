@@ -22,13 +22,16 @@ var Build = (function () {
 		var _concat = ' && ';
 		var _cleanDist = 'rm -rf ' + _assetPath + '/*';
 		var _css = './node_modules/node-sass/bin/node-sass ' + _assetPathName + '/styles/main.scss ' + _assetPath + '/main.css';
+		var _autoprefixer = './node_modules/postcss-cli/bin/postcss --use autoprefixer --autoprefixer.browsers \'last 12 versions\' -o ' + _assetPath + '/main.css ' + _assetPath + '/main.css';
+		var _cleancss = './node_modules/clean-css/bin/cleancss -o ' + _assetPath + '/main.css ' + _assetPath + '/main.css'
+		var _styles = _css + _concat + _autoprefixer + _concat + _cleancss;
 		var _js = './node_modules/webpack/bin/webpack.js --config build.config.js -p --progress';
 		var _copyImages = './node_modules/copyfiles/copyfiles -u 1 \'' + _assetPathName + '/images/**/*.*\' ' + _assetPath + '/';
 		var _copyFonts = './node_modules/copyfiles/copyfiles -u 1 \'' + _assetPathName + '/fonts/**/*.*\' ' + _assetPath + '/';
 		var _copyPdf = './node_modules/copyfiles/copyfiles -u 1 \'' + _assetPathName + '/pdf/**/*.*\' ' + _assetPath + '/';
 		var _copyVideos = './node_modules/copyfiles/copyfiles -u 1 \'' + _assetPathName + '/videos/**/*.*\' ' + _assetPath + '/';
 		var _assets = _copyImages + _concat + _copyFonts + _concat + _copyPdf + _concat + _copyVideos;
-		var _process = exec(_cleanDist + _concat + _css + _concat + _js + _concat + _assets);
+		var _process = exec(_cleanDist + _concat + _styles + _concat + _js + _concat + _assets);
 		
 		_process.stdout.on('data', function (res) {
 			if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0) {

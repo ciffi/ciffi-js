@@ -29,42 +29,34 @@ ciffi dev
 ```
 ciffi build
 ```
-#### e2e test with nightwatch and cucumber (default configuration)
+#### e2e test with nightwatch and cucumber (use default if configuration is not defined)
 ```
-ciffi e2e
-```
-#### e2e test with nightwatch and cucumber (custom configuration)
-```
-ciffi e2e chrome //default, chrome or firefox
+ciffi e2e [configuration]
 ```
 #### new page html and js
 ```
-ciffi newpage pagename
+ciffi newpage [pagename]
 ```
 #### new js component
 ```
-ciffi newcomponent componentname
+ciffi newcomponent [componentname]
 ```
 #### new js module
 ```
-ciffi newmodule modulename
+ciffi newmodule [modulename]
 ```
 #### generate javascript documentation
-- with jsdoc into ./jsdoc path
-- ./jsdoc/index.html
+- with jsdoc
 ```
 ciffi jsdoc
 ```
 #### generate css documentation
-- with sassdoc into ./cssdoc path
-- ./cssdoc/index.html
+- with sassdoc
 ```
 ciffi cssdoc
 ```
 #### generate styleguides
-- with kss into ./styleguides path
-- it need build or dev task before
-- ./styleguides/index.html
+- with kss
 ```
 ciffi styleguide
 ```

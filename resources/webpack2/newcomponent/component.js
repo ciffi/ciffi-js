@@ -16,4 +16,4 @@ var @REPLACE__COMPONENTNAME@ = (function() {
 
 })();
 
-export default @REPLACE__COMPONENTNAME;
+export default @REPLACE__COMPONENTNAME@;

@@ -1,3 +1,11 @@
+### v0.9.1 (2017-04-09)
+
+#### Improved functionality
+- rewritten package.json, now contains only test task
+- rewritten tasks execution and relative logs
+- added questions for new modules, components or javascript pages
+- updated [README.md](https://github.com/ciffi/ciffi-js/blob/master/README.md)
+
 ### v0.9.0 (2017-04-08)
 
 #### Awesome refactor
