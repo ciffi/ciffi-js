@@ -7,6 +7,7 @@ var replace = require('replace-in-file');
 var NewPage = (function () {
 	
 	var ASSETSPATHNAME = 'static';
+	var ASSETSBUNDLE = 'webpack';
 	
 	function NewPage(config) {
 		
@@ -28,7 +29,7 @@ var NewPage = (function () {
 			
 			var _appConfig = require(_configFile);
 			ASSETSPATHNAME = _appConfig.assetsPathName;
-			ASSETSBUNDLE = _appConfig.bundle;
+			ASSETSBUNDLE = _appConfig.bundle || ASSETSBUNDLE;
 			
 		}
 		

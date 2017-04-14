@@ -1,3 +1,8 @@
+### v0.9.2 (2017-04-14)
+
+#### Fixed backward compatibility
+- fixed new page component and module and serve task for old projects
+
 ### v0.9.1 (2017-04-09)
 
 #### Improved functionality

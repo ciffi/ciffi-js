@@ -17,7 +17,7 @@ var Serve = (function () {
 			return console.log('');
 		}
 		
-		var _disabled = _CONFIG && _CONFIG.bundle === 'webpack2';
+		var _disabled = _CONFIG && _CONFIG.bundle && _CONFIG.bundle === 'webpack2';
 		
 		if (_disabled) {
 			return console.log(chalk.red.bold('Sorry, but serve task is still not available'));
