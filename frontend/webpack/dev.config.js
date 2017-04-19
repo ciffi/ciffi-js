@@ -25,6 +25,9 @@ module.exports = {
 				test: /\.js$/,
 				loader: 'eslint-loader',
 				exclude: './node_modules'
+			}, {
+				test: /\.twig$/,
+				loader: 'twig-loader'
 			}
 		]
 	},

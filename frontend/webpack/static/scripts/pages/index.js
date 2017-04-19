@@ -19,6 +19,10 @@ var Page = (function () {
 		console.log('home page load');
 		
 		$('h1').text('pagina index!!');
+		
+		return {
+			prova: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+		};
 	};
 
 	return new Page();

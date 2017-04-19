@@ -17,6 +17,10 @@ var Page = (function () {
 		console.log('one page load');
 		
 		$('h1').text('pagina one!!');
+		
+		return {
+			prova: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+		};
 	};
 
 	return new Page();

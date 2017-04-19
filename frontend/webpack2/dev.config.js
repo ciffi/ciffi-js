@@ -29,6 +29,10 @@ module.exports = {
 				options: {
 					configFile: './.eslintrc'
 				}
+			},
+			{
+				test: /\.twig$/,
+				loader: 'twig-loader'
 			}
 		]
 	},

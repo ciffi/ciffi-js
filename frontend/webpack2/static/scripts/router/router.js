@@ -68,9 +68,16 @@ var Router = (function () {
 		});
 		
 		if (pages[currentRoute]) {
-			require('../pages/' + currentRoute).load({
+			var _template = require('../../views/' + currentRoute + '.html.twig');
+			var _section = $('.js-router--views');
+			
+			$(pages[currentRoute]).hide();
+			
+			var _content = require('../pages/' + currentRoute).load({
 				config: CONFIG.config
 			});
+			
+			_section.html(_template(_content));
 		}
 	}
 	

@@ -30,7 +30,8 @@ var Build = (function () {
 		var _copyFonts = './node_modules/copyfiles/copyfiles -u 1 \'' + _assetPathName + '/fonts/**/*.*\' ' + _assetPath + '/';
 		var _copyPdf = './node_modules/copyfiles/copyfiles -u 1 \'' + _assetPathName + '/pdf/**/*.*\' ' + _assetPath + '/';
 		var _copyVideos = './node_modules/copyfiles/copyfiles -u 1 \'' + _assetPathName + '/videos/**/*.*\' ' + _assetPath + '/';
-		var _assets = _copyImages + _concat + _copyFonts + _concat + _copyPdf + _concat + _copyVideos;
+		var _copyViews = './node_modules/copyfiles/copyfiles -u 1 \'' + _assetPathName + '/views/**/*.*\' ' + _assetPath + '/';
+		var _assets = _copyImages + _concat + _copyFonts + _concat + _copyPdf + _concat + _copyVideos + _concat + _copyViews;
 		var _process = exec(_cleanDist + _concat + _styles + _concat + _js + _concat + _assets);
 		
 		_process.stdout.on('data', function (res) {

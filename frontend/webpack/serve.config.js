@@ -38,6 +38,9 @@ module.exports = {
 			{
 				test: /\.(woff|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
 				loaders: ['base64-font-loader']
+			}, {
+				test: /\.twig$/,
+				loader: 'twig-loader'
 			}
 		]
 	},

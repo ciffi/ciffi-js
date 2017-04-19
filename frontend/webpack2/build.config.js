@@ -7,5 +7,22 @@ module.exports = {
 	output: {
 		path: '@REPLACE__ASSETS@',
 		filename: '[name].js'
+	},
+	module: {
+		rules: [
+			{
+				test: /\.js$/,
+				enforce: 'pre',
+				loader: 'eslint-loader',
+				exclude: './node_modules',
+				options: {
+					configFile: './.eslintrc'
+				}
+			},
+			{
+				test: /\.twig$/,
+				loader: 'twig-loader'
+			}
+		]
 	}
 };

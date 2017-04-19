@@ -1,3 +1,8 @@
+### v0.9.4 (2017-04-20)
+
+#### Improved pushState support with Twig
+- added Twig as template engine for html views in pushState mode on (spa framework)
+
 ### v0.9.3 (2017-04-19)
 
 #### Fixed setup process

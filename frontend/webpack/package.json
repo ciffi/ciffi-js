@@ -49,6 +49,8 @@
     "selenium-server": "^2.53.1",
     "selenium-webdriver": "^2.53.3",
     "style-loader": "^0.13.0",
+    "twig": "^1.10.4",
+    "twig-loader": "^0.3.0",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.14.1"
   },
