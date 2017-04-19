@@ -1,6 +1,6 @@
 {
   "name": "ciffi",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "Ciffi Frontend Generator",
   "main": "ciffi.js",
   "repository": {
@@ -14,8 +14,8 @@
     "ciffi",
     "ciffi-js",
     "javascript",
-    "generator",
     "webpack",
+    "webpack2",
     "cli-app",
     "cli",
     "front-end",
@@ -31,7 +31,9 @@
     "app",
     "test",
     "cucumberjs",
-    "nightwatch"
+    "nightwatch",
+    "livereload",
+    "local-server"
   ],
   "license": "MIT",
   "homepage": "https://github.com/ciffi/ciffi-js",

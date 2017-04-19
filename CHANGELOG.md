@@ -1,3 +1,8 @@
+### v0.9.3 (2017-04-19)
+
+#### Fixed setup process
+- fixed error that block setup when project name is specified
+
 ### v0.9.2 (2017-04-14)
 
 #### Fixed backward compatibility

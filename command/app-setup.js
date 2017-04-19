@@ -58,10 +58,10 @@ var AppSetup = (function () {
 					}, 10);
 				}
 			}).then(function (res) {
-				callback(res);
+				callback({projectName: res});
 			});
 		} else {
-			callback(_projectName);
+			callback(config);
 		}
 	}
 	
