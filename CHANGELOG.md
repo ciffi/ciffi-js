@@ -1,3 +1,8 @@
+### v0.9.6 (2017-04-21)
+
+#### Fixed setup process
+- fixed error that block setup when project name is not specified
+
 ### v0.9.5 (2017-04-21)
 
 #### Fixed setup process for custom node installations

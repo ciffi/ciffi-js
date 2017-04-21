@@ -23,6 +23,9 @@ var AppSetup = (function (modulePath) {
 				require('./tempApp')(_isNewVersion, modulePath, function () {
 					config.bundle = res.version;
 					config.isNewVersion = _isNewVersion;
+					
+					console.log(config);
+					
 					start(config);
 				});
 			});
@@ -58,7 +61,7 @@ var AppSetup = (function (modulePath) {
 					}, 10);
 				}
 			}).then(function (res) {
-				callback({projectName: res});
+				callback(res);
 			});
 		} else {
 			callback(config);
