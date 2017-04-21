@@ -24,19 +24,6 @@ var PushState = (function () {
 		});
 	}
 	
-	function setPagesVisibility(pages, currentPage) {
-		var _active = currentPage || 'index';
-		setTimeout(function () {
-			$.each(pages, function (url, trigger) {
-				if (url !== _active) {
-					$(trigger).addClass('js-router--is-inactive').removeClass('js-router--is-active');
-				} else {
-					$(trigger).addClass('js-router--is-active').removeClass('js-router--is-inactive');
-				}
-			});
-		});
-	}
-	
 	function newUrl(data, url, Pushstate) {
 		if (!Pushstate.currentRoute || Pushstate.currentRoute !== url) {
 			if (url === '') {
@@ -69,7 +56,6 @@ var PushState = (function () {
 		
 		window.onpopstate = history.onpushstate = $.proxy(function (e) {
 			if (e.state) {
-				setPagesVisibility(pages, e.state.url);
 				this.currentRoute = e.state.url;
 				callback(e.state);
 			} else {
@@ -78,8 +64,6 @@ var PushState = (function () {
 		}, this);
 		
 		setLinkInteractions(this);
-		
-		setPagesVisibility(pages);
 		
 		return pages;
 	};

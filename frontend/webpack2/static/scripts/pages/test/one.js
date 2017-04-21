@@ -1,29 +1,30 @@
-var $ = require('jquery');
-
-var Page = (function () {
-
-	function Page() {
-
-		console.log('one page constructor');
-
-	}
-
-	Page.prototype.setData = function (data) {
-		console.log(data);
-	};
+var Page = (function (PageClass) {
 	
-	Page.prototype.load = function () {
-		console.log('one page load');
+	var _PAGE = new PageClass();
+	
+	function Page() {
 		
-		$('h1').text('pagina one!!');
-		
-		return {
+		this.config = _PAGE.getConfig();
+		this.content = {
 			prova: [1, 2, 3, 4, 5, 6, 7, 8, 9]
 		};
+		
+		start(this.config);
+		
+		return this;
+		
+	}
+	
+	function start(config) {
+		console.log('test/one page start', config);
+	}
+	
+	Page.prototype.load = function () {
+		console.log('test/one loaded');
 	};
-
+	
 	return new Page();
-
-})();
+	
+});
 
 module.exports = Page;

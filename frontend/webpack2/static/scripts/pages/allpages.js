@@ -1,20 +1,21 @@
-var Page = (function () {
-
-	function Page() {
-		console.log('all page constructor');
-	}
-
-	Page.prototype.setData = function (data) {
-		console.log(data);
-	};
+var Page = (function (PageClass) {
 	
-	Page.prototype.load = function () {
-		document.body.classList.add('app-is-ready');
-		console.log('all page load');
-	};
-
+	var _PAGE = new PageClass();
+	
+	function Page() {
+		
+		this.config = _PAGE.getConfig();
+		
+		start(this.config);
+		
+	}
+	
+	function start(config) {
+		console.log('all pages start', config);
+	}
+	
 	return new Page();
-
-})();
+	
+});
 
 module.exports = Page;

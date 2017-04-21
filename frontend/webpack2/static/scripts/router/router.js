@@ -2,6 +2,7 @@
 var UserConfig = require('../config/config');
 var RouterConfig = require('./router-config');
 var CONFIG = new RouterConfig(UserConfig.env);
+var PageClass = require('./page-class')(CONFIG);
 /* CONFIG */
 
 /* PAGES */
@@ -15,11 +16,15 @@ var PushState = require('./pushstate');
 var $ = require('jquery');
 var Router = (function () {
 	
-	var ALLPAGES = 'allpages';
+	var _ALLPAGES = 'allpages';
 	
 	function Router(pages) {
 		checkConfig(pages, $.proxy(function () {
 			this.pages = pages;
+			this.history = {
+				pages: [],
+				modules: {}
+			};
 			this.init();
 		}, this));
 	}
@@ -47,43 +52,35 @@ var Router = (function () {
 	
 	function onPagesLoaded(pages, currentRoute) {
 		
-		require('../pages/' + ALLPAGES).setData({
-			config: CONFIG.config
-		});
-		
-		require('../pages/' + ALLPAGES).load();
-		
+		require('../pages/' + _ALLPAGES)(PageClass);
 		if (pages[currentRoute]) {
-			
-			require('../pages/' + currentRoute).setData({
-				config: CONFIG.config
-			});
+			require('../pages/' + currentRoute)(PageClass);
 		}
+		
 	}
 	
-	function onPushStateChange(pages, currentRoute) {
-		
-		require('../pages/' + ALLPAGES).load({
-			config: CONFIG.config
-		});
+	function onPushStateChange(history, pages, currentRoute) {
 		
 		if (pages[currentRoute]) {
+			
+			if (history.pages.indexOf(currentRoute) < 0) {
+				history.pages.push(currentRoute);
+				history.modules[currentRoute] = require('../pages/' + currentRoute)(PageClass);
+			}
+			
 			var _template = require('../../views/' + currentRoute + '.html.twig');
 			var _section = $('.js-router--views');
-			
-			$(pages[currentRoute]).hide();
-			
-			var _content = require('../pages/' + currentRoute).load({
-				config: CONFIG.config
-			});
+			var _content = history.modules[currentRoute].content;
 			
 			_section.html(_template(_content));
+			
+			history.modules[currentRoute].load();
 		}
 	}
 	
 	Router.prototype.init = function () {
-		if (CONFIG.config.env === 'local') {
-			document.write('<script src="' + CONFIG.config.baseUrl + ':35729/livereload.js?snipver=1" async="" defer=""></script>');
+		if (CONFIG.env === 'local') {
+			document.write('<script src="' + CONFIG.baseUrl + ':35729/livereload.js?snipver=1" async="" defer=""></script>');
 		}
 	};
 	
@@ -91,9 +88,7 @@ var Router = (function () {
 		
 		if (val) {
 			
-			require('../pages/' + ALLPAGES).setData({
-				config: CONFIG.config
-			});
+			require('../pages/' + _ALLPAGES)(PageClass);
 			
 			this.isPushStateEnabled = PushState.checkSupport();
 			
@@ -101,7 +96,7 @@ var Router = (function () {
 				PushState.watcher(this.pages, $.proxy(function (data) {
 					var _routes = this.pages;
 					var _currentRoute = data.url;
-					onPushStateChange(_routes, _currentRoute);
+					onPushStateChange(this.history, _routes, _currentRoute);
 				}, this));
 			}
 			

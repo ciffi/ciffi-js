@@ -1,30 +1,32 @@
 'use strict';
-var $ = require('jquery');
 
-var Page = (function () {
-
-	function Page() {
-
-		console.log('example page constructor');
-
-	}
-
-	Page.prototype.setData = function (data) {
-		console.log(data);
-	};
+var Page = (function (PageClass) {
 	
-	Page.prototype.load = function () {
-		console.log('example page load');
+	var _PAGE = new PageClass();
+	
+	function Page() {
 		
-		$('h1').text('pagina example!!');
-		
-		return {
+		this.config = _PAGE.getConfig();
+		this.content = {
 			prova: [1, 2, 3, 4, 5, 6, 7, 8, 9]
 		};
+		
+		start(this.config);
+		
+		return this;
+		
+	}
+	
+	function start(config) {
+		console.log('example page start', config);
+	}
+	
+	Page.prototype.load = function () {
+		console.log('example loaded');
 	};
-
+	
 	return new Page();
-
-})();
+	
+});
 
 module.exports = Page;
