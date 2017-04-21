@@ -6,6 +6,7 @@ var chalk = require('chalk');
 var pkg = require('./package.json');
 var cliCursor = require('cli-cursor');
 var Commands = require('./command/app-commands');
+var exec = require('child_process').exec;
 
 var cli = meow({
 	pkg: pkg
@@ -26,90 +27,100 @@ Object.keys(opts).forEach(function (key) {
 	opts[legacyKey] = opts[key];
 });
 
-if (!cmd) {
-	if (opts.h) {
-		showCommandListMsg();
-	} else if (opts.v) {
-		console.log(chalk.magenta.bold(pkg.version));
-	} else if (opts.a) {
-		console.log(chalk.blue(pkg.author.name));
-	} else if (opts.logo) {
-		showLogo();
-	} else if (opts.postsetup) {
-		cliCursor.show();
-		showGreetings();
-	} else {
-		showCommandErrorMessage();
-	}
-} else {
-	switch (cmd) {
-		case 'setup':
-			var Setup = require('./command/app-setup');
-			new Setup({
-				projectName: projectName
-			});
-			break;
-		case 'update':
-			require('./command/app-update');
-			break;
-		case 'serve':
-			require('./command/app-serve');
-			break;
-		case 'dev':
-			require('./command/app-dev');
-			break;
-		case 'build':
-			require('./command/app-build');
-			break;
-		case 'build-prod':
-			console.log(chalk.red.bold('Sorry, but dev-unit task is still not available'));
-			//require('./command/app-build-prod');
-			break;
-		case 'dev-unit':
-			console.log(chalk.red.bold('Sorry, but dev-unit task is still not available'));
-			//require('./command/app-test').devUnit();
-			break;
-		case 'unit':
-			console.log(chalk.red.bold('Sorry, but unit task is still not available'));
-			//require('./command/app-test').unit();
-			break;
-		case 'e2e':
-			var _args = false;
-			if (args[1]) {
-				_args = args;
-			}
-			require('./command/app-test').e2e(_args);
-			break;
-		case 'newpage':
-			var Page = require('./command/app-newpage');
-			new Page({
-				pageName: projectName
-			});
-			break;
-		case 'newmodule':
-			var Module = require('./command/app-newmodule');
-			new Module({
-				moduleName: projectName
-			});
-			break;
-		case 'newcomponent':
-			var Component = require('./command/app-newcomponent');
-			new Component({
-				componentName: projectName
-			});
-			break;
-		case 'jsdoc':
-			require('./command/app-doc').jsdoc();
-			break;
-		case 'cssdoc':
-			require('./command/app-doc').cssdoc();
-			break;
-		case 'styleguide':
-			require('./command/app-doc').styleguide();
-			break;
-		default:
+var _process = exec('npm config get prefix');
+
+_process.stdout.on('data', function (path) {
+	var _modulePath = path.trim();
+	
+	start(_modulePath);
+});
+
+function start(modulePath) {
+	if (!cmd) {
+		if (opts.h) {
+			showCommandListMsg();
+		} else if (opts.v) {
+			console.log(chalk.magenta.bold(pkg.version));
+		} else if (opts.a) {
+			console.log(chalk.blue(pkg.author.name));
+		} else if (opts.logo) {
+			showLogo();
+		} else if (opts.postsetup) {
+			cliCursor.show();
+			showGreetings();
+		} else {
 			showCommandErrorMessage();
-			break;
+		}
+	} else {
+		switch (cmd) {
+			case 'setup':
+				var Setup = require('./command/app-setup')(modulePath);
+				new Setup({
+					projectName: projectName
+				});
+				break;
+			case 'update':
+				require('./command/app-update');
+				break;
+			case 'serve':
+				require('./command/app-serve');
+				break;
+			case 'dev':
+				require('./command/app-dev');
+				break;
+			case 'build':
+				require('./command/app-build');
+				break;
+			case 'build-prod':
+				console.log(chalk.red.bold('Sorry, but dev-unit task is still not available'));
+				//require('./command/app-build-prod');
+				break;
+			case 'dev-unit':
+				console.log(chalk.red.bold('Sorry, but dev-unit task is still not available'));
+				//require('./command/app-test').devUnit();
+				break;
+			case 'unit':
+				console.log(chalk.red.bold('Sorry, but unit task is still not available'));
+				//require('./command/app-test').unit();
+				break;
+			case 'e2e':
+				var _args = false;
+				if (args[1]) {
+					_args = args;
+				}
+				require('./command/app-test').e2e(_args);
+				break;
+			case 'newpage':
+				var Page = require('./command/app-newpage')((modulePath));
+				new Page({
+					pageName: projectName
+				});
+				break;
+			case 'newmodule':
+				var Module = require('./command/app-newmodule')((modulePath));
+				new Module({
+					moduleName: projectName
+				});
+				break;
+			case 'newcomponent':
+				var Component = require('./command/app-newcomponent')((modulePath));
+				new Component({
+					componentName: projectName
+				});
+				break;
+			case 'jsdoc':
+				require('./command/app-doc').jsdoc();
+				break;
+			case 'cssdoc':
+				require('./command/app-doc').cssdoc();
+				break;
+			case 'styleguide':
+				require('./command/app-doc').styleguide();
+				break;
+			default:
+				showCommandErrorMessage();
+				break;
+		}
 	}
 }
 

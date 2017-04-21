@@ -4,7 +4,7 @@ var fileExists = require('file-exists');
 var inquirer = require('inquirer');
 var pathExists = require('path-exists');
 var replace = require('replace-in-file');
-var NewComponent = (function () {
+var NewComponent = (function (modulePath) {
 	
 	var ASSETSPATHNAME = 'static';
 	var ASSETSBUNDLE = 'webpack';
@@ -34,7 +34,7 @@ var NewComponent = (function () {
 		}
 		
 		var _tempFileJs = _tempPath + componentName + '.js';
-		var _resourceJs = process.config.variables.node_prefix + '/lib/node_modules/ciffi/resources/' + ASSETSBUNDLE + '/newcomponent/component.js';
+		var _resourceJs = modulePath + '/lib/node_modules/ciffi/resources/' + ASSETSBUNDLE + '/newcomponent/component.js';
 		var _projectComponents = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/components/';
 		var _projectFileJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/components/' + componentName + '.js';
 		
@@ -117,6 +117,6 @@ var NewComponent = (function () {
 	
 	return NewComponent;
 	
-})();
+});
 
 module.exports = NewComponent;

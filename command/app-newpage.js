@@ -4,7 +4,7 @@ var fileExists = require('file-exists');
 var inquirer = require('inquirer');
 var pathExists = require('path-exists');
 var replace = require('replace-in-file');
-var NewPage = (function () {
+var NewPage = (function (modulePath) {
 	
 	var ASSETSPATHNAME = 'static';
 	var ASSETSBUNDLE = 'webpack';
@@ -34,7 +34,7 @@ var NewPage = (function () {
 		}
 		
 		var _tempFileJs = _tempPath + pageName + '.js';
-		var _resourceJs = process.config.variables.node_prefix + '/lib/node_modules/ciffi/resources/' + ASSETSBUNDLE + '/newpage/page.js';
+		var _resourceJs = modulePath + '/lib/node_modules/ciffi/resources/' + ASSETSBUNDLE + '/newpage/page.js';
 		var _projectPagesJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/pages/';
 		var _projectFileJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/pages/' + pageName + '.js';
 		
@@ -56,7 +56,7 @@ var NewPage = (function () {
 		}
 		
 		var _tempFileHtml = _tempPath + pageName + '.html';
-		var _resourceHtml = process.config.variables.node_prefix + '/lib/node_modules/ciffi/resources/webpack/newpage/page.html';
+		var _resourceHtml = modulePath + '/lib/node_modules/ciffi/resources/webpack/newpage/page.html';
 		var _projectDevPath = process.env.PWD + '/' + ASSETSPATHNAME + '/';
 		var _projectFileHtml = process.env.PWD + '/' + ASSETSPATHNAME + '/' + pageName + '.html';
 		
@@ -139,6 +139,6 @@ var NewPage = (function () {
 	
 	return NewPage;
 	
-})();
+});
 
 module.exports = NewPage;

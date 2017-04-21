@@ -2,7 +2,7 @@ var shell = require('shelljs');
 var replace = require('replace-in-file');
 var pathExists = require('path-exists');
 
-var TempApp = (function (isNewVersion, callback) {
+var TempApp = (function (isNewVersion, modulePath, callback) {
 	
 	var _CONFIG = {
 		isNewVersion: isNewVersion,
@@ -11,7 +11,7 @@ var TempApp = (function (isNewVersion, callback) {
 	};
 	
 	function TempApp() {
-		var _modulePath = process.config.variables.node_prefix + '/lib/node_modules/ciffi/frontend/' + _CONFIG.frontendPath + '/*';
+		var _modulePath = modulePath + '/lib/node_modules/ciffi/frontend/' + _CONFIG.frontendPath + '/*';
 		var _tempPath = process.env.PWD + '/.ciffi/';
 		
 		pathExists(_tempPath).then(function (res) {

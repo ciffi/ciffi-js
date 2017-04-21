@@ -5,7 +5,7 @@ var fileExists = require('file-exists');
 var pathExists = require('path-exists');
 var Loading = require('./loading');
 
-var CreateSettingsFile = (function (config) {
+var CreateSettingsFile = (function (config, modulePath) {
 	
 	var _CONFIG = config;
 	
@@ -79,7 +79,7 @@ var CreateSettingsFile = (function (config) {
 		});
 		
 		var _tempFile = _tempPath + fileName;
-		var _resource = process.config.variables.node_prefix + '/lib/node_modules/ciffi/resources/' + _CONFIG.bundle + '/core/' + fileName;
+		var _resource = modulePath + '/lib/node_modules/ciffi/resources/' + _CONFIG.bundle + '/core/' + fileName;
 		var _projectRoot = process.env.PWD + '/';
 		var _projectFile = process.env.PWD + '/.' + fileName;
 		

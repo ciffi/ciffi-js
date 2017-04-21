@@ -6,7 +6,7 @@ var cliCursor = require('cli-cursor');
 var shell = require('shelljs');
 var Loading = require('./loading');
 
-var AppSetup = (function () {
+var AppSetup = (function (modulePath) {
 	
 	function AppSetup(config) {
 		
@@ -20,7 +20,7 @@ var AppSetup = (function () {
 				choices: ['webpack', 'webpack2'],
 			}).then(function (res) {
 				var _isNewVersion = res.version === 'webpack2';
-				require('./tempApp')(_isNewVersion, function () {
+				require('./tempApp')(_isNewVersion, modulePath, function () {
 					config.bundle = res.version;
 					config.isNewVersion = _isNewVersion;
 					start(config);
@@ -178,14 +178,14 @@ var AppSetup = (function () {
 					
 					Loading.stop('Generate project tree for ' + chalk.blue(config.projectName) + chalk.green.bold(' OK'));
 					
-					require('./app-sethiddenfile')(config.isNewVersion);
+					require('./app-sethiddenfile')(config.isNewVersion, modulePath);
 					require('./app-createsettings')({
 						projectName: config.projectName,
 						assetsPath: _fixedAssetsUrl,
 						pathName: _pathName,
 						bundle: config.bundle,
 						isNewVersion: config.isNewVersion
-					});
+					}, modulePath);
 					
 					require('./moveApp');
 					
@@ -221,6 +221,6 @@ var AppSetup = (function () {
 	}
 	
 	return AppSetup;
-})();
+});
 
 module.exports = AppSetup;

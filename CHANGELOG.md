@@ -1,3 +1,7 @@
+### v0.9.5 (2017-04-21)
+
+#### Fixed setup process for custom node installations
+
 ### v0.9.4 (2017-04-20)
 
 #### Improved pushState support with Twig
