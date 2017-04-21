@@ -1,4 +1,4 @@
-### v0.9.7 (2017-04-21)
+### v0.9.8 (2017-04-21)
 
 #### Fixed setup process
 - removed log during setup process

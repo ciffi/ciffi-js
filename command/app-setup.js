@@ -24,8 +24,6 @@ var AppSetup = (function (modulePath) {
 					config.bundle = res.version;
 					config.isNewVersion = _isNewVersion;
 					
-					console.log(config);
-					
 					start(config);
 				});
 			});
