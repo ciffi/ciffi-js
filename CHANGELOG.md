@@ -1,3 +1,11 @@
+### v0.9.9 (2017-04-22)
+
+#### Rewritten router
+- added new page-class modules in router component
+- improved new page task that now supports nested path
+- removed creation of html file when run newpage task
+- rewritten pages modules
+
 ### v0.9.8 (2017-04-21)
 
 #### Fixed setup process

@@ -15,12 +15,12 @@ var SetupHiddenFiles = (function (isNewVersion, modulePath) {
 		
 		console.log('');
 		
-		Loading.start('Generate ' + chalk.blue('.eslint') + ' end ' + chalk.blue('.gitignore'));
+		Loading.start('Generate ' + chalk.blue('.eslint') + ' and ' + chalk.blue('.gitignore'));
 		
 		yeah('eslintrc');
 		yeah('gitignore');
 		
-		Loading.stop('Generate ' + chalk.blue('.eslint') + ' end ' + chalk.blue('.gitignore') + chalk.green.bold(' OK'));
+		Loading.stop('Generate ' + chalk.blue('.eslint') + ' and ' + chalk.blue('.gitignore') + chalk.green.bold(' OK'));
 		
 	}
 	

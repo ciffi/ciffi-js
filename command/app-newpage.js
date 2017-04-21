@@ -33,47 +33,29 @@ var NewPage = (function (modulePath) {
 			
 		}
 		
-		var _tempFileJs = _tempPath + pageName + '.js';
+		var _fileName = pageName.split('/')[pageName.split('/').length - 1] + '.js';
+		var _fullName = pageName + '.js';
+		var _pathName = _fullName.replace(_fileName, '');
+		var _tempFileJs = _tempPath + _fileName;
 		var _resourceJs = modulePath + '/lib/node_modules/ciffi/resources/' + ASSETSBUNDLE + '/newpage/page.js';
-		var _projectPagesJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/pages/';
-		var _projectFileJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/pages/' + pageName + '.js';
+		var _projectPagesJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/pages/' + _pathName;
+		var _projectFileJs = _projectPagesJs + _fileName;
 		
 		if (fileExists(_projectFileJs)) {
 			console.log(chalk.red('☠️  File already exists: ' + _projectFileJs + ' ☠️'));
 		} else {
 			pathExists(_projectPagesJs).then(function (res) {
-				if (res) {
-					shell.cp(_resourceJs, _tempFileJs);
-					replacePageName(_tempFileJs, pageName, function () {
-						shell.cp(_tempFileJs, _projectFileJs);
-						shell.rm('-rf', _tempFileJs);
-						console.log(chalk.green('New file created: ' + _projectFileJs));
-					});
-				} else {
-					console.log(chalk.red('☠️  Pages path does not exists: ' + _projectModuless + ' ☠️'));
+				
+				if (!res) {
+					shell.mkdir('-p', _projectPagesJs);
 				}
-			});
-		}
-		
-		var _tempFileHtml = _tempPath + pageName + '.html';
-		var _resourceHtml = modulePath + '/lib/node_modules/ciffi/resources/webpack/newpage/page.html';
-		var _projectDevPath = process.env.PWD + '/' + ASSETSPATHNAME + '/';
-		var _projectFileHtml = process.env.PWD + '/' + ASSETSPATHNAME + '/' + pageName + '.html';
-		
-		if (fileExists(_projectFileHtml)) {
-			console.log(chalk.red('☠️  File already exists: ' + _projectFileHtml + ' ☠️'));
-		} else {
-			pathExists(_projectDevPath).then(function (res) {
-				if (res) {
-					shell.cp(_resourceHtml, _tempFileHtml);
-					replacePageName(_tempFileHtml, pageName, function () {
-						shell.cp(_tempFileHtml, _projectFileHtml);
-						shell.rm('-rf', _tempFileHtml);
-						console.log(chalk.green('New file created: ' + _projectFileHtml));
-					});
-				} else {
-					console.log(chalk.red('☠️  Project dev does not exists: ' + _projectDevPath + ' ☠️'));
-				}
+				
+				shell.cp('-rf', _resourceJs, _tempFileJs);
+				replacePageName(_tempFileJs, pageName, function () {
+					shell.cp('-rf', _tempFileJs, _projectFileJs);
+					shell.rm('-rf', _tempFileJs);
+					console.log(chalk.green('New file created: ' + _projectFileJs));
+				});
 			});
 		}
 	}
