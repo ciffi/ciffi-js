@@ -10,7 +10,6 @@ var Page = (function (config) {
 	function start() {
 		if (document.body.classList.value.indexOf('app-is-ready') < 0) {
 			document.body.classList.add('app-is-ready');
-			console.log('page-class start');
 		}
 	}
 	

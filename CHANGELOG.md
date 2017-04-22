@@ -5,6 +5,7 @@
 - improved new page task that now supports nested path
 - removed creation of html file when run newpage task
 - rewritten pages modules
+- updated [README.md](https://github.com/ciffi/ciffi-js/blob/master/README.md)
 
 ### v0.9.8 (2017-04-21)
 

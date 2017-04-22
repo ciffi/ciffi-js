@@ -88,11 +88,60 @@ dev task opens your default browser on url set in relative config file, open dev
 
 ## JS PROJECT ENV CONFIGURATION
 
-in scripts/config/config.js you can configure your env variables that router component return to each page with .setData() method
+in scripts/config/config.js you can configure your env variables that router component returns to each .getConfig method from page-class component
 
+* generic page module when pushState is set to false
+* .getConfig method returns app config from scripts/config/config.js relative to your current env detected by router component based on baseUrl attribute
 ```javascript
-Page.prototype.setData = function (data) {
-	console.log(data);
-};
+var Page = (function (PageClass) {
+	
+	var _PAGE = new PageClass();
+	
+	function Page() {
+		
+		this.config = _PAGE.getConfig();
+		
+	}
+	
+	return new Page();
+	
+});
+
+module.exports = Page;
 ```
-data contains object configured in scripts/config/config.js relative to your current env detected by router component based on baseUrl attribute
+
+- - -
+
+## SPA Framework - pushState(true)
+
+* generic page module when pushState is set to true
+* this.content is the data model for the twig view rendered by router 
+* Page.prototype.load is called by router after that template was be rendered
+```javascript
+var Page = (function (PageClass) {
+	
+	var _PAGE = new PageClass();
+	
+	function Page() {
+		
+		this.config = _PAGE.getConfig();
+		this.content = {
+			title: 'title',
+			items: {
+				name: 'test',
+				sizes: [1,2,3]
+			}
+		};
+		
+	}
+	
+	Page.prototype.load = function () {
+		console.log('myPage loaded');
+	};
+	
+	return new Page();
+	
+});
+
+module.exports = Page;
+```
