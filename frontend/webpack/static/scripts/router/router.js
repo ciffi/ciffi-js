@@ -54,24 +54,28 @@ var Router = (function () {
 	
 	function onPagesLoaded(pages, currentRoute) {
 		
-		require('../pages/' + _ALLPAGES)(PageClass);
+		var _pageClass = new PageClass();
+		var _allPage = require('../pages/' + _ALLPAGES)(_pageClass);
+		
 		if (pages[currentRoute]) {
-			require('../pages/' + currentRoute)(PageClass);
+			require('../pages/' + currentRoute)(_pageClass);
+		} else {
+			new _allPage();
 		}
 		
 	}
 	
-	function onPushStateChange(history, pages, currentRoute) {
+	function onPushStateChange(history, pages, currentRoute, pageClass) {
 		
 		if (pages[currentRoute]) {
 			
 			if (history.pages.indexOf(currentRoute) < 0) {
 				history.pages.push(currentRoute);
-				history.modules[currentRoute] = require('../pages/' + currentRoute)(PageClass);
+				history.modules[currentRoute] = require('../pages/' + currentRoute)(pageClass);
 			}
 			
 			var _template = require('../../views/' + currentRoute + '.html.twig');
-			var _section = $('.js-router--views');
+			var _section = $('cd-view');
 			var _content = history.modules[currentRoute].content;
 			
 			_section.html(_template(_content));
@@ -90,7 +94,10 @@ var Router = (function () {
 		
 		if (val) {
 			
-			require('../pages/' + _ALLPAGES)(PageClass);
+			var _pageClass = new PageClass();
+			var _allPage = require('../pages/' + _ALLPAGES)(_pageClass);
+			
+			new _allPage();
 			
 			this.isPushStateEnabled = PushState.checkSupport();
 			
@@ -98,7 +105,7 @@ var Router = (function () {
 				PushState.watcher(this.pages, $.proxy(function (data) {
 					var _routes = this.pages;
 					var _currentRoute = data.url;
-					onPushStateChange(this.history, _routes, _currentRoute);
+					onPushStateChange(this.history, _routes, _currentRoute, _pageClass, _allPage);
 				}, this));
 			}
 			

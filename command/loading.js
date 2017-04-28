@@ -53,7 +53,7 @@ var Loading = (function () {
 		}.bind(this), 15000);
 		
 		this.timeoutTurtle = setTimeout(function () {
-			this.current.text = text + ' -- almost finish';
+			this.current.text = text + ' -- almost finished';
 			this.current.spinner = _spinners.turtle
 		}.bind(this), 30000);
 	};

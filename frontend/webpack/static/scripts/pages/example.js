@@ -2,11 +2,9 @@
 
 var Page = (function (PageClass) {
 	
-	var _PAGE = new PageClass();
-	
 	function Page() {
 		
-		this.config = _PAGE.getConfig();
+		this.config = PageClass.getConfig();
 		this.content = {
 			prova: [1, 2, 3, 4, 5, 6, 7, 8, 9]
 		};
@@ -25,7 +23,7 @@ var Page = (function (PageClass) {
 		console.log('example loaded');
 	};
 	
-	return new Page();
+	return Page;
 	
 });
 

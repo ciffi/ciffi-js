@@ -88,6 +88,12 @@ dev task opens your default browser on url set in relative config file, open dev
 
 ## JS PROJECT ENV CONFIGURATION
 
+* add a tag with class "js-router--my-page" in each page
+
+```html
+<div class="js-router--my-page"></div>
+```
+
 in scripts/config/config.js you can configure your env variables that router component returns to each .getConfig method from page-class component
 
 * generic page module when pushState is set to false
@@ -95,15 +101,13 @@ in scripts/config/config.js you can configure your env variables that router com
 ```javascript
 var Page = (function (PageClass) {
 	
-	var _PAGE = new PageClass();
-	
 	function Page() {
 		
-		this.config = _PAGE.getConfig();
+		this.config = PageClass.getConfig();
 		
 	}
 	
-	return new Page();
+	return Page;
 	
 });
 
@@ -114,17 +118,19 @@ module.exports = Page;
 
 ## SPA Framework - pushState(true)
 
+* add cd-view custom tag in your page
+```html
+<cd-view></cd-view>
+```
 * generic page module when pushState is set to true
 * this.content is the data model for the twig view rendered by router 
 * Page.prototype.load is called by router after that template was be rendered
 ```javascript
 var Page = (function (PageClass) {
 	
-	var _PAGE = new PageClass();
-	
 	function Page() {
 		
-		this.config = _PAGE.getConfig();
+		this.config = PageClass.getConfig();
 		this.content = {
 			title: 'title',
 			items: {
@@ -139,7 +145,7 @@ var Page = (function (PageClass) {
 		console.log('myPage loaded');
 	};
 	
-	return new Page();
+	return Page;
 	
 });
 

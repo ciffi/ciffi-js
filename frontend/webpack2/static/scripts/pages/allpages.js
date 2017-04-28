@@ -1,10 +1,8 @@
 var Page = (function (PageClass) {
 	
-	var _PAGE = new PageClass();
-	
 	function Page() {
 		
-		this.config = _PAGE.getConfig();
+		this.config = PageClass.getConfig();
 		
 		start(this.config);
 		
@@ -14,7 +12,7 @@ var Page = (function (PageClass) {
 		console.log('all pages start', config);
 	}
 	
-	return new Page();
+	return Page;
 	
 });
 

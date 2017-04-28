@@ -1,3 +1,9 @@
+### v0.9.10 (2017-04-28)
+
+#### Improved router and pages
+- improved pages constructor
+- updated [README.md](https://github.com/ciffi/ciffi-js/blob/master/README.md)
+
 ### v0.9.9 (2017-04-22)
 
 #### Rewritten router
