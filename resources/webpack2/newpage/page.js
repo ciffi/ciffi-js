@@ -21,7 +21,7 @@ var Page = (function (PageClass) {
 		console.log('@REPLACE__PAGENAME@ loaded');
 	};
 	
-	return new Page();
+	return Page;
 	
 });
 

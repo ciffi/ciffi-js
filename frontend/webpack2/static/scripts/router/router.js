@@ -54,11 +54,11 @@ var Router = (function () {
 		
 		var _pageClass = new PageClass();
 		var _allPage = require('../pages/' + _ALLPAGES)(_pageClass);
+		new _allPage();
 		
 		if (pages[currentRoute]) {
-			require('../pages/' + currentRoute)(_pageClass);
-		} else {
-			new _allPage();
+			var _currentPage = require('../pages/' + currentRoute)(_pageClass);
+			new _currentPage();
 		}
 		
 	}
@@ -69,7 +69,8 @@ var Router = (function () {
 			
 			if (history.pages.indexOf(currentRoute) < 0) {
 				history.pages.push(currentRoute);
-				history.modules[currentRoute] = require('../pages/' + currentRoute)(pageClass);
+				var _currentPage = require('../pages/' + currentRoute)(pageClass);
+				history.modules[currentRoute] = new _currentPage();
 			}
 			
 			var _template = require('../../views/' + currentRoute + '.html.twig');
