@@ -47,16 +47,21 @@ ciffi newmodule [modulename]
 ```
 #### generate javascript documentation
 - with jsdoc
+
 ```
 ciffi jsdoc
 ```
+
 #### generate css documentation
 - with sassdoc
+
 ```
 ciffi cssdoc
 ```
+
 #### generate styleguides
 - with kss
+
 ```
 ciffi styleguide
 ```
