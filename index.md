@@ -125,6 +125,7 @@ module.exports = Page;
 * configure your pages in scripts/config/pages.js
 * each key of Pages object corresponds to name or path/name of the page module files that must be loaded when the trigger, relative value, is present in page
 * use one page at a time
+
 ```javascript
 var Pages = {
 	index: '.js-router--home',
