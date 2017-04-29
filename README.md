@@ -33,7 +33,7 @@ ciffi build
 ```
 ciffi e2e [configuration]
 ```
-#### new page html and js
+#### new js page
 ```
 ciffi newpage [pagename]
 ```
@@ -78,23 +78,18 @@ fi
 
 1. create folder (I usually use frontend in the root of project), then browse inside it and run setup task
 2. project name is the name of your development host (if host is myapp.local your project name is myapp)
-3. answer the setup process questions 
-4. run serve or dev task and start to write code
-5. run build task and you are ready to deploy
+3. answer the setup process questions
+4. link main.css and main.js to your project
+5. run dev task and start to write code
+6. run build task and you are ready to deploy
 
 ## DEV CONFIGURATION
 
-dev task opens your default browser on url set in relative config file, open dev_config.js and change variable "_indexUrl"
+dev task opens your default browser on url set in relative config file, open dev.config.js and change "_indexUrl" variable
 
 ## JS PROJECT ENV CONFIGURATION
 
-* add a tag with class "js-router--my-page" in each page
-
-```html
-<div class="js-router--my-page"></div>
-```
-
-in scripts/config/config.js you can configure your env variables that router component returns to each .getConfig method from page-class component
+in scripts/config/config.js you can configure your env variables that router component returns to each Page class with .getConfig method from PageClass component
 
 * generic page module when pushState is set to false
 * .getConfig method returns app config from scripts/config/config.js relative to your current env detected by router component based on baseUrl attribute
@@ -116,15 +111,62 @@ module.exports = Page;
 
 - - -
 
+## Router
+
+* add a tag with class "js-router--page-name" in each page to load relative page module
+```html
+<div class="js-router--my-page"></div>
+```
+
+* configure your pages in scripts/config/pages.js
+* each key of Pages object corresponds to name or path/name of the page module files that must be loaded when the trigger, relative value, is present in page
+* use one page at a time
+```javascript
+var Pages = {
+	index: '.js-router--home',
+	example: '.js-router--example',
+	'test/one': '.js-router--test-one'
+};
+
+module.exports = Pages;
+```
+- - -
+
 ## SPA Framework - pushState(true)
 
-* add cd-view custom tag in your page
+#### twig views container
+
+* add c-view custom tag in your page
+
 ```html
-<cd-view></cd-view>
+<c-view></c-view>
 ```
+
+#### twig views files
+
+* create twig file for each page in views/ folder with same page's name or path/name
+
+#### pages configuration
+
+* configure your pages in scripts/config/pages.js
+* each key of Pages object corresponds to name or path/name of the page module files that must be loaded when the url pathname is equal to key, relative value is unused
+
+```javascript
+var Pages = {
+	index: '',
+	example: '',
+	'test/one': ''
+};
+
+module.exports = Pages;
+```
+
+#### page class
+
 * generic page module when pushState is set to true
 * this.content is the data model for the twig view rendered by router 
-* Page.prototype.load is called by router after that template was be rendered
+* Page.prototype.load is called by router after that the template was be rendered
+
 ```javascript
 var Page = (function (PageClass) {
 	

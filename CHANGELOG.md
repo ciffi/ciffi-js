@@ -1,3 +1,9 @@
+### v0.10.0 (2017-04-29)
+
+#### Changed twig container custom tag
+- use c-view instead cd-view
+- updated [README.md](https://github.com/ciffi/ciffi-js/blob/master/README.md)
+
 ### v0.9.10 (2017-04-28)
 
 #### Improved router and pages

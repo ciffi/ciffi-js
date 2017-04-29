@@ -76,7 +76,7 @@ var Router = (function () {
 			}
 			
 			var _template = require('../../views/' + currentRoute + '.html.twig');
-			var _section = $('cd-view');
+			var _section = $('c-view');
 			var _content = history.modules[currentRoute].content;
 			
 			_section.html(_template(_content));
