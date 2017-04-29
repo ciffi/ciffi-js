@@ -47,19 +47,25 @@ ciffi newmodule [modulename]
 ```
 #### generate javascript documentation
 - with jsdoc
+
 ```
 ciffi jsdoc
 ```
+
 #### generate css documentation
 - with sassdoc
+
 ```
 ciffi cssdoc
 ```
+
 #### generate styleguides
 - with kss
+
 ```
 ciffi styleguide
 ```
+
 - - -
 
 ## CLI COMPLETION
@@ -72,6 +78,7 @@ if [ -f /usr/local/lib/node_modules/ciffi/ciffi.bash ]; then
   . /usr/local/lib/node_modules/ciffi/ciffi.bash
 fi
 ```
+
 - - -
 
 ## WORKFLOW
@@ -93,6 +100,7 @@ in scripts/config/config.js you can configure your env variables that router com
 
 * generic page module when pushState is set to false
 * .getConfig method returns app config from scripts/config/config.js relative to your current env detected by router component based on baseUrl attribute
+
 ```javascript
 var Page = (function (PageClass) {
 	
@@ -114,6 +122,7 @@ module.exports = Page;
 ## Router
 
 * add a tag with class "js-router--page-name" in each page to load relative page module
+
 ```html
 <div class="js-router--my-page"></div>
 ```
@@ -121,6 +130,7 @@ module.exports = Page;
 * configure your pages in scripts/config/pages.js
 * each key of Pages object corresponds to name or path/name of the page module files that must be loaded when the trigger, relative value, is present in page
 * use one page at a time
+
 ```javascript
 var Pages = {
 	index: '.js-router--home',
@@ -130,6 +140,7 @@ var Pages = {
 
 module.exports = Pages;
 ```
+
 - - -
 
 ## SPA Framework - pushState(true)
