@@ -1,3 +1,10 @@
+### v0.10.1 (2017-04-30)
+
+#### Some minor fixes
+- defined default c-view style in _layout.scss
+- removed _router.scss
+- updated [README.md](https://github.com/ciffi/ciffi-js/blob/master/README.md)
+
 ### v0.10.0 (2017-04-29)
 
 #### Changed twig container custom tag

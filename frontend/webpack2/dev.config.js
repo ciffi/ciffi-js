@@ -1,5 +1,3 @@
-'use strict';
-
 /*
  *
  * replace _indexUrl variable with your development index page

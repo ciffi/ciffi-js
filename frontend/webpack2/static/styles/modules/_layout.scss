@@ -36,6 +36,10 @@ body {
     pointer-events: all !important;
     transition: visibility .4s linear 0s, opacity .4s linear 0s;
   }
+
+  c-view {
+    display: block;
+  }
 }
 
 .clear {
