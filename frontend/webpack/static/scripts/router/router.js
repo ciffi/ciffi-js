@@ -75,11 +75,13 @@ var Router = (function () {
 				history.modules[currentRoute] = new _currentPage();
 			}
 			
-			var _template = require('../../views/' + currentRoute + '.html.twig');
 			var _section = $('c-view');
 			var _content = history.modules[currentRoute].content;
 			
-			_section.html(_template(_content));
+			if (_content) {
+				var _template = require('../../views/' + currentRoute + '.html.twig');
+				_section.html(_template(_content));
+			}
 			
 			history.modules[currentRoute].load();
 		}

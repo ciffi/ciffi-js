@@ -1,3 +1,8 @@
+### v0.10.2 (2017-04-30)
+
+#### Improved spa framework and twig loader
+- updated [README.md](https://github.com/ciffi/ciffi-js/blob/master/README.md)
+
 ### v0.10.1 (2017-04-30)
 
 #### Some minor fixes

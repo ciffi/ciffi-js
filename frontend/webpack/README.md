@@ -175,7 +175,8 @@ module.exports = Pages;
 #### page class
 
 * generic page module when pushState is set to true
-* this.content is the data model for the twig view rendered by router 
+* this.content is the data model for the twig view rendered by router
+* if this.content is not specified, the twig files does not be rendered (and not request) 
 * Page.prototype.load is called by router after that the template was be rendered
 
 ```javascript
