@@ -1,3 +1,9 @@
+### v0.10.4 (2017-05-01)
+
+#### Removed dependencies for dev task
+- now parallels tasks are controlled from ciffi's core
+- updated [README.md](https://github.com/ciffi/ciffi-js/blob/master/README.md)
+
 ### v0.10.3 (2017-05-01)
 
 #### Improved spa framework

@@ -206,3 +206,7 @@ var Page = (function (PageClass) {
 
 module.exports = Page;
 ```
+
+- - -
+
+__full documentation available at [ciffi.it/ciffi-js](https://www.ciffi.it/ciffi-js)__
