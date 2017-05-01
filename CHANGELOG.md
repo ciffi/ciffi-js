@@ -1,3 +1,8 @@
+### v0.10.5 (2017-05-01)
+
+#### Removed views from dist folder
+- twig views are included in mains.js files
+
 ### v0.10.4 (2017-05-01)
 
 #### Removed dependencies for dev task
