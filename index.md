@@ -160,13 +160,14 @@ module.exports = Pages;
 #### pages configuration
 
 * configure your pages in scripts/config/pages.js
-* each key of Pages object corresponds to name or path/name of the page module files that must be loaded when the url pathname is equal to key, relative value is unused
+* Pages object define the url and the relative page module that must be loaded when url pathname is equal at least one key
 
 ```javascript
 var Pages = {
-	index: '',
-	example: '',
-	'test/one': ''
+	index: 'index',
+	example: 'example',
+	'index/alternative': 'index',
+	'test/one': 'test/one'
 };
 
 module.exports = Pages;
@@ -175,7 +176,8 @@ module.exports = Pages;
 #### page class
 
 * generic page module when pushState is set to true
-* this.content is the data model for the twig view rendered by router 
+* this.content is the data model for the twig view rendered by router
+* if this.content is not specified, the twig files does not be rendered (and not request) 
 * Page.prototype.load is called by router after that the template was be rendered
 
 ```javascript
@@ -204,3 +206,7 @@ var Page = (function (PageClass) {
 
 module.exports = Page;
 ```
+
+- - -
+
+__full documentation available at [ciffi.it/ciffi-js](https://www.ciffi.it/ciffi-js)__
