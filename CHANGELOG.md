@@ -1,3 +1,9 @@
+### v0.10.3 (2017-05-01)
+
+#### Improved spa framework
+- now you can specify one page module for multiple routes
+- updated [README.md](https://github.com/ciffi/ciffi-js/blob/master/README.md)
+
 ### v0.10.2 (2017-04-30)
 
 #### Improved spa framework and twig loader

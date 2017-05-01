@@ -71,7 +71,7 @@ var Router = (function () {
 			
 			if (history.pages.indexOf(currentRoute) < 0) {
 				history.pages.push(currentRoute);
-				var _currentPage = require('../pages/' + currentRoute)(pageClass);
+				var _currentPage = require('../pages/' + pages[currentRoute])(pageClass);
 				history.modules[currentRoute] = new _currentPage();
 			}
 			

@@ -160,13 +160,14 @@ module.exports = Pages;
 #### pages configuration
 
 * configure your pages in scripts/config/pages.js
-* each key of Pages object corresponds to name or path/name of the page module files that must be loaded when the url pathname is equal to key, relative value is a simple string that can't be empty
+* Pages object define the url and the relative page module that must be loaded when url pathname is equal at least one key
 
 ```javascript
 var Pages = {
 	index: 'index',
 	example: 'example',
-	'test/one': 'test one'
+	'index/alternative': 'index',
+	'test/one': 'test/one'
 };
 
 module.exports = Pages;
