@@ -1,3 +1,11 @@
+### v0.11.0 (2017-05-03)
+
+#### Improved Router and pages
+- added .onLoad method also to the allpages module that returns the current page
+- page has config object in their constructor
+- renamed .load in .onLoad method callable in the constructor with this.onLoad = myOnLoadFunctions;
+- updated [README.md](https://github.com/ciffi/ciffi-js/blob/master/README.md)
+
 ### v0.10.5 (2017-05-01)
 
 #### Removed views from dist folder

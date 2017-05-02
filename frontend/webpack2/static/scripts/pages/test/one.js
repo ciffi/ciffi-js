@@ -1,25 +1,22 @@
-var Page = (function (PageClass) {
+var Page = (function () {
 	
-	function Page() {
+	function Page(config) {
 		
-		this.config = PageClass.getConfig();
+		this.config = config;
+		
 		this.content = {
 			prova: [1, 2, 3, 4, 5, 6, 7, 8, 9]
 		};
 		
-		start(this.config);
+		this.onLoad = onLoad;
 		
 		return this;
 		
 	}
 	
-	function start(config) {
-		console.log('test/one page start', config);
+	function onLoad() {
+		console.log('test/one page loaded');
 	}
-	
-	Page.prototype.load = function () {
-		console.log('test/one loaded');
-	};
 	
 	return Page;
 	

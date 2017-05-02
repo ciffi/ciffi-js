@@ -1,15 +1,17 @@
-var Page = (function (PageClass) {
+var Page = (function () {
 	
-	function Page() {
+	function Page(config) {
 		
-		this.config = PageClass.getConfig();
+		this.config = config;
 		
-		start(this.config);
+		this.onLoad = onLoad;
+		
+		return this;
 		
 	}
 	
-	function start(config) {
-		console.log('all pages start', config);
+	function onLoad() {
+		console.log('all pages loaded');
 	}
 	
 	return Page;

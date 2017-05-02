@@ -4,7 +4,6 @@
 var UserConfig = require('../config/config');
 var RouterConfig = require('./router-config');
 var CONFIG = new RouterConfig(UserConfig.env);
-var PageClass = require('./page-class')(CONFIG);
 /* CONFIG */
 
 /* PAGES */
@@ -54,25 +53,26 @@ var Router = (function () {
 	
 	function onPagesLoaded(pages, currentRoute) {
 		
-		var _pageClass = new PageClass();
-		var _allPage = require('../pages/' + _ALLPAGES)(_pageClass);
-		new _allPage();
+		document.body.classList.add('app-is-ready');
+		
+		var _allPages = require('../pages/' + _ALLPAGES)();
+		new _allPages(CONFIG);
 		
 		if (pages[currentRoute]) {
-			var _currentPage = require('../pages/' + currentRoute)(_pageClass);
-			new _currentPage();
+			var _currentPage = require('../pages/' + currentRoute)();
+			new _currentPage(CONFIG);
 		}
 		
 	}
 	
-	function onPushStateChange(history, pages, currentRoute, pageClass) {
+	function onPushStateChange(history, pages, currentRoute, allPages) {
 		
 		if (pages[currentRoute]) {
 			
 			if (history.pages.indexOf(currentRoute) < 0) {
 				history.pages.push(currentRoute);
-				var _currentPage = require('../pages/' + pages[currentRoute])(pageClass);
-				history.modules[currentRoute] = new _currentPage();
+				var _currentPage = require('../pages/' + pages[currentRoute])();
+				history.modules[currentRoute] = new _currentPage(CONFIG);
 			}
 			
 			var _section = $('c-view');
@@ -83,7 +83,8 @@ var Router = (function () {
 				_section.html(_template(_content));
 			}
 			
-			history.modules[currentRoute].load();
+			history.modules[currentRoute].onLoad();
+			allPages.onLoad(pages[currentRoute]);
 		}
 	}
 	
@@ -97,10 +98,11 @@ var Router = (function () {
 		
 		if (val) {
 			
-			var _pageClass = new PageClass();
-			var _allPage = require('../pages/' + _ALLPAGES)(_pageClass);
+			document.body.classList.add('app-is-ready');
 			
-			new _allPage();
+			var _allPages = require('../pages/' + _ALLPAGES)(CONFIG);
+			
+			var _allPagesClass = new _allPages(CONFIG);
 			
 			this.isPushStateEnabled = PushState.checkSupport();
 			
@@ -108,7 +110,7 @@ var Router = (function () {
 				PushState.watcher(this.pages, $.proxy(function (data) {
 					var _routes = this.pages;
 					var _currentRoute = data.url;
-					onPushStateChange(this.history, _routes, _currentRoute, _pageClass, _allPage);
+					onPushStateChange(this.history, _routes, _currentRoute, _allPagesClass);
 				}, this));
 			}
 			
