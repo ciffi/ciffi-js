@@ -54,11 +54,11 @@ var Router = (function () {
 		document.body.classList.add('app-is-ready');
 		
 		var _allPages = require('../pages/' + _ALLPAGES)();
-		new _allPages(CONFIG);
+		new _allPages(CONFIG).onLoad(currentRoute);
 		
 		if (pages[currentRoute]) {
 			var _currentPage = require('../pages/' + currentRoute)();
-			new _currentPage(CONFIG);
+			new _currentPage(CONFIG).onLoad();
 		}
 		
 	}
