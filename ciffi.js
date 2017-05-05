@@ -72,7 +72,7 @@ function start(modulePath) {
 				require('./command/app-build');
 				break;
 			case 'build-prod':
-				console.log(chalk.red.bold('Sorry, but dev-unit task is still not available'));
+				console.log(chalk.red.bold('Sorry, but build-prod task is still not available'));
 				//require('./command/app-build-prod');
 				break;
 			case 'dev-unit':
@@ -91,19 +91,19 @@ function start(modulePath) {
 				require('./command/app-test').e2e(_args);
 				break;
 			case 'newpage':
-				var Page = require('./command/app-newpage')((modulePath));
+				var Page = require('./command/app-newpage')(modulePath);
 				new Page({
 					pageName: projectName
 				});
 				break;
 			case 'newmodule':
-				var Module = require('./command/app-newmodule')((modulePath));
+				var Module = require('./command/app-newmodule')(modulePath);
 				new Module({
 					moduleName: projectName
 				});
 				break;
 			case 'newcomponent':
-				var Component = require('./command/app-newcomponent')((modulePath));
+				var Component = require('./command/app-newcomponent')(modulePath);
 				new Component({
 					componentName: projectName
 				});
