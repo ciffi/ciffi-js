@@ -1,3 +1,9 @@
+### v0.11.1 (2017-05-06)
+
+#### Improved setup process
+- fixed setup if yarn is not installed
+- fixed setup for node 6.x and 7.x
+
 ### v0.11.0 (2017-05-03)
 
 #### Improved Router and pages
