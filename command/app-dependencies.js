@@ -49,7 +49,8 @@ var AppDependencies = (function () {
 					}
 					break;
 				case 127 :
-					Loading.stop('Download and install ' + chalk.blue('dependencies') + _processError + chalk.red.bold(' FAIL'));
+					var _error = _processError || 'yarn';
+					Loading.stop('Download and install ' + chalk.blue('dependencies') + _error + chalk.red.bold(' FAIL'));
 					console.log('');
 					if (failCallback && typeof failCallback === 'function') {
 						failCallback();
