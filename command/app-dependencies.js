@@ -22,21 +22,17 @@ var AppDependencies = (function () {
 		process.stdout.on('data', function (res) {
 			if (res.indexOf('command not found') >= 0) {
 				console.log(res);
-			} else {
-				//console.log(res);
 			}
 		});
 		
 		process.stderr.on('data', function (res) {
-			if (res.indexOf('command not found') >= 0) {
-				console.log(res);
-				_processError = ' - ' + chalk.red.bold(res.split(': ')[1]) + chalk.red(' not found') + ' - ';
-			} else {
-				switch (res) {
-					case ' ':
-						break;
-					default:
-				}
+			switch (res) {
+				case ' ':
+					break;
+				default:
+					if (res.indexOf('command not found') >= 0) {
+						_processError = ' - ' + chalk.red.bold(res.split(': ')[1]) + chalk.red(' not found') + ' - ';
+					}
 			}
 		});
 		
@@ -50,7 +46,7 @@ var AppDependencies = (function () {
 					}
 					break;
 				case 127 :
-					var _error = _processError || 'yarn';
+					var _error = _processError || ' - ' + chalk.red.bold(' yarn') + chalk.red(' not found') + ' - ';
 					Loading.stop('Download and install ' + chalk.blue('dependencies') + _error + chalk.red.bold(' FAIL'));
 					console.log('');
 					if (failCallback && typeof failCallback === 'function') {
