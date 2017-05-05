@@ -39,11 +39,13 @@ var AppDependencies = (function () {
 		process.on('close', function (res) {
 			switch (res) {
 				case 0 :
-					Loading.stop('Download and install ' + chalk.blue('dependencies') + chalk.green.bold(' OK'));
-					console.log('');
-					if (successCallback && typeof successCallback === 'function') {
-						successCallback();
-					}
+					onDownloadEnd(successCallback);
+					break;
+				case 'null' :
+					onDownloadEnd(successCallback);
+					break;
+				case null :
+					onDownloadEnd(successCallback);
 					break;
 				case 127 :
 					var _error = _processError || ' - ' + chalk.red.bold(' yarn') + chalk.red(' not found') + ' - ';
@@ -57,6 +59,14 @@ var AppDependencies = (function () {
 					console.log('exit -- ' + res);
 			}
 		});
+	}
+	
+	function onDownloadEnd(successCallback) {
+		Loading.stop('Download and install ' + chalk.blue('dependencies') + chalk.green.bold(' OK'));
+		console.log('');
+		if (successCallback && typeof successCallback === 'function') {
+			successCallback();
+		}
 	}
 	
 	return new AppDependencies();
