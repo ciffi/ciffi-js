@@ -29,6 +29,7 @@ var AppDependencies = (function () {
 		
 		process.stderr.on('data', function (res) {
 			if (res.indexOf('command not found') >= 0) {
+				console.log(res);
 				_processError = ' - ' + chalk.red.bold(res.split(': ')[1]) + chalk.red(' not found') + ' - ';
 			} else {
 				switch (res) {
