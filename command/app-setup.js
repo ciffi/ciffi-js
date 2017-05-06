@@ -1,12 +1,17 @@
 var chalk = require('chalk');
 var inquirer = require('inquirer');
 var replace = require('replace-in-file');
-var emptydir = require('empty-dir');
+var emptyDir = require('empty-dir');
 var cliCursor = require('cli-cursor');
 var shell = require('shelljs');
 var Loading = require('./loading');
 
 var AppSetup = (function (modulePath) {
+	
+	var _CONFIG = {
+		ciffiSrc: '.ciffi/src',
+		ciffiSrcName: 'src'
+	};
 	
 	function AppSetup(config) {
 		
@@ -71,7 +76,7 @@ var AppSetup = (function (modulePath) {
 		var _pathName = config.split('/')[config.split('/').length - 1];
 		replace({
 			files: [
-				process.env.PWD + '/.ciffi/static/scripts/config/config.js',
+				process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/config.js',
 				process.env.PWD + '/.ciffi/dev.config.js',
 				process.env.PWD + '/.ciffi/build.config.js',
 				process.env.PWD + '/.ciffi/package.json'
@@ -84,7 +89,7 @@ var AppSetup = (function (modulePath) {
 			}
 			
 			var _files = [
-				process.env.PWD + '/.ciffi/static/scripts/config/config.js',
+				process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/config.js',
 				process.env.PWD + '/.ciffi/dev.config.js',
 				process.env.PWD + '/.ciffi/build.config.js',
 				process.env.PWD + '/.ciffi/package.json'
@@ -92,14 +97,14 @@ var AppSetup = (function (modulePath) {
 			
 			if (!isNewVersion) {
 				_files.push(
-					process.env.PWD + '/.ciffi/static/scripts/styles.js',
+					process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/styles.js',
 					process.env.PWD + '/.ciffi/serve.config.js'
 				)
 			}
 			replace({
 				files: _files,
 				replace: /@REPLACE__ASSETS__NAME@/g,
-				with: _pathName
+				with: _CONFIG.ciffiSrcName
 			}, function (error) {
 				if (error) {
 					return console.error('Error occurred:', error);
@@ -112,7 +117,7 @@ var AppSetup = (function (modulePath) {
 	function replaceConfig(config, callback) {
 		replace({
 			files: [
-				process.env.PWD + '/.ciffi/static/scripts/config/config.js',
+				process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/config.js',
 				process.env.PWD + '/.ciffi/dev.config.js'
 			],
 			replace: /@REPLACE__CONFIG@/g,
@@ -173,8 +178,8 @@ var AppSetup = (function (modulePath) {
 					
 					var _pathName = _fixedAssetsUrl.split('/')[_fixedAssetsUrl.split('/').length - 1];
 					
-					if (_pathName != 'static') {
-						shell.mv(process.env.PWD + '/.ciffi/static/', process.env.PWD + '/.ciffi/' + _pathName + '/');
+					if (_pathName !== 'src') {
+						shell.mv(process.env.PWD + '/' + _CONFIG.ciffiSrc + '/', process.env.PWD + '/.ciffi/' + _CONFIG.ciffiSrc + '/');
 					}
 					
 					Loading.stop('Generate project tree for ' + chalk.blue(config.projectName) + chalk.green.bold(' OK'));
@@ -197,7 +202,7 @@ var AppSetup = (function (modulePath) {
 	
 	function beforeStart(config, callback) {
 		
-		emptydir(process.env.PWD + '/', filter, function (err, result) {
+		emptyDir(process.env.PWD + '/', filter, function (err, result) {
 			if (err) {
 				console.log(err);
 			} else {

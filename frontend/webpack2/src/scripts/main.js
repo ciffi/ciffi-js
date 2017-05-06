@@ -5,4 +5,4 @@ require('fastclick').attach(document.body);
 require('./components/device');
 
 // router
-require('./router/router').pushState(false);
+require('ciffi-js-router').pushState(false);

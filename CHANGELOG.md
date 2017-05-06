@@ -1,3 +1,12 @@
+### v0.12.0 (2017-05-06)
+
+#### New ciffi-js-router component
+- added [ciffi-js-router](https://www.npmjs.com/package/ciffi-js-router) as default dependencies
+- removed router folder from project
+
+#### New source folder
+- now source files are located in src/ folder - __do not rename it__
+
 ### v0.11.1 (2017-05-06)
 
 #### Improved setup process

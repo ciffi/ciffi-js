@@ -20,7 +20,7 @@ var CreateSettingsFile = (function (config, modulePath) {
 	}
 	
 	function replaceBuildPath(config, file, callback) {
-		var _pathName = config.split('/')[config.split('/').length - 1];
+		//var _pathName = config.split('/')[config.split('/').length - 1];
 		replace({
 			files: [file],
 			replace: /@REPLACE__ASSETS@/g,
@@ -32,7 +32,7 @@ var CreateSettingsFile = (function (config, modulePath) {
 			replace({
 				files: [file],
 				replace: /@REPLACE__ASSETS__NAME@/g,
-				with: _pathName
+				with: 'src'
 			}, function (error) {
 				if (error) {
 					return console.error('Error occurred:', error);

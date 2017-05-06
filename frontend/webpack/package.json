@@ -55,6 +55,7 @@
   },
   "dependencies": {
     "breakpoint-sass": "^2.7.0",
+    "ciffi-js-router": "^0.1.0",
     "fastclick": "^1.0.6",
     "jquery": "^3.1.0",
     "reset-css": "^2.2.0"

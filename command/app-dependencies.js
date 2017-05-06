@@ -41,6 +41,9 @@ var AppDependencies = (function () {
 				case 0 :
 					onDownloadEnd(successCallback);
 					break;
+				case 1 :
+					onDownloadEnd(successCallback);
+					break;
 				case 'null' :
 					onDownloadEnd(successCallback);
 					break;
