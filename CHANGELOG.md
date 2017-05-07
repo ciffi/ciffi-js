@@ -1,3 +1,9 @@
+### v0.13.0 (2017-05-07)
+
+#### Improved base projects
+- updated [ciffi-js-router](https://www.npmjs.com/package/ciffi-js-router) dependencies to 0.2.0
+- rewritten pages.js for easy trigger/module definition
+
 ### v0.12.0 (2017-05-06)
 
 #### New ciffi-js-router component

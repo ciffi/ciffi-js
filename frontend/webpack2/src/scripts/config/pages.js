@@ -1,7 +1,7 @@
 var Pages = {
-	index: '.js-router--home',
-	example: '.js-router--example',
-	'test/one': '.js-router--test-one'
+	'.js-router--home': 'index',
+	'.js-router--example': 'example',
+	'.js-router--test-one': 'test/one'
 };
 
 module.exports = Pages;
