@@ -17,24 +17,39 @@ var AppSetup = (function (modulePath) {
 		
 		beforeStart(config, function (config) {
 			
-			inquirer.prompt({
-				type: 'list',
-				name: 'version',
-				message: 'What webpack version do you want to use for this project?',
-				default: 'webpack2',
-				choices: ['webpack', 'webpack2'],
-			}).then(function (res) {
-				var _isNewVersion = res.version === 'webpack2';
-				require('./tempApp')(_isNewVersion, modulePath, function () {
-					config.bundle = res.version;
-					config.isNewVersion = _isNewVersion;
+			askForBuildPath(function (buildPath) {
+				
+				askForBundle(function (version) {
 					
-					start(config);
+					var _isNewVersion = version === 'webpack2';
+					
+					require('./tempApp')(_isNewVersion, modulePath, function () {
+						
+						config.bundle = version;
+						config.isNewVersion = _isNewVersion;
+						
+						start(config, buildPath);
+						
+					});
+					
 				});
+				
 			});
 			
 		});
 		
+	}
+	
+	function askForBundle(callback) {
+		inquirer.prompt({
+			type: 'list',
+			name: 'version',
+			message: 'What webpack version do you want to use for this project?',
+			default: 'webpack2',
+			choices: ['webpack', 'webpack2'],
+		}).then(function (res) {
+			callback(res.version);
+		});
 	}
 	
 	function askForProjectName(config, callback) {
@@ -73,7 +88,6 @@ var AppSetup = (function (modulePath) {
 	
 	function replaceBuildPath(config, isNewVersion, callback) {
 		
-		var _pathName = config.split('/')[config.split('/').length - 1];
 		replace({
 			files: [
 				process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/config.js',
@@ -134,7 +148,47 @@ var AppSetup = (function (modulePath) {
 		return !/(^|\/)\.[^\/\.]/g.test(filepath);
 	}
 	
-	function start(config) {
+	function start(config, res) {
+		var _fixedAssetsUrl = res.buildPath;
+		
+		if (_fixedAssetsUrl.substring(_fixedAssetsUrl.length - 1, _fixedAssetsUrl.length) === '/') {
+			_fixedAssetsUrl = _fixedAssetsUrl.substring(0, _fixedAssetsUrl.length - 1)
+		}
+		
+		replaceBuildPath(_fixedAssetsUrl, config.isNewVersion, function () {
+			
+			cliCursor.hide();
+			
+			console.log('');
+			
+			Loading.start('Generate project tree for ' + chalk.blue(config.projectName));
+			
+			replaceConfig(config.projectName, function () {
+				
+				var _pathName = _fixedAssetsUrl.split('/')[_fixedAssetsUrl.split('/').length - 1];
+				
+				if (_pathName !== 'src') {
+					shell.mv(process.env.PWD + '/' + _CONFIG.ciffiSrc + '/', process.env.PWD + '/.ciffi/' + _CONFIG.ciffiSrc + '/');
+				}
+				
+				Loading.stop('Generate project tree for ' + chalk.blue(config.projectName) + chalk.green.bold(' OK'));
+				
+				require('./app-sethiddenfile')(config.isNewVersion, modulePath);
+				require('./app-createsettings')({
+					projectName: config.projectName,
+					assetsPath: _fixedAssetsUrl,
+					pathName: _pathName,
+					bundle: config.bundle,
+					isNewVersion: config.isNewVersion
+				}, modulePath);
+				
+				require('./moveApp');
+				
+			});
+		});
+	}
+	
+	function askForBuildPath(callback) {
 		
 		inquirer.prompt({
 			type: 'input',
@@ -160,43 +214,7 @@ var AppSetup = (function (modulePath) {
 				}, 10);
 			}
 		}).then(function (res) {
-			var _fixedAssetsUrl = res.buildPath;
-			
-			if (_fixedAssetsUrl.substring(_fixedAssetsUrl.length - 1, _fixedAssetsUrl.length) === '/') {
-				_fixedAssetsUrl = _fixedAssetsUrl.substring(0, _fixedAssetsUrl.length - 1)
-			}
-			
-			replaceBuildPath(_fixedAssetsUrl, config.isNewVersion, function () {
-				
-				cliCursor.hide();
-				
-				console.log('');
-				
-				Loading.start('Generate project tree for ' + chalk.blue(config.projectName));
-				
-				replaceConfig(config.projectName, function () {
-					
-					var _pathName = _fixedAssetsUrl.split('/')[_fixedAssetsUrl.split('/').length - 1];
-					
-					if (_pathName !== 'src') {
-						shell.mv(process.env.PWD + '/' + _CONFIG.ciffiSrc + '/', process.env.PWD + '/.ciffi/' + _CONFIG.ciffiSrc + '/');
-					}
-					
-					Loading.stop('Generate project tree for ' + chalk.blue(config.projectName) + chalk.green.bold(' OK'));
-					
-					require('./app-sethiddenfile')(config.isNewVersion, modulePath);
-					require('./app-createsettings')({
-						projectName: config.projectName,
-						assetsPath: _fixedAssetsUrl,
-						pathName: _pathName,
-						bundle: config.bundle,
-						isNewVersion: config.isNewVersion
-					}, modulePath);
-					
-					require('./moveApp');
-					
-				});
-			});
+			callback(res);
 		});
 	}
 	

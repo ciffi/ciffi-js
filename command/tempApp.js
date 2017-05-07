@@ -11,7 +11,7 @@ var TempApp = (function (isNewVersion, modulePath, callback) {
 	};
 	
 	function TempApp() {
-		var _modulePath = modulePath + '/lib/node_modules/ciffi/frontend/' + _CONFIG.frontendPath + '/*';
+		var _modulePath = modulePath + '/lib/node_modules/ciffi/node_modules/ciffi-js-' + _CONFIG.frontendPath + '/frontend/*';
 		var _tempPath = process.env.PWD + '/.ciffi/';
 		
 		pathExists(_tempPath).then(function (res) {

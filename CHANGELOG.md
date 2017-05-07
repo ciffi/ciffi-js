@@ -1,3 +1,9 @@
+### v0.14.0 (2017-05-07)
+
+#### Improved setup and core
+- base resources are now npm packages
+- removed base projects and core folder from ciffi
+
 ### v0.13.0 (2017-05-07)
 
 #### Improved base projects

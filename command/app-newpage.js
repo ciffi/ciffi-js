@@ -37,7 +37,7 @@ var NewPage = (function (modulePath) {
 		var _fullName = pageName + '.js';
 		var _pathName = _fullName.replace(_fileName, '');
 		var _tempFileJs = _tempPath + _fileName;
-		var _resourceJs = modulePath + '/lib/node_modules/ciffi/resources/' + ASSETSBUNDLE + '/newpage/page.js';
+		var _resourceJs = modulePath + '/lib/node_modules/ciffi/node_modules/ciffi-js-' + ASSETSBUNDLE + '/resources/newpage/page.js';
 		var _projectPagesJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/pages/' + _pathName;
 		var _projectFileJs = _projectPagesJs + _fileName;
 		

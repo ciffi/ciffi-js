@@ -35,7 +35,7 @@ var NewModule = (function (modulePath) {
 		}
 		
 		var _tempFileJs = _tempPath + moduleName + '.js';
-		var _resourceJs = modulePath + '/lib/node_modules/ciffi/resources/' + ASSETSBUNDLE + '/newmodule/module.js';
+		var _resourceJs = modulePath + '/lib/node_modules/ciffi/node_modules/ciffi-js-' + ASSETSBUNDLE + '/resources/newmodule/module.js';
 		var _projectModules = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/modules/';
 		var _projectFileJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/modules/' + moduleName + '.js';
 		

@@ -1,6 +1,6 @@
 {
   "name": "ciffi",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "description": "Ciffi Frontend Generator",
   "main": "ciffi.js",
   "repository": {
@@ -42,6 +42,8 @@
     "chalk": "^1.1.3",
     "cli-cursor": "^1.0.2",
     "cli-spinners": "^1.0.0",
+    "ciffi-js-webpack": "^0.1.0",
+    "ciffi-js-webpack2": "^0.1.0",
     "empty-dir": "^0.2.0",
     "file-exists": "^1.0.0",
     "foreach": "^2.0.5",

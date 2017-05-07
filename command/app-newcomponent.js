@@ -34,7 +34,7 @@ var NewComponent = (function (modulePath) {
 		}
 		
 		var _tempFileJs = _tempPath + componentName + '.js';
-		var _resourceJs = modulePath + '/lib/node_modules/ciffi/resources/' + ASSETSBUNDLE + '/newcomponent/component.js';
+		var _resourceJs = modulePath + '/lib/node_modules/ciffi/node_modules/ciffi-js-' + ASSETSBUNDLE + '/resources/newcomponent/component.js';
 		var _projectComponents = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/components/';
 		var _projectFileJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/components/' + componentName + '.js';
 		

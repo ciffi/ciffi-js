@@ -79,7 +79,7 @@ var CreateSettingsFile = (function (config, modulePath) {
 		});
 		
 		var _tempFile = _tempPath + fileName;
-		var _resource = modulePath + '/lib/node_modules/ciffi/resources/' + _CONFIG.bundle + '/core/' + fileName;
+		var _resource = modulePath + '/lib/node_modules/ciffi/node_modules/ciffi-js-' + _CONFIG.bundle + '/resources/core/' + fileName;
 		var _projectRoot = process.env.PWD + '/';
 		var _projectFile = process.env.PWD + '/.' + fileName;
 		
