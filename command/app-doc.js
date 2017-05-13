@@ -30,9 +30,9 @@ var Doc = (function () {
 		var _copyVideos = './node_modules/copyfiles/copyfiles -u 1 \'' + _assetPathName + '/videos/**/*.*\' ' + _assetPath + '/';
 		var _assets = _copyImages + _concat + _copyFonts + _concat + _copyPdf + _concat + _copyVideos;
 		var _build = _cleanDist + _concat + _styles + _concat + _js + _concat + _assets;
-		var _jsdoc = './node_modules/.bin/jsdoc static/scripts/components -d ' + replaceBuildPath(_assetPath, 'jsdoc');
-		var _cssdoc = './node_modules/.bin/sassdoc static/styles -d ' + replaceBuildPath(_assetPath, 'cssdoc');
-		var _styleguide = './node_modules/.bin/kss --source ./' + _assetPathName + '/styles/ --destination ' + replaceBuildPath(_assetPath, 'styleguide') + ' --css ..' + _assetPathName + '/main.css --js ../' + _assetPathName + '/main.js';
+		var _jsdoc = './node_modules/.bin/jsdoc ' + _assetPathName + '/scripts/components -d ' + replaceBuildPath(_assetPath, 'jsdoc');
+		var _cssdoc = './node_modules/.bin/sassdoc ' + _assetPathName + '/styles -d ' + replaceBuildPath(_assetPath, 'cssdoc');
+		var _styleguide = './node_modules/.bin/kss --source ./' + _assetPathName + '/styles/ --destination ' + replaceBuildPath(_assetPath, 'styleguide') + ' --css ../' + _assetPathName + '/main.css --js ../' + _assetPathName + '/main.js';
 		this.process = {
 			jsdoc: _js + _concat + 'rm -rf ' + replaceBuildPath(_assetPath, 'jsdoc') + _concat + _jsdoc,
 			cssdoc: _assets + _concat + 'rm -rf ' + replaceBuildPath(_assetPath, 'cssdoc') + _concat + _cssdoc,

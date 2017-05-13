@@ -1,3 +1,8 @@
+### v0.14.1 (2017-05-13)
+
+#### Fixed documentations tasks
+- fixed source path
+
 ### v0.14.0 (2017-05-07)
 
 #### Improved setup and core
