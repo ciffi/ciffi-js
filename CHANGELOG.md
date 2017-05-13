@@ -1,3 +1,8 @@
+### v0.14.2 (2017-05-13)
+
+#### Updated base projects dependencies
+- now includes ciffi base projects v0.3.0
+
 ### v0.14.1 (2017-05-13)
 
 #### Fixed documentations tasks
