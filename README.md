@@ -6,6 +6,7 @@
 [![npm-version][npm-version]][npm-url]
 [![npm-month][npm-month]][npm-url]
 [![npm-total][npm-total]][npm-url]
+[![Build Status](https://travis-ci.org/ciffi/ciffi-js.svg?branch=master)](https://travis-ci.org/ciffi/ciffi-js)
 [![Join the chat at https://gitter.im/ciffi-js/Lobby](https://badges.gitter.im/ciffi-js/Lobby.svg)](https://gitter.im/ciffi-js/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # Ciffi Frontend Generator #
