@@ -1,3 +1,8 @@
+### v0.15.0 (2017-05-16)
+
+#### Fixed build task
+- fixed clean-css task
+
 ### v0.14.2 (2017-05-13)
 
 #### Updated base projects dependencies
