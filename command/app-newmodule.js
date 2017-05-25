@@ -51,7 +51,14 @@ var NewModule = (function (modulePath) {
 						console.log(chalk.green('New file created: ' + _projectFileJs));
 					});
 				} else {
-					console.log(chalk.red('☠️  Modules path does not exists: ' + _projectModuless + ' ☠️'));
+					shell.mkdir(_projectModules);
+					console.log(chalk.green('New folder created: ' + _projectModules));
+					shell.cp(_resourceJs, _tempFileJs);
+					replaceModuleName(_tempFileJs, moduleName, function () {
+						shell.cp(_tempFileJs, _projectFileJs);
+						shell.rm('-rf', _tempFileJs);
+						console.log(chalk.green('New file created: ' + _projectFileJs));
+					});
 				}
 			});
 		}

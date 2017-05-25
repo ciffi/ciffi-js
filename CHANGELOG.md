@@ -1,3 +1,8 @@
+### v0.15.2 (2017-05-25)
+
+#### Improved new component and newmodule tasks
+- now create folder if does not exits
+
 ### v0.15.1 (2017-05-16)
 
 #### Fixed dev task

@@ -50,7 +50,14 @@ var NewComponent = (function (modulePath) {
 						console.log(chalk.green('New file created: ' + _projectFileJs));
 					});
 				} else {
-					console.log(chalk.red('☠️  Components path does not exists: ' + _projectComponents + ' ☠️'));
+					shell.mkdir(_projectComponents);
+					console.log(chalk.green('New folder created: ' + _projectComponents));
+					shell.cp(_resourceJs, _tempFileJs);
+					replaceComponentName(_tempFileJs, componentName, function () {
+						shell.cp(_tempFileJs, _projectFileJs);
+						shell.rm('-rf', _tempFileJs);
+						console.log(chalk.green('New file created: ' + _projectFileJs));
+					});
 				}
 			});
 		}
