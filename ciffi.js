@@ -71,6 +71,9 @@ function start(modulePath) {
 			case 'build':
 				require('./command/app-build');
 				break;
+			case 'build-es6':
+				require('./command/app-build-es6');
+				break;
 			case 'build-prod':
 				console.log(chalk.red.bold('Sorry, but build-prod task is still not available'));
 				//require('./command/app-build-prod');
