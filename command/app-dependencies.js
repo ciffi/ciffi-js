@@ -7,10 +7,11 @@ var AppDependencies = (function () {
 	function AppDependencies() {
 		
 		this.download = function (callback) {
-			addProcessListeners(exec('yarn'), callback, function () {
-				console.log('👀 ' + chalk.blue(' try npm'));
-				addProcessListeners(exec('npm install'), callback);
-			});
+			addProcessListeners(exec('npm install'), callback);
+			// addProcessListeners(exec('yarn'), callback, function () {
+			// 	console.log('👀 ' + chalk.blue(' try npm'));
+			//
+			// });
 		}
 		
 	}

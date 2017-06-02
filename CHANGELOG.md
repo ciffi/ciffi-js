@@ -1,3 +1,8 @@
+### v0.15.4 (2017-06-02)
+
+#### Removed yarn for setup project dependencies
+- use npm@~5.0.0 or npm@latest
+
 ### v0.15.2 (2017-05-25)
 
 #### Improved new component and newmodule tasks

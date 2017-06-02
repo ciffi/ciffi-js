@@ -5,6 +5,7 @@ var emptyDir = require('empty-dir');
 var cliCursor = require('cli-cursor');
 var shell = require('shelljs');
 var Loading = require('./loading');
+var exec = require('child_process').exec;
 
 var AppSetup = (function (modulePath) {
 	
@@ -218,28 +219,51 @@ var AppSetup = (function (modulePath) {
 		});
 	}
 	
+	function testNpm5(callback) {
+		var _process = exec('npm -v');
+		var _result;
+		_process.stdout.on('data', function (res) {
+			_result = parseInt(res.split('.')[0]) >= 5;
+		});
+		
+		_process.stderr.on('data', function () {
+			_result = false;
+		});
+		
+		_process.on('close', function () {
+			if (_result) {
+				callback(_result);
+			} else {
+				console.log(chalk.red.bold('☠️ Setup error: ') + chalk.red('npm@5.0.0 is required ☠️'));
+				console.log(chalk.blue.bold('update with: ') + chalk.blue('npm install -g npm@latest'));
+			}
+		});
+	}
+	
 	function beforeStart(config, callback) {
 		
-		emptyDir(process.env.PWD + '/', filter, function (err, result) {
-			if (err) {
-				console.log(err);
-			} else {
-				
-				console.log('');
-				console.log('');
-				console.log(chalk.green.bold('-- Ciffi Frontend Generator --'));
-				console.log('');
-				
-				if (result) {
-					askForProjectName(config, function (config) {
-						callback(config);
-					});
-					
+		testNpm5(function () {
+			emptyDir(process.env.PWD + '/', filter, function (err, result) {
+				if (err) {
+					console.log(err);
 				} else {
-					console.log(chalk.red.bold('☠️  Project setup failed:') + ' ' + chalk.blue('the path must be empty ☠️'));
+					
 					console.log('');
+					console.log('');
+					console.log(chalk.green.bold('-- Ciffi Frontend Generator --'));
+					console.log('');
+					
+					if (result) {
+						askForProjectName(config, function (config) {
+							callback(config);
+						});
+						
+					} else {
+						console.log(chalk.red.bold('☠️  Project setup failed:') + ' ' + chalk.blue('the path must be empty ☠️'));
+						console.log('');
+					}
 				}
-			}
+			});
 		});
 		
 	}
