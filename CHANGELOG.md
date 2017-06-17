@@ -1,3 +1,8 @@
+### v0.15.5 (2017-06-17)
+
+#### New assets task
+- improved development workflow with ciffi assets task
+
 ### v0.15.4 (2017-06-02)
 
 #### Removed yarn for setup project dependencies

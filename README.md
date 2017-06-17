@@ -68,6 +68,13 @@ ciffi cssdoc
 ciffi styleguide
 ```
 
+#### copy assets
+- defined in .ciffisettings file
+
+```
+ciffi assets
+```
+
 - - -
 
 ## CLI COMPLETION
@@ -88,9 +95,10 @@ fi
 1. create folder (I usually use frontend in the root of project), then browse inside it and run setup task
 2. project name is the name of your development host (if host is myapp.local your project name is myapp)
 3. answer the setup process questions
-4. link main.css and main.js to your project
-5. run dev task and start to write code
-6. run build task and you are ready to deploy
+4. finish project's configuration by edit the .ciffisetting file 
+5. link main.css and main.js to your project
+6. run dev task and start to write code
+7. run build task and you are ready to deploy
 
 - - -
 

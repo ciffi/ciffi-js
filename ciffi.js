@@ -120,6 +120,9 @@ function start(modulePath) {
 			case 'styleguide':
 				require('./command/app-doc').styleguide();
 				break;
+			case 'assets':
+				require('./command/app-assets');
+				break;
 			default:
 				showCommandErrorMessage();
 				break;

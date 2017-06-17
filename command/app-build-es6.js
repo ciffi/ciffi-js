@@ -26,11 +26,7 @@ var Build = (function () {
 		var _cleancss = './node_modules/.bin/cleancss -o ' + _assetPath + '/main.css ' + _assetPath + '/main.css'
 		var _styles = _css + _concat + _autoprefixer + _concat + _cleancss;
 		var _js = './node_modules/.bin/webpack --config build.config.js --progress';
-		var _copyImages = './node_modules/.bin/copyfiles -u 1 \'' + _assetPathName + '/images/**/*.*\' ' + _assetPath + '/';
-		var _copyFonts = './node_modules/.bin/copyfiles -u 1 \'' + _assetPathName + '/fonts/**/*.*\' ' + _assetPath + '/';
-		var _copyPdf = './node_modules/.bin/copyfiles -u 1 \'' + _assetPathName + '/pdf/**/*.*\' ' + _assetPath + '/';
-		var _copyVideos = './node_modules/.bin/copyfiles -u 1 \'' + _assetPathName + '/videos/**/*.*\' ' + _assetPath + '/';
-		var _assets = _copyImages + _concat + _copyFonts + _concat + _copyPdf + _concat + _copyVideos;
+		var _assets = 'ciffi assets';
 		var _process = exec(_cleanDist + _concat + _styles + _concat + _js + _concat + _assets);
 		
 		_process.stdout.on('data', function (res) {
