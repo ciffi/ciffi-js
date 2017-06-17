@@ -19,7 +19,7 @@ var Assets = (function () {
 		
 		var _staticFolders = _CONFIG.staticFolders;
 		
-		if (_staticFolders.length) {
+		if (_staticFolders && _staticFolders.length) {
 			
 			var _process = exec(getAssets());
 			
