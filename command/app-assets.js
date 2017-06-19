@@ -46,21 +46,15 @@ var Assets = (function () {
 			var _staticFolders = _CONFIG.staticFolders;
 			var _assetPath = _CONFIG.assetsPath;
 			var _assetPathName = _CONFIG.assetsPathName;
-			var _default = ['images', 'videos', 'pdf', 'fonts'];
+			var _pathsArray = _staticFolders && _staticFolders.length ? _staticFolders : ['images', 'videos', 'pdf', 'fonts'];
 			var _temp = '';
 			var _results = '';
 			
-			if (_staticFolders && _staticFolders.length) {
-				for (var i = 0; i < _staticFolders.length; i++) {
-					_temp += '\'' + _assetPathName + '/' + _staticFolders[i] + '/**/*.*\' ';
-				}
-				
-				_results = './node_modules/.bin/copyfiles -u 1 ' + _temp + _assetPath + '/';
-				
-			} else {
-				
-				_results = _default;
+			for (var i = 0; i < _pathsArray.length; i++) {
+				_temp += '\'' + _assetPathName + '/' + _pathsArray[i] + '/**/*.*\' ';
 			}
+			
+			_results = './node_modules/.bin/copyfiles -u 1 ' + _temp + _assetPath + '/';
 			
 			return _results;
 		}

@@ -1,3 +1,8 @@
+### v0.15.8 (2017-06-18)
+
+#### Fixed assets task
+- fixed assets tasks for old projects
+
 ### v0.15.7 (2017-06-17)
 
 #### Fixed assets task
