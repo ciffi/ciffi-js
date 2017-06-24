@@ -20,18 +20,14 @@ var AppSetup = (function (modulePath) {
 			
 			askForBuildPath(function (buildPath) {
 				
-				askForBundle(function (version) {
+				var _isNewVersion = true;
+				
+				require('./tempApp')(_isNewVersion, modulePath, function () {
 					
-					var _isNewVersion = version === 'webpack2';
+					config.bundle = 'webpack3';
+					config.isNewVersion = _isNewVersion;
 					
-					require('./tempApp')(_isNewVersion, modulePath, function () {
-						
-						config.bundle = version;
-						config.isNewVersion = _isNewVersion;
-						
-						start(config, buildPath);
-						
-					});
+					start(config, buildPath);
 					
 				});
 				
@@ -41,7 +37,7 @@ var AppSetup = (function (modulePath) {
 		
 	}
 	
-	function askForBundle(callback) {
+	/*function askForBundle(callback) {
 		inquirer.prompt({
 			type: 'list',
 			name: 'version',
@@ -51,7 +47,7 @@ var AppSetup = (function (modulePath) {
 		}).then(function (res) {
 			callback(res.version);
 		});
-	}
+	}*/
 	
 	function askForProjectName(config, callback) {
 		var _projectName = config.projectName;

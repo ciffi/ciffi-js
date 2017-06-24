@@ -7,7 +7,7 @@ var TempApp = (function (isNewVersion, modulePath, callback) {
 	var _CONFIG = {
 		isNewVersion: isNewVersion,
 		callback: callback,
-		frontendPath: isNewVersion ? 'webpack2' : 'webpack'
+		frontendPath: 'webpack'
 	};
 	
 	function TempApp() {

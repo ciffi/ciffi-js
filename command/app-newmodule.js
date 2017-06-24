@@ -30,7 +30,7 @@ var NewModule = (function (modulePath) {
 			
 			var _appConfig = require(_configFile);
 			ASSETSPATHNAME = _appConfig.assetsPathName;
-			ASSETSBUNDLE = _appConfig.bundle || ASSETSBUNDLE;
+			//ASSETSBUNDLE = _appConfig.bundle || ASSETSBUNDLE;
 			
 		}
 		

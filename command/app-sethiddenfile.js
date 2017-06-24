@@ -8,7 +8,7 @@ var SetupHiddenFiles = (function (isNewVersion, modulePath) {
 	
 	var _CONFIG = {
 		isNewVersion: isNewVersion,
-		corePath: isNewVersion ? 'webpack2' : 'webpack'
+		corePath: 'webpack'
 	};
 	
 	function SetupHiddenFiles() {

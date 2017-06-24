@@ -9,6 +9,8 @@ var CreateSettingsFile = (function (config, modulePath) {
 	
 	var _CONFIG = config;
 	
+	_CONFIG.bundle = 'webpack';
+	
 	function CreateSettingsFile() {
 		console.log('');
 		
