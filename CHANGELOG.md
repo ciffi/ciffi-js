@@ -1,3 +1,8 @@
+### v0.18.0 (2017-08-6)
+
+#### Multi setup support
+- choose project's features before install dependencies
+
 ### v0.15.8 (2017-06-18)
 
 #### Fixed assets task
