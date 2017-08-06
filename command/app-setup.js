@@ -92,6 +92,10 @@ var AppSetup = (function (modulePath) {
         replace({
             files: [
                 process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/config.js',
+                process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/dev.js',
+                process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/local.js',
+                process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/stage.js',
+                process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/prod.js',
                 process.env.PWD + '/.ciffi/dev.config.js',
                 process.env.PWD + '/.ciffi/build.config.js',
                 process.env.PWD + '/.ciffi/package.json'
@@ -105,6 +109,10 @@ var AppSetup = (function (modulePath) {
             
             var _files = [
                 process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/config.js',
+                process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/dev.js',
+                process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/local.js',
+                process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/stage.js',
+                process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/prod.js',
                 process.env.PWD + '/.ciffi/dev.config.js',
                 process.env.PWD + '/.ciffi/build.config.js',
                 process.env.PWD + '/.ciffi/package.json'
@@ -133,6 +141,10 @@ var AppSetup = (function (modulePath) {
         replace({
             files: [
                 process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/config.js',
+                process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/dev.js',
+                process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/local.js',
+                process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/stage.js',
+                process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/prod.js',
                 process.env.PWD + '/.ciffi/dev.config.js'
             ],
             replace: /@REPLACE__CONFIG@/g,

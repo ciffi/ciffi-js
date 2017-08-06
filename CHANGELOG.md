@@ -1,3 +1,8 @@
+### v0.19.0 (2017-08-7)
+
+#### Multi environment
+- new `ciffi build[:env]` task
+
 ### v0.18.0 (2017-08-6)
 
 #### Multi setup support
