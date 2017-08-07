@@ -1,3 +1,8 @@
+### v0.20.0 (2017-08-7)
+
+#### Custom output filename
+- edit .ciffisettings files to customize your project
+
 ### v0.19.0 (2017-08-7)
 
 #### Multi environment
