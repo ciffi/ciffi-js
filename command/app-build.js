@@ -66,7 +66,7 @@ var Build = (function (env) {
 		
 		_process.on('close', function (res) {
 			if (res === 0) {
-				Log(chalk.blue('🏗  Project build for ') + env + ' - ' + _assetPath + ' ' + chalk.green.bold(' OK'));
+				Log(chalk.blue('🏗  Project build for ') + env + chalk.blue(' in ') + _assetPath + ' ' + chalk.green.bold(' OK'));
 			}
 			console.log('');
 		});
