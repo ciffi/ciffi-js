@@ -19,10 +19,6 @@ npm install -g ciffi
 ```
 ciffi setup [projectname]
 ```
-#### local dev server (is not available for webpack2 installation)
-```
-ciffi serve
-```
 #### local dev build
 ```
 ciffi dev
@@ -68,7 +64,13 @@ ciffi cssdoc
 ciffi styleguide
 ```
 
-#### copy assets
+#### generate css only
+- defined in .ciffisettings file
+
+```
+ciffi styles
+```
+#### copy assets only
 - defined in .ciffisettings file
 
 ```
@@ -95,10 +97,11 @@ fi
 1. create folder (I usually use frontend in the root of project), then browse inside it and run setup task
 2. project name is the name of your development host (if host is myapp.local your project name is myapp)
 3. answer the setup process questions
-4. finish project's configuration by edit the .ciffisettings file 
-5. link main.css and main.js to your project
-6. run dev task and start to write code
-7. run build task and you are ready to deploy
+4. define your config files in src/scripts/config/env/envName.js
+5. finish project's configuration by edit the .ciffisettings file 
+6. link main.css and main.js to your project
+7. run dev task and start to write code
+8. run build task and you are ready to deploy
 
 - - -
 

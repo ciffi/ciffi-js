@@ -134,6 +134,9 @@ function start(modulePath) {
             case 'assets':
                 require('./command/app-assets');
                 break;
+	        case 'styles':
+		        require('./command/app-styles');
+		        break;
             default:
                 showCommandErrorMessage();
                 break;

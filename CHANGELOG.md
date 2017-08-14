@@ -1,3 +1,10 @@
+### v0.21.0 (2017-08-14)
+
+#### Some improvements
+- improved log for config on build
+- new `ciffi styles` task
+- updated bash commands
+
 ### v0.20.0 (2017-08-7)
 
 #### Custom output filename
