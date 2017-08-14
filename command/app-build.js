@@ -38,7 +38,15 @@ var Build = (function (env) {
 		var _styles = _css + _concat + _autoprefixer + _concat + _cleancss;
 		var _js = './node_modules/.bin/webpack --config build.config.js -p --progress';
 		var _assets = 'ciffi assets';
-		var _process = exec(_createConfig + _concat + _cleanDist + _concat + _styles + _concat + _js + _concat + _assets);
+		
+		exec(_createConfig + _concat);
+		
+		console.log('');
+		console.log(chalk.blue('🦄 Generate config for ') + env + ' ' + chalk.green.bold(' OK'));
+		console.log('');
+		console.log('');
+		
+		var _process = exec(_cleanDist + _concat + _styles + _concat + _js + _concat + _assets);
 		
 		_process.stdout.on('data', function (res) {
 			if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0) {
