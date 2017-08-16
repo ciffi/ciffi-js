@@ -1,3 +1,9 @@
+### v0.23.0 (2017-08-16)
+
+#### Fix build task and improved readme
+- fix creation of config during build task
+- updated readme
+
 ### v0.22.0 (2017-08-16)
 
 #### Improved setup and backward compatibility

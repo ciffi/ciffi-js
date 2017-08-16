@@ -39,7 +39,7 @@ var Build = (function (env) {
 		var _js = './node_modules/.bin/webpack --config build.config.js -p --progress';
 		var _assets = 'ciffi assets';
 		
-		exec(_createConfig + _concat);
+		exec(_createConfig);
 		
 		console.log('');
 		console.log(chalk.blue('🦄 Generate config for ') + env + ' ' + chalk.green.bold(' OK'));

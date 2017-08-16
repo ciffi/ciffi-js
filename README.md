@@ -11,6 +11,13 @@
 
 # Ciffi Frontend Generator #
 
+Ciffi js is a frontend project generator with node based build system and javascript framework.
+
+It includes webpack for javascript module, node-sass for build scss files with postCSS autoprefixer and cleancss, livereloadjs for fast development
+
+_full documentation available at [ciffi.it/ciffi-js](https://www.ciffi.it/ciffi-js)_
+- - - 
+
 #### install ciffi
 ```
 npm install -g ciffi
@@ -19,13 +26,13 @@ npm install -g ciffi
 ```
 ciffi setup [projectname]
 ```
-#### local dev build
+#### local dev build with livereload server
 ```
 ciffi dev
 ```
-#### generate build
+#### generate build with custom target env
 ```
-ciffi build
+ciffi build[:env]
 ```
 #### e2e test with nightwatch and cucumber (use default if configuration is not defined)
 ```
