@@ -1,6 +1,6 @@
 _ciffi()
 {
-    _ciffi_commands="assets build cssdoc dev e2e jsdoc newcomponent newmodule newpage setup styleguide styles"
+    _ciffi_commands="assets build build-old cssdoc dev e2e jsdoc newcomponent newmodule newpage setup styleguide styles"
 
     local cur prev
       COMPREPLY=()

@@ -6,8 +6,15 @@ var AppDependencies = (function () {
 	
 	function AppDependencies() {
 		
-		this.download = function (callback) {
-			addProcessListeners(exec('npm install'), callback);
+		this.download = function (wantRouter, callback) {
+			var _process = 'npm install';
+			
+			if (wantRouter) {
+				_process += ' && npm install --save @ciffi-js/router';
+			}
+			
+			addProcessListeners(exec(_process), callback);
+			
 			// addProcessListeners(exec('yarn'), callback, function () {
 			// 	console.log('👀 ' + chalk.blue(' try npm'));
 			//

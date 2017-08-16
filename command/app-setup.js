@@ -46,8 +46,8 @@ var AppSetup = (function (modulePath) {
             type: 'checkbox',
             name: 'features',
             message: 'What features do you want to include in this project?',
-            default: [''],
-            choices: ['testing', 'styleguides']
+            default: ['router'],
+            choices: ['router', 'testing', 'styleguides']
         }).then(function (res) {
             callback(res.features);
         });
@@ -195,8 +195,8 @@ var AppSetup = (function (modulePath) {
                     isNewVersion: config.isNewVersion,
                     features: config.features
                 }, modulePath, function () {
-                    require('./app-createpackage')(config.features, modulePath, function () {
-                        require('./moveApp')
+                    require('./app-createpackage')(config.features, modulePath, function (wantRouter) {
+                        require('./moveApp')(wantRouter);
                     });
                 });
                 

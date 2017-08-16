@@ -1,3 +1,10 @@
+### v0.22.0 (2017-08-16)
+
+#### Improved setup and backward compatibility
+- choose router from project's features before install dependencies
+- new `ciffi build-old` task for backward compatibility
+- updated bash commands
+
 ### v0.21.0 (2017-08-14)
 
 #### Some improvements

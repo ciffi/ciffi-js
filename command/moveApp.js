@@ -5,7 +5,7 @@ var exec = require('child_process').exec;
 var CiffiDependencies = require('./app-dependencies');
 var pkg = require('../package.json');
 
-var MoveApp = (function () {
+var MoveApp = (function (wantRouter) {
 	
 	function MoveApp() {
 		
@@ -15,7 +15,7 @@ var MoveApp = (function () {
 		shell.cp('-R', _tempPath, _projectPath);
 		shell.rm('-rf', _tempPath);
 		
-		CiffiDependencies.download(function () {
+		CiffiDependencies.download(wantRouter, function () {
 			exec('ciffi --postsetup', function () {
 				console.log(chalk.blue('ciffi -h') + chalk.green(' for commands list'));
 				console.log('');
@@ -27,6 +27,6 @@ var MoveApp = (function () {
 	}
 	
 	return new MoveApp();
-})();
+});
 
 module.exports = MoveApp;
