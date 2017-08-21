@@ -13,6 +13,8 @@ var Dev = (function () {
 		
 		if (fileExists(ConfigFile)) {
 			_CONFIG = require(ConfigFile);
+			
+			build();
 		} else {
 			console.log(chalk.red.bold('☠️  Project dev failed:') + ' ' + chalk.blue('can\'t find .ciffisettings file ☠️'));
 			return console.log('');
