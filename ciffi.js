@@ -89,6 +89,9 @@ function start(modulePath) {
 				console.log(chalk.red.bold('Sorry, but build-prod task is still not available'));
 				//require('./command/app-build-prod');
 				break;
+			case 'dev-old':
+				require('./command/app-dev-old');
+				break;
 			case 'build-old':
 				require('./command/app-build-prod');
 				break;

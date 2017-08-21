@@ -1,3 +1,8 @@
+### v0.23.1 (2017-08-21)
+
+#### Improved backward compatibility
+- new `ciffi dev-old` task for backward compatibility
+
 ### v0.23.0 (2017-08-16)
 
 #### Fix build task and improved readme
