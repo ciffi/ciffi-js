@@ -1,7 +1,8 @@
-### v0.23.1 (2017-08-21)
+### v0.23.3 (2017-08-21)
 
 #### Improved backward compatibility
 - new `ciffi dev-old` task for backward compatibility
+- new bash auto completion
 
 ### v0.23.0 (2017-08-16)
 

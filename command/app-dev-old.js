@@ -18,13 +18,6 @@ var Dev = (function () {
 			return console.log('');
 		}
 		
-		if (fileExists(process.env.PWD + '/src/scripts/config/env/' + _CONFIG.defaultDevEnv + '.js')) {
-			build();
-		} else {
-			console.log(chalk.red.bold('☠️  Project dev failed:') + ' ' + chalk.blue('can\'t find src/scripts/config/env/dev' + _CONFIG.defaultDevEnv + '.js file ☠️'));
-			return console.log('');
-		}
-		
 	}
 	
 	function build() {
