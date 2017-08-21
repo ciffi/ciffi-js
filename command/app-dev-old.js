@@ -14,6 +14,8 @@ var Dev = (function () {
 		if (fileExists(ConfigFile)) {
 			_CONFIG = require(ConfigFile);
 			
+			_CONFIG.stylesOutputName = _CONFIG.stylesOutputName ? _CONFIG.stylesOutputName : 'main';
+			
 			build();
 		} else {
 			console.log(chalk.red.bold('☠️  Project dev failed:') + ' ' + chalk.blue('can\'t find .ciffisettings file ☠️'));
