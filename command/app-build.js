@@ -29,11 +29,12 @@ var Build = (function (env) {
 	function build() {
 		var _assetPath = _CONFIG.assetsPath;
 		var _assetPathName = _CONFIG.assetsPathName;
+		var _autoprefixerConfig = _CONFIG.autoprefixer || 'last 12 versions';
 		var _concat = ' && ';
 		var _createConfig = 'cp ' + _assetPathName + '/scripts/config/env/' + env + '.js ' + _assetPathName + '/scripts/config/config.js';
 		var _cleanDist = 'rm -rf ' + _assetPath + '/*';
 		var _css = './node_modules/.bin/node-sass ' + _assetPathName + '/styles/main.scss ' + _assetPath + '/' + _CONFIG.stylesOutputName;
-		var _autoprefixer = './node_modules/.bin/postcss --use autoprefixer --autoprefixer.browsers \'last 12 versions\' -o ' + _assetPath + '/' + _CONFIG.stylesOutputName + ' ' + _assetPath + '/' + _CONFIG.stylesOutputName;
+		var _autoprefixer = './node_modules/.bin/postcss --use autoprefixer --autoprefixer.browsers \'' + _autoprefixerConfig + '\' -o ' + _assetPath + '/' + _CONFIG.stylesOutputName + ' ' + _assetPath + '/' + _CONFIG.stylesOutputName;
 		var _cleancss = './node_modules/.bin/cleancss -o ' + _assetPath + '/' + _CONFIG.stylesOutputName + ' ' + _assetPath + '/' + _CONFIG.stylesOutputName;
 		var _styles = _css + _concat + _autoprefixer + _concat + _cleancss;
 		var _js = './node_modules/.bin/webpack --config build.config.js -p --progress';

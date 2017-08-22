@@ -1,3 +1,8 @@
+### v0.23.6 (2017-08-22)
+
+#### Add custom configuration for autoprefixer
+- edit .ciffisettings file
+
 ### v0.23.4 (2017-08-21)
 
 #### Improved backward compatibility
