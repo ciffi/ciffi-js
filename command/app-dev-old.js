@@ -14,7 +14,7 @@ var Dev = (function () {
 		if (fileExists(ConfigFile)) {
 			_CONFIG = require(ConfigFile);
 			
-			_CONFIG.stylesOutputName = _CONFIG.stylesOutputName ? _CONFIG.stylesOutputName : 'main';
+			_CONFIG.stylesOutputName = _CONFIG.stylesOutputName ? _CONFIG.stylesOutputName : 'main.css';
 			
 			build();
 		} else {
