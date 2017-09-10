@@ -1,3 +1,8 @@
+### v0.23.8 (2017-09-10)
+
+#### Updated dependencies
+- new "publicPath" in .ciffisettings
+
 ### v0.23.6 (2017-08-22)
 
 #### Add custom configuration for autoprefixer
