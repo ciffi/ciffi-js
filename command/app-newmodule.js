@@ -26,7 +26,7 @@ var NewModule = (function (modulePath) {
 		
 		var _configFile = process.env.PWD + '/.ciffisettings';
 		
-		if (fileExists(_configFile)) {
+		if (fileExists.sync(_configFile)) {
 			
 			var _appConfig = require(_configFile);
 			ASSETSPATHNAME = _appConfig.assetsPathName;
@@ -39,7 +39,7 @@ var NewModule = (function (modulePath) {
 		var _projectModules = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/modules/';
 		var _projectFileJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/modules/' + moduleName + '.js';
 		
-		if (fileExists(_projectFileJs)) {
+		if (fileExists.sync(_projectFileJs)) {
 			console.log(chalk.red('☠️  File already exists: ' + _projectFileJs + ' ☠️'));
 		} else {
 			pathExists(_projectModules).then(function (res) {

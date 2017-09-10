@@ -25,7 +25,7 @@ var NewComponent = (function (modulePath) {
 		
 		var _configFile = process.env.PWD + '/.ciffisettings';
 		
-		if (fileExists(_configFile)) {
+		if (fileExists.sync(_configFile)) {
 			
 			var _appConfig = require(_configFile);
 			ASSETSPATHNAME = _appConfig.assetsPathName;
@@ -38,7 +38,7 @@ var NewComponent = (function (modulePath) {
 		var _projectComponents = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/components/';
 		var _projectFileJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/components/' + componentName + '.js';
 		
-		if (fileExists(_projectFileJs)) {
+		if (fileExists.sync(_projectFileJs)) {
 			console.log(chalk.red('☠️  File already exists: ' + _projectFileJs + ' ☠️'));
 		} else {
 			pathExists(_projectComponents).then(function (res) {

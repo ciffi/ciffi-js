@@ -10,7 +10,7 @@ var Serve = (function () {
 	
 	function Serve() {
 		
-		if (fileExists(ConfigFile)) {
+		if (fileExists.sync(ConfigFile)) {
 			_CONFIG = require(ConfigFile);
 		} else {
 			console.log(chalk.red.bold('☠️  Project serve failed:') + ' ' + chalk.blue('can\'t find .ciffisettings file ☠️'));

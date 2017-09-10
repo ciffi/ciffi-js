@@ -1,3 +1,8 @@
+### v0.24.0 (2017-09-10)
+
+#### Minor fix
+- new version -- release ready
+
 ### v0.23.8 (2017-09-10)
 
 #### Updated dependencies

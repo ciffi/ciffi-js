@@ -29,16 +29,16 @@ var CreateSettingsFile = (function (config, modulePath, callback) {
         //var _pathName = config.split('/')[config.split('/').length - 1];
         replace({
             files: [file],
-            replace: /@REPLACE__ASSETS@/g,
-            with: config
+            from: /@REPLACE__ASSETS@/g,
+            to: config
         }, function (error) {
             if (error) {
                 return console.error('Error occurred:', error);
             }
             replace({
                 files: [file],
-                replace: /@REPLACE__ASSETS__NAME@/g,
-                with: 'src'
+                from: /@REPLACE__ASSETS__NAME@/g,
+                to: 'src'
             }, function (error) {
                 if (error) {
                     return console.error('Error occurred:', error);
@@ -52,8 +52,8 @@ var CreateSettingsFile = (function (config, modulePath, callback) {
         
         replace({
             files: [file],
-            replace: /@REPLACE__CONFIG@/g,
-            with: config
+            from: /@REPLACE__CONFIG@/g,
+            to: config
         }, function (error) {
             if (error) {
                 return console.error('Error occurred:', error);
@@ -66,8 +66,8 @@ var CreateSettingsFile = (function (config, modulePath, callback) {
         
         replace({
             files: [file],
-            replace: /@REPLACE__FEATURES@/g,
-            with: JSON.stringify(config).replace(/"/g, '\'')
+            from: /@REPLACE__FEATURES@/g,
+            to: JSON.stringify(config).replace(/"/g, '\'')
         }, function (error) {
             if (error) {
                 return console.error('Error occurred:', error);
@@ -79,8 +79,8 @@ var CreateSettingsFile = (function (config, modulePath, callback) {
     function replaceBundleName(config, file, callback) {
         replace({
             files: [file],
-            replace: /@REPLACE__BUNDLE__NAME@/g,
-            with: config
+            from: /@REPLACE__BUNDLE__NAME@/g,
+            to: config
         }, function (error) {
             if (error) {
                 return console.error('Error occurred:', error);
@@ -111,7 +111,7 @@ var CreateSettingsFile = (function (config, modulePath, callback) {
                 replaceConfig(appConfig.projectName, _tempFile, function () {
                     replaceFeatures(appConfig.features, _tempFile, function () {
                         
-                        if (fileExists(_projectFile)) {
+                        if (fileExists.sync(_projectFile)) {
                             console.log(chalk.red('File already exists: ' + _projectFile));
                         } else {
                             pathExists(_projectRoot).then(function (res) {

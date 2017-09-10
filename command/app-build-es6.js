@@ -10,7 +10,7 @@ var Build = (function () {
 	
 	function Build() {
 		
-		if (fileExists(ConfigFile)) {
+		if (fileExists.sync(ConfigFile)) {
 			_CONFIG = require(ConfigFile);
 		} else {
 			console.log(chalk.red.bold('☠️  Project build failed:') + ' ' + chalk.blue('can\'t find .ciffisettings file ☠️'));

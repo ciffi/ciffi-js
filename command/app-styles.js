@@ -10,7 +10,7 @@ var Styles = (function (env) {
 	
 	function Styles() {
 		
-		if (fileExists(ConfigFile)) {
+		if (fileExists.sync(ConfigFile)) {
 			_CONFIG = require(ConfigFile);
 			
 			build();

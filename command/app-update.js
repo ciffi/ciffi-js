@@ -46,7 +46,7 @@ var AppUpdate = (function () {
 			
 			var _configFile = process.env.PWD + '/.ciffisettings';
 			
-			if (fileExists(_configFile)) {
+			if (fileExists.sync(_configFile)) {
 				
 				var _appConfig = require(_configFile);
 				

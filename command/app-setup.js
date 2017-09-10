@@ -100,8 +100,8 @@ var AppSetup = (function (modulePath) {
                 process.env.PWD + '/.ciffi/build.config.js',
                 process.env.PWD + '/.ciffi/package.json'
             ],
-            replace: /@REPLACE__ASSETS@/g,
-            with: config
+            from: /@REPLACE__ASSETS@/g,
+            to: config
         }, function (error) {
             if (error) {
                 return console.error('Error occurred:', error);
@@ -126,8 +126,8 @@ var AppSetup = (function (modulePath) {
             }
             replace({
                 files: _files,
-                replace: /@REPLACE__ASSETS__NAME@/g,
-                with: _CONFIG.ciffiSrcName
+                from: /@REPLACE__ASSETS__NAME@/g,
+                to: _CONFIG.ciffiSrcName
             }, function (error) {
                 if (error) {
                     return console.error('Error occurred:', error);
@@ -147,8 +147,8 @@ var AppSetup = (function (modulePath) {
                 process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/prod.js',
                 process.env.PWD + '/.ciffi/dev.config.js'
             ],
-            replace: /@REPLACE__CONFIG@/g,
-            with: config
+            from: /@REPLACE__CONFIG@/g,
+            to: config
         }, function (error) {
             if (error) {
                 return console.error('Error occurred:', error);

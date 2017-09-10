@@ -73,7 +73,7 @@ var CreatePackage = (function (features, modulePath, callback) {
 			
 			shell.cp(_resource, _tempFile);
 			
-			if (fileExists(_projectFile)) {
+			if (fileExists.sync(_projectFile)) {
 				console.log(chalk.red('File already exists: ' + _projectFile));
 			} else {
 				pathExists(_projectRoot).then(function (res) {

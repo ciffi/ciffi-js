@@ -11,14 +11,14 @@ var Dev = (function () {
 	
 	function Dev() {
 		
-		if (fileExists(ConfigFile)) {
+		if (fileExists.sync(ConfigFile)) {
 			_CONFIG = require(ConfigFile);
 		} else {
 			console.log(chalk.red.bold('☠️  Project dev failed:') + ' ' + chalk.blue('can\'t find .ciffisettings file ☠️'));
 			return console.log('');
 		}
 		
-		if (fileExists(process.env.PWD + '/src/scripts/config/env/' + _CONFIG.defaultDevEnv + '.js')) {
+		if (fileExists.sync(process.env.PWD + '/src/scripts/config/env/' + _CONFIG.defaultDevEnv + '.js')) {
 			build();
 		} else {
 			console.log(chalk.red.bold('☠️  Project dev failed:') + ' ' + chalk.blue('can\'t find src/scripts/config/env/dev' + _CONFIG.defaultDevEnv + '.js file ☠️'));
