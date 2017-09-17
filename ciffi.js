@@ -56,7 +56,7 @@ function start(modulePath) {
 	} else {
 		
 		var _cmd = cmd;
-		var _env = fileExists(ConfigFile) && require(ConfigFile).defaultBuildEnv ? require(ConfigFile).defaultBuildEnv : 'local';
+		var _env = fileExists.sync(ConfigFile) && require(ConfigFile).defaultBuildEnv ? require(ConfigFile).defaultBuildEnv : 'local';
 		
 		if (cmd.indexOf('build:') === 0) {
 			_cmd = 'build';

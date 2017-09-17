@@ -1,6 +1,6 @@
 {
   "name": "ciffi",
-  "version": "0.24.1",
+  "version": "0.24.2",
   "description": "Ciffi Frontend Generator",
   "main": "ciffi.js",
   "repository": {

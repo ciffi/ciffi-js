@@ -1,3 +1,8 @@
+### v0.24.2 (2017-09-17)
+
+#### Minor fix
+- fixed default build env
+
 ### v0.24.1 (2017-09-17)
 
 #### Minor fix
