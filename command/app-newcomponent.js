@@ -78,8 +78,8 @@ var NewComponent = (function (modulePath) {
 			files: [
 				file
 			],
-			replace: /@REPLACE__COMPONENTNAME@/g,
-			with: capitalizeFirstLetter(componentName)
+			from: /@REPLACE__COMPONENTNAME@/g,
+			to: capitalizeFirstLetter(componentName)
 		}, function (error, changedFiles) {
 			if (error) {
 				return console.error('Error occurred:', error);

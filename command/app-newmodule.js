@@ -79,8 +79,8 @@ var NewModule = (function (modulePath) {
 			files: [
 				file
 			],
-			replace: /@REPLACE__MODULENAME@/g,
-			with: capitalizeFirstLetter(moduleName)
+			from: /@REPLACE__MODULENAME@/g,
+			to: capitalizeFirstLetter(moduleName)
 		}, function (error, changedFiles) {
 			if (error) {
 				return console.error('Error occurred:', error);

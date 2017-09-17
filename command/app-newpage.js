@@ -75,8 +75,8 @@ var NewPage = (function (modulePath) {
 			files: [
 				file
 			],
-			replace: /@REPLACE__PAGENAME@/g,
-			with: capitalizeFirstLetter(pageName)
+			from: /@REPLACE__PAGENAME@/g,
+			to: capitalizeFirstLetter(pageName)
 		}, function (error, changedFiles) {
 			if (error) {
 				return console.error('Error occurred:', error);

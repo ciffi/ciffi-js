@@ -1,3 +1,8 @@
+### v0.24.1 (2017-09-17)
+
+#### Minor fix
+- new page/module/component fix
+
 ### v0.24.0 (2017-09-10)
 
 #### Minor fix
