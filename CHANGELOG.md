@@ -1,3 +1,13 @@
+### v0.25.0 (2017-11-08)
+
+#### New config task
+- generate javascript config with `ciffi config[:env]` 
+
+### v0.24.3 (2017-11-08)
+
+#### Check new version on project setup
+- check and update `ciffi` before project setup process
+
 ### v0.24.2 (2017-09-17)
 
 #### Minor fix

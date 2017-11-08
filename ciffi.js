@@ -63,6 +63,11 @@ function start(modulePath) {
 			_env = cmd.split(':')[1];
 		}
 		
+		if (cmd.indexOf('config:') === 0) {
+			_cmd = 'config';
+			_env = cmd.split(':')[1];
+		}
+		
 		switch (_cmd) {
 			case 'setup':
 				var Setup = require('./command/app-setup')(modulePath);
@@ -94,6 +99,9 @@ function start(modulePath) {
 				break;
 			case 'build-old':
 				require('./command/app-build-prod');
+				break;
+			case 'config':
+				require('./command/app-config')(_env);
 				break;
 			case 'dev-unit':
 				console.log(chalk.red.bold('Sorry, but dev-unit task is still not available'));
