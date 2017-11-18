@@ -38,7 +38,6 @@ var Build = (function (env) {
 		var _cleancss = './node_modules/.bin/cleancss -o ' + _assetPath + '/' + _CONFIG.stylesOutputName + ' ' + _assetPath + '/' + _CONFIG.stylesOutputName;
 		var _styles = _css + _concat + _autoprefixer + _concat + _cleancss;
 		var _js = './node_modules/.bin/webpack --config build.config.js -p --progress';
-		var _assets = 'ciffi assets';
 		
 		exec(_createConfig);
 		
@@ -47,7 +46,7 @@ var Build = (function (env) {
 		console.log('');
 		console.log('');
 		
-		var _process = exec(_cleanDist + _concat + _styles + _concat + _js + _concat + _assets);
+		var _process = exec(_cleanDist + _concat + _styles + _concat + _js);
 		
 		_process.stdout.on('data', function (res) {
 			if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0) {
@@ -68,6 +67,7 @@ var Build = (function (env) {
 		_process.on('close', function (res) {
 			if (res === 0) {
 				Log(chalk.blue('🏗  Project build for ') + env + chalk.blue(' in ') + _assetPath + ' ' + chalk.green.bold(' OK'));
+				require('./app-assets');
 			}
 			console.log('');
 		});

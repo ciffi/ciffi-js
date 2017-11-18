@@ -1,3 +1,12 @@
+### v0.26.0 (2017-11-18)
+
+#### Improved webpack project config
+- fix dependencies ignore
+- removed autoprefixer
+
+#### Improved build task
+- improved assets copy on project build
+
 ### v0.25.0 (2017-11-08)
 
 #### New config task
