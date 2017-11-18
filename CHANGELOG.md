@@ -1,8 +1,12 @@
+### v0.26.1 (2017-11-18)
+
+#### Update ciffi js webpack base project dependencies
+
 ### v0.26.0 (2017-11-18)
 
 #### Improved webpack project config
 - fix dependencies ignore
-- removed autoprefixer
+- removed fastclick
 
 #### Improved build task
 - improved assets copy on project build
