@@ -37,10 +37,10 @@ let CreatePackage = (function (features, modulePath, callback) {
 		switch (_features) {
 			case 'testing' :
 				_fileName = 'testing.json';
+				addTestingDependencies();
 				break;
 			case 'styleguides' :
 				_fileName = 'styleguides.json';
-				addTestingDependencies();
 				break;
 			case 'testing+styleguides' :
 				_fileName = 'full.json';
