@@ -1,13 +1,13 @@
-var chalk = require('chalk');
-var Loading = require('./loading');
-var exec = require('child_process').exec;
+let chalk = require('chalk');
+let Loading = require('./loading');
+let exec = require('child_process').exec;
 
-var AppDependencies = (function () {
+let AppDependencies = (function () {
 	
 	function AppDependencies() {
 		
 		this.download = function (wantRouter, callback) {
-			var _process = 'npm install';
+			let _process = 'npm install';
 			
 			if (wantRouter) {
 				_process += ' && npm install --save @ciffi-js/router';
@@ -26,7 +26,7 @@ var AppDependencies = (function () {
 	function addProcessListeners(process, successCallback, failCallback) {
 		console.log('');
 		Loading.start('Download and install ' + chalk.blue('dependencies'));
-		var _processError;
+		let _processError;
 		process.stdout.on('data', function (res) {
 			if (res.indexOf('command not found') >= 0) {
 				console.log(res);
@@ -59,7 +59,7 @@ var AppDependencies = (function () {
 					onDownloadEnd(successCallback);
 					break;
 				case 127 :
-					var _error = _processError || ' - ' + chalk.red.bold(' yarn') + chalk.red(' not found') + ' - ';
+					let _error = _processError || ' - ' + chalk.red.bold(' yarn') + chalk.red(' not found') + ' - ';
 					Loading.stop('Download and install ' + chalk.blue('dependencies') + _error + chalk.red.bold(' FAIL'));
 					console.log('');
 					if (failCallback && typeof failCallback === 'function') {

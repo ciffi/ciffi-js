@@ -1,11 +1,11 @@
-var chalk = require('chalk');
-var fileExists = require('file-exists');
-var exec = require('child_process').exec;
-var ConfigFile = process.env.PWD + '/.ciffisettings';
+let chalk = require('chalk');
+let fileExists = require('file-exists');
+let exec = require('child_process').exec;
+let ConfigFile = process.env.PWD + '/.ciffisettings';
 
-var Config = (function (env) {
+let Config = (function (env) {
 	
-	var _CONFIG;
+	let _CONFIG;
 	
 	function Config() {
 		
@@ -26,8 +26,8 @@ var Config = (function (env) {
 	}
 	
 	function build() {
-		var _assetPathName = _CONFIG.assetsPathName;
-		var _createConfig = 'cp ' + _assetPathName + '/scripts/config/env/' + env + '.js ' + _assetPathName + '/scripts/config/config.js';
+		let _assetPathName = _CONFIG.assetsPathName;
+		let _createConfig = 'cp ' + _assetPathName + '/scripts/config/env/' + env + '.js ' + _assetPathName + '/scripts/config/config.js';
 		
 		exec(_createConfig);
 		

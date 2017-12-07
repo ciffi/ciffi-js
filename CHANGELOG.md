@@ -1,3 +1,13 @@
+### v0.28.0 (2017-12-07)
+
+#### Update ciffi js webpack base project dependencies
+- auto update dependencies during new project setup
+- some fixes
+
+### v0.26.1 (2017-11-18)
+
+#### Update ciffi js webpack base project dependencies
+
 ### v0.26.1 (2017-11-18)
 
 #### Update ciffi js webpack base project dependencies

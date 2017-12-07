@@ -1,12 +1,12 @@
-var chalk = require('chalk');
-var fileExists = require('file-exists');
-var exec = require('child_process').exec;
-var Log = require('single-line-log').stdout;
-var ConfigFile = process.env.PWD + '/.ciffisettings';
+let chalk = require('chalk');
+let fileExists = require('file-exists');
+let exec = require('child_process').exec;
+let Log = require('single-line-log').stdout;
+let ConfigFile = process.env.PWD + '/.ciffisettings';
 
-var Build = (function (env) {
+let Build = (function (env) {
 	
-	var _CONFIG;
+	let _CONFIG;
 	
 	function Build() {
 		
@@ -27,17 +27,17 @@ var Build = (function (env) {
 	}
 	
 	function build() {
-		var _assetPath = _CONFIG.assetsPath;
-		var _assetPathName = _CONFIG.assetsPathName;
-		var _autoprefixerConfig = _CONFIG.autoprefixer || 'last 12 versions';
-		var _concat = ' && ';
-		var _createConfig = 'cp ' + _assetPathName + '/scripts/config/env/' + env + '.js ' + _assetPathName + '/scripts/config/config.js';
-		var _cleanDist = 'rm -rf ' + _assetPath + '/*';
-		var _css = './node_modules/.bin/node-sass ' + _assetPathName + '/styles/main.scss ' + _assetPath + '/' + _CONFIG.stylesOutputName;
-		var _autoprefixer = './node_modules/.bin/postcss --use autoprefixer --autoprefixer.browsers \'' + _autoprefixerConfig + '\' -o ' + _assetPath + '/' + _CONFIG.stylesOutputName + ' ' + _assetPath + '/' + _CONFIG.stylesOutputName;
-		var _cleancss = './node_modules/.bin/cleancss -o ' + _assetPath + '/' + _CONFIG.stylesOutputName + ' ' + _assetPath + '/' + _CONFIG.stylesOutputName;
-		var _styles = _css + _concat + _autoprefixer + _concat + _cleancss;
-		var _js = './node_modules/.bin/webpack --config build.config.js -p --progress';
+		let _assetPath = _CONFIG.assetsPath;
+		let _assetPathName = _CONFIG.assetsPathName;
+		let _autoprefixerConfig = _CONFIG.autoprefixer || 'last 12 versions';
+		let _concat = ' && ';
+		let _createConfig = 'cp ' + _assetPathName + '/scripts/config/env/' + env + '.js ' + _assetPathName + '/scripts/config/config.js';
+		let _cleanDist = 'rm -rf ' + _assetPath + '/*';
+		let _css = './node_modules/.bin/node-sass ' + _assetPathName + '/styles/main.scss ' + _assetPath + '/' + _CONFIG.stylesOutputName;
+		let _autoprefixer = './node_modules/.bin/postcss --use autoprefixer --autoprefixer.browsers \'' + _autoprefixerConfig + '\' -o ' + _assetPath + '/' + _CONFIG.stylesOutputName + ' ' + _assetPath + '/' + _CONFIG.stylesOutputName;
+		let _cleancss = './node_modules/.bin/cleancss -o ' + _assetPath + '/' + _CONFIG.stylesOutputName + ' ' + _assetPath + '/' + _CONFIG.stylesOutputName;
+		let _styles = _css + _concat + _autoprefixer + _concat + _cleancss;
+		let _js = './node_modules/.bin/webpack --config build.config.js -p --progress';
 		
 		exec(_createConfig);
 		
@@ -46,7 +46,7 @@ var Build = (function (env) {
 		console.log('');
 		console.log('');
 		
-		var _process = exec(_cleanDist + _concat + _styles + _concat + _js);
+		let _process = exec(_cleanDist + _concat + _styles + _concat + _js);
 		
 		_process.stdout.on('data', function (res) {
 			if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0) {

@@ -1,6 +1,6 @@
-var chalk = require('chalk');
+let chalk = require('chalk');
 
-var Commands = (function () {
+let Commands = (function () {
 	
 	function Commands() {
 		

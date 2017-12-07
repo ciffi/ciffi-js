@@ -1,16 +1,16 @@
-var chalk = require('chalk');
-var inquirer = require('inquirer');
-var replace = require('replace-in-file');
-var emptyDir = require('empty-dir');
-var cliCursor = require('cli-cursor');
-var shell = require('shelljs');
-var Loading = require('./loading');
-var CheckUpdate = require('./app-check-update');
-var exec = require('child_process').exec;
+let chalk = require('chalk');
+let inquirer = require('inquirer');
+let replace = require('replace-in-file');
+let emptyDir = require('empty-dir');
+let cliCursor = require('cli-cursor');
+let shell = require('shelljs');
+let Loading = require('./loading');
+let CheckUpdate = require('./app-check-update');
+let exec = require('child_process').exec;
 
-var AppSetup = (function (modulePath) {
+let AppSetup = (function (modulePath) {
 	
-	var _CONFIG = {
+	let _CONFIG = {
 		ciffiSrc: '.ciffi/src',
 		ciffiSrcName: 'src'
 	};
@@ -25,16 +25,28 @@ var AppSetup = (function (modulePath) {
 			if (res) {
 				askForUpdate(function (res) {
 					if (res === 'no') {
-						init(config);
+						exec(modulePath + '/lib/node_modules/ciffi/node_modules/.bin/ciffi-js-webpack', (err, res) => {
+							if (res.indexOf('yeah') >= 0) {
+								init(config);
+							}
+						});
 					} else {
-						CheckUpdate.update(function () {
-							init(config);
+						exec(modulePath + '/lib/node_modules/ciffi/node_modules/.bin/ciffi-js-webpack', (err, res) => {
+							if (res.indexOf('yeah') >= 0) {
+								CheckUpdate.update(function () {
+									init(config);
+								});
+							}
 						});
 					}
 				});
 			} else {
-				console.log('😎 ' + chalk.green('Latest version installed️'));
-				init(config);
+				exec(modulePath + '/lib/node_modules/ciffi/node_modules/.bin/ciffi-js-webpack', (err, res) => {
+					if (res.indexOf('yeah') >= 0) {
+						console.log('😎 ' + chalk.green('Latest version installed️'));
+						init(config);
+					}
+				});
 			}
 			
 		});
@@ -48,7 +60,7 @@ var AppSetup = (function (modulePath) {
 				
 				askForBuildPath(function (buildPath) {
 					
-					var _isNewVersion = true;
+					let _isNewVersion = true;
 					
 					require('./tempApp')(_isNewVersion, modulePath, function () {
 						
@@ -91,7 +103,7 @@ var AppSetup = (function (modulePath) {
 	}
 	
 	function askForProjectName(config, callback) {
-		var _projectName = config.projectName;
+		let _projectName = config.projectName;
 		if (!_projectName) {
 			inquirer.prompt({
 				type: 'input',
@@ -100,12 +112,12 @@ var AppSetup = (function (modulePath) {
 				default: 'test',
 				validate: function (res) {
 					
-					var done = this.async();
+					let done = this.async();
 					
 					setTimeout(function () {
 						
-						var _test = new RegExp(/^$|\s+|\w\s+|[\/]|^\.|\.$/);
-						var _testResult = _test.test(res);
+						let _test = new RegExp(/^$|\s+|\w\s+|[\/]|^\.|\.$/);
+						let _testResult = _test.test(res);
 						
 						if (typeof res !== 'string' || _testResult) {
 							done('☠️  Project must have real name ☠️');
@@ -144,7 +156,7 @@ var AppSetup = (function (modulePath) {
 				return console.error('Error occurred:', error);
 			}
 			
-			var _files = [
+			let _files = [
 				process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/config.js',
 				process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/dev.js',
 				process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/local.js',
@@ -199,7 +211,7 @@ var AppSetup = (function (modulePath) {
 	}
 	
 	function start(config, res) {
-		var _fixedAssetsUrl = res.buildPath;
+		let _fixedAssetsUrl = res.buildPath;
 		
 		if (_fixedAssetsUrl.substring(_fixedAssetsUrl.length - 1, _fixedAssetsUrl.length) === '/') {
 			_fixedAssetsUrl = _fixedAssetsUrl.substring(0, _fixedAssetsUrl.length - 1)
@@ -215,7 +227,7 @@ var AppSetup = (function (modulePath) {
 			
 			replaceConfig(config.projectName, function () {
 				
-				var _pathName = _fixedAssetsUrl.split('/')[_fixedAssetsUrl.split('/').length - 1];
+				let _pathName = _fixedAssetsUrl.split('/')[_fixedAssetsUrl.split('/').length - 1];
 				
 				if (_pathName !== 'src') {
 					shell.mv(process.env.PWD + '/' + _CONFIG.ciffiSrc + '/', process.env.PWD + '/.ciffi/' + _CONFIG.ciffiSrc + '/');
@@ -250,12 +262,12 @@ var AppSetup = (function (modulePath) {
 			default: '../static',
 			validate: function (res) {
 				
-				var done = this.async();
+				let done = this.async();
 				
 				setTimeout(function () {
 					
-					var _test = new RegExp(/^(\.\.\/){1,}\w/);
-					var _testResult = _test.test(res);
+					let _test = new RegExp(/^(\.\.\/){1,}\w/);
+					let _testResult = _test.test(res);
 					
 					if (typeof res !== 'string' || !_testResult) {
 						done('☠️  Build path must be out of this project setup folder ☠️');
@@ -272,8 +284,8 @@ var AppSetup = (function (modulePath) {
 	}
 	
 	function testNpm5(callback) {
-		var _process = exec('npm -v');
-		var _result;
+		let _process = exec('npm -v');
+		let _result;
 		_process.stdout.on('data', function (res) {
 			_result = parseInt(res.split('.')[0]) >= 5;
 		});

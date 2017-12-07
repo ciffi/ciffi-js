@@ -1,6 +1,6 @@
 {
   "name": "ciffi",
-  "version": "0.27.0",
+  "version": "0.28.0",
   "description": "Ciffi Frontend Generator",
   "main": "ciffi.js",
   "repository": {
@@ -39,18 +39,18 @@
   "homepage": "https://github.com/ciffi/ciffi-js",
   "preferGlobal": true,
   "dependencies": {
-    "chalk": "^2.1.0",
-    "ciffi-js-webpack": "^0.13.0",
+    "chalk": "^2.3.0",
+    "ciffi-js-webpack": "^0.13.1",
     "cli-cursor": "^2.1.0",
-    "cli-spinners": "^1.0.0",
+    "cli-spinners": "^1.1.0",
     "empty-dir": "^0.2.1",
-    "file-exists": "^4.0.0",
+    "file-exists": "^5.0.0",
     "foreach": "^2.0.5",
-    "inquirer": "^3.2.3",
-    "meow": "^3.7.0",
+    "inquirer": "^4.0.1",
+    "meow": "^4.0.0",
     "ora": "^1.3.0",
     "path-exists": "^3.0.0",
-    "replace-in-file": "^2.6.4",
+    "replace-in-file": "^3.0.0",
     "shelljs": "^0.7.8",
     "single-line-log": "^1.1.2"
   },

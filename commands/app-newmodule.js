@@ -1,13 +1,13 @@
-var chalk = require('chalk');
-var shell = require('shelljs');
-var fileExists = require('file-exists');
-var inquirer = require('inquirer');
-var pathExists = require('path-exists');
-var replace = require('replace-in-file');
-var NewModule = (function (modulePath) {
+let chalk = require('chalk');
+let shell = require('shelljs');
+let fileExists = require('file-exists');
+let inquirer = require('inquirer');
+let pathExists = require('path-exists');
+let replace = require('replace-in-file');
+let NewModule = (function (modulePath) {
 	
-	var ASSETSPATHNAME = 'static';
-	var ASSETSBUNDLE = 'webpack';
+	let ASSETSPATHNAME = 'static';
+	let ASSETSBUNDLE = 'webpack';
 	
 	function NewModule(config) {
 		
@@ -16,7 +16,7 @@ var NewModule = (function (modulePath) {
 	}
 	
 	function start(moduleName) {
-		var _tempPath = process.env.PWD + '/.ciffi/';
+		let _tempPath = process.env.PWD + '/.ciffi/';
 		
 		pathExists(_tempPath).then(function (res) {
 			if (!res) {
@@ -24,20 +24,20 @@ var NewModule = (function (modulePath) {
 			}
 		});
 		
-		var _configFile = process.env.PWD + '/.ciffisettings';
+		let _configFile = process.env.PWD + '/.ciffisettings';
 		
 		if (fileExists.sync(_configFile)) {
 			
-			var _appConfig = require(_configFile);
+			let _appConfig = require(_configFile);
 			ASSETSPATHNAME = _appConfig.assetsPathName;
 			//ASSETSBUNDLE = _appConfig.bundle || ASSETSBUNDLE;
 			
 		}
 		
-		var _tempFileJs = _tempPath + moduleName + '.js';
-		var _resourceJs = modulePath + '/lib/node_modules/ciffi/node_modules/ciffi-js-' + ASSETSBUNDLE + '/resources/newmodule/module.js';
-		var _projectModules = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/modules/';
-		var _projectFileJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/modules/' + moduleName + '.js';
+		let _tempFileJs = _tempPath + moduleName + '.js';
+		let _resourceJs = modulePath + '/lib/node_modules/ciffi/node_modules/ciffi-js-' + ASSETSBUNDLE + '/resources/newmodule/module.js';
+		let _projectModules = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/modules/';
+		let _projectFileJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/modules/' + moduleName + '.js';
 		
 		if (fileExists.sync(_projectFileJs)) {
 			console.log(chalk.red('☠️  File already exists: ' + _projectFileJs + ' ☠️'));
@@ -65,10 +65,10 @@ var NewModule = (function (modulePath) {
 	}
 	
 	function capitalizeFirstLetter(string) {
-		var _capitalized = string.charAt(0).toUpperCase() + string.slice(1);
-		var _stringArray = _capitalized.split('-');
-		var _result = '';
-		for (var i = 0; i < _stringArray.length; i++) {
+		let _capitalized = string.charAt(0).toUpperCase() + string.slice(1);
+		let _stringArray = _capitalized.split('-');
+		let _result = '';
+		for (let i = 0; i < _stringArray.length; i++) {
 			_result += _stringArray[i].charAt(0).toUpperCase() + _stringArray[i].slice(1)
 		}
 		return _result;
@@ -90,7 +90,7 @@ var NewModule = (function (modulePath) {
 	}
 	
 	function askForName(name, callback) {
-		var _name = name;
+		let _name = name;
 		if (!_name) {
 			inquirer.prompt({
 				type: 'input',
@@ -99,12 +99,12 @@ var NewModule = (function (modulePath) {
 				default: 'new-module',
 				validate: function (res) {
 					
-					var done = this.async();
+					let done = this.async();
 					
 					setTimeout(function () {
 						
-						var _test = new RegExp(/^$|\s+|\w\s+|[\/]|^\.|\.$/);
-						var _testResult = _test.test(res);
+						let _test = new RegExp(/^$|\s+|\w\s+|[\/]|^\.|\.$/);
+						let _testResult = _test.test(res);
 						
 						if (typeof res !== 'string' || _testResult) {
 							done('☠️  Module must have real name ☠️');

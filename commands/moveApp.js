@@ -1,16 +1,16 @@
-var chalk = require('chalk');
-var npm = require('npm');
-var shell = require('shelljs');
-var exec = require('child_process').exec;
-var CiffiDependencies = require('./app-dependencies');
-var pkg = require('../package.json');
+let chalk = require('chalk');
+let npm = require('npm');
+let shell = require('shelljs');
+let exec = require('child_process').exec;
+let CiffiDependencies = require('./app-dependencies');
+let pkg = require('../package.json');
 
-var MoveApp = (function (wantRouter) {
+let MoveApp = (function (wantRouter) {
 	
 	function MoveApp() {
 		
-		var _tempPath = process.env.PWD + '/.ciffi/*';
-		var _projectPath = process.env.PWD + '/';
+		let _tempPath = process.env.PWD + '/.ciffi/*';
+		let _projectPath = process.env.PWD + '/';
 		
 		shell.cp('-R', _tempPath, _projectPath);
 		shell.rm('-rf', _tempPath);

@@ -1,13 +1,13 @@
-var chalk = require('chalk');
-var shell = require('shelljs');
-var replace = require('replace-in-file');
-var fileExists = require('file-exists');
-var pathExists = require('path-exists');
-var Loading = require('./loading');
+let chalk = require('chalk');
+let shell = require('shelljs');
+let replace = require('replace-in-file');
+let fileExists = require('file-exists');
+let pathExists = require('path-exists');
+let Loading = require('./loading');
 
-var CreateSettingsFile = (function (config, modulePath, callback) {
+let CreateSettingsFile = (function (config, modulePath, callback) {
     
-    var _CONFIG = config;
+    let _CONFIG = config;
     
     _CONFIG.bundle = 'webpack';
     
@@ -26,7 +26,7 @@ var CreateSettingsFile = (function (config, modulePath, callback) {
     }
     
     function replaceBuildPath(config, file, callback) {
-        //var _pathName = config.split('/')[config.split('/').length - 1];
+        //let _pathName = config.split('/')[config.split('/').length - 1];
         replace({
             files: [file],
             from: /@REPLACE__ASSETS@/g,
@@ -91,7 +91,7 @@ var CreateSettingsFile = (function (config, modulePath, callback) {
     
     function yeah(fileName, appConfig, callback) {
         
-        var _tempPath = process.env.PWD + '/.ciffi/';
+        let _tempPath = process.env.PWD + '/.ciffi/';
         
         pathExists(_tempPath).then(function (res) {
             if (!res) {
@@ -99,10 +99,10 @@ var CreateSettingsFile = (function (config, modulePath, callback) {
             }
         });
         
-        var _tempFile = _tempPath + fileName;
-        var _resource = modulePath + '/lib/node_modules/ciffi/node_modules/ciffi-js-' + _CONFIG.bundle + '/resources/core/' + fileName;
-        var _projectRoot = process.env.PWD + '/';
-        var _projectFile = process.env.PWD + '/.' + fileName;
+        let _tempFile = _tempPath + fileName;
+        let _resource = modulePath + '/lib/node_modules/ciffi/node_modules/ciffi-js-' + _CONFIG.bundle + '/resources/core/' + fileName;
+        let _projectRoot = process.env.PWD + '/';
+        let _projectFile = process.env.PWD + '/.' + fileName;
         
         shell.cp(_resource, _tempFile);
         

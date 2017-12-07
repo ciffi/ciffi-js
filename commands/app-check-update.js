@@ -1,17 +1,17 @@
-var chalk = require('chalk');
-var exec = require('child_process').exec;
+let chalk = require('chalk');
+let exec = require('child_process').exec;
 
-var CheckUpdate = (function () {
+let CheckUpdate = (function () {
 	
 	function CheckUpdate() {
 		
 	}
 	
 	CheckUpdate.prototype.check = function (callback) {
-		var _processCurrentVersion = 'ciffi -v';
-		var _processNewVersion = 'npm info ciffi version';
-		var _currentVersion;
-		var _newVersion;
+		let _processCurrentVersion = 'ciffi -v';
+		let _processNewVersion = 'npm info ciffi version';
+		let _currentVersion;
+		let _newVersion;
 		
 		addProcessListeners(exec(_processCurrentVersion), function (res) {
 			_currentVersion = res;
@@ -25,13 +25,13 @@ var CheckUpdate = (function () {
 	
 	CheckUpdate.prototype.update = function (callback) {
 		
-		var _process = 'npm i -g ciffi';
+		let _process = 'npm i -g ciffi';
 		
 		addUpdateProcessListeners(exec(_process), callback);
 	};
 	
 	function addProcessListeners(process, successCallback) {
-		var _version;
+		let _version;
 		process.stdout.on('data', function (res) {
 			_version = res;
 		});
@@ -92,11 +92,11 @@ var CheckUpdate = (function () {
 	}
 	
 	function checkUpdate(_currentVersion, _newVersion, callback) {
-		var _current = _currentVersion.split('.');
-		var _new = _newVersion.split('.');
-		var _hasNewVersion = 0;
+		let _current = _currentVersion.split('.');
+		let _new = _newVersion.split('.');
+		let _hasNewVersion = 0;
 		
-		for (var i = 0; i < _current.length; i++) {
+		for (let i = 0; i < _current.length; i++) {
 			if (parseInt(_new[i]) > parseInt(_current[i])) {
 				_hasNewVersion++;
 			}

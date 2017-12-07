@@ -1,12 +1,12 @@
-var chalk = require('chalk');
-var fileExists = require('file-exists');
-var exec = require('child_process').exec;
-var Log = require('single-line-log').stdout;
-var ConfigFile = process.env.PWD + '/.ciffisettings';
+let chalk = require('chalk');
+let fileExists = require('file-exists');
+let exec = require('child_process').exec;
+let Log = require('single-line-log').stdout;
+let ConfigFile = process.env.PWD + '/.ciffisettings';
 
-var Assets = (function () {
+let Assets = (function () {
 	
-	var _CONFIG;
+	let _CONFIG;
 	
 	function Assets() {
 		
@@ -17,7 +17,7 @@ var Assets = (function () {
 			return console.log('');
 		}
 		
-		var _process = exec(getAssets());
+		let _process = exec(getAssets());
 		
 		_process.stdout.on('data', function (res) {
 			if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0) {
@@ -43,14 +43,14 @@ var Assets = (function () {
 		});
 		
 		function getAssets() {
-			var _staticFolders = _CONFIG.staticFolders;
-			var _assetPath = _CONFIG.assetsPath;
-			var _assetPathName = _CONFIG.assetsPathName;
-			var _pathsArray = _staticFolders && _staticFolders.length ? _staticFolders : ['images', 'videos', 'pdf', 'fonts'];
-			var _temp = '';
-			var _results = '';
+			let _staticFolders = _CONFIG.staticFolders;
+			let _assetPath = _CONFIG.assetsPath;
+			let _assetPathName = _CONFIG.assetsPathName;
+			let _pathsArray = _staticFolders && _staticFolders.length ? _staticFolders : ['images', 'videos', 'pdf', 'fonts'];
+			let _temp = '';
+			let _results = '';
 			
-			for (var i = 0; i < _pathsArray.length; i++) {
+			for (let i = 0; i < _pathsArray.length; i++) {
 				_temp += '\'' + _assetPathName + '/' + _pathsArray[i] + '/**/*.*\' ';
 			}
 			

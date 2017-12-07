@@ -1,38 +1,37 @@
 #! /usr/bin/env node
-'use strict';
+const meow = require('meow');
+const chalk = require('chalk');
+const cliCursor = require('cli-cursor');
+const Commands = require('./commands/app-commands');
+const exec = require('child_process').exec;
+const fileExists = require('file-exists');
+const ConfigFile = process.env.PWD + '/.ciffisettings';
 
-var meow = require('meow');
-var chalk = require('chalk');
-var pkg = require('./package.json');
-var cliCursor = require('cli-cursor');
-var Commands = require('./command/app-commands');
-var exec = require('child_process').exec;
-var fileExists = require('file-exists');
-var ConfigFile = process.env.PWD + '/.ciffisettings';
+let pkg = require('./package.json');
 
-var cli = meow({
+const cli = meow({
 	pkg: pkg
 });
 
-var opts = cli.flags;
-var args = cli.input;
-var cmd = args[0];
-var projectName = args[1];
+const opts = cli.flags;
+const args = cli.input;
+const cmd = args[0];
+const projectName = args[1];
 
 pkg = cli.pkg;
 
 Object.keys(opts).forEach(function (key) {
-	var legacyKey = key.replace(/[A-Z]/g, function (m) {
+	let legacyKey = key.replace(/[A-Z]/g, function (m) {
 		return '-' + m.toLowerCase();
 	});
 	
 	opts[legacyKey] = opts[key];
 });
 
-var _process = exec('npm config get prefix');
+let _process = exec('npm config get prefix');
 
 _process.stdout.on('data', function (path) {
-	var _modulePath = path.trim();
+	let _modulePath = path.trim();
 	
 	start(_modulePath);
 });
@@ -55,8 +54,8 @@ function start(modulePath) {
 		}
 	} else {
 		
-		var _cmd = cmd;
-		var _env = fileExists.sync(ConfigFile) && require(ConfigFile).defaultBuildEnv ? require(ConfigFile).defaultBuildEnv : 'local';
+		let _cmd = cmd;
+		let _env = fileExists.sync(ConfigFile) && require(ConfigFile).defaultBuildEnv ? require(ConfigFile).defaultBuildEnv : 'local';
 		
 		if (cmd.indexOf('build:') === 0) {
 			_cmd = 'build';
@@ -70,86 +69,80 @@ function start(modulePath) {
 		
 		switch (_cmd) {
 			case 'setup':
-				var Setup = require('./command/app-setup')(modulePath);
+				let Setup = require('./commands/app-setup')(modulePath);
 				new Setup({
 					projectName: projectName
 				});
 				break;
-			case 'update':
-				require('./command/app-update');
-				break;
 			case 'serve':
-				require('./command/app-serve');
+				require('./commands/app-serve');
 				break;
 			case 'dev':
-				require('./command/app-dev');
+				require('./commands/app-dev');
 				break;
 			case 'build':
-				require('./command/app-build')(_env);
+				require('./commands/app-build')(_env);
 				break;
 			case 'build-es6':
-				require('./command/app-build-es6');
+				require('./commands/app-build-es6');
 				break;
 			case 'build-prod':
 				console.log(chalk.red.bold('Sorry, but build-prod task is still not available'));
-				//require('./command/app-build-prod');
 				break;
 			case 'dev-old':
-				require('./command/app-dev-old');
+				require('./commands/app-dev-old');
 				break;
 			case 'build-old':
-				require('./command/app-build-prod');
+				require('./commands/app-build-prod');
 				break;
 			case 'config':
-				require('./command/app-config')(_env);
+				require('./commands/app-config')(_env);
 				break;
 			case 'dev-unit':
 				console.log(chalk.red.bold('Sorry, but dev-unit task is still not available'));
-				//require('./command/app-test').devUnit();
 				break;
 			case 'unit':
 				console.log(chalk.red.bold('Sorry, but unit task is still not available'));
-				//require('./command/app-test').unit();
 				break;
 			case 'e2e':
-				var _args = false;
+				let _args = false;
 				if (args[1]) {
 					_args = args;
 				}
-				require('./command/app-test').e2e(_args);
+				require('./commands/app-test').e2e(_args);
 				break;
 			case 'newpage':
-				var Page = require('./command/app-newpage')(modulePath);
+				let Page = require('./commands/app-newpage')(modulePath);
 				new Page({
 					pageName: projectName
 				});
 				break;
 			case 'newmodule':
-				var Module = require('./command/app-newmodule')(modulePath);
+				let Module = require('./commands/app-newmodule')(modulePath);
 				new Module({
 					moduleName: projectName
 				});
 				break;
 			case 'newcomponent':
-				var Component = require('./command/app-newcomponent')(modulePath);
+				let Component = require('./commands/app-newcomponent')(modulePath);
 				new Component({
 					componentName: projectName
 				});
 				break;
 			case 'jsdoc':
-				require('./command/app-doc').jsdoc();
+				require('./commands/app-doc').jsdoc();
 				break;
 			case 'cssdoc':
-				require('./command/app-doc').cssdoc();
+				require('./commands/app-doc').cssdoc();
 				break;
 			case 'styleguide':
-				require('./command/app-doc').styleguide();
+				require('./commands/app-doc').styleguide();
 				break;
 			case 'assets':
-				require('./command/app-assets');
+				require('./commands/app-assets');
 				break;
 			case 'styles':
-				require('./command/app-styles');
+				require('./commands/app-styles');
 				break;
 			default:
 				showCommandErrorMessage();

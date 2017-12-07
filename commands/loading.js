@@ -1,8 +1,8 @@
 'use strict';
 
-var Ora = require('ora');
+let Ora = require('ora');
 
-var Loading = (function () {
+let Loading = (function () {
 	
 	function Loading() {
 		this.current = false;
@@ -41,7 +41,7 @@ var Loading = (function () {
 	}
 	
 	Loading.prototype.start = function (text) {
-		var _spinners = this.spinners;
+		let _spinners = this.spinners;
 		this.current = Ora({
 			text: text,
 			spinner: _spinners.track

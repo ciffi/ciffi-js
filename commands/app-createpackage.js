@@ -1,10 +1,10 @@
-var chalk = require('chalk');
-var shell = require('shelljs');
-var fileExists = require('file-exists');
-var pathExists = require('path-exists');
-var Loading = require('./loading');
+let chalk = require('chalk');
+let shell = require('shelljs');
+let fileExists = require('file-exists');
+let pathExists = require('path-exists');
+let Loading = require('./loading');
 
-var CreatePackage = (function (features, modulePath, callback) {
+let CreatePackage = (function (features, modulePath, callback) {
 	
 	function CreatePackage() {
 		console.log('');
@@ -22,16 +22,16 @@ var CreatePackage = (function (features, modulePath, callback) {
 	
 	function generateFile(features, callback) {
 		
-		var _fileName = 'lite.json';
-		var _features = features.join('+');
-		var _wantRouter = true;
+		let _fileName = 'lite.json';
+		let _features = features.join('+');
+		let _wantRouter = false;
 		
 		if (_features.indexOf('router+') === 0) {
 			_features = _features.replace('router+', '');
+			_wantRouter = true;
 		} else if (_features.indexOf('router') === 0) {
 			_features = _features.replace('router', '');
-		} else {
-			_wantRouter = false;
+			_wantRouter = true;
 		}
 		
 		switch (_features) {
@@ -55,7 +55,7 @@ var CreatePackage = (function (features, modulePath, callback) {
 	
 	function yeah(fileName, features, callback) {
 		
-		var _tempPath = process.env.PWD + '/.ciffi/';
+		let _tempPath = process.env.PWD + '/.ciffi/';
 		
 		pathExists(_tempPath).then(function (res) {
 			if (!res) {
@@ -64,12 +64,12 @@ var CreatePackage = (function (features, modulePath, callback) {
 		});
 		
 		generateFile(features, function (generatedFile, wantRouter) {
-			var _generatedFile = generatedFile;
+			let _generatedFile = generatedFile;
 			
-			var _tempFile = _tempPath + fileName;
-			var _resource = modulePath + '/lib/node_modules/ciffi/node_modules/ciffi-js-' + 'webpack' + '/resources/package/' + _generatedFile;
-			var _projectRoot = process.env.PWD + '/';
-			var _projectFile = process.env.PWD + '/' + fileName;
+			let _tempFile = _tempPath + fileName;
+			let _resource = modulePath + '/lib/node_modules/ciffi/node_modules/ciffi-js-' + 'webpack' + '/resources/package/' + _generatedFile;
+			let _projectRoot = process.env.PWD + '/';
+			let _projectFile = process.env.PWD + '/' + fileName;
 			
 			shell.cp(_resource, _tempFile);
 			
@@ -92,8 +92,8 @@ var CreatePackage = (function (features, modulePath, callback) {
 	}
 	
 	function addTestingDependencies() {
-		var _tempPath = process.env.PWD + '/.ciffi/';
-		var _resource = modulePath + '/lib/node_modules/ciffi/node_modules/ciffi-js-webpack/resources/frontend/test/*';
+		let _tempPath = process.env.PWD + '/.ciffi/';
+		let _resource = modulePath + '/lib/node_modules/ciffi/node_modules/ciffi-js-webpack/resources/frontend/test/*';
 		_destination = _tempPath + 'test/';
 		
 		shell.mkdir(_destination);
@@ -101,10 +101,10 @@ var CreatePackage = (function (features, modulePath, callback) {
 	}
 	
 	function addRouterDependencies(wantRouter, callback) {
-		var _tempPath = process.env.PWD + '/.ciffi/';
-		var _resource = '';
-		var _destination = '';
-		var _mainJS = wantRouter ? 'main-router' : 'main';
+		let _tempPath = process.env.PWD + '/.ciffi/';
+		let _resource = '';
+		let _destination = '';
+		let _mainJS = wantRouter ? 'main-router' : 'main';
 		
 		if (wantRouter) {
 			// pages.js

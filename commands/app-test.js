@@ -1,5 +1,5 @@
-var npm = require('npm');
-var Test = (function () {
+let npm = require('npm');
+let Test = (function () {
 	
 	function Test() {
 	}
@@ -34,7 +34,7 @@ var Test = (function () {
 			});
 		},
 		e2e: function (args) {
-			var _cmd = (!args) ? 'test-e2e' : 'test-e2e-' + args[1];
+			let _cmd = (!args) ? 'test-e2e' : 'test-e2e-' + args[1];
 			npm.load(function (err) {
 				npm.commands.run([_cmd], function (er, data) {
 					if (er) {

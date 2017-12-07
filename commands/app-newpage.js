@@ -1,13 +1,13 @@
-var chalk = require('chalk');
-var shell = require('shelljs');
-var fileExists = require('file-exists');
-var inquirer = require('inquirer');
-var pathExists = require('path-exists');
-var replace = require('replace-in-file');
-var NewPage = (function (modulePath) {
+let chalk = require('chalk');
+let shell = require('shelljs');
+let fileExists = require('file-exists');
+let inquirer = require('inquirer');
+let pathExists = require('path-exists');
+let replace = require('replace-in-file');
+let NewPage = (function (modulePath) {
 	
-	var ASSETSPATHNAME = 'static';
-	var ASSETSBUNDLE = 'webpack';
+	let ASSETSPATHNAME = 'static';
+	let ASSETSBUNDLE = 'webpack';
 	
 	function NewPage(config) {
 		
@@ -15,7 +15,7 @@ var NewPage = (function (modulePath) {
 	}
 	
 	function start(pageName) {
-		var _tempPath = process.env.PWD + '/.ciffi/';
+		let _tempPath = process.env.PWD + '/.ciffi/';
 		
 		pathExists(_tempPath).then(function (res) {
 			if (!res) {
@@ -23,23 +23,23 @@ var NewPage = (function (modulePath) {
 			}
 		});
 		
-		var _configFile = process.env.PWD + '/.ciffisettings';
+		let _configFile = process.env.PWD + '/.ciffisettings';
 		
 		if (fileExists.sync(_configFile)) {
 			
-			var _appConfig = require(_configFile);
+			let _appConfig = require(_configFile);
 			ASSETSPATHNAME = _appConfig.assetsPathName;
 			//ASSETSBUNDLE = _appConfig.bundle || ASSETSBUNDLE;
 			
 		}
 		
-		var _fileName = pageName.split('/')[pageName.split('/').length - 1] + '.js';
-		var _fullName = pageName + '.js';
-		var _pathName = _fullName.replace(_fileName, '');
-		var _tempFileJs = _tempPath + _fileName;
-		var _resourceJs = modulePath + '/lib/node_modules/ciffi/node_modules/ciffi-js-' + ASSETSBUNDLE + '/resources/newpage/page.js';
-		var _projectPagesJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/pages/' + _pathName;
-		var _projectFileJs = _projectPagesJs + _fileName;
+		let _fileName = pageName.split('/')[pageName.split('/').length - 1] + '.js';
+		let _fullName = pageName + '.js';
+		let _pathName = _fullName.replace(_fileName, '');
+		let _tempFileJs = _tempPath + _fileName;
+		let _resourceJs = modulePath + '/lib/node_modules/ciffi/node_modules/ciffi-js-' + ASSETSBUNDLE + '/resources/newpage/page.js';
+		let _projectPagesJs = process.env.PWD + '/' + ASSETSPATHNAME + '/scripts/pages/' + _pathName;
+		let _projectFileJs = _projectPagesJs + _fileName;
 		
 		if (fileExists.sync(_projectFileJs)) {
 			console.log(chalk.red('☠️  File already exists: ' + _projectFileJs + ' ☠️'));
@@ -61,10 +61,10 @@ var NewPage = (function (modulePath) {
 	}
 	
 	function capitalizeFirstLetter(string) {
-		var _capitalized = string.charAt(0).toUpperCase() + string.slice(1);
-		var _stringArray = _capitalized.split('-');
-		var _result = '';
-		for (var i = 0; i < _stringArray.length; i++) {
+		let _capitalized = string.charAt(0).toUpperCase() + string.slice(1);
+		let _stringArray = _capitalized.split('-');
+		let _result = '';
+		for (let i = 0; i < _stringArray.length; i++) {
 			_result += _stringArray[i].charAt(0).toUpperCase() + _stringArray[i].slice(1)
 		}
 		return _result;
@@ -86,7 +86,7 @@ var NewPage = (function (modulePath) {
 	}
 	
 	function askForName(name, callback) {
-		var _name = name;
+		let _name = name;
 		if (!_name) {
 			inquirer.prompt({
 				type: 'input',
@@ -95,12 +95,12 @@ var NewPage = (function (modulePath) {
 				default: 'page-name',
 				validate: function (res) {
 					
-					var done = this.async();
+					let done = this.async();
 					
 					setTimeout(function () {
 						
-						var _test = new RegExp(/^$|\s+|\w\s+|[\/]|^\.|\.$/);
-						var _testResult = _test.test(res);
+						let _test = new RegExp(/^$|\s+|\w\s+|[\/]|^\.|\.$/);
+						let _testResult = _test.test(res);
 						
 						if (typeof res !== 'string' || _testResult) {
 							done('☠️  Page must have real name ☠️');

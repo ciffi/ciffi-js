@@ -1,12 +1,12 @@
-var chalk = require('chalk');
-var fileExists = require('file-exists');
-var exec = require('child_process').exec;
-var Log = require('single-line-log').stdout;
-var ConfigFile = process.env.PWD + '/.ciffisettings';
+let chalk = require('chalk');
+let fileExists = require('file-exists');
+let exec = require('child_process').exec;
+let Log = require('single-line-log').stdout;
+let ConfigFile = process.env.PWD + '/.ciffisettings';
 
-var Serve = (function () {
+let Serve = (function () {
 	
-	var _CONFIG;
+	let _CONFIG;
 	
 	function Serve() {
 		
@@ -17,13 +17,13 @@ var Serve = (function () {
 			return console.log('');
 		}
 		
-		var _disabled = _CONFIG && _CONFIG.bundle && _CONFIG.bundle !== 'webpack';
+		let _disabled = _CONFIG && _CONFIG.bundle && _CONFIG.bundle !== 'webpack';
 		
 		if (_disabled) {
 			return console.log(chalk.red.bold('Sorry, but serve task is still not available'));
 		}
 		
-		var _process = exec('./node_modules/.bin/webpack-dev-server --config serve.config.js --progress --inline --hot');
+		let _process = exec('./node_modules/.bin/webpack-dev-server --config serve.config.js --progress --inline --hot');
 		
 		_process.stdout.on('data', function (res) {
 			if (res.indexOf('ERROR in') >= 0) {
