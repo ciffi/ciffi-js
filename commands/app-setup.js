@@ -95,8 +95,8 @@ let AppSetup = (function (modulePath) {
 			type: 'checkbox',
 			name: 'features',
 			message: 'What features do you want to include in this project?',
-			default: ['router'],
-			choices: ['router', 'testing', 'styleguides']
+			default: false,
+			choices: ['router', 'react', 'testing', 'styleguides']
 		}).then(function (res) {
 			callback(res.features);
 		});
@@ -235,7 +235,6 @@ let AppSetup = (function (modulePath) {
 				
 				Loading.stop('Generate project tree for ' + chalk.blue(config.projectName) + chalk.green.bold(' OK'));
 				
-				require('./app-sethiddenfile')(config.isNewVersion, modulePath);
 				require('./app-createsettings')({
 					projectName: config.projectName,
 					assetsPath: _fixedAssetsUrl,
@@ -244,8 +243,9 @@ let AppSetup = (function (modulePath) {
 					isNewVersion: config.isNewVersion,
 					features: config.features
 				}, modulePath, function () {
-					require('./app-createpackage')(config.features, modulePath, function (wantRouter) {
-						require('./moveApp')(wantRouter);
+					require('./app-createpackage')(config.features, modulePath, function (whatWant) {
+						require('./app-sethiddenfile')(config.isNewVersion, whatWant, modulePath);
+						require('./moveApp')(whatWant);
 					});
 				});
 				

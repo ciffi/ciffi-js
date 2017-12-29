@@ -6,11 +6,15 @@ let AppDependencies = (function () {
 	
 	function AppDependencies() {
 		
-		this.download = function (wantRouter, callback) {
+		this.download = function (whatWant, callback) {
 			let _process = 'npm install';
 			
-			if (wantRouter) {
+			if (whatWant.router) {
 				_process += ' && npm install --save @ciffi-js/router';
+			}
+			
+			if (whatWant.react) {
+				_process += ' && npm install --save-dev babel-preset-react eslint-plugin-react && npm install --save react react-dom';
 			}
 			
 			addProcessListeners(exec(_process), callback);

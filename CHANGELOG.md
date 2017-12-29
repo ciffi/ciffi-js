@@ -1,3 +1,9 @@
+### v0.29.0 (2017-12-29)
+
+#### Integrated React
+- now you can choose if want add React as project's dependency
+- minor fixes
+
 ### v0.28.0 (2017-12-07)
 
 #### Update ciffi js webpack base project dependencies

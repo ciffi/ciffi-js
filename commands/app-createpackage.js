@@ -11,11 +11,11 @@ let CreatePackage = (function (features, modulePath, callback) {
 		
 		Loading.start('Generate ' + chalk.blue('package.json'));
 		
-		yeah('package.json', features, function (wantRouter) {
+		yeah('package.json', features, function (whatWant) {
 			
 			Loading.stop('Generate ' + chalk.blue('package.json') + chalk.green.bold(' OK'));
 			
-			callback(wantRouter);
+			callback(whatWant);
 			
 		});
 	}
@@ -25,6 +25,7 @@ let CreatePackage = (function (features, modulePath, callback) {
 		let _fileName = 'lite.json';
 		let _features = features.join('+');
 		let _wantRouter = false;
+		let _wantReact = false;
 		
 		if (_features.indexOf('router+') === 0) {
 			_features = _features.replace('router+', '');
@@ -32,6 +33,14 @@ let CreatePackage = (function (features, modulePath, callback) {
 		} else if (_features.indexOf('router') === 0) {
 			_features = _features.replace('router', '');
 			_wantRouter = true;
+		}
+		
+		if (_features.indexOf('react+') === 0) {
+			_features = _features.replace('react+', '');
+			_wantReact = true;
+		} else if (_features.indexOf('react') === 0) {
+			_features = _features.replace('react', '');
+			_wantReact = true;
 		}
 		
 		switch (_features) {
@@ -50,7 +59,7 @@ let CreatePackage = (function (features, modulePath, callback) {
 				_fileName = 'lite.json'
 		}
 		
-		callback(_fileName, _wantRouter);
+		callback(_fileName, {router: _wantRouter, react: _wantReact});
 	}
 	
 	function yeah(fileName, features, callback) {
@@ -63,7 +72,7 @@ let CreatePackage = (function (features, modulePath, callback) {
 			}
 		});
 		
-		generateFile(features, function (generatedFile, wantRouter) {
+		generateFile(features, function (generatedFile, whatWant) {
 			let _generatedFile = generatedFile;
 			
 			let _tempFile = _tempPath + fileName;
@@ -81,8 +90,16 @@ let CreatePackage = (function (features, modulePath, callback) {
 						shell.cp(_tempFile, _projectFile);
 						shell.rm('-rf', _tempFile);
 						//shell.rm('-rf', _projectRoot + '/' + fileName);
-						addRouterDependencies(wantRouter, function () {
-							callback(wantRouter);
+						addRouterDependencies(whatWant.router, function () {
+							
+							addReactDependencies(whatWant.react, function () {
+								
+								generateMain(whatWant, function () {
+									callback(whatWant);
+								});
+								
+							});
+							
 						});
 					}
 				});
@@ -104,7 +121,6 @@ let CreatePackage = (function (features, modulePath, callback) {
 		let _tempPath = process.env.PWD + '/.ciffi/';
 		let _resource = '';
 		let _destination = '';
-		let _mainJS = wantRouter ? 'main-router' : 'main';
 		
 		if (wantRouter) {
 			// pages.js
@@ -127,6 +143,41 @@ let CreatePackage = (function (features, modulePath, callback) {
 			shell.mkdir(_destination);
 			shell.cp('-r', _resource, _destination);
 			
+		}
+		
+		callback();
+	}
+	
+	function addReactDependencies(wantReact, callback) {
+		let _tempPath = process.env.PWD + '/.ciffi/';
+		let _resource = '';
+		let _destination = '';
+		
+		if (wantReact) {
+			//pages folder
+			_resource = modulePath + '/lib/node_modules/ciffi/node_modules/ciffi-js-webpack/resources/react/*';
+			_destination = _tempPath + 'src/scripts/components/';
+			
+			shell.mkdir(_destination);
+			shell.cp('-r', _resource, _destination);
+			
+		}
+		
+		callback();
+	}
+	
+	function generateMain(whatWant, callback) {
+		let _tempPath = process.env.PWD + '/.ciffi/';
+		let _resource;
+		let _destination;
+		let _mainJS = 'main';
+		
+		if (whatWant.router) {
+			_mainJS += '-router';
+		}
+		
+		if (whatWant.react) {
+			_mainJS += '-react';
 		}
 		
 		//main.js
