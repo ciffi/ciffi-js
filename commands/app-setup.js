@@ -7,6 +7,7 @@ let shell = require('shelljs');
 let Loading = require('./loading');
 let CheckUpdate = require('./app-check-update');
 let exec = require('child_process').exec;
+let CiffiJsWebpack = require('ciffi-js-webpack');
 
 let AppSetup = (function (modulePath) {
 	
@@ -21,31 +22,23 @@ let AppSetup = (function (modulePath) {
 		
 		CheckUpdate.check(function (res) {
 			
-			console.log('');
 			if (res) {
+				console.log('');
 				askForUpdate(function (res) {
 					if (res === 'no') {
-						exec(modulePath + '/lib/node_modules/ciffi/node_modules/.bin/ciffi-js-webpack', (err, res) => {
-							if (res.indexOf('yeah') >= 0) {
-								init(config);
-							}
-						});
+						updateFrontendProject(() => init(config));
 					} else {
-						exec(modulePath + '/lib/node_modules/ciffi/node_modules/.bin/ciffi-js-webpack', (err, res) => {
-							if (res.indexOf('yeah') >= 0) {
-								CheckUpdate.update(function () {
-									init(config);
-								});
-							}
+						updateFrontendProject(() => {
+							CheckUpdate.update(function () {
+								init(config);
+							});
 						});
 					}
 				});
 			} else {
-				exec(modulePath + '/lib/node_modules/ciffi/node_modules/.bin/ciffi-js-webpack', (err, res) => {
-					if (res.indexOf('yeah') >= 0) {
-						console.log('😎 ' + chalk.green('Latest version installed️'));
-						init(config);
-					}
+				updateFrontendProject(() => {
+					console.log('😎 ' + chalk.green('Latest version installed️'));
+					init(config);
 				});
 			}
 			
@@ -330,6 +323,15 @@ let AppSetup = (function (modulePath) {
 			});
 		});
 		
+	}
+	
+	function updateFrontendProject(callback) {
+		CiffiJsWebpack.check((res) => {
+			if (res && res.text) {
+				console.log(res.text);
+			}
+			callback();
+		});
 	}
 	
 	return AppSetup;

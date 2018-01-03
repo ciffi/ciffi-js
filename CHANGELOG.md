@@ -1,3 +1,8 @@
+### v0.30.0 (2018-01-03)
+
+#### Improved setup task
+- minor fixes
+
 ### v0.29.0 (2017-12-29)
 
 #### Integrated React
