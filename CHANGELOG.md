@@ -1,3 +1,8 @@
+### v0.31.0 (2018-02-11)
+
+#### New babel preset for react
+- minor fixes
+
 ### v0.30.0 (2018-01-03)
 
 #### Improved setup task
