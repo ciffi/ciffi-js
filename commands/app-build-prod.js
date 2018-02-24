@@ -25,7 +25,7 @@ let Build = (function () {
 		let _autoprefixer = './node_modules/.bin/postcss --use autoprefixer --autoprefixer.browsers \'last 12 versions\' -o ' + _assetPath + '/main.css ' + _assetPath + '/main.css';
 		let _cleancss = './node_modules/.bin/cleancss -o ' + _assetPath + '/main.css ' + _assetPath + '/main.css'
 		let _styles = _css + _concat + _autoprefixer + _concat + _cleancss;
-		let _js = './node_modules/.bin/webpack --config build.config.js -p --progress';
+		let _js = './node_modules/.bin/webpack --config build.config.js --progress';
 		let _assets = 'ciffi assets';
 		let _process = exec(_cleanDist + _concat + _styles + _concat + _js + _concat + _assets);
 		

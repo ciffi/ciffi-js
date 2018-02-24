@@ -1,3 +1,8 @@
+### v0.32.0 (2018-02-24)
+
+#### New default babel presets
+- fix webpack build
+
 ### v0.31.0 (2018-02-11)
 
 #### New babel preset for react

@@ -37,7 +37,7 @@ let Build = (function (env) {
 		let _autoprefixer = './node_modules/.bin/postcss --use autoprefixer --autoprefixer.browsers \'' + _autoprefixerConfig + '\' -o ' + _assetPath + '/' + _CONFIG.stylesOutputName + ' ' + _assetPath + '/' + _CONFIG.stylesOutputName;
 		let _cleancss = './node_modules/.bin/cleancss -o ' + _assetPath + '/' + _CONFIG.stylesOutputName + ' ' + _assetPath + '/' + _CONFIG.stylesOutputName;
 		let _styles = _css + _concat + _autoprefixer + _concat + _cleancss;
-		let _js = './node_modules/.bin/webpack --config build.config.js -p --progress';
+		let _js = './node_modules/.bin/webpack --config build.config.js --progress';
 		
 		exec(_createConfig);
 		

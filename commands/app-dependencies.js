@@ -13,10 +13,6 @@ let AppDependencies = (function () {
 				_process += ' && npm install --save @ciffi-js/router';
 			}
 			
-			if (whatWant.react) {
-				_process += ' && npm install --save-dev babel-preset-react eslint-plugin-react babel-preset-es2015 babel-preset-stage-0 && npm install --save react react-dom';
-			}
-			
 			addProcessListeners(exec(_process), callback);
 			
 			// addProcessListeners(exec('yarn'), callback, function () {
