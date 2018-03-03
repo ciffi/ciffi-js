@@ -21,8 +21,9 @@ let SetupHiddenFiles = (function (isNewVersion, whatWant, modulePath) {
 		
 		yeah(_esLintFile, '.eslintrc');
 		yeah('gitignore', '.gitignore');
+        yeah('prettierignore', '.prettierignore');
 		
-		Loading.stop('Generate ' + chalk.blue('.eslint') + ' and ' + chalk.blue('.gitignore') + chalk.green.bold(' OK'));
+		Loading.stop('Generate ' + chalk.blue('.eslint') + ' and ' + chalk.blue('.gitignore') + ' and ' + chalk.blue('.prettierignore') + chalk.green.bold(' OK'));
 		
 	}
 	

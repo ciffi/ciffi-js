@@ -1,3 +1,8 @@
+### v0.33.0 (2018-03-03)
+
+#### Added prettier
+- added prettier 
+
 ### v0.32.0 (2018-02-24)
 
 #### New default babel presets
