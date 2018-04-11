@@ -4,14 +4,14 @@ let fileExists = require('file-exists');
 let pathExists = require('path-exists');
 let Loading = require('./loading');
 
-let CreatePackage = (function (features, modulePath, callback) {
+let CreatePackage = (function (features, livereload, modulePath, callback) {
 	
 	function CreatePackage() {
 		console.log('');
 		
 		Loading.start('Generate ' + chalk.blue('package.json'));
 		
-		yeah('package.json', features, function (whatWant) {
+		yeah('package.json', features, livereload, function (whatWant) {
 			
 			Loading.stop('Generate ' + chalk.blue('package.json') + chalk.green.bold(' OK'));
 			
@@ -20,7 +20,7 @@ let CreatePackage = (function (features, modulePath, callback) {
 		});
 	}
 	
-	function generateFile(features, callback) {
+	function generateFile(features, livereload, callback) {
 		
 		let _fileName = 'lite.json';
 		let _features = features.join('+');
@@ -59,10 +59,10 @@ let CreatePackage = (function (features, modulePath, callback) {
 				_fileName = 'lite.json'
 		}
 		
-		callback(_fileName, {router: _wantRouter, react: _wantReact});
+		callback(_fileName, {router: _wantRouter, react: _wantReact, livereload: livereload});
 	}
 	
-	function yeah(fileName, features, callback) {
+	function yeah(fileName, features, livereload, callback) {
 		
 		let _tempPath = process.env.PWD + '/.ciffi/';
 		
@@ -72,7 +72,7 @@ let CreatePackage = (function (features, modulePath, callback) {
 			}
 		});
 		
-		generateFile(features, function (generatedFile, whatWant) {
+		generateFile(features, livereload, function (generatedFile, whatWant) {
 			let _generatedFile = generatedFile;
 			
 			let _tempFile = _tempPath + fileName;

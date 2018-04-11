@@ -7,7 +7,9 @@ let AppDependencies = (function () {
 	function AppDependencies() {
 		
 		this.download = function (whatWant, callback) {
-			let _process = 'npm install';
+      let _livereload = whatWant.livereload === 'browsersync' ? 'browser-sync' : 'livereload';
+      
+			let _process = 'npm install && npm install --save-dev ' + _livereload;
 			
 			if (whatWant.router) {
 				_process += ' && npm install --save @ciffi-js/router';

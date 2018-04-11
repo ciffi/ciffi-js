@@ -64,10 +64,15 @@ let CreateSettingsFile = (function (config, modulePath, callback) {
     
     function replaceFeatures(config, file, callback) {
         
+        const feature = config.features;
+        const livereload = config.livereload;
+        
+        feature.push(livereload);
+        
         replace({
             files: [file],
             from: /@REPLACE__FEATURES@/g,
-            to: JSON.stringify(config).replace(/"/g, '\'')
+            to: JSON.stringify(feature).replace(/"/g, '\'')
         }, function (error) {
             if (error) {
                 return console.error('Error occurred:', error);
@@ -109,7 +114,7 @@ let CreateSettingsFile = (function (config, modulePath, callback) {
         replaceBundleName(appConfig.bundle, _tempFile, function () {
             replaceBuildPath(appConfig.assetsPath, _tempFile, function () {
                 replaceConfig(appConfig.projectName, _tempFile, function () {
-                    replaceFeatures(appConfig.features, _tempFile, function () {
+                    replaceFeatures(appConfig, _tempFile, function () {
                         
                         if (fileExists.sync(_projectFile)) {
                             console.log(chalk.red('File already exists: ' + _projectFile));
