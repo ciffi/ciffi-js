@@ -1,60 +1,23 @@
 {
-  "name": "ciffi",
-  "version": "0.34.0",
-  "description": "Ciffi Frontend Generator",
-  "main": "ciffi.js",
+  "name": "ciffi-frontend-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ciffi/ciffi-js"
+    "url": "git+https://ciffi@github.com/ciffi/ciffi-frontend-generator.git"
   },
-  "author": {
-    "name": "Ciffi"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ciffi/ciffi-frontend-generator/issues"
   },
-  "keywords": [
-    "ciffi",
-    "ciffi-js",
-    "javascript",
-    "webpack",
-    "webpack2",
-    "cli-app",
-    "cli",
-    "front-end",
-    "development",
-    "dev",
-    "build",
-    "web",
-    "tool",
-    "scaffold",
-    "stack",
-    "generator",
-    "generate",
-    "app",
-    "test",
-    "cucumberjs",
-    "nightwatch",
-    "livereload",
-    "local-server"
-  ],
-  "license": "MIT",
-  "homepage": "https://github.com/ciffi/ciffi-js",
-  "preferGlobal": true,
-  "dependencies": {
-    "chalk": "^2.3.0",
-    "ciffi-js-webpack": "^0.21.0",
-    "cli-cursor": "^2.1.0",
-    "cli-spinners": "^1.1.0",
-    "empty-dir": "^0.2.1",
-    "file-exists": "^5.0.0",
-    "foreach": "^2.0.5",
-    "inquirer": "^4.0.1",
-    "meow": "^4.0.0",
-    "ora": "^1.3.0",
-    "path-exists": "^3.0.0",
-    "replace-in-file": "^3.0.0",
-    "shelljs": "^0.7.8",
-    "single-line-log": "^1.1.2"
-  },
-  "bin": {
-    "ciffi": "./ciffi.js"
+  "homepage": "https://github.com/ciffi/ciffi-frontend-generator#readme",
+  "devDependencies": {
+    "lerna": "^2.11.0"
   }
 }
