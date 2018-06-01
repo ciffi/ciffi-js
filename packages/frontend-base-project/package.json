@@ -1,0 +1,21 @@
+{
+  "name": "ciffi-js-webpack",
+  "version": "0.21.0",
+  "author": {
+    "name": "Ciffi"
+  },
+  "description": "Ciffi-js frontend base project for webpack installation",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ciffi/ciffi-js.git"
+  },
+  "license": "ISC",
+  "homepage": "https://github.com/ciffi/ciffi-js",
+  "main": "./commands/app-check-update.js",
+  "bin": {
+    "ciffi-js-webpack": "./main.js"
+  },
+  "dependencies": {
+    "chalk": "^2.3.0"
+  }
+}

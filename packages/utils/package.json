@@ -1,0 +1,29 @@
+{
+  "name": "@ciffi-js/utils",
+  "version": "1.0.4",
+  "description": "JS Utility",
+  "main": "./utils.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ciffi/ciffi-js/"
+  },
+  "author": {
+    "name": "Ciffi"
+  },
+  "keywords": [
+    "ciffi",
+    "ciffi-js",
+    "javascript",
+    "front-end",
+    "development",
+    "web",
+    "module",
+    "javascript utility"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ciffi/ciffi-js",
+  "preferGlobal": false,
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}

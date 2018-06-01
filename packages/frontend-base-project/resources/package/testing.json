@@ -1,0 +1,70 @@
+{
+  "name": "ciffi-base-project",
+  "version": "1.0.0",
+  "author": {
+    "name": "Ciffi"
+  },
+  "description": "Frontend Base Project - testing",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ciffi/ciffi-js-webpack.git"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/ciffi/ciffi-js-webpack",
+  "devDependencies": {
+    "@ciffi-js/builder": "^1.1.0",
+    "@ciffi-js/jsonize-path": "^1.0.4",
+    "autoprefixer": "^7.2.1",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2017": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "chromedriver": "^2.33.2",
+    "clean-css-cli": "^4.1.10",
+    "copyfiles": "^1.2.0",
+    "css-loader": "^0.28.10",
+    "cucumber": "^3.1.0",
+    "cucumber-html-reporter": "^3.0.4",
+    "cucumber-pretty": "0.0.5",
+    "eslint": "^4.18.2",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-react": "^7.7.0",
+    "geckodriver": "^1.10.0",
+    "hard-source-webpack-plugin": "^0.6.1",
+    "nightwatch": "^0.9.19",
+    "nightwatch-cucumber": "^8.2.10",
+    "node-sass": "^4.7.2",
+    "phantomjs-prebuilt": "^2.1.16",
+    "postcss-cli": "^4.1.1",
+    "prettier": "^1.11.1",
+    "sass-loader": "^6.0.6",
+    "selenium-chromedriver": "0.0.2",
+    "selenium-server": "^3.8.1",
+    "selenium-webdriver": "^3.6.0",
+    "style-loader": "^0.20.2",
+    "twig": "^1.10.5",
+    "twig-loader": "^0.3.1",
+    "webpack": "^4.1.0",
+    "webpack-cli": "^2.0.10"
+  },
+  "dependencies": {
+    "@ciffi-js/device": "^1.0.2",
+    "breakpoint-sass": "^2.7.1",
+    "jquery": "^3.2.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "reset-css": "^2.2.1"
+  },
+  "scripts": {
+    "dev": "./node_modules/.bin/ciffi-builder dev",
+    "build": "./node_modules/.bin/ciffi-builder build --env",
+    "jsonize": "./node_modules/.bin/ciffi-jsonize",
+    "prettier": "./node_modules/.bin/prettier --write --single-quote '**/*.{jsx,js,json,scss}'",
+    "test-e2e": "./node_modules/.bin/nightwatch -c ./test/e2e/config.js && node ./test/e2e/generate-report.js || node ./test/e2e/generate-report.js",
+    "test-e2e-chrome": "./node_modules/.bin/nightwatch -c ./test/e2e/config.js --env chrome && node ./test/e2e/generate-report.js || node ./test/e2e/generate-report.js",
+    "test-e2e-firefox": "./node_modules/.bin/nightwatch -c ./test/e2e/config.js --env firefox && node ./test/e2e/generate-report.js || node ./test/e2e/generate-report.js"
+  }
+}

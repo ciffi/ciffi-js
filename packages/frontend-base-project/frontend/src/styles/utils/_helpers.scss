@@ -1,0 +1,85 @@
+/// This set/remove element aspect ratio
+/// @param {number} $w - element width
+/// @param {number} $h - element height
+/// @example scss - Set aspect ratio
+///   @include ratio(16,9);
+/// @example scss - Remove aspect ratio
+///   @include ratio(0,0);
+/// @group helpers
+@mixin ratio($w,$h) {
+  @if $w == 0 {
+    &:before {
+      display: none;
+    }
+  } @else {
+    &:before {
+      display: block;
+      content: '';
+      width: 100%;
+      padding-bottom: ($h/$w)*100%;
+    }
+  }
+}
+
+/// This set input placeholder css properties
+/// @example scss - Set properties
+///   @include placeholder() {
+///     color: red;
+///     background-color: green;
+///   }
+/// @group helpers
+@mixin placeholder() {
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    @content;
+  }
+
+  ::-moz-placeholder { /* Firefox 19+ */
+    @content;
+  }
+
+  :-ms-input-placeholder { /* IE 10+ */
+    @content;
+  }
+
+  :-moz-placeholder { /* Firefox 18- */
+    @content;
+  }
+}
+
+/// This fixes webkit autofilled input styles
+/// @example scss - Set properties
+///   @include autofill(#fff, #000);
+/// @group helpers
+@mixin autofill($bg,$text) {
+  *:-webkit-autofill,
+  *:-webkit-autofill:hover,
+  *:-webkit-autofill:focus,
+  *:-webkit-autofill:active {
+    box-shadow: 0 0 0 100vh $bg inset !important;
+    -webkit-text-fill-color: $text !important;
+  }
+}
+
+/// Provides a conversion from pixels to vw
+/// @param {string} $size - the amount of pixels to be converted
+/// @param {string} $breakpoint-max-w - the viewport max width reference
+/// @example scss - Convert px to vw
+///   font-size: vw(10,1024);
+/// @group helpers
+@function vw($size, $breakpoint-max-w: 1920) {
+  $context: ($breakpoint-max-w * 0.01);
+  $result: round($size * 100 / $context) / 100;
+  @return #{$result}vw;
+}
+
+/// Provides a conversion from pixels to vw
+/// @param {string} $size - the amount of pixels to be converted
+/// @param {string} $breakpoint-max-h - the viewport max height reference
+/// @example scss - Convert px to vh
+///   font-size: vh(10,768);
+/// @group helpers
+@function vh($size, $breakpoint-max-h: 1080) {
+  $context: ($breakpoint-max-h * 0.01);
+  $result: round($size * 100 / $context) / 100;
+  @return #{$result}vh;
+}

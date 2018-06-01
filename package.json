@@ -3,21 +3,22 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://ciffi@github.com/ciffi/ciffi-frontend-generator.git"
+    "url": "git+https://ciffi@github.com/ciffi/ciffi-js.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ciffi/ciffi-frontend-generator/issues"
+    "url": "https://github.com/ciffi/ciffi-js/issues"
   },
-  "homepage": "https://github.com/ciffi/ciffi-frontend-generator#readme",
+  "homepage": "https://github.com/ciffi/ciffi-js#readme",
   "devDependencies": {
     "lerna": "^2.11.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lerna": "./node_modules/.bin/lerna $1"
   }
 }
