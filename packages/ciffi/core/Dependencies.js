@@ -1,18 +1,18 @@
 let chalk = require('chalk');
-let Loading = require('./loading');
+let Loading = require('./Loading');
 let exec = require('child_process').exec;
 
-let AppDependencies = (function () {
+let Dependencies = (function () {
 	
 	function AppDependencies() {
 		
 		this.download = function (whatWant, callback) {
       let _livereload = whatWant.livereload === 'browsersync' ? 'browser-sync' : 'livereload';
       
-			let _process = 'npm install && npm install --save-dev ' + _livereload;
+			let _process = 'npm install --no-progress && npm install --no-progress --save-dev ' + _livereload;
 			
 			if (whatWant.router) {
-				_process += ' && npm install --save @ciffi-js/router';
+				_process += ' && npm install --no-progress --save @ciffi-js/router';
 			}
 			
 			addProcessListeners(exec(_process), callback);
@@ -86,4 +86,4 @@ let AppDependencies = (function () {
 	
 })();
 
-module.exports = AppDependencies;
+module.exports = Dependencies;

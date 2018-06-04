@@ -2,7 +2,7 @@ let chalk = require('chalk');
 let npm = require('npm');
 let shell = require('shelljs');
 let exec = require('child_process').exec;
-let CiffiDependencies = require('./app-dependencies');
+let CiffiDependencies = require('./Dependencies');
 let pkg = require('../package.json');
 
 let MoveApp = (function (whatWant) {
@@ -17,7 +17,7 @@ let MoveApp = (function (whatWant) {
 		
 		CiffiDependencies.download(whatWant, function () {
 			exec('ciffi --postsetup', function () {
-				console.log(chalk.blue('ciffi -h') + chalk.green(' for commands list'));
+				console.log(chalk.blue('ciffi -h') + chalk.green(' for core list'));
 				console.log('');
 				console.log(chalk.blue.bold(pkg.author.name) + chalk.blue.bold(' ^_^'));
 				console.log('');

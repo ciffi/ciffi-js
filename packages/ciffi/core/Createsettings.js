@@ -3,7 +3,7 @@ let shell = require('shelljs');
 let replace = require('replace-in-file');
 let fileExists = require('file-exists');
 let pathExists = require('path-exists');
-let Loading = require('./loading');
+let Loading = require('./Loading');
 
 let CreateSettingsFile = (function (config, modulePath, callback) {
     

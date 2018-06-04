@@ -2,7 +2,7 @@ let chalk = require('chalk');
 let shell = require('shelljs');
 let fileExists = require('file-exists');
 let pathExists = require('path-exists');
-let Loading = require('./loading');
+let Loading = require('./Loading');
 
 let SetupHiddenFiles = (function (isNewVersion, whatWant, modulePath) {
   
