@@ -1,3 +1,10 @@
+### v1.0.0 (2018-06-05)
+
+#### Refactoring
+- Added Lerna
+- Rewritten with latest javascript features
+- Splitted codes in core and task
+
 ### v0.33.0 (2018-03-03)
 
 #### Added prettier

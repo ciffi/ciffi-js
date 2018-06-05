@@ -3,11 +3,17 @@ const inquirer = require('inquirer');
 const replace = require('replace-in-file');
 const emptyDir = require('empty-dir');
 const cliCursor = require('cli-cursor');
-const shell = require('shelljs');
-const exec = require('child_process').exec;
 const CiffiJsWebpack = require('ciffi-js-webpack');
 const Loading = require('../core/Loading');
 const CheckUpdate = require('../core/CheckUpdate');
+const ProcessManager = require('../core/ProcessManager');
+const TempApp = require('../core/TempApp');
+const CreateSettings = require('../core/CreateSettings');
+const CreatePackage = require('../core/CreatePackage');
+const CreateHiddenFiles = require('../core/CreateHiddenFiles');
+const MoveApp = require('../core/MoveApp');
+const Dependencies = require('../core/Dependencies');
+const {showGreetings} = require('../core/Messages');
 
 class Setup {
   
@@ -18,122 +24,241 @@ class Setup {
       ciffiSrcName: 'src'
     };
     
-    console.log('👀 ' + chalk.blue('looking for updates'));
+    this.init();
+  }
+  
+  init() {
     
-    CheckUpdate.check((res) => {
+    this.checkUpdates(() => {
+      this.beforeStart(({buildPath, features, livereload}) => {
+        
+        this.config.features = features;
+        this.config.livereload = livereload;
+        this.config.buildPath = buildPath;
+        
+        new TempApp(this.config.modulePath, () => {
+          this.start();
+        });
+      });
+    });
+  }
+  
+  checkUpdates(callback) {
+    const updateChecker = new CheckUpdate((hasUpdate) => {
       
-      if (res) {
-        console.log('');
-        this.askForUpdate((res) => {
-          if (res === 'no') {
-            updateFrontendProject(() => init(config));
+      if (hasUpdate) {
+        this.askForUpdate((wantUpdate) => {
+          if (!wantUpdate) {
+            CiffiJsWebpack.check(callback);
           } else {
-            updateFrontendProject(() => {
-              CheckUpdate.update(() => {
-                init(config);
-              });
+            updateChecker.update(() => {
+              CiffiJsWebpack.check(callback);
             });
           }
         });
       } else {
-        updateFrontendProject(() => {
-          console.log('😎 ' + chalk.green('Latest version installed️'));
-          init(config);
-        });
+        console.log('😎 ' + chalk.green('Latest version installed️'));
+        CiffiJsWebpack.check(callback);
       }
       
     });
   }
   
   askForUpdate(callback) {
+    console.log('');
     inquirer.prompt({
       type: 'list',
       name: 'wantUpdate',
       message: 'Update ciffi before setup?',
       default: 0,
       choices: ['yes', 'no']
-    }).then(function (res) {
-      callback(res.wantUpdate);
+    }).then((res) => {
+      callback(res.wantUpdate === 'yes');
     });
   }
   
+  askForFeatures(callback) {
+    inquirer.prompt({
+      type: 'checkbox',
+      name: 'features',
+      message: 'What features do you want to include in this project?',
+      default: false,
+      choices: ['router']
+    }).then((res) => {
+      callback(res.features);
+    });
+  }
   
-}
-
-module.exports = Setup;
-
-function init(config) {
-  beforeStart(config, function (config) {
+  askForLiveReload(callback) {
+    inquirer.prompt({
+      type: 'list',
+      name: 'livereload',
+      message: 'What file watcher do you want to include in this project?',
+      default: 0,
+      choices: ['none', 'browsersync', 'livereload']
+    }).then((res) => {
+      callback(res.livereload);
+    });
+  }
+  
+  askForProjectName(callback) {
+    const projectName = this.config.projectName;
+    if (!projectName) {
+      inquirer.prompt({
+        type: 'input',
+        name: 'projectName',
+        message: 'Specify project name',
+        default: 'test',
+        validate: function (res) {
+          
+          const done = this.async();
+          
+          setTimeout(() => {
+            
+            const test = new RegExp(/^$|\s+|\w\s+|[\/]|^\.|\.$/);
+            const testResult = test.test(res);
+            
+            if (typeof res !== 'string' || testResult) {
+              done('☠️  Project must have real name ☠️');
+              return;
+            }
+            
+            done(null, true);
+            
+          }, 10);
+        }
+      }).then((res) => {
+        this.config.projectName = res.projectName;
+        callback();
+      });
+    } else {
+      callback();
+    }
+  }
+  
+  replaceBuildPath(newString, callback) {
     
-    askForBundle(function (features) {
+    const files = [
+      process.env.PWD + '/' + this.config.ciffiSrc + '/scripts/config/config.js',
+      process.env.PWD + '/' + this.config.ciffiSrc + '/scripts/config/env/dev.js',
+      process.env.PWD + '/' + this.config.ciffiSrc + '/scripts/config/env/local.js',
+      process.env.PWD + '/' + this.config.ciffiSrc + '/scripts/config/env/stage.js',
+      process.env.PWD + '/' + this.config.ciffiSrc + '/scripts/config/env/prod.js',
+      process.env.PWD + '/.ciffi/package.json'
+    ];
+    
+    replace({
+      files,
+      from: /@REPLACE__ASSETS@/g,
+      to: newString
+    }, (error) => {
+      if (error) {
+        return console.error('Error occurred:', error);
+      }
       
-      askForLiveReload(function (livereload) {
+      replace({
+        files,
+        from: /@REPLACE__ASSETS__NAME@/g,
+        to: this.config.ciffiSrcName
+      }, (error) => {
+        if (error) {
+          return console.error('Error occurred:', error);
+        }
+        callback();
+      });
+    });
+  }
+  
+  replaceConfig(newString, callback) {
+    replace({
+      files: [
+        process.env.PWD + '/' + this.config.ciffiSrc + '/scripts/config/config.js',
+        process.env.PWD + '/' + this.config.ciffiSrc + '/scripts/config/env/dev.js',
+        process.env.PWD + '/' + this.config.ciffiSrc + '/scripts/config/env/local.js',
+        process.env.PWD + '/' + this.config.ciffiSrc + '/scripts/config/env/stage.js',
+        process.env.PWD + '/' + this.config.ciffiSrc + '/scripts/config/env/prod.js'
+      ],
+      from: /@REPLACE__CONFIG@/g,
+      to: newString
+    }, (error) => {
+      if (error) {
+        return console.error('Error occurred:', error);
+      }
+      callback();
+    });
+  }
+  
+  filter(filepath) {
+    return !/(^|\/)\.[^\/\.]/g.test(filepath);
+  }
+  
+  start() {
+    let fixedAssetsUrl = this.config.buildPath;
+    
+    if (fixedAssetsUrl.substring(fixedAssetsUrl.length - 1, fixedAssetsUrl.length) === '/') {
+      fixedAssetsUrl = fixedAssetsUrl.substring(0, fixedAssetsUrl.length - 1)
+    }
+    
+    this.replaceBuildPath(fixedAssetsUrl, () => {
+      
+      cliCursor.hide();
+      
+      console.log('');
+      
+      Loading.start('Generate project tree for ' + chalk.blue(this.config.projectName));
+      
+      this.replaceConfig(this.config.projectName, () => {
         
-        askForBuildPath(function (buildPath) {
-          
-          let _isNewVersion = true;
-          
-          require('../core/TempApp')(_isNewVersion, modulePath, function () {
-            
-            config.bundle = 'webpack3';
-            config.isNewVersion = _isNewVersion;
-            config.features = features;
-            config.livereload = livereload;
-            
-            start(config, buildPath);
-            
+        const pathName = fixedAssetsUrl.split('/')[fixedAssetsUrl.split('/').length - 1];
+        
+        if (pathName !== 'src') {
+          new ProcessManager({
+            process: `${process.env.PWD}/${this.config.ciffiSrc}/, ${process.env.PWD}/.ciffi/${this.config.ciffiSrc}/`
+          })
+        }
+        
+        Loading.stop('Generate project tree for ' + chalk.blue(this.config.projectName) + chalk.green.bold(' OK'));
+        
+        new CreateSettings({
+          projectName: this.config.projectName,
+          assetsPath: fixedAssetsUrl,
+          pathName: pathName,
+          features: this.config.features,
+          livereload: this.config.livereload,
+          modulePath: this.config.modulePath
+        }, () => {
+          new CreatePackage(this.config, () => {
+            new CreateHiddenFiles(this.config, () => {
+              new MoveApp(() => {
+                new Dependencies(this.config, () => {
+                  showGreetings();
+                });
+              });
+            });
           });
-          
         });
       });
     });
+  }
+  
+  askForBuildPath(callback) {
     
-  });
-}
-
-function askForBundle(callback) {
-  inquirer.prompt({
-    type: 'checkbox',
-    name: 'features',
-    message: 'What features do you want to include in this project?',
-    default: false,
-    choices: ['router', 'react', 'testing', 'styleguides']
-  }).then(function (res) {
-    callback(res.features);
-  });
-}
-
-function askForLiveReload(callback) {
-  inquirer.prompt({
-    type: 'list',
-    name: 'livereload',
-    message: 'What file watcher do you want to include in this project?',
-    default: 0,
-    choices: ['browsersync', 'livereload']
-  }).then(function (res) {
-    callback(res.livereload);
-  });
-}
-
-function askForProjectName(config, callback) {
-  let _projectName = config.projectName;
-  if (!_projectName) {
     inquirer.prompt({
       type: 'input',
-      name: 'projectName',
-      message: 'Specify project name',
-      default: 'test',
+      name: 'buildPath',
+      message: 'Specify relative build path',
+      default: '../static',
       validate: function (res) {
         
-        let done = this.async();
+        const done = this.async();
         
-        setTimeout(function () {
+        setTimeout(() => {
           
-          let _test = new RegExp(/^$|\s+|\w\s+|[\/]|^\.|\.$/);
-          let _testResult = _test.test(res);
+          const test = new RegExp(/^(\.\.\/){1,}\w/);
+          const testResult = test.test(res);
           
-          if (typeof res !== 'string' || _testResult) {
-            done('☠️  Project must have real name ☠️');
+          if (typeof res !== 'string' || !testResult) {
+            done('☠️  Build path must be out of this project setup folder ☠️');
             return;
           }
           
@@ -141,216 +266,70 @@ function askForProjectName(config, callback) {
           
         }, 10);
       }
-    }).then(function (res) {
-      callback(res);
+    }).then((res) => {
+      callback(res.buildPath);
     });
-  } else {
-    callback(config);
-  }
-}
-
-function replaceBuildPath(config, isNewVersion, callback) {
-  
-  replace({
-    files: [
-      process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/config.js',
-      process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/dev.js',
-      process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/local.js',
-      process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/stage.js',
-      process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/prod.js',
-      process.env.PWD + '/.ciffi/dev.config.js',
-      process.env.PWD + '/.ciffi/build.config.js',
-      process.env.PWD + '/.ciffi/package.json'
-    ],
-    from: /@REPLACE__ASSETS@/g,
-    to: config
-  }, function (error) {
-    if (error) {
-      return console.error('Error occurred:', error);
-    }
-    
-    let _files = [
-      process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/config.js',
-      process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/dev.js',
-      process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/local.js',
-      process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/stage.js',
-      process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/prod.js',
-      process.env.PWD + '/.ciffi/dev.config.js',
-      process.env.PWD + '/.ciffi/build.config.js',
-      process.env.PWD + '/.ciffi/package.json'
-    ];
-    
-    if (!isNewVersion) {
-      _files.push(
-        process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/styles.js',
-        process.env.PWD + '/.ciffi/serve.config.js'
-      )
-    }
-    replace({
-      files: _files,
-      from: /@REPLACE__ASSETS__NAME@/g,
-      to: _CONFIG.ciffiSrcName
-    }, function (error) {
-      if (error) {
-        return console.error('Error occurred:', error);
-      }
-      callback();
-    });
-  });
-}
-
-function replaceConfig(config, callback) {
-  replace({
-    files: [
-      process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/config.js',
-      process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/dev.js',
-      process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/local.js',
-      process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/stage.js',
-      process.env.PWD + '/' + _CONFIG.ciffiSrc + '/scripts/config/env/prod.js',
-      process.env.PWD + '/.ciffi/dev.config.js'
-    ],
-    from: /@REPLACE__CONFIG@/g,
-    to: config
-  }, function (error) {
-    if (error) {
-      return console.error('Error occurred:', error);
-    }
-    callback();
-  });
-}
-
-function filter(filepath) {
-  return !/(^|\/)\.[^\/\.]/g.test(filepath);
-}
-
-function start(config, res) {
-  let _fixedAssetsUrl = res.buildPath;
-  
-  if (_fixedAssetsUrl.substring(_fixedAssetsUrl.length - 1, _fixedAssetsUrl.length) === '/') {
-    _fixedAssetsUrl = _fixedAssetsUrl.substring(0, _fixedAssetsUrl.length - 1)
   }
   
-  replaceBuildPath(_fixedAssetsUrl, config.isNewVersion, function () {
-    
-    cliCursor.hide();
-    
-    console.log('');
-    
-    Loading.start('Generate project tree for ' + chalk.blue(config.projectName));
-    
-    replaceConfig(config.projectName, function () {
-      
-      let _pathName = _fixedAssetsUrl.split('/')[_fixedAssetsUrl.split('/').length - 1];
-      
-      if (_pathName !== 'src') {
-        shell.mv(process.env.PWD + '/' + _CONFIG.ciffiSrc + '/', process.env.PWD + '/.ciffi/' + _CONFIG.ciffiSrc + '/');
-      }
-      
-      Loading.stop('Generate project tree for ' + chalk.blue(config.projectName) + chalk.green.bold(' OK'));
-      
-      require('../core/Createsettings')({
-        projectName: config.projectName,
-        assetsPath: _fixedAssetsUrl,
-        pathName: _pathName,
-        bundle: config.bundle,
-        isNewVersion: config.isNewVersion,
-        features: config.features,
-        livereload: config.livereload
-      }, modulePath, function () {
-        require('../core/Createpackage')(config.features, config.livereload, modulePath, function (whatWant) {
-          require('../core/Sethiddenfile')(config.isNewVersion, whatWant, modulePath);
-          require('../core/MoveApp')(whatWant);
-        });
-      });
-      
-    });
-  });
-}
-
-function askForBuildPath(callback) {
-  
-  inquirer.prompt({
-    type: 'input',
-    name: 'buildPath',
-    message: 'Specify relative build path',
-    default: '../static',
-    validate: function (res) {
-      
-      let done = this.async();
-      
-      setTimeout(function () {
-        
-        let _test = new RegExp(/^(\.\.\/){1,}\w/);
-        let _testResult = _test.test(res);
-        
-        if (typeof res !== 'string' || !_testResult) {
-          done('☠️  Build path must be out of this project setup folder ☠️');
-          return;
-        }
-        
-        done(null, true);
-        
-      }, 10);
-    }
-  }).then(function (res) {
-    callback(res);
-  });
-}
-
-function testNpm5(callback) {
-  let _process = exec('npm -v');
-  let _result;
-  _process.stdout.on('data', function (res) {
-    _result = parseInt(res.split('.')[0]) >= 5;
-  });
-  
-  _process.stderr.on('data', function () {
-    _result = false;
-  });
-  
-  _process.on('close', function () {
-    if (_result) {
-      callback(_result);
-    } else {
-      console.log(chalk.red.bold('☠️ Setup error: ') + chalk.red('npm@5.0.0 is required ☠️'));
-      console.log(chalk.blue.bold('update with: ') + chalk.blue('npm install -g npm@latest'));
-    }
-  });
-}
-
-function beforeStart(config, callback) {
-  
-  testNpm5(function () {
-    emptyDir(process.env.PWD + '/', filter, function (err, result) {
-      if (err) {
-        console.log(err);
-      } else {
-        
-        console.log('');
-        console.log('');
-        console.log(chalk.green.bold('-- Ciffi Frontend Generator --'));
-        console.log('');
-        
-        if (result) {
-          askForProjectName(config, function (config) {
-            callback(config);
-          });
-          
+  testNpm5(callback) {
+    let version;
+    new ProcessManager({
+      process: 'npm -v',
+      onMessage: (res) => {
+        version = parseInt(res.split('.')[0]) >= 5;
+      },
+      onError: () => {
+        version = false;
+      },
+      onClose: () => {
+        if (version) {
+          callback();
         } else {
-          console.log(chalk.red.bold('☠️  Project setup failed:') + ' ' + chalk.blue('the path must be empty ☠️'));
-          console.log('');
+          console.log(chalk.red.bold('☠️ Setup error: ') + chalk.red('npm@5.0.0 is required ☠️'));
+          console.log(chalk.blue.bold('update with: ') + chalk.blue('npm install -g npm@latest'));
         }
       }
     });
-  });
+  }
   
+  beforeStart(callback) {
+    
+    this.testNpm5(() => {
+      
+      emptyDir(process.env.PWD + '/', this.filter, (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          
+          console.log('');
+          console.log('');
+          console.log(chalk.green.bold('-- Ciffi Frontend Generator --'));
+          console.log('');
+          
+          if (result) {
+            
+            this.askForProjectName(() => {
+              this.askForFeatures((features) => {
+                this.askForLiveReload((livereload) => {
+                  this.askForBuildPath((buildPath) => {
+                    callback({
+                      buildPath,
+                      features,
+                      livereload
+                    });
+                  });
+                });
+              });
+            });
+            
+          } else {
+            console.log(chalk.red.bold('☠️  Project setup failed:') + ' ' + chalk.blue('the path must be empty ☠️'));
+            console.log('');
+          }
+        }
+      });
+    });
+  }
 }
 
-function updateFrontendProject(callback) {
-  CiffiJsWebpack.check((res) => {
-    if (res && res.text) {
-      console.log(res.text);
-    }
-    callback();
-  });
-}
+module.exports = Setup;

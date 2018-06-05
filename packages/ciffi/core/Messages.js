@@ -6,7 +6,7 @@ const showCommandErrorMessage = () => {
   console.log('');
   console.log(chalk.red.bold('Command not found'));
   console.log('');
-  console.log(chalk.cyan('ciffi -h') + chalk.green(' -- core list --'));
+  console.log(chalk.cyan('ciffi -h') + chalk.green(' -- command list --'));
   console.log('');
 };
 

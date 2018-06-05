@@ -1,89 +1,79 @@
 let chalk = require('chalk');
 let Loading = require('./Loading');
-let exec = require('child_process').exec;
+let ProcessManager = require('./ProcessManager');
 
-let Dependencies = (function () {
-	
-	function AppDependencies() {
-		
-		this.download = function (whatWant, callback) {
-      let _livereload = whatWant.livereload === 'browsersync' ? 'browser-sync' : 'livereload';
-      
-			let _process = 'npm install --no-progress && npm install --no-progress --save-dev ' + _livereload;
-			
-			if (whatWant.router) {
-				_process += ' && npm install --no-progress --save @ciffi-js/router';
-			}
-			
-			addProcessListeners(exec(_process), callback);
-			
-			// addProcessListeners(exec('yarn'), callback, function () {
-			// 	console.log('👀 ' + chalk.blue(' try npm'));
-			//
-			// });
-		}
-		
-	}
-	
-	function addProcessListeners(process, successCallback, failCallback) {
-		console.log('');
-		Loading.start('Download and install ' + chalk.blue('dependencies'));
-		let _processError;
-		process.stdout.on('data', function (res) {
-			if (res.indexOf('command not found') >= 0) {
-				console.log(res);
-			}
-		});
-		
-		process.stderr.on('data', function (res) {
-			switch (res) {
-				case ' ':
-					break;
-				default:
-					if (res.indexOf('command not found') >= 0) {
-						_processError = ' - ' + chalk.red.bold(res.split(': ')[1]) + chalk.red(' not found') + ' - ';
-					}
-			}
-		});
-		
-		process.on('close', function (res) {
-			switch (res) {
-				case 0 :
-					onDownloadEnd(successCallback);
-					break;
-				case 1 :
-					onDownloadEnd(successCallback);
-					break;
-				case 'null' :
-					onDownloadEnd(successCallback);
-					break;
-				case null :
-					onDownloadEnd(successCallback);
-					break;
-				case 127 :
-					let _error = _processError || ' - ' + chalk.red.bold(' yarn') + chalk.red(' not found') + ' - ';
-					Loading.stop('Download and install ' + chalk.blue('dependencies') + _error + chalk.red.bold(' FAIL'));
-					console.log('');
-					if (failCallback && typeof failCallback === 'function') {
-						failCallback();
-					}
-					break;
-				default:
-					console.log('exit -- ' + res);
-			}
-		});
-	}
-	
-	function onDownloadEnd(successCallback) {
-		Loading.stop('Download and install ' + chalk.blue('dependencies') + chalk.green.bold(' OK'));
-		console.log('');
-		if (successCallback && typeof successCallback === 'function') {
-			successCallback();
-		}
-	}
-	
-	return new AppDependencies();
-	
-})();
+class Dependencies {
+  
+  constructor(config, callback) {
+    const livereload = config.livereload === 'browsersync' ? 'browser-sync' : 'livereload';
+    
+    let process = 'npm install --no-progress && npm install --no-progress --save-dev ' + livereload;
+    
+    if (config.features.indexOf('router') === 0) {
+      process += ' && npm install --no-progress --save @ciffi-js/router';
+    }
+    
+    this.startDownload(process, callback);
+  }
+  
+  startDownload(process, successCallback, failCallback) {
+    console.log('');
+    Loading.start('Download and install ' + chalk.blue('dependencies'));
+    let processError;
+    
+    new ProcessManager({
+      process,
+      onMessage: (res) => {
+        if (res.indexOf('command not found') >= 0) {
+          console.log(res);
+        }
+      },
+      onError: (res) => {
+        switch (res) {
+          case ' ':
+            break;
+          default:
+            if (res.indexOf('command not found') >= 0) {
+              processError = ' - ' + chalk.red.bold(res.split(': ')[1]) + chalk.red(' not found') + ' - ';
+            }
+        }
+      },
+      onClose: (res) => {
+        switch (res) {
+          case 0 :
+            this.onDownloadEnd(successCallback);
+            break;
+          case 1 :
+            this.onDownloadEnd(successCallback);
+            break;
+          case 'null' :
+            this.onDownloadEnd(successCallback);
+            break;
+          case null :
+            this.onDownloadEnd(successCallback);
+            break;
+          case 127 :
+            const error = processError || ' - ' + chalk.red.bold(' yarn') + chalk.red(' not found') + ' - ';
+            Loading.stop('Download and install ' + chalk.blue('dependencies') + error + chalk.red.bold(' FAIL'));
+            console.log('');
+            if (failCallback && typeof failCallback === 'function') {
+              failCallback();
+            }
+            break;
+          default:
+            console.log('exit -- ' + res);
+        }
+      }
+    });
+  }
+  
+  onDownloadEnd(successCallback) {
+    Loading.stop('Download and install ' + chalk.blue('dependencies') + chalk.green.bold(' OK'));
+    console.log('');
+    if (successCallback && typeof successCallback === 'function') {
+      successCallback();
+    }
+  }
+}
 
 module.exports = Dependencies;
