@@ -47,7 +47,7 @@ let Dev = (function () {
     }
     
     let _liveCss = './node_modules/.bin/node-sass ' + _assetPathName + '/styles/main.scss ' + _assetPath + '/' + _CONFIG.stylesOutputName + ' --watch --source-map true';
-    let _liveJs = './node_modules/.bin/webpack --config dev.config.js --progress';
+    let _liveJs = './node_modules/.bin/webpack-dev-server --config dev.config.js --progress';
     let _processServer = spawnCommand(_createConfig + _concat + _liveCssFirst + _concat + _assets + _concat + _liveServer);
     let _processCss = spawnCommand(_liveCss);
     let _processJS = spawnCommand(_liveJs);
