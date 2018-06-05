@@ -7,15 +7,17 @@
     "mocha": true,
     "es6": true
   },
+  "plugins": [
+    "react"
+  ],
   "parserOptions": {
     "sourceType": "module"
   },
   "extends": [
-      "eslint:recommended",
-      "plugin:react/recommended"
-    ],
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
   "globals": {
-    "System": false
   },
   "rules": {
     "no-console": 0,

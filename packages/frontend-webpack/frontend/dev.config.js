@@ -1,22 +1,40 @@
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const ConfigFile = require(__dirname + '/.ciffisettings');
 const path = require('path');
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const WriteFilePlugin = require('write-file-webpack-plugin');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   performance: {
     hints: false
   },
   entry: {
-    main: './' + ConfigFile.srcPathName + '/scripts/main.js'
+    main: path.join(__dirname, ConfigFile.srcPathName + '/scripts/main.js')
   },
   output: {
-    path: __dirname + '/' + ConfigFile.assetsPath,
-    publicPath: ConfigFile.publicPath,
+    publicPath: path.join(__dirname, ConfigFile.assetsPath + '/'),
+    path: path.join(__dirname, ConfigFile.assetsPath + '/'),
     filename: '[name].js',
     chunkFilename: '[name].js'
   },
+  devtool: 'source-map',
+  devServer: {
+    contentBase: path.normalize(ConfigFile.assetsPath + '/../'),
+    publicPath: path.normalize(ConfigFile.assetsPath + '/'),
+    compress: true,
+    port: 3000,
+    https: true,
+    host: '0.0.0.0',
+    useLocalIp: true,
+    open: true,
+    noInfo: false,
+    inline: true,
+    hot: false,
+    overlay: {
+      warnings: true,
+      errors: true
+    }
+  },
+  watch: true,
   module: {
     rules: [
       {
@@ -63,15 +81,10 @@ module.exports = {
   resolve: {
     alias: {
       Config: path.resolve(__dirname, ConfigFile.srcPathName + '/scripts/config/config.js'),
+      Theme: path.resolve(__dirname, ConfigFile.srcPathName + '/scripts/config/theme.js')
     }
   },
   plugins: [
-    new HardSourceWebpackPlugin(),
-    new UglifyJSPlugin({
-      uglifyOptions: {
-        sourceMap: false,
-        comments: false
-      }
-    })
+    new WriteFilePlugin()
   ]
 };

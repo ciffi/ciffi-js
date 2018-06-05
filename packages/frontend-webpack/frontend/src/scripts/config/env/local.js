@@ -1,14 +1,11 @@
-var Config = {
+const Config = {
 	projectName: '@REPLACE__CONFIG@',
-	env: 'dev',
+	env: 'local',
 	baseUrl: 'http://@REPLACE__CONFIG@.local',
 	apiUrl: 'http://@REPLACE__CONFIG@.local/',
 	shareUrl: 'http://@REPLACE__CONFIG@.local/',
 	assetsUrl: 'http://@REPLACE__CONFIG@.local/@REPLACE__ASSETS__NAME@/',
-	liveReload: {
-		host: 'http://@REPLACE__CONFIG@.local',
-		port: 35729
-	}
+	liveReload: false
 };
 
-module.exports = Config;
+export default Config;

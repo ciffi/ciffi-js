@@ -1,29 +1,33 @@
-[npm-month]: https://img.shields.io/npm/dm/ciffi-js-webpack.svg
-[npm-total]: https://img.shields.io/npm/dt/ciffi-js-webpack.svg
 [npm-version]: https://img.shields.io/npm/v/ciffi-js-webpack.svg
 [npm-url]: https://www.npmjs.com/package/ciffi-js-webpack
 
 [![npm-version][npm-version]][npm-url]
-[![npm-month][npm-month]][npm-url]
-[![npm-total][npm-total]][npm-url]
 
 # Ciffi Frontend Base Project #
 
 #### local dev
 ```
-npm run dev
+npm start
 ```
 or
 ```
-ciffi dev
+npm run dev
 ```
 #### generate build
 ```
 npm run build [env]
 ```
-or
+#### test code
 ```
-ciffi build[:env]
+npm test
+```
+#### regenerate config.js
+```
+npm run config [env]
+```
+#### copy assets only
+```
+npm run assets
 ```
 
 ## WORKFLOW
