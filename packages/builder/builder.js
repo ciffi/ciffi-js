@@ -42,8 +42,8 @@ function start() {
     }
   } else {
     
-    const _cmd = cmd;
-    const _env = fileExists.sync(ConfigFile) && require(ConfigFile).defaultBuildEnv ? require(ConfigFile).defaultBuildEnv : 'local';
+    let _cmd = cmd;
+    let _env = fileExists.sync(ConfigFile) && require(ConfigFile).defaultBuildEnv ? require(ConfigFile).defaultBuildEnv : 'local';
     
     if (cmd.indexOf('build:') === 0) {
       _cmd = 'build';
