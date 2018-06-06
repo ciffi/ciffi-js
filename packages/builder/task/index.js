@@ -1,8 +1,8 @@
-import Assets from './Assets';
-import Build from './Build';
-import Config from './Config';
-import Dev from './Dev';
-import Notify from './Notify';
+const Assets = require('./Assets');
+const Build = require('./Build');
+const Config = require('./Config');
+const Dev = require('./Dev');
+const Notify = require('./Notify');
 
 module.exports = {
   Assets,
