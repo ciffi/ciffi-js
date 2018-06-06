@@ -54,7 +54,7 @@ class Build {
       
       process.on('close', (res) => {
         if (res === 0) {
-          console.log(chalk.blue('🏗  Project build for ') + env + chalk.blue(' in ') + assetPath + ' ' + chalk.green.bold(' OK'));
+          console.log(chalk.blue('🏗  Project build for ') + this.env + chalk.blue(' in ') + assetPath + ' ' + chalk.green.bold(' OK'));
           new Assets();
         }
         console.log('');
