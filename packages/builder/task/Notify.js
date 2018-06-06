@@ -46,7 +46,11 @@ class Notify {
       let errorMsg = msg.toString();
       let errorImage = 'webpack';
       
-      if (typeof msg === 'string' && JSON.parse(msg).file && JSON.parse(msg).file.indexOf('.css')) {
+      console.log('msg');
+      console.log(errorMsg);
+      console.log('msg');
+      
+      if (typeof msg === 'string' && msg.indexOf('{') === 0 && JSON.parse(msg).file && JSON.parse(msg).file.indexOf('.css')) {
         errorTitle = ' - Error(scss)'
         errorMsg = JSON.parse(msg).message;
         errorImage = 'sass'
