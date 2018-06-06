@@ -56,7 +56,7 @@ const showLogo = () => {
 };
 
 const showCommands = () => {
-  console.log(chalk.cyan('npm start') + chalk.green(' -- start webpack dev server and generate dev build with watch --'));
+  console.log(chalk.cyan('npm start') + chalk.green(' -- start livereload server and generate dev build with watch --'));
   console.log('');
   console.log(chalk.cyan('npm run dev') + chalk.green(' -- start livereload server and generate dev build with watch --'));
   console.log('');
