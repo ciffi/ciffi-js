@@ -5,9 +5,9 @@ let ProcessManager = require('./ProcessManager');
 class Dependencies {
   
   constructor(config, callback) {
-    const livereload = config.livereload === 'browsersync' ? 'browser-sync' : 'livereload';
+    const livereload = config.livereload === 'none' ? '' : ` && npm install --no-progress --save-dev ${config.livereload}`;
     
-    let process = 'npm install --no-progress && npm install --no-progress --save-dev ' + livereload;
+    let process = 'npm install --no-progress' + livereload;
     
     if (config.features.indexOf('router') === 0) {
       process += ' && npm install --no-progress --save @ciffi-js/router';

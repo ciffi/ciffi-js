@@ -94,8 +94,8 @@ class Setup {
       type: 'list',
       name: 'livereload',
       message: 'What file watcher do you want to include in this project?',
-      default: 0,
-      choices: ['none', 'browsersync', 'livereload']
+      default: 2,
+      choices: ['none', 'livereload']
     }).then((res) => {
       callback(res.livereload);
     });
