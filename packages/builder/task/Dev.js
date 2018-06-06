@@ -31,7 +31,7 @@ class Dev {
     const liveServer = this.defineLiveServer();
     
     const liveCss = './node_modules/.bin/node-sass ' + assetPathName + '/styles/main.scss ' + assetPath + '/' + this.config.stylesOutputName + ' --watch --source-map true';
-    const liveJs = './node_modules/.bin/webpack-dev-server --config dev.config.js --progress';
+    const liveJs = './node_modules/.bin/webpack --config dev.config.js --progress';
     
     new Config(this.env, () => {
       new Assets(() => {
@@ -66,8 +66,8 @@ class Dev {
         } else {
   
           Log(chalk.blue(res));
-          
-          if (res.indexOf('Entrypoint main = main.js main.js.map') >= 0 || res.indexOf('Entrypoint main [big] = main.js main.js.map')) {
+  
+          if (res.indexOf('Built at: ') >= 0) {
             Notify.sendReady('🏗 DEV ready - click to open');
           }
         }
