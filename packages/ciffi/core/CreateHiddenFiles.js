@@ -45,30 +45,38 @@ class CreateHiddenFiles {
     });
   }
   
-  createFile(fileName) {
+  checkPath(callback) {
     
     pathExists(this.tempPath).then((res) => {
       if (!res) {
         new ProcessManager({
           process: `mkdir ${this.tempPath}`,
           onClose: () => {
-            const tempFile = `${this.tempPath}${fileName}`;
-            const resource = `${this.config.modulePath}/lib/node_modules/ciffi/node_modules/ciffi-js-webpack/resources/core/${fileName}`;
-            const projectRoot = `${process.env.PWD}/`;
-            const projectFile = `${process.env.PWD}/.${fileName}`;
-            
-            if (fileExists.sync(projectFile)) {
-              console.log(chalk.red(`File already exists: ${projectFile}`));
-            } else {
-              pathExists(projectRoot).then((res) => {
-                if (res) {
-                  new ProcessManager({
-                    process: `cp ${resource} ${tempFile} && cp ${tempFile} ${projectFile} && rm -rf ${tempFile}`,
-                    onClose: () => console.log(`cp ${resource} ${tempFile} && cp ${tempFile} ${projectFile} && rm -rf ${tempFile}`)
-                  });
-                }
-              });
-            }
+            callback();
+          }
+        });
+      } else {
+        callback();
+      }
+    });
+  }
+  
+  createFile(fileName) {
+    
+    const tempFile = `${this.tempPath}${fileName}`;
+    const resource = `${this.config.modulePath}/lib/node_modules/ciffi/node_modules/ciffi-js-webpack/resources/core/${fileName}`;
+    const projectRoot = `${process.env.PWD}/`;
+    const projectFile = `${process.env.PWD}/.${fileName}`;
+    
+    this.checkPath(() => {
+      if (fileExists.sync(projectFile)) {
+        console.log(chalk.red(`File already exists: ${projectFile}`));
+      } else {
+        pathExists(projectRoot).then((res) => {
+          if (res) {
+            new ProcessManager({
+              process: `cp ${resource} ${tempFile} && cp ${tempFile} ${projectFile} && rm -rf ${tempFile}`
+            });
           }
         });
       }
