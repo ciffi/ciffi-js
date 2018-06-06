@@ -11,27 +11,28 @@ class Config {
     
     if (fileExists.sync(ConfigFile)) {
       this.config = require(ConfigFile);
+      this.env = env;
     } else {
       console.error(chalk.red.bold('☠️  Project build failed:') + ' ' + chalk.blue('can\'t find .ciffisettings file ☠️'));
       return console.log('');
     }
     
-    if (fileExists.sync(process.env.PWD + '/src/scripts/config/env/' + env + '.js')) {
+    if (fileExists.sync(process.env.PWD + '/src/scripts/config/env/' + this.env + '.js')) {
       this.init(callback);
     } else {
-      console.error(chalk.red.bold('☠️  Project build failed:') + ' ' + chalk.blue('can\'t find src/scripts/config/env/' + env + '.js file ☠️'));
+      console.error(chalk.red.bold('☠️  Project build failed:') + ' ' + chalk.blue('can\'t find src/scripts/config/env/' + this.env + '.js file ☠️'));
       return console.log('');
     }
   }
   
   init(callback) {
     const assetPathName = this.config.assetsPathName;
-    const createConfig = 'cp ' + assetPathName + '/scripts/config/env/' + env + '.js ' + assetPathName + '/scripts/config/config.js';
+    const createConfig = 'cp ' + assetPathName + '/scripts/config/env/' + this.env + '.js ' + assetPathName + '/scripts/config/config.js';
     
     exec(createConfig);
     
     console.log('');
-    console.log(chalk.blue('🦄 Generate config for ') + env + ' ' + chalk.green.bold(' OK'));
+    console.log(chalk.blue('🦄 Generate config for ') + this.env + ' ' + chalk.green.bold(' OK'));
     console.log('');
     console.log('');
   

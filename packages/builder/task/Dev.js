@@ -17,8 +17,8 @@ class Dev {
       this.env = 'dev';
       this.init();
     } else {
-      Notify.sendError('☠️  Project dev failed: can\'t find .ciffisettings file ☠️');
       console.log(chalk.red.bold('☠️  Project dev failed:') + ' ' + chalk.blue('can\'t find .ciffisettings file ☠️'));
+      Notify.sendError('☠️  Project dev failed: can\'t find .ciffisettings file ☠️');
       return console.log('');
     }
     
@@ -61,29 +61,31 @@ class Dev {
     for (let i = 0; i < processes.length; i++) {
       processes[i].stdout.on('data', (res) => {
         if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0 || res.indexOf('error ') >= 0) {
-          Notify.sendObjError(res);
           console.log(chalk.red(res));
+          Notify.sendObjError(res);
         } else {
+  
+          Log(chalk.blue(res));
           
           if (res.indexOf('Entrypoint main = main.js main.js.map') >= 0 || res.indexOf('Entrypoint main [big] = main.js main.js.map')) {
             Notify.sendReady('🏗 DEV ready - click to open');
           }
-          
-          Log(chalk.blue(res));
         }
       });
       
       processes[i].stderr.on('data', (res) => {
         if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0 || res.indexOf('error ') >= 0) {
-          Notify.sendObjError(chalk(res));
           console.log(chalk.red(res));
+          Notify.sendObjError(chalk(res));
         } else {
           Log(chalk.blue(res));
         }
       });
       
       processes[i].on('close', (res) => {
-        Log(chalk.green(res));
+        if (res !== 0) {
+          Log(chalk.green(res));
+        }
       });
     }
   }
