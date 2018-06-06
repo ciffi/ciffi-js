@@ -30,16 +30,10 @@ class Ciffi {
       opts[legacyKey] = opts[key];
     });
     
-    const _process = exec('npm config get prefix');
-    
-    _process.stdout.on('data', (path) => {
-      let modulePath = path.trim();
-      
-      this.init(modulePath, cmd, projectName, pkg, opts);
-    });
+    this.init(cmd, projectName, pkg, opts);
   }
   
-  init(modulePath, cmd, projectName, pkg, opts) {
+  init(cmd, projectName, pkg, opts) {
     if (!cmd) {
       if (opts.h) {
         showCommandListMsg();
@@ -57,7 +51,7 @@ class Ciffi {
       }
     } else {
       
-      new TaskManager(modulePath, cmd, projectName);
+      new TaskManager(cmd, projectName);
       
     }
   }

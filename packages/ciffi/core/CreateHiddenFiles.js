@@ -15,7 +15,7 @@ class CreateHiddenFiles {
     };
     
     this.files = ['eslintrc', 'gitignore', 'prettierignore'];
-    this.tempPath = `${process.env.PWD}/.ciffi/'`;
+    this.tempPath = `${process.env.PWD}/.ciffi/`;
     
     const loadingString = this.files.map((fileName, index) => {
       const withAnd = index === this.files.length - 1 ? '' : ' and';
@@ -26,7 +26,7 @@ class CreateHiddenFiles {
     
     this.init(() => {
       
-      Loading.stop('Generate ' + chalk.blue('.eslint') + ' and ' + chalk.blue('.gitignore') + ' and ' + chalk.blue('.prettierignore') + chalk.green.bold(' OK'));
+      Loading.stop(`Generate ${loadingString.join(' ')} ${chalk.green.bold(' OK')}`);
       
       callback();
     });
@@ -35,11 +35,14 @@ class CreateHiddenFiles {
   
   init(callback) {
     
-    this.files.map((fileName) => {
+    this.files.map((fileName, index) => {
       this.createFile(fileName);
+      
+      if (index === this.files.length - 1) {
+        callback();
+      }
+      
     });
-    
-    callback();
   }
   
   createFile(fileName) {
@@ -60,7 +63,8 @@ class CreateHiddenFiles {
               pathExists(projectRoot).then((res) => {
                 if (res) {
                   new ProcessManager({
-                    process: `cp ${resource} ${tempFile} && cp ${tempFile} ${projectFile} && rm -rf ${tempFile}`
+                    process: `cp ${resource} ${tempFile} && cp ${tempFile} ${projectFile} && rm -rf ${tempFile}`,
+                    onClose: () => console.log(`cp ${resource} ${tempFile} && cp ${tempFile} ${projectFile} && rm -rf ${tempFile}`)
                   });
                 }
               });
