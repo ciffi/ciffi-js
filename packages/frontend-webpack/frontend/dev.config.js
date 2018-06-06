@@ -1,6 +1,5 @@
 const ConfigFile = require(__dirname + '/.ciffisettings');
 const path = require('path');
-const WriteFilePlugin = require('write-file-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -17,23 +16,6 @@ module.exports = {
     chunkFilename: '[name].js'
   },
   devtool: 'source-map',
-  devServer: {
-    contentBase: path.normalize(ConfigFile.assetsPath + '/../'),
-    publicPath: path.normalize(ConfigFile.assetsPath + '/'),
-    compress: true,
-    port: 3000,
-    https: true,
-    host: '0.0.0.0',
-    useLocalIp: true,
-    open: true,
-    noInfo: false,
-    inline: true,
-    hot: false,
-    overlay: {
-      warnings: true,
-      errors: true
-    }
-  },
   watch: true,
   module: {
     rules: [
@@ -85,6 +67,6 @@ module.exports = {
     }
   },
   plugins: [
-    new WriteFilePlugin()
+  
   ]
 };
