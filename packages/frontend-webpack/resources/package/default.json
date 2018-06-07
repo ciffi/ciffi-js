@@ -15,7 +15,8 @@
     "@ciffi-js/builder": "^2.1.5",
     "@ciffi-js/jsonize-path": "^1.1.0",
     "autoprefixer": "^7.2.1",
-    "babel-core": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.0.1",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
@@ -28,9 +29,11 @@
     "eslint": "^4.18.2",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-react": "^7.7.0",
+    "jest": "^23.1.0",
     "node-sass": "^4.7.2",
     "postcss-cli": "^4.1.1",
     "prettier": "^1.11.1",
+    "regenerator-runtime": "^0.11.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.20.2",
     "styled-components": "^3.3.0",
@@ -48,12 +51,19 @@
     "reset-css": "^2.2.1"
   },
   "scripts": {
-    "start": "./node_modules/.bin/ciffi-builder start",
-    "dev": "./node_modules/.bin/ciffi-builder dev",
-    "build": "./node_modules/.bin/ciffi-builder build --env",
-    "jsonize": "./node_modules/.bin/ciffi-jsonize",
-    "config": "./node_modules/.bin/ciffi-builder config --env",
-    "assets": "./node_modules/.bin/ciffi-builder assets",
-    "prettier": "./node_modules/.bin/prettier --write --single-quote '**/*.{jsx,js,json,scss}'"
+    "start": "ciffi-builder start",
+    "dev": "ciffi-builder dev",
+    "build": "ciffi-builder build --env",
+    "jsonize": "ciffi-jsonize",
+    "config": "ciffi-builder config --env",
+    "assets": "ciffi-builder assets",
+    "prettier": "prettier --write --single-quote '**/*.{jsx,js,json,scss}'",
+    "test": "jest --watchAll"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "Config": "<rootDir>/src/scripts/config/config.js",
+      "Theme": "<rootDir>/src/scripts/config/theme.js"
+    }
   }
 }
