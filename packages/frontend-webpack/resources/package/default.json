@@ -58,7 +58,7 @@
     "config": "ciffi-builder config --env",
     "assets": "ciffi-builder assets",
     "prettier": "prettier --write --single-quote '**/*.{jsx,js,json,scss}'",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll --coverage"
   },
   "jest": {
     "moduleNameMapper": {
