@@ -1,26 +1,26 @@
-const chalk = require("chalk");
-const inquirer = require("inquirer");
-const replace = require("replace-in-file");
-const emptyDir = require("empty-dir");
-const cliCursor = require("cli-cursor");
-const CiffiJsWebpack = require("ciffi-js-webpack");
-const Loading = require("../core/Loading");
-const CheckUpdate = require("../core/CheckUpdate");
-const ProcessManager = require("../core/ProcessManager");
-const TempApp = require("../core/TempApp");
-const CreateSettings = require("../core/CreateSettings");
-const CreatePackage = require("../core/CreatePackage");
-const CreateHiddenFiles = require("../core/CreateHiddenFiles");
-const MoveApp = require("../core/MoveApp");
-const Dependencies = require("../core/Dependencies");
-const { showGreetings } = require("../core/Messages");
+const chalk = require('chalk');
+const inquirer = require('inquirer');
+const replace = require('replace-in-file');
+const emptyDir = require('empty-dir');
+const cliCursor = require('cli-cursor');
+const CiffiJsWebpack = require('ciffi-js-webpack');
+const Loading = require('../core/Loading');
+const CheckUpdate = require('../core/CheckUpdate');
+const ProcessManager = require('../core/ProcessManager');
+const TempApp = require('../core/TempApp');
+const CreateSettings = require('../core/CreateSettings');
+const CreatePackage = require('../core/CreatePackage');
+const CreateHiddenFiles = require('../core/CreateHiddenFiles');
+const MoveApp = require('../core/MoveApp');
+const Dependencies = require('../core/Dependencies');
+const { showGreetings } = require('../core/Messages');
 
 class Setup {
   constructor(config) {
     this.config = {
       ...config,
-      ciffiSrc: ".ciffi/src",
-      ciffiSrcName: "src"
+      ciffiSrc: '.ciffi/src',
+      ciffiSrcName: 'src'
     };
 
     this.init();
@@ -53,7 +53,7 @@ class Setup {
           }
         });
       } else {
-        console.log("😎 " + chalk.green("Latest version installed️"));
+        console.log('😎 ' + chalk.green('Latest version installed️'));
         CiffiJsWebpack.check(callback);
       }
     });
@@ -64,28 +64,28 @@ class Setup {
       return callback(true);
     }
 
-    console.log("");
+    console.log('');
     inquirer
       .prompt({
-        type: "list",
-        name: "wantUpdate",
-        message: "Update ciffi before setup?",
+        type: 'list',
+        name: 'wantUpdate',
+        message: 'Update ciffi before setup?',
         default: 0,
-        choices: ["yes", "no"]
+        choices: ['yes', 'no']
       })
       .then(res => {
-        callback(res.wantUpdate === "yes");
+        callback(res.wantUpdate === 'yes');
       });
   }
 
   askForFeatures(callback) {
     inquirer
       .prompt({
-        type: "checkbox",
-        name: "features",
-        message: "What features do you want to include in this project?",
+        type: 'checkbox',
+        name: 'features',
+        message: 'What features do you want to include in this project?',
         default: false,
-        choices: ["router"]
+        choices: ['router']
       })
       .then(res => {
         callback(res.features);
@@ -94,16 +94,16 @@ class Setup {
 
   askForLiveReload(callback) {
     if (this.config.silent) {
-      return callback("none");
+      return callback('none');
     }
 
     inquirer
       .prompt({
-        type: "list",
-        name: "livereload",
-        message: "What file watcher do you want to include in this project?",
+        type: 'list',
+        name: 'livereload',
+        message: 'What file watcher do you want to include in this project?',
         default: 2,
-        choices: ["none", "livereload"]
+        choices: ['none', 'livereload']
       })
       .then(res => {
         callback(res.livereload);
@@ -112,7 +112,7 @@ class Setup {
 
   askForProjectName(callback) {
     if (this.config.silent) {
-      this.config.projectName = "test";
+      this.config.projectName = 'test';
       return callback();
     }
 
@@ -120,10 +120,10 @@ class Setup {
     if (!projectName) {
       inquirer
         .prompt({
-          type: "input",
-          name: "projectName",
-          message: "Specify project name",
-          default: "test",
+          type: 'input',
+          name: 'projectName',
+          message: 'Specify project name',
+          default: 'test',
           validate: function(res) {
             const done = this.async();
 
@@ -131,8 +131,8 @@ class Setup {
               const test = new RegExp(/^$|\s+|\w\s+|[\/]|^\.|\.$/);
               const testResult = test.test(res);
 
-              if (typeof res !== "string" || testResult) {
-                done("☠️  Project must have real name ☠️");
+              if (typeof res !== 'string' || testResult) {
+                done('☠️  Project must have real name ☠️');
                 return;
               }
 
@@ -152,26 +152,26 @@ class Setup {
   replaceBuildPath(newString, callback) {
     const files = [
       process.env.PWD +
-        "/" +
+        '/' +
         this.config.ciffiSrc +
-        "/scripts/config/config.js",
+        '/scripts/config/config.js',
       process.env.PWD +
-        "/" +
+        '/' +
         this.config.ciffiSrc +
-        "/scripts/config/env/dev.js",
+        '/scripts/config/env/dev.js',
       process.env.PWD +
-        "/" +
+        '/' +
         this.config.ciffiSrc +
-        "/scripts/config/env/local.js",
+        '/scripts/config/env/local.js',
       process.env.PWD +
-        "/" +
+        '/' +
         this.config.ciffiSrc +
-        "/scripts/config/env/stage.js",
+        '/scripts/config/env/stage.js',
       process.env.PWD +
-        "/" +
+        '/' +
         this.config.ciffiSrc +
-        "/scripts/config/env/prod.js",
-      process.env.PWD + "/.ciffi/package.json"
+        '/scripts/config/env/prod.js',
+      process.env.PWD + '/.ciffi/package.json'
     ];
 
     replace(
@@ -182,7 +182,7 @@ class Setup {
       },
       error => {
         if (error) {
-          return console.error("Error occurred:", error);
+          return console.error('Error occurred:', error);
         }
 
         replace(
@@ -193,7 +193,7 @@ class Setup {
           },
           error => {
             if (error) {
-              return console.error("Error occurred:", error);
+              return console.error('Error occurred:', error);
             }
             callback();
           }
@@ -207,32 +207,32 @@ class Setup {
       {
         files: [
           process.env.PWD +
-            "/" +
+            '/' +
             this.config.ciffiSrc +
-            "/scripts/config/config.js",
+            '/scripts/config/config.js',
           process.env.PWD +
-            "/" +
+            '/' +
             this.config.ciffiSrc +
-            "/scripts/config/env/dev.js",
+            '/scripts/config/env/dev.js',
           process.env.PWD +
-            "/" +
+            '/' +
             this.config.ciffiSrc +
-            "/scripts/config/env/local.js",
+            '/scripts/config/env/local.js',
           process.env.PWD +
-            "/" +
+            '/' +
             this.config.ciffiSrc +
-            "/scripts/config/env/stage.js",
+            '/scripts/config/env/stage.js',
           process.env.PWD +
-            "/" +
+            '/' +
             this.config.ciffiSrc +
-            "/scripts/config/env/prod.js"
+            '/scripts/config/env/prod.js'
         ],
         from: /@REPLACE__CONFIG@/g,
         to: newString
       },
       error => {
         if (error) {
-          return console.error("Error occurred:", error);
+          return console.error('Error occurred:', error);
         }
         callback();
       }
@@ -250,7 +250,7 @@ class Setup {
       fixedAssetsUrl.substring(
         fixedAssetsUrl.length - 1,
         fixedAssetsUrl.length
-      ) === "/"
+      ) === '/'
     ) {
       fixedAssetsUrl = fixedAssetsUrl.substring(0, fixedAssetsUrl.length - 1);
     }
@@ -258,18 +258,18 @@ class Setup {
     this.replaceBuildPath(fixedAssetsUrl, () => {
       cliCursor.hide();
 
-      console.log("");
+      console.log('');
 
       Loading.start(
-        "Generate project tree for " + chalk.blue(this.config.projectName)
+        'Generate project tree for ' + chalk.blue(this.config.projectName)
       );
 
       this.replaceConfig(this.config.projectName, () => {
-        const pathName = fixedAssetsUrl.split("/")[
-          fixedAssetsUrl.split("/").length - 1
+        const pathName = fixedAssetsUrl.split('/')[
+          fixedAssetsUrl.split('/').length - 1
         ];
 
-        if (pathName !== "src") {
+        if (pathName !== 'src') {
           new ProcessManager({
             process: `${process.env.PWD}/${this.config.ciffiSrc}/, ${
               process.env.PWD
@@ -278,9 +278,9 @@ class Setup {
         }
 
         Loading.stop(
-          "Generate project tree for " +
+          'Generate project tree for ' +
             chalk.blue(this.config.projectName) +
-            chalk.green.bold(" OK")
+            chalk.green.bold(' OK')
         );
 
         new CreateSettings(
@@ -310,15 +310,15 @@ class Setup {
 
   askForBuildPath(callback) {
     if (this.config.silent) {
-      return callback("../static");
+      return callback('../static');
     }
 
     inquirer
       .prompt({
-        type: "input",
-        name: "buildPath",
-        message: "Specify relative build path",
-        default: "../static",
+        type: 'input',
+        name: 'buildPath',
+        message: 'Specify relative build path',
+        default: '../static',
         validate: function(res) {
           const done = this.async();
 
@@ -326,9 +326,9 @@ class Setup {
             const test = new RegExp(/^(\.\.\/){1,}\w/);
             const testResult = test.test(res);
 
-            if (typeof res !== "string" || !testResult) {
+            if (typeof res !== 'string' || !testResult) {
               done(
-                "☠️  Build path must be out of this project setup folder ☠️"
+                '☠️  Build path must be out of this project setup folder ☠️'
               );
               return;
             }
@@ -345,9 +345,9 @@ class Setup {
   testNpm5(callback) {
     let version;
     new ProcessManager({
-      process: "npm -v",
+      process: 'npm -v',
       onMessage: res => {
-        version = parseInt(res.split(".")[0]) >= 5;
+        version = parseInt(res.split('.')[0]) >= 5;
       },
       onError: () => {
         version = false;
@@ -357,12 +357,12 @@ class Setup {
           callback();
         } else {
           console.log(
-            chalk.red.bold("☠️ Setup error: ") +
-              chalk.red("npm@5.0.0 is required ☠️")
+            chalk.red.bold('☠️ Setup error: ') +
+              chalk.red('npm@5.0.0 is required ☠️')
           );
           console.log(
-            chalk.blue.bold("update with: ") +
-              chalk.blue("npm install -g npm@latest")
+            chalk.blue.bold('update with: ') +
+              chalk.blue('npm install -g npm@latest')
           );
         }
       }
@@ -371,14 +371,14 @@ class Setup {
 
   beforeStart(callback) {
     this.testNpm5(() => {
-      emptyDir(process.env.PWD + "/", this.filter, (err, result) => {
+      emptyDir(process.env.PWD + '/', this.filter, (err, result) => {
         if (err) {
           console.log(err);
         } else {
-          console.log("");
-          console.log("");
-          console.log(chalk.green.bold("-- Ciffi Frontend Generator --"));
-          console.log("");
+          console.log('');
+          console.log('');
+          console.log(chalk.green.bold('-- Ciffi Frontend Generator --'));
+          console.log('');
 
           if (result) {
             this.askForProjectName(() => {
@@ -394,11 +394,11 @@ class Setup {
             });
           } else {
             console.log(
-              chalk.red.bold("☠️  Project setup failed:") +
-                " " +
-                chalk.blue("the path must be empty ☠️")
+              chalk.red.bold('☠️  Project setup failed:') +
+                ' ' +
+                chalk.blue('the path must be empty ☠️')
             );
-            console.log("");
+            console.log('');
           }
         }
       });
