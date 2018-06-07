@@ -11,10 +11,32 @@ module.exports = {
     main: './' + ConfigFile.srcPathName + '/scripts/main.js'
   },
   output: {
-    path: __dirname + '/' + ConfigFile.assetsPath,
-    publicPath: ConfigFile.publicPath,
+    publicPath: path.normalize(ConfigFile.assetsPath + '/'),
+    path: path.join(__dirname, ConfigFile.assetsPath + '/'),
     filename: '[name].js',
     chunkFilename: '[name].js'
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'async',
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    },
   },
   module: {
     rules: [
@@ -40,8 +62,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env', 'react', 'es2017', 'stage-0'],
-            plugins: ['transform-runtime']
+            babelrc: true
           }
         }
       }, {
@@ -49,8 +70,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env', 'react', 'es2017', 'stage-0'],
-            plugins: ['transform-runtime']
+            babelrc: true
           }
         }
       }, {

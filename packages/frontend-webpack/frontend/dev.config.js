@@ -10,10 +10,32 @@ module.exports = {
     main: path.join(__dirname, ConfigFile.srcPathName + '/scripts/main.js')
   },
   output: {
-    publicPath: path.join(__dirname, ConfigFile.assetsPath + '/'),
+    publicPath: path.normalize(ConfigFile.assetsPath + '/'),
     path: path.join(__dirname, ConfigFile.assetsPath + '/'),
     filename: '[name].js',
     chunkFilename: '[name].js'
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'async',
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    },
   },
   devtool: 'source-map',
   watch: true,
@@ -41,8 +63,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env', 'react', 'es2017', 'stage-0'],
-            plugins: ['transform-runtime']
+            babelrc: true
           }
         }
       }, {
@@ -50,8 +71,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env', 'react', 'es2017', 'stage-0'],
-            plugins: ['transform-runtime']
+            babelrc: true
           }
         }
       }, {
@@ -66,7 +86,5 @@ module.exports = {
       Theme: path.resolve(__dirname, ConfigFile.srcPathName + '/scripts/config/theme.js')
     }
   },
-  plugins: [
-  
-  ]
+  plugins: []
 };

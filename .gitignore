@@ -1,5 +1,5 @@
 .idea
 node_modules
-frontend
-static
+/frontend
+/static
 .DS_Store
