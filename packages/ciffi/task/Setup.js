@@ -309,14 +309,12 @@ class Setup {
           if (result) {
             
             this.askForProjectName(() => {
-              this.askForFeatures((features) => {
-                this.askForLiveReload((livereload) => {
-                  this.askForBuildPath((buildPath) => {
-                    callback({
-                      buildPath,
-                      features,
-                      livereload
-                    });
+              this.askForLiveReload((livereload) => {
+                this.askForBuildPath((buildPath) => {
+                  callback({
+                    buildPath,
+                    livereload,
+                    features: [],
                   });
                 });
               });
