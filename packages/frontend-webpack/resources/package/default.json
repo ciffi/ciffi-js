@@ -50,10 +50,10 @@
   "scripts": {
     "start": "./node_modules/.bin/ciffi-builder start",
     "dev": "./node_modules/.bin/ciffi-builder dev",
-    "build": "./node_modules/.bin/ciffi-builder build $1",
+    "build": "./node_modules/.bin/ciffi-builder build --env",
     "jsonize": "./node_modules/.bin/ciffi-jsonize",
-    "config": "./node_modules/.bin/ciffi-builder config $1",
-    "assets": "./node_modules/.bin/ciffi-builder assets $1",
+    "config": "./node_modules/.bin/ciffi-builder config --env",
+    "assets": "./node_modules/.bin/ciffi-builder assets",
     "prettier": "./node_modules/.bin/prettier --write --single-quote '**/*.{jsx,js,json,scss}'"
   }
 }
