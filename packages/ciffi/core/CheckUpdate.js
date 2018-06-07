@@ -37,6 +37,7 @@ class CheckUpdate {
         version = res;
       },
       onClose: () => {
+        this.newVersion = version;
         callback(version);
       }
     });
@@ -45,7 +46,7 @@ class CheckUpdate {
   update(callback) {
     Loading.start('Download and install ' + chalk.blue('ciffi'));
     new ProcessManager({
-      process: 'npm i -g ciffi',
+      process: `npm i -g ciffi@${this.newVersion}`,
       onClose: () => {
         Loading.stop('Download and install ' + chalk.blue('ciffi') + chalk.green.bold(' OK'));
         callback();
