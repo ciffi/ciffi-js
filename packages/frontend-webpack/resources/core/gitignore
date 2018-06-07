@@ -2,4 +2,5 @@
 .ciffi/
 .idea/
 node_modules/
+coverage/
 src/scripts/config/config.js
