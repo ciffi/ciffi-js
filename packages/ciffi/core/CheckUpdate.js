@@ -1,10 +1,11 @@
 const chalk = require('chalk');
 const ProcessManager = require('./ProcessManager');
+const Loading = require('./Loading');
 
 class CheckUpdate {
   
   constructor(callback) {
-  
+    
     console.log('👀 ' + chalk.blue('looking for updates'));
     
     this.getCurrentVersion((currentVersion) => {
@@ -42,9 +43,13 @@ class CheckUpdate {
   }
   
   update(callback) {
+    Loading.start('Download and install ' + chalk.blue('ciffi'));
     new ProcessManager({
       process: 'npm i -g ciffi',
-      onClose: callback
+      onClose: () => {
+        Loading.stop('Download and install ' + chalk.blue('ciffi') + chalk.green.bold(' OK'));
+        callback();
+      }
     });
   }
   
