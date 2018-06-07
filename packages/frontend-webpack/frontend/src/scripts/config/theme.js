@@ -1,10 +1,16 @@
-var Config = {
-  projectName: '@REPLACE__CONFIG@',
-  env: 'dev',
-  baseUrl: 'http://@REPLACE__CONFIG@.local',
-  apiUrl: 'http://@REPLACE__CONFIG@.local/',
-  shareUrl: 'http://@REPLACE__CONFIG@.local/',
-  assetsUrl: 'http://@REPLACE__CONFIG@.local/@REPLACE__ASSETS__NAME@/'
+const BP = {
+  tablet: 'min-width: 768px',
+  ipad: 'min-width: 1024px',
+  desktop: 'min-width: 1280px',
+  big: 'min-width: 1660px',
+  maxMobile: 'max-width: 767px'
 };
 
-module.exports = Config;
+const Colors = {};
+
+const Theme = {
+  BP,
+  Colors
+};
+
+export default Theme;

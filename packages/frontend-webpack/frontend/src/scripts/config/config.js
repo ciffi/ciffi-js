@@ -1,4 +1,4 @@
-var Config = {
+const Config = {
   projectName: '@REPLACE__CONFIG@',
   env: 'dev',
   baseUrl: 'http://@REPLACE__CONFIG@.local',
@@ -7,4 +7,4 @@ var Config = {
   assetsUrl: 'http://@REPLACE__CONFIG@.local/@REPLACE__ASSETS__NAME@/'
 };
 
-module.exports = Config;
+export default Config;
