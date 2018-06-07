@@ -6,11 +6,12 @@ const BP = {
   maxMobile: 'max-width: 767px'
 };
 
-const Colors = {};
+const Colors = {
+  black: 'rgba(0, 0, 0, 1)',
+  white: 'rgba(255, 255, 255, 1)'
+};
 
-const Theme = {
+export {
   BP,
   Colors
 };
-
-export default Theme;
