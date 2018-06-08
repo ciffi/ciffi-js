@@ -4,9 +4,9 @@ const Loading = require('./Loading');
 
 class CreateSSL {
   
-  constructor({ssl}, callback) {
+  constructor({https}, callback) {
     
-    if (!ssl) {
+    if (!https) {
       return callback();
     }
     
