@@ -1,4 +1,4 @@
-var CiffiSettings = {
+const CiffiSettings = {
     autoprefixer: 'last 12 versions',
     assetsPath: '@REPLACE__ASSETS@',
 	assetsPathName: '@REPLACE__ASSETS__NAME@',
