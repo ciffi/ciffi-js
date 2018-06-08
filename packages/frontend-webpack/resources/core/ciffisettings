@@ -15,7 +15,7 @@ var CiffiSettings = {
 	serverPublicPath: '../',
 	srcPathName: '@REPLACE__ASSETS__NAME@',
 	sslKey: 'sslcert/local.server.key',
-	sslCert: 'sslcert/local.server.crt',
+	sslCrt: 'sslcert/local.server.crt',
 	staticFolders: ['fonts','images'],
 	stylesOutputName: 'main.css'
 };
