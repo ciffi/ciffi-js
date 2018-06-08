@@ -95,7 +95,7 @@ class Setup {
         choices: ['yes', 'no']
       })
       .then(res => {
-        callback(res.wantHTTPS);
+        callback(res.wantHTTPS === 'yes');
       });
   }
   
