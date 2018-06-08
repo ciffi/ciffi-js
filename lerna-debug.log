@@ -1,0 +1,93 @@
+0 silly input [ 'publish' ]
+1 silly flags { _: [ 'publish' ], 'reject-cycles': false, rejectCycles: false }
+2 verbose rootPath /Applications/MAMP/htdocs/ciffi_design/git/ciffi-js
+3 info version 2.11.0
+4 silly isInitialized
+5 silly isInitialized true
+6 silly existsSync /Applications/MAMP/htdocs/ciffi_design/git/ciffi-js/VERSION
+7 info versioning independent
+8 silly initialize attempt
+9 silly isDetachedHead
+10 silly getCurrentBranch
+11 verbose getCurrentBranch master
+12 verbose isDetachedHead false
+13 silly getCurrentBranch
+14 verbose getCurrentBranch master
+15 silly getUpdates
+16 info Checking for updated packages...
+17 silly hasTags
+18 verbose hasTags true
+19 silly getLastTag
+20 verbose getLastTag @ciffi-js/dev-server@0.0.1
+21 info Comparing with @ciffi-js/dev-server@0.0.1.
+22 silly diffSinceIn @ciffi-js/dev-server@0.0.1 packages/builder
+23 silly diff
+24 silly diffSinceIn @ciffi-js/dev-server@0.0.1 packages/ciffi
+25 silly diff
+26 silly diffSinceIn @ciffi-js/dev-server@0.0.1 packages/cookies
+27 silly diff
+28 silly diffSinceIn @ciffi-js/dev-server@0.0.1 packages/custom-select
+29 silly diff
+30 silly diffSinceIn @ciffi-js/dev-server@0.0.1 packages/dev-server
+31 silly diff packages/dev-server/package.json
+32 silly diffSinceIn @ciffi-js/dev-server@0.0.1 packages/device
+33 silly diff
+34 silly diffSinceIn @ciffi-js/dev-server@0.0.1 packages/frontend-webpack
+35 silly diff
+36 silly diffSinceIn @ciffi-js/dev-server@0.0.1 packages/jsonize-path
+37 silly diff
+38 silly diffSinceIn @ciffi-js/dev-server@0.0.1 packages/responsive-images
+39 silly diff
+40 silly diffSinceIn @ciffi-js/dev-server@0.0.1 packages/router
+41 silly diff
+42 silly diffSinceIn @ciffi-js/dev-server@0.0.1 packages/utils
+43 silly diff
+44 verbose updated @ciffi-js/dev-server
+45 info Checking for prereleased packages...
+46 silly collectDependents
+47 silly isPackageDependentOf @ciffi-js/builder @ciffi-js/dev-server
+48 silly isPackageDependentOf ciffi @ciffi-js/dev-server
+49 silly isPackageDependentOf ciffi-js-webpack @ciffi-js/dev-server
+50 silly isPackageDependentOf @ciffi-js/cookies @ciffi-js/dev-server
+51 silly isPackageDependentOf @ciffi-js/custom-select @ciffi-js/dev-server
+52 silly isPackageDependentOf @ciffi-js/dev-server @ciffi-js/dev-server
+53 silly isPackageDependentOf @ciffi-js/device @ciffi-js/dev-server
+54 silly isPackageDependentOf ciffi-js-webpack @ciffi-js/dev-server
+55 silly isPackageDependentOf @ciffi-js/jsonize-path @ciffi-js/dev-server
+56 silly isPackageDependentOf @ciffi-js/responsive-images @ciffi-js/dev-server
+57 silly isPackageDependentOf @ciffi-js/utils @ciffi-js/dev-server
+58 silly isPackageDependentOf @ciffi-js/router @ciffi-js/dev-server
+59 silly isPackageDependentOf @ciffi-js/utils @ciffi-js/dev-server
+60 silly collectUpdates
+61 verbose has filtered update @ciffi-js/dev-server
+62 silly initialize success
+63 silly execute attempt
+64 silly runScriptSync preversion ciffi-frontend-generator
+65 silly runScriptSync preversion @ciffi-js/dev-server
+66 silly runScriptSync version @ciffi-js/dev-server
+67 silly runScriptSync version ciffi-frontend-generator
+68 silly addFile /Applications/MAMP/htdocs/ciffi_design/git/ciffi-js/packages/dev-server/package.json
+69 silly commit Publish
+69 silly commit
+69 silly commit  - @ciffi-js/dev-server@0.0.1
+70 verbose commit [ 'commit',
+70 verbose commit   '--no-verify',
+70 verbose commit   '-F',
+70 verbose commit   '/private/var/folders/hr/4snzq4c519nb5sx12s2v154m0000gn/T/e9412510-8de9-4150-a0cc-c38cf5c033fb/lerna-commit.txt' ]
+71 error execute caught error
+72 error Error: On branch master
+72 error Your branch is ahead of 'origin/master' by 1 commit.
+72 error   (use "git push" to publish your local commits)
+72 error
+72 error Untracked files:
+72 error 	lerna-debug.log
+72 error 	packages/dev-server/package-lock.json
+72 error
+72 error nothing added to commit but untracked files present
+72 error
+72 error     at Function.module.exports.sync (/Applications/MAMP/htdocs/ciffi_design/git/ciffi-js/node_modules/execa/index.js:303:26)
+72 error     at Function.execSync (/Applications/MAMP/htdocs/ciffi_design/git/ciffi-js/node_modules/lerna/lib/ChildProcessUtilities.js:59:30)
+72 error     at Function.commit (/Applications/MAMP/htdocs/ciffi_design/git/ciffi-js/node_modules/lerna/lib/GitUtilities.js:94:39)
+72 error     at PublishCommand.gitCommitAndTagVersionForUpdates (/Applications/MAMP/htdocs/ciffi_design/git/ciffi-js/node_modules/lerna/lib/commands/PublishCommand.js:765:30)
+72 error     at PublishCommand.commitAndTagUpdates (/Applications/MAMP/htdocs/ciffi_design/git/ciffi-js/node_modules/lerna/lib/commands/PublishCommand.js:738:26)
+72 error     at PublishCommand.execute (/Applications/MAMP/htdocs/ciffi_design/git/ciffi-js/node_modules/lerna/lib/commands/PublishCommand.js:329:14)
