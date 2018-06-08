@@ -8,6 +8,7 @@ const CiffiSettings = {
 	devServerPort: '3000',
 	devStartUrl: 'https://localhost:3000/',
 	features: @REPLACE__FEATURES@,
+	https: @REPLACE__HTTPS@,
 	projectName: '@REPLACE__CONFIG@',
 	publicPath: './static/',
 	scriptsOutputName: 'main.js',

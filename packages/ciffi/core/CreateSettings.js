@@ -37,30 +37,37 @@ class CreateSettings {
       new ProcessManager({
         process: `cp ${this.resource} ${this.tempFile}`,
         onClose: () => {
-          this.replaceBuildPath(() => {
-            this.replaceConfig(() => {
-              this.replaceFeatures(() => {
-                
-                if (fileExists.sync(this.projectFile)) {
-                  console.log(chalk.red('File already exists: ' + this.projectFile));
-                } else {
-                  pathExists(this.projectRoot).then((res) => {
-                    if (res) {
-                      const copy = `cp ${this.tempFile} ${this.projectFile}`;
-                      const removeTempFile = `rm -rf ${this.tempFile}`;
-                      const removeNewFile = `rm -rf ${this.projectRoot}/${this.fileName}`;
-                      const copyAndClear = `${copy} && ${removeTempFile} && ${removeNewFile}`;
-                      new ProcessManager({
-                        process: copyAndClear,
-                        onClose: callback
-                      });
-                    }
+          this.replaceAll(() => {
+            if (fileExists.sync(this.projectFile)) {
+              console.log(chalk.red('File already exists: ' + this.projectFile));
+            } else {
+              pathExists(this.projectRoot).then((res) => {
+                if (res) {
+                  const copy = `cp ${this.tempFile} ${this.projectFile}`;
+                  const removeTempFile = `rm -rf ${this.tempFile}`;
+                  const removeNewFile = `rm -rf ${this.projectRoot}/${this.fileName}`;
+                  const copyAndClear = `${copy} && ${removeTempFile} && ${removeNewFile}`;
+                  new ProcessManager({
+                    process: copyAndClear,
+                    onClose: callback
                   });
                 }
               });
-            });
+            }
           });
         }
+      });
+    });
+  }
+  
+  replaceAll(callback) {
+    this.replaceBuildPath(() => {
+      this.replaceConfig(() => {
+        this.replaceHTTPS(() => {
+          this.replaceFeatures(() => {
+            callback();
+          });
+        });
       });
     });
   }
@@ -107,6 +114,20 @@ class CreateSettings {
       files: [this.tempFile],
       from: /@REPLACE__CONFIG@/g,
       to: this.config.projectName
+    }, (error) => {
+      if (error) {
+        return console.error('Error occurred:', error);
+      }
+      callback();
+    });
+  }
+  
+  replaceHTTPS(callback) {
+    
+    replace({
+      files: [this.tempFile],
+      from: /@REPLACE__HTTPS@/g,
+      to: this.config.https
     }, (error) => {
       if (error) {
         return console.error('Error occurred:', error);

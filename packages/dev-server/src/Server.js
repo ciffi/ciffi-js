@@ -29,7 +29,7 @@ class Server {
     
     this.app.use(express.static(this.config.serverPublicPath));
     
-    this.server = require('https').Server(credentials, this.app);
+    this.server = this.config.https ? require('https').Server(credentials, this.app) : require('http').Server(this.app);
     
     this.server.listen(this.config.devServerPort, '0.0.0.0');
     

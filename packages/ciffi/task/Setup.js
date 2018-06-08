@@ -309,6 +309,7 @@ class Setup {
             projectName: this.config.projectName,
             assetsPath: fixedAssetsUrl,
             pathName: pathName,
+            https: this.config.https,
             features: this.config.features,
             livereload: this.config.livereload,
             modulePath: this.config.modulePath
