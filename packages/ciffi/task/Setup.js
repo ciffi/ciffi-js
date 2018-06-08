@@ -11,9 +11,10 @@ const TempApp = require('../core/TempApp');
 const CreateSettings = require('../core/CreateSettings');
 const CreatePackage = require('../core/CreatePackage');
 const CreateHiddenFiles = require('../core/CreateHiddenFiles');
+const CreateSSL = require('../core/CreateSSL');
 const MoveApp = require('../core/MoveApp');
 const Dependencies = require('../core/Dependencies');
-const { showGreetings } = require('../core/Messages');
+const {showGreetings} = require('../core/Messages');
 
 class Setup {
   constructor(config) {
@@ -22,24 +23,25 @@ class Setup {
       ciffiSrc: '.ciffi/src',
       ciffiSrcName: 'src'
     };
-
+    
     this.init();
   }
-
+  
   init() {
     this.checkUpdates(() => {
-      this.beforeStart(({ buildPath, features, livereload }) => {
+      this.beforeStart(({buildPath, features, livereload, ssl}) => {
         this.config.features = features;
         this.config.livereload = livereload;
         this.config.buildPath = buildPath;
-
+        this.config.ssl = ssl;
+        
         new TempApp(this.config.modulePath, () => {
           this.start();
         });
       });
     });
   }
-
+  
   checkUpdates(callback) {
     const updateChecker = new CheckUpdate(hasUpdate => {
       if (hasUpdate) {
@@ -58,12 +60,12 @@ class Setup {
       }
     });
   }
-
+  
   askForUpdate(callback) {
     if (this.config.silent) {
       return callback(true);
     }
-
+    
     console.log('');
     inquirer
       .prompt({
@@ -77,7 +79,26 @@ class Setup {
         callback(res.wantUpdate === 'yes');
       });
   }
-
+  
+  askForSSL(callback) {
+    if (this.config.silent) {
+      return callback(false);
+    }
+    
+    console.log('');
+    inquirer
+      .prompt({
+        type: 'list',
+        name: 'wantHTTPS',
+        message: 'Want HTTPS?',
+        default: 0,
+        choices: ['yes', 'no']
+      })
+      .then(res => {
+        callback(res.wantHTTPS === 'yes');
+      });
+  }
+  
   askForFeatures(callback) {
     inquirer
       .prompt({
@@ -91,12 +112,12 @@ class Setup {
         callback(res.features);
       });
   }
-
+  
   askForLiveReload(callback) {
     if (this.config.silent) {
       return callback('none');
     }
-
+    
     inquirer
       .prompt({
         type: 'list',
@@ -109,13 +130,13 @@ class Setup {
         callback(res.livereload);
       });
   }
-
+  
   askForProjectName(callback) {
     if (this.config.silent) {
       this.config.projectName = 'test';
       return callback();
     }
-
+    
     const projectName = this.config.projectName;
     if (!projectName) {
       inquirer
@@ -124,18 +145,18 @@ class Setup {
           name: 'projectName',
           message: 'Specify project name',
           default: 'test',
-          validate: function(res) {
+          validate: function (res) {
             const done = this.async();
-
+            
             setTimeout(() => {
               const test = new RegExp(/^$|\s+|\w\s+|[\/]|^\.|\.$/);
               const testResult = test.test(res);
-
+              
               if (typeof res !== 'string' || testResult) {
                 done('☠️  Project must have real name ☠️');
                 return;
               }
-
+              
               done(null, true);
             }, 10);
           }
@@ -148,32 +169,32 @@ class Setup {
       callback();
     }
   }
-
+  
   replaceBuildPath(newString, callback) {
     const files = [
       process.env.PWD +
-        '/' +
-        this.config.ciffiSrc +
-        '/scripts/config/config.js',
+      '/' +
+      this.config.ciffiSrc +
+      '/scripts/config/config.js',
       process.env.PWD +
-        '/' +
-        this.config.ciffiSrc +
-        '/scripts/config/env/dev.js',
+      '/' +
+      this.config.ciffiSrc +
+      '/scripts/config/env/dev.js',
       process.env.PWD +
-        '/' +
-        this.config.ciffiSrc +
-        '/scripts/config/env/local.js',
+      '/' +
+      this.config.ciffiSrc +
+      '/scripts/config/env/local.js',
       process.env.PWD +
-        '/' +
-        this.config.ciffiSrc +
-        '/scripts/config/env/stage.js',
+      '/' +
+      this.config.ciffiSrc +
+      '/scripts/config/env/stage.js',
       process.env.PWD +
-        '/' +
-        this.config.ciffiSrc +
-        '/scripts/config/env/prod.js',
+      '/' +
+      this.config.ciffiSrc +
+      '/scripts/config/env/prod.js',
       process.env.PWD + '/.ciffi/package.json'
     ];
-
+    
     replace(
       {
         files,
@@ -184,7 +205,7 @@ class Setup {
         if (error) {
           return console.error('Error occurred:', error);
         }
-
+        
         replace(
           {
             files,
@@ -201,31 +222,31 @@ class Setup {
       }
     );
   }
-
+  
   replaceConfig(newString, callback) {
     replace(
       {
         files: [
           process.env.PWD +
-            '/' +
-            this.config.ciffiSrc +
-            '/scripts/config/config.js',
+          '/' +
+          this.config.ciffiSrc +
+          '/scripts/config/config.js',
           process.env.PWD +
-            '/' +
-            this.config.ciffiSrc +
-            '/scripts/config/env/dev.js',
+          '/' +
+          this.config.ciffiSrc +
+          '/scripts/config/env/dev.js',
           process.env.PWD +
-            '/' +
-            this.config.ciffiSrc +
-            '/scripts/config/env/local.js',
+          '/' +
+          this.config.ciffiSrc +
+          '/scripts/config/env/local.js',
           process.env.PWD +
-            '/' +
-            this.config.ciffiSrc +
-            '/scripts/config/env/stage.js',
+          '/' +
+          this.config.ciffiSrc +
+          '/scripts/config/env/stage.js',
           process.env.PWD +
-            '/' +
-            this.config.ciffiSrc +
-            '/scripts/config/env/prod.js'
+          '/' +
+          this.config.ciffiSrc +
+          '/scripts/config/env/prod.js'
         ],
         from: /@REPLACE__CONFIG@/g,
         to: newString
@@ -238,14 +259,14 @@ class Setup {
       }
     );
   }
-
+  
   filter(filepath) {
     return !/(^|\/)\.[^\/\.]/g.test(filepath);
   }
-
+  
   start() {
     let fixedAssetsUrl = this.config.buildPath;
-
+    
     if (
       fixedAssetsUrl.substring(
         fixedAssetsUrl.length - 1,
@@ -254,35 +275,35 @@ class Setup {
     ) {
       fixedAssetsUrl = fixedAssetsUrl.substring(0, fixedAssetsUrl.length - 1);
     }
-
+    
     this.replaceBuildPath(fixedAssetsUrl, () => {
       cliCursor.hide();
-
+      
       console.log('');
-
+      
       Loading.start(
         'Generate project tree for ' + chalk.blue(this.config.projectName)
       );
-
+      
       this.replaceConfig(this.config.projectName, () => {
         const pathName = fixedAssetsUrl.split('/')[
-          fixedAssetsUrl.split('/').length - 1
-        ];
-
+        fixedAssetsUrl.split('/').length - 1
+          ];
+        
         if (pathName !== 'src') {
           new ProcessManager({
             process: `${process.env.PWD}/${this.config.ciffiSrc}/, ${
               process.env.PWD
-            }/.ciffi/${this.config.ciffiSrc}/`
+              }/.ciffi/${this.config.ciffiSrc}/`
           });
         }
-
+        
         Loading.stop(
           'Generate project tree for ' +
-            chalk.blue(this.config.projectName) +
-            chalk.green.bold(' OK')
+          chalk.blue(this.config.projectName) +
+          chalk.green.bold(' OK')
         );
-
+        
         new CreateSettings(
           {
             projectName: this.config.projectName,
@@ -295,9 +316,11 @@ class Setup {
           () => {
             new CreatePackage(this.config, () => {
               new CreateHiddenFiles(this.config, () => {
-                new MoveApp(() => {
-                  new Dependencies(this.config, () => {
-                    showGreetings();
+                new CreateSSL(this.config, () => {
+                  new MoveApp(() => {
+                    new Dependencies(this.config, () => {
+                      showGreetings();
+                    });
                   });
                 });
               });
@@ -307,32 +330,32 @@ class Setup {
       });
     });
   }
-
+  
   askForBuildPath(callback) {
     if (this.config.silent) {
       return callback('../static');
     }
-
+    
     inquirer
       .prompt({
         type: 'input',
         name: 'buildPath',
         message: 'Specify relative build path',
         default: '../static',
-        validate: function(res) {
+        validate: function (res) {
           const done = this.async();
-
+          
           setTimeout(() => {
             const test = new RegExp(/^(\.\.\/){1,}\w/);
             const testResult = test.test(res);
-
+            
             if (typeof res !== 'string' || !testResult) {
               done(
                 '☠️  Build path must be out of this project setup folder ☠️'
               );
               return;
             }
-
+            
             done(null, true);
           }, 10);
         }
@@ -341,7 +364,7 @@ class Setup {
         callback(res.buildPath);
       });
   }
-
+  
   testNpm5(callback) {
     let version;
     new ProcessManager({
@@ -358,17 +381,17 @@ class Setup {
         } else {
           console.log(
             chalk.red.bold('☠️ Setup error: ') +
-              chalk.red('npm@5.0.0 is required ☠️')
+            chalk.red('npm@5.0.0 is required ☠️')
           );
           console.log(
             chalk.blue.bold('update with: ') +
-              chalk.blue('npm install -g npm@latest')
+            chalk.blue('npm install -g npm@latest')
           );
         }
       }
     });
   }
-
+  
   beforeStart(callback) {
     this.testNpm5(() => {
       emptyDir(process.env.PWD + '/', this.filter, (err, result) => {
@@ -379,15 +402,18 @@ class Setup {
           console.log('');
           console.log(chalk.green.bold('-- Ciffi Frontend Generator --'));
           console.log('');
-
+          
           if (result) {
             this.askForProjectName(() => {
-              this.askForLiveReload(livereload => {
-                this.askForBuildPath(buildPath => {
-                  callback({
-                    buildPath,
-                    livereload,
-                    features: []
+              this.askForSSL((ssl) => {
+                this.askForLiveReload(livereload => {
+                  this.askForBuildPath(buildPath => {
+                    callback({
+                      buildPath,
+                      livereload,
+                      ssl,
+                      features: []
+                    });
                   });
                 });
               });
@@ -395,8 +421,8 @@ class Setup {
           } else {
             console.log(
               chalk.red.bold('☠️  Project setup failed:') +
-                ' ' +
-                chalk.blue('the path must be empty ☠️')
+              ' ' +
+              chalk.blue('the path must be empty ☠️')
             );
             console.log('');
           }
