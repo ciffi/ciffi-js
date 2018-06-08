@@ -12,7 +12,7 @@
   "license": "MIT",
   "homepage": "https://github.com/ciffi/ciffi-js",
   "devDependencies": {
-    "@ciffi-js/builder": "^2.1.7",
+    "@ciffi-js/builder": "latest",
     "@ciffi-js/jsonize-path": "^1.1.0",
     "autoprefixer": "^7.2.1",
     "babel-core": "^6.26.3",
