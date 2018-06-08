@@ -1,6 +1,6 @@
 {
   "name": "@ciffi-js/dev-server",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Local server for ciffi js webbpack project",
   "main": "./index.js",
   "repository": {
