@@ -1,0 +1,35 @@
+{
+  "name": "@ciffi-js/dev-server",
+  "version": "0.0.0",
+  "description": "Local server for ciffi js webbpack project",
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ciffi/ciffi-js/"
+  },
+  "author": {
+    "name": "Ciffi"
+  },
+  "keywords": [
+    "ciffi",
+    "ciffi-js",
+    "javascript",
+    "front-end",
+    "development",
+    "web",
+    "module",
+    "node",
+    "node utility",
+    "node server",
+    "node dev server"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ciffi/ciffi-js",
+  "preferGlobal": false,
+  "bin": {
+    "ciffi-dev-server": "./index.js"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
