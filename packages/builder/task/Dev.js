@@ -10,11 +10,12 @@ const Config = require('./Config');
 class Dev {
   
   
-  constructor() {
+  constructor(withServer) {
     
     if (fileExists.sync(ConfigFile)) {
       this.config = require(ConfigFile);
       this.env = 'dev';
+      this.withServer = withServer;
       this.init();
     } else {
       console.log(chalk.red.bold('☠️  Project dev failed:') + ' ' + chalk.blue('can\'t find .ciffisettings file ☠️'));
@@ -29,9 +30,12 @@ class Dev {
     const assetPathName = this.config.assetsPathName;
     const liveCssFirst = './node_modules/.bin/node-sass ' + assetPathName + '/styles/main.scss ' + assetPath + '/' + this.config.stylesOutputName + ' --source-map true';
     const liveServer = this.defineLiveServer();
-    
     const liveCss = './node_modules/.bin/node-sass ' + assetPathName + '/styles/main.scss ' + assetPath + '/' + this.config.stylesOutputName + ' --watch --source-map true';
     const liveJs = './node_modules/.bin/webpack --config dev.config.js --progress';
+    
+    if (this.withServer) {
+      require('@ciffi-js/dev-server');
+    }
     
     new Config(this.env, () => {
       new Assets(() => {
@@ -64,9 +68,9 @@ class Dev {
           console.log(chalk.red(res));
           Notify.sendObjError(res);
         } else {
-  
+          
           Log(chalk.blue(res));
-  
+          
           if (res.indexOf('Built at: ') >= 0) {
             Notify.sendReady('🏗 DEV ready - click to open');
           }

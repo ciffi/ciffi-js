@@ -27,6 +27,8 @@ class Server {
     
     this.app = express();
     
+    this.app.use(express.static(this.config.serverPublicPath));
+    
     this.server = require('https').Server(credentials, this.app);
     
     this.server.listen(this.config.devServerPort, '0.0.0.0');
@@ -36,7 +38,7 @@ class Server {
   
   initRouter() {
     
-    this.app.get('/', (req, res) => {
+    this.app.get('*', (req, res) => {
       
       res.send('server ready');
       

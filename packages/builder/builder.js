@@ -37,7 +37,7 @@ class Builder {
       
       switch (cmd) {
         case 'start':
-          new Dev();
+          new Dev(true);
           break;
         case 'build':
           new Build(env)
