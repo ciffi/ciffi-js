@@ -1,10 +1,10 @@
 const Config = {
 	projectName: '@REPLACE__CONFIG@',
 	env: 'dev',
-	baseUrl: 'http://@REPLACE__CONFIG@.local',
-	apiUrl: 'http://@REPLACE__CONFIG@.local/',
-	shareUrl: 'http://@REPLACE__CONFIG@.local/',
-	assetsUrl: 'http://@REPLACE__CONFIG@.local/@REPLACE__ASSETS__NAME@/'
+  baseUrl: `${window.location.protocol}//${window.location.host}`,
+  apiUrl: `${window.location.protocol}//${window.location.host}/`,
+  shareUrl: `${window.location.protocol}//${window.location.host}/`,
+  assetsUrl: `${window.location.protocol}//${window.location.host}/static/`,
 };
 
 export default Config;

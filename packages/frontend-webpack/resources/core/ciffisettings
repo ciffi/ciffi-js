@@ -6,7 +6,7 @@ var CiffiSettings = {
 	defaultBuildEnv: 'local',
 	defaultDevEnv: 'dev',
 	devServerPort: '3000',
-	devStartUrl: 'http://@REPLACE__CONFIG@.local/',
+	devStartUrl: 'https://localhost:3000/',
 	features: @REPLACE__FEATURES@,
 	projectName: '@REPLACE__CONFIG@',
 	publicPath: './static/',
