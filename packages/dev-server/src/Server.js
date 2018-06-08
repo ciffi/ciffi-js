@@ -21,15 +21,21 @@ class Server {
   }
   
   init() {
-    const privateKey = fs.readFileSync(`${process.env.PWD}/${this.config.sslKey}`, 'utf8');
-    const certificate = fs.readFileSync(`${process.env.PWD}/${this.config.sslCrt}`, 'utf8');
-    const credentials = {key: privateKey, cert: certificate};
     
     this.app = express();
-    
     this.app.use(express.static(this.config.serverPublicPath));
     
-    this.server = this.config.https ? require('https').Server(credentials, this.app) : require('http').Server(this.app);
+    if (this.config.https) {
+      
+      const privateKey = fs.readFileSync(`${process.env.PWD}/${this.config.sslKey}`, 'utf8');
+      const certificate = fs.readFileSync(`${process.env.PWD}/${this.config.sslCrt}`, 'utf8');
+      const credentials = {key: privateKey, cert: certificate};
+      
+      this.server = require('https').Server(credentials, this.app);
+      
+    } else {
+      this.server = require('http').Server(this.app)
+    }
     
     this.server.listen(this.config.devServerPort, '0.0.0.0');
     
