@@ -1,19 +1,35 @@
+const chalk = require('chalk');
 const fs = require('fs');
+const fileExists = require('file-exists');
 const express = require('express');
 const ConfigFile = `${process.env.PWD}/.ciffisettings`;
-const privateKey = fs.readFileSync(`${process.env.PWD}/${ConfigFile.sslKey}`, 'utf8');
-const certificate = fs.readFileSync(`${process.env.PWD}/${ConfigFile.sslCrt}/`, 'utf8');
-const credentials = {key: privateKey, cert: certificate};
 
 class Server {
   
   constructor() {
     
+    if (fileExists.sync(ConfigFile)) {
+      
+      this.config = require(ConfigFile);
+      
+      this.init();
+      
+    } else {
+      console.error(chalk.red.bold('☠️  Project build failed:') + ' ' + chalk.blue('can\'t find .ciffisettings file ☠️'));
+      return console.log('');
+    }
+  }
+  
+  init() {
+    const privateKey = fs.readFileSync(`${process.env.PWD}/${this.config.sslKey}`, 'utf8');
+    const certificate = fs.readFileSync(`${process.env.PWD}/${this.config.sslCrt}`, 'utf8');
+    const credentials = {key: privateKey, cert: certificate};
+    
     this.app = express();
     
     this.server = require('https').Server(credentials, this.app);
     
-    this.server.listen(ConfigFile.devServerPort, '0.0.0.0');
+    this.server.listen(this.config.devServerPort, '0.0.0.0');
     
     this.initRouter();
   }

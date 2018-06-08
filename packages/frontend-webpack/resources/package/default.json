@@ -14,7 +14,7 @@
   "devDependencies": {
     "@ciffi-js/builder": "^2.1.5",
     "@ciffi-js/jsonize-path": "^1.1.0",
-    "@ciffi-js/dev-server": "^0.0.1",
+    "@ciffi-js/dev-server": "^0.0.2",
     "autoprefixer": "^7.2.1",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
