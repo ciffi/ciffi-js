@@ -63,12 +63,17 @@
     "assets": "ciffi-builder assets",
     "prettier": "prettier --write --single-quote '**/*.{jsx,js,json,scss}'",
     "precommit": "pretty-quick --staged",
-    "test": "jest --watchAll --coverage"
+    "test": "jest --watchAll",
+    "coverage": "jest --coverage"
   },
   "jest": {
     "moduleNameMapper": {
       "Config": "<rootDir>/src/scripts/config/config.js",
       "Theme": "<rootDir>/src/scripts/config/theme.js"
-    }
+    },
+    "collectCoverageFrom": [
+      "<rootDir>/src/scripts/**/*.{js,jsx}",
+      "!<rootDir>/src/scripts/config/**/*.{js,jsx}"
+    ]
   }
 }

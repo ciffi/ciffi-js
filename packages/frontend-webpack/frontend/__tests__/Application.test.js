@@ -1,5 +1,5 @@
 import Config from 'Config';
-import Application from '../scripts/controllers/Application';
+import Application from '../src/scripts/controllers/Application';
 
 const App = new Application();
 
