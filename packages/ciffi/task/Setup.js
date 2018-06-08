@@ -29,11 +29,11 @@ class Setup {
   
   init() {
     this.checkUpdates(() => {
-      this.beforeStart(({buildPath, features, livereload, ssl}) => {
+      this.beforeStart(({buildPath, features, livereload, https}) => {
         this.config.features = features;
         this.config.livereload = livereload;
         this.config.buildPath = buildPath;
-        this.config.ssl = ssl;
+        this.config.https = https;
         
         new TempApp(this.config.modulePath, () => {
           this.start();
@@ -95,7 +95,7 @@ class Setup {
         choices: ['yes', 'no']
       })
       .then(res => {
-        callback(res.wantHTTPS === 'yes');
+        callback(res.wantHTTPS);
       });
   }
   
@@ -406,13 +406,13 @@ class Setup {
           
           if (result) {
             this.askForProjectName(() => {
-              this.askForSSL((ssl) => {
+              this.askForSSL((https) => {
                 this.askForLiveReload(livereload => {
                   this.askForBuildPath(buildPath => {
                     callback({
                       buildPath,
                       livereload,
-                      ssl,
+                      https,
                       features: []
                     });
                   });

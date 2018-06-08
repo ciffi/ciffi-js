@@ -37,32 +37,28 @@ class CreateSettings {
       new ProcessManager({
         process: `cp ${this.resource} ${this.tempFile}`,
         onClose: () => {
-          this.replaceBuildPath(() => {
-            this.replaceConfig(() => {
-              this.replaceHTTPS(() => {
-                this.replaceFeatures(() => {
-                  
-                  if (fileExists.sync(this.projectFile)) {
-                    console.log(chalk.red('File already exists: ' + this.projectFile));
-                  } else {
-                    pathExists(this.projectRoot).then((res) => {
-                      if (res) {
-                        const copy = `cp ${this.tempFile} ${this.projectFile}`;
-                        const removeTempFile = `rm -rf ${this.tempFile}`;
-                        const removeNewFile = `rm -rf ${this.projectRoot}/${this.fileName}`;
-                        const copyAndClear = `${copy} && ${removeTempFile} && ${removeNewFile}`;
-                        new ProcessManager({
-                          process: copyAndClear,
-                          onClose: callback
-                        });
-                      }
-                    });
-                  }
-                  
-                });
+          
+          this.replaceAll(() => {
+            
+            if (fileExists.sync(this.projectFile)) {
+              console.log(chalk.red('File already exists: ' + this.projectFile));
+            } else {
+              pathExists(this.projectRoot).then((res) => {
+                if (res) {
+                  const copy = `cp ${this.tempFile} ${this.projectFile}`;
+                  const removeTempFile = `rm -rf ${this.tempFile}`;
+                  const removeNewFile = `rm -rf ${this.projectRoot}/${this.fileName}`;
+                  const copyAndClear = `${copy} && ${removeTempFile} && ${removeNewFile}`;
+                  new ProcessManager({
+                    process: copyAndClear,
+                    onClose: callback
+                  });
+                }
               });
-            });
+            }
+            
           });
+          
         }
       });
     });
@@ -79,6 +75,18 @@ class CreateSettings {
       } else {
         callback();
       }
+    });
+  }
+  
+  replaceAll(callback) {
+    this.replaceBuildPath(() => {
+      this.replaceConfig(() => {
+        this.replaceHTTPS(() => {
+          this.replaceFeatures(() => {
+            callback();
+          });
+        });
+      });
     });
   }
   
