@@ -1,6 +1,6 @@
-let chalk = require('chalk');
-let Loading = require('./Loading');
-let ProcessManager = require('./ProcessManager');
+const chalk = require('chalk');
+const Loading = require('./Loading');
+const ProcessManager = require('./ProcessManager');
 
 class Dependencies {
   

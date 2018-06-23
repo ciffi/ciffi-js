@@ -10,6 +10,7 @@
   "plugins": [
     "react"
   ],
+  "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module"
   },
@@ -18,10 +19,10 @@
     "plugin:react/recommended"
   ],
   "globals": {
-    "System": false
   },
   "rules": {
     "no-console": 0,
+    "react/prop-types": 0,
     "strict": [
       2,
       "safe"

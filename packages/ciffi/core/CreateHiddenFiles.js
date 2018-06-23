@@ -14,7 +14,7 @@ class CreateHiddenFiles {
       ...config
     };
     
-    this.files = ['babelrc', 'eslintrc', 'gitignore', 'prettierignore', 'prettierrc'];
+    this.files = ['babelrc', 'editorconfig', 'eslintrc', 'gitignore', 'prettierignore', 'prettierrc'];
     this.tempPath = `${process.env.PWD}/.ciffi/`;
     
     const loadingString = this.files.map((fileName, index) => {

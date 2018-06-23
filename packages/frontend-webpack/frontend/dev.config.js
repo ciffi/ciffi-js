@@ -10,7 +10,7 @@ module.exports = {
     main: path.join(__dirname, ConfigFile.srcPathName + '/scripts/main.js')
   },
   output: {
-    publicPath: path.normalize(ConfigFile.assetsPath + '/'),
+    publicPath: path.normalize(ConfigFile.publicPath),
     path: path.join(__dirname, ConfigFile.assetsPath + '/'),
     filename: '[name].js',
     chunkFilename: '[name].js'
