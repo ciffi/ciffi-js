@@ -15,7 +15,7 @@ class Assets {
     if (fileExists.sync(ConfigFile)) {
       this.config = require(ConfigFile);
     } else {
-      console.error(chalk.red.bold('??  Project build failed:') + ' ' + chalk.blue('can\'t find .ciffisettings file ??'));
+      console.error(chalk.red.bold('☠️ Project build failed:') + ' ' + chalk.blue('can\'t find .ciffisettings file ☠️'));
       return console.log('');
     }
     
@@ -39,7 +39,7 @@ class Assets {
     
     process.on('close', (res) => {
       if (res === 0) {
-        Log(chalk.blue('??  Assets copied in ') + ' ' + this.config.assetsPath + '/ ' + chalk.green.bold(' OK'));
+        Log(chalk.blue('🦄 Assets copied in ') + ' ' + this.config.assetsPath + '/ ' + chalk.green.bold(' OK'));
         console.log('');
         callback();
       }

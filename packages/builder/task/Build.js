@@ -16,7 +16,7 @@ class Build {
       this.env = env;
       this.init();
     } else {
-      console.error(chalk.red.bold('☠️  Project build failed:') + ' ' + chalk.blue('can\'t find .ciffisettings file ☠️'));
+      console.error(chalk.red.bold('☠️ Project build failed:') + ' ' + chalk.blue('can\'t find .ciffisettings file ☠️'));
       return console.log('');
     }
   }
@@ -55,7 +55,7 @@ class Build {
       
       process.on('close', (res) => {
         if (res === 0) {
-          console.log(chalk.blue('🏗  Project build for ') + this.env + chalk.blue(' in ') + assetPath + ' ' + chalk.green.bold(' OK'));
+          console.log(chalk.blue('🏗 Project build for ') + this.env + chalk.blue(' in ') + assetPath + ' ' + chalk.green.bold(' OK'));
           new Assets();
         }
         console.log('');

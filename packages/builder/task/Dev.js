@@ -19,8 +19,8 @@ class Dev {
       this.withServer = withServer;
       this.init();
     } else {
-      console.log(chalk.red.bold('☠️  Project dev failed:') + ' ' + chalk.blue('can\'t find .ciffisettings file ☠️'));
-      Notify.sendError('☠️  Project dev failed: can\'t find .ciffisettings file ☠️');
+      console.log(chalk.red.bold('☠️ Project dev failed:') + ' ' + chalk.blue('can\'t find .ciffisettings file ☠️'));
+      Notify.sendError('☠️ Project dev failed: can\'t find .ciffisettings file ☠️');
       return console.log('');
     }
     

@@ -15,14 +15,14 @@ class Config {
       this.config = require(ConfigFile);
       this.env = env;
     } else {
-      console.error(chalk.red.bold('??  Project build failed:') + ' ' + chalk.blue('can\'t find .ciffisettings file ??'));
+      console.error(chalk.red.bold('☠️ Project build failed:') + ' ' + chalk.blue('can\'t find .ciffisettings file ☠️'));
       return console.log('');
     }
     
     if (fileExists.sync(path.join(process.cwd(), 'src', 'scripts', 'config', 'env', `${this.env}.js`))) {
       this.init(callback);
     } else {
-      console.error(chalk.red.bold('??  Project build failed:') + ' ' + chalk.blue('can\'t find src/scripts/config/env/' + this.env + '.js file ??'));
+      console.error(chalk.red.bold('☠️ Project build failed:') + ' ' + chalk.blue('can\'t find src/scripts/config/env/' + this.env + '.js file ☠️'));
       return console.log('');
     }
   }
@@ -34,7 +34,7 @@ class Config {
     exec(createConfig);
     
     console.log('');
-    console.log(chalk.blue('?? Generate config for ') + this.env + ' ' + chalk.green.bold(' OK'));
+    console.log(chalk.blue('🦄 Generate config for ') + this.env + ' ' + chalk.green.bold(' OK'));
     console.log('');
     console.log('');
     
