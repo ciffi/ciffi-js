@@ -1,6 +1,6 @@
 {
   "name": "@ciffi-js/builder",
-  "version": "2.1.8",
+  "version": "2.2.0",
   "description": "Builder for ciffi js webbpack project",
   "main": "./builder.js",
   "repository": {
@@ -28,7 +28,7 @@
     "ciffi-builder": "./builder.js"
   },
   "dependencies": {
-    "@ciffi-js/dev-server": "^0.0.5",
+    "@ciffi-js/dev-server": "^1.0.0",
     "chalk": "^2.1.0",
     "file-exists": "^4.0.0",
     "meow": "^3.7.0",
