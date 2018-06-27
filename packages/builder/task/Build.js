@@ -1,7 +1,8 @@
 const chalk = require('chalk');
 const fileExists = require('file-exists');
 const exec = require('child_process').exec;
-const ConfigFile = process.env.PWD + '/.ciffisettings';
+const path = require('path');
+const ConfigFile = path.join(process.cwd(), '.ciffisettings');
 const Assets = require('./Assets');
 const Config = require('./Config');
 
@@ -21,16 +22,16 @@ class Build {
   }
   
   init() {
-    const assetPath = this.config.assetsPath;
+    const assetPath = process.platform === 'win32' ? this.config.assetsPath.replace(/\//g, '\\') : this.config.assetsPath;
     const assetPathName = this.config.assetsPathName;
     const autoprefixerConfig = this.config.autoprefixer || 'last 12 versions';
     const concat = ' && ';
-    const cleanDist = 'rm -rf ' + assetPath + '/*';
-    const css = './node_modules/.bin/node-sass ' + assetPathName + '/styles/main.scss ' + assetPath + '/' + this.config.stylesOutputName;
-    const autoprefixer = './node_modules/.bin/postcss --use autoprefixer --autoprefixer.browsers \'' + autoprefixerConfig + '\' -o ' + assetPath + '/' + this.config.stylesOutputName + ' ' + assetPath + '/' + this.config.stylesOutputName;
-    const cleancss = './node_modules/.bin/cleancss -o ' + assetPath + '/' + this.config.stylesOutputName + ' ' + assetPath + '/' + this.config.stylesOutputName;
+    const cleanDist = process.platform === 'win32' ? 'rd / s / q ' + assetPath : 'rm -rf ' + assetPath + '/*';
+    const css = `${path.join('node_modules', '.bin', 'node-sass')} ${path.join(assetPathName, 'styles', 'main.scss')} ${path.join(assetPath, this.config.stylesOutputName)}`;
+    const autoprefixer = `${path.join('node_modules', '.bin', 'postcss')} --use autoprefixer --autoprefixer.browsers "${autoprefixerConfig}" -o ${path.join(assetPath, this.config.stylesOutputName)} ${path.join(assetPath, this.config.stylesOutputName)}`;
+    const cleancss = `${path.join('node_modules', '.bin', 'cleancss')} -o ${path.join(assetPath, this.config.stylesOutputName,)} ${path.join(assetPath, this.config.stylesOutputName,)}`;
     const styles = css + concat + autoprefixer + concat + cleancss;
-    const js = './node_modules/.bin/webpack --config build.config.js --progress';
+    const js = `${path.join('node_modules', '.bin', 'webpack')} --config build.config.js --progress`;
     
     new Config(this.env, () => {
       

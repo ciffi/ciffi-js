@@ -2,7 +2,8 @@ const chalk = require('chalk');
 const fs = require('fs');
 const fileExists = require('file-exists');
 const express = require('express');
-const ConfigFile = `${process.env.PWD}/.ciffisettings`;
+const path = require('path');
+const ConfigFile = path.join(process.cwd(), '.ciffisettings');
 
 class Server {
   

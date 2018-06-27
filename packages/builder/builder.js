@@ -2,12 +2,15 @@
 const meow = require('meow');
 const chalk = require('chalk');
 const fileExists = require('file-exists');
-const ConfigFile = process.env.PWD + '/.ciffisettings';
+const path =require('path');
+const ConfigFile = path.resolve(process.cwd(), '.ciffisettings');
 const {Assets, Build, Config, Dev} = require('./task');
+
 
 class Builder {
   
   constructor() {
+	  
     const cli = meow();
     
     const opts = cli.flags;
@@ -21,12 +24,12 @@ class Builder {
       
       opts[legacyKey] = opts[key];
     });
-    
+	
     this.init(cmd, opts);
   }
   
   init(cmd, opts) {
-    
+	  
     if (cmd) {
       
       let env = typeof opts.env === 'string' ? opts.env : false;

@@ -1,4 +1,4 @@
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ConfigFile = require(__dirname + '/.ciffisettings');
 const path = require('path');
 
@@ -8,11 +8,11 @@ module.exports = {
     hints: false
   },
   entry: {
-    main: './' + ConfigFile.srcPathName + '/scripts/main.js'
+    main: path.join(__dirname, ConfigFile.srcPathName, 'scripts', 'main.js')
   },
   output: {
     publicPath: path.normalize(ConfigFile.publicPath),
-    path: path.join(__dirname, ConfigFile.assetsPath + '/'),
+    path: path.normalize(path.join(__dirname, ConfigFile.assetsPath + '/')),
     filename: '[name].js',
     chunkFilename: '[name].js'
   },
@@ -36,27 +36,33 @@ module.exports = {
           reuseExistingChunk: true
         }
       }
-    },
+    }
   },
   module: {
     rules: [
       {
         test: /\.scss$/,
-        loaders: [{
-          loader: 'style-loader',
-          options: {
-            insertAt: 'top'
-          }
-        }, 'css-loader', 'sass-loader']
-      }, {
+        loaders: [
+          {
+            loader: 'style-loader',
+            options: {
+              insertAt: 'top'
+            }
+          },
+          'css-loader',
+          'sass-loader'
+        ]
+      },
+      {
         test: /\.js$/,
         enforce: 'pre',
         loader: 'eslint-loader',
-        exclude: [/(node_modules)/, __dirname + '/' + 'src/scripts/vendors'],
+        exclude: [/(node_modules)/, path.join(__dirname, 'src', 'scripts', 'vendors')],
         options: {
           configFile: './.eslintrc'
         }
-      }, {
+      },
+      {
         test: /\.js$/,
         exclude: /(node_modules)/,
         use: {
@@ -65,7 +71,8 @@ module.exports = {
             babelrc: true
           }
         }
-      }, {
+      },
+      {
         test: /\.jsx$/,
         use: {
           loader: 'babel-loader',
@@ -73,7 +80,8 @@ module.exports = {
             babelrc: true
           }
         }
-      }, {
+      },
+      {
         test: /\.twig$/,
         loader: 'twig-loader'
       }
@@ -81,8 +89,12 @@ module.exports = {
   },
   resolve: {
     alias: {
-      Config: path.resolve(__dirname, ConfigFile.srcPathName + '/scripts/config/config.js'),
-      Theme: path.resolve(__dirname, ConfigFile.srcPathName + '/scripts/config/theme.js')
+      Config: path.resolve(
+        path.join(__dirname, ConfigFile.srcPathName, 'scripts', 'config', 'config.js')
+      ),
+      Theme: path.resolve(
+        path.join(__dirname, ConfigFile.srcPathName, 'scripts', 'config', 'theme.js')
+      )
     }
   },
   plugins: [

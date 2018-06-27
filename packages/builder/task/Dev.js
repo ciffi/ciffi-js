@@ -2,7 +2,8 @@ const chalk = require('chalk');
 const spawnCommand = require('spawn-command')
 const Log = require('single-line-log').stdout;
 const fileExists = require('file-exists');
-const ConfigFile = process.env.PWD + '/.ciffisettings';
+const path = require('path');
+const ConfigFile = path.join(process.cwd(), '.ciffisettings');
 const Notify = require('./Notify');
 const Assets = require('./Assets');
 const Config = require('./Config');
@@ -26,12 +27,12 @@ class Dev {
   }
   
   init() {
-    const assetPath = this.config.assetsPath;
+    const assetPath = process.platform === 'win32' ? this.config.assetsPath.replace(/\//g, '\\') : this.config.assetsPath;
     const assetPathName = this.config.assetsPathName;
-    const liveCssFirst = './node_modules/.bin/node-sass ' + assetPathName + '/styles/main.scss ' + assetPath + '/' + this.config.stylesOutputName + ' --source-map true';
+    const liveCssFirst = `${path.join('node_modules', '.bin', 'node-sass')} ${path.join(assetPathName, 'styles', 'main.scss')} ${path.join(assetPath, this.config.stylesOutputName)} --source-map true`;
     const liveServer = this.defineLiveServer();
-    const liveCss = './node_modules/.bin/node-sass ' + assetPathName + '/styles/main.scss ' + assetPath + '/' + this.config.stylesOutputName + ' --watch --source-map true';
-    const liveJs = './node_modules/.bin/webpack --config dev.config.js --progress';
+    const liveCss = `${path.join('node_modules', '.bin', 'node-sass')} ${path.join(assetPathName, 'styles', 'main.scss')} ${path.join(assetPath, this.config.stylesOutputName)} --watch --source-map true`;
+    const liveJs = `${path.join('node_modules', '.bin', 'webpack')} --config dev.config.js --progress`;
     
     if (this.withServer) {
       require('@ciffi-js/dev-server');
@@ -50,12 +51,13 @@ class Dev {
   
   defineLiveServer() {
     const liveServerFeature = this.config.features[this.config.features.length - 1];
+    const assetPath = process.platform === 'win32' ? this.config.assetsPath.replace(/\//g, '\\') : this.config.assetsPath;
     
     switch (liveServerFeature) {
       case 'browsersync':
-        return ' && ./node_modules/.bin/browser-sync start --config ' + this.config.serverConfig;
+        return `' && ${path.join('node_modules', '.bin', 'browser-sync')} start --config ${this.config.serverConfig}`;
       case 'livereload':
-        return ' && ./node_modules/.bin/livereload ' + this.config.assetsPath;
+        return `&& ${path.join('node_modules', '.bin', 'livereload')} ${assetPath}`
       default:
         return '';
     }
