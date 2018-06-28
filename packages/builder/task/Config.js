@@ -19,7 +19,7 @@ class Config {
       return console.log('');
     }
     
-    if (fileExists.sync(path.join(process.cwd(), 'src', 'scripts', 'config', 'env', `${this.env}.js`))) {
+    if (fileExists.sync(`${path.join(process.cwd(), 'src', 'scripts', 'config', 'env', this.env)}.js`)) {
       this.init(callback);
     } else {
       console.error(chalk.red.bold('☠️ Project build failed:') + ' ' + chalk.blue('can\'t find src/scripts/config/env/' + this.env + '.js file ☠️'));
@@ -29,7 +29,7 @@ class Config {
   
   init(callback) {
     const assetPathName = this.config.assetsPathName;
-    const createConfig = `cp ${path.join(assetPathName, 'scripts', 'config', 'env', `${this.env}.js`)} ${path.join(assetPathName, 'scripts', 'config', 'config.js')}`;
+    const createConfig = `cp ${path.join(assetPathName, 'scripts', 'config', 'env', this.env)}.js ${path.join(assetPathName, 'scripts', 'config', 'config')}.js`;
     
     exec(createConfig);
     
