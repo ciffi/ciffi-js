@@ -25,7 +25,7 @@ class Assets {
       if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0) {
         console.log(chalk.red(res));
       } else {
-        Log('??  ' + chalk.blue(res));
+        Log('🦄 ' + chalk.blue(res));
       }
     });
     
@@ -33,7 +33,7 @@ class Assets {
       if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0) {
         console.log(chalk.red(res));
       } else {
-        Log('??  ' + chalk.blue(res));
+        Log('🦄 ' + chalk.blue(res));
       }
     });
     

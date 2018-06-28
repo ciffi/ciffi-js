@@ -29,7 +29,8 @@ class Config {
   
   init(callback) {
     const assetPathName = this.config.assetsPathName;
-    const createConfig = `cp ${path.join(assetPathName, 'scripts', 'config', 'env', this.env)}.js ${path.join(assetPathName, 'scripts', 'config', 'config')}.js`;
+    const copyCommand = process.platform === 'win32' ? 'copy' : 'cp';
+    const createConfig = `${copyCommand} ${path.join(assetPathName, 'scripts', 'config', 'env', this.env)}.js ${path.join(assetPathName, 'scripts', 'config', 'config')}.js`;
     
     exec(createConfig);
     
