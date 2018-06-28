@@ -3,7 +3,7 @@ const exec = require('child_process').exec;
 const fs = require('fs');
 
 const setupProcess = exec(
-  'mkdir frontend && cd frontend && npm install -g ciffi && ciffi setup -s && npm run build'
+  'mkdir frontend && cd frontend && npm link ../packages/ciffi/ && ciffi setup -s && npm run build'
 );
 
 let error = false;
