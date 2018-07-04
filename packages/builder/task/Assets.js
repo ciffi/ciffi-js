@@ -55,8 +55,10 @@ class Assets {
     let temp = '';
     
     for (let i = 0; i < pathsArray.length; i++) {
-      temp += path.join(assetPathName, pathsArray[i], '**', '*.*') + ' ';
+      temp += '\'' + path.join(assetPathName, pathsArray[i], '**', '*.*') + '\' ';
     }
+    
+    console.log(`${path.join('node_modules', '.bin', 'copyfiles')} -u 1 ${temp}${assetPath}`);
     
     return `${path.join('node_modules', '.bin', 'copyfiles')} -u 1 ${temp} ${assetPath}`;
   }
