@@ -7,6 +7,19 @@ npm i -D @ciffi-js/builder
 ```
 
 use
+
+- local sever
+```
+./node_modules/.bin/ciffi-builder start
+```
+
+- dev
+```
+./node_modules/.bin/ciffi-builder dev
+```
+
+- build
+
 ```
 ./node_modules/.bin/ciffi-builder build [env]
 ```
