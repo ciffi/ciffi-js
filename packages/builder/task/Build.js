@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 const fileExists = require('file-exists');
-const exec = require('child_process').exec;
+const spawnCommand = require('spawn-command')
 const path = require('path');
 const ConfigFile = path.join(process.cwd(), '.ciffisettings');
 const Assets = require('./Assets');
@@ -34,8 +34,8 @@ class Build {
     const js = `${path.join('node_modules', '.bin', 'webpack')} --config build.config.js --progress`;
     
     new Config(this.env, () => {
-      
-      const process = exec(cleanDist + concat + styles + concat + js);
+  
+      const process = spawnCommand(cleanDist + concat + styles + concat + js);
       
       process.stdout.on('data', (res) => {
         if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0) {
