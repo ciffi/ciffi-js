@@ -6,7 +6,7 @@ class CheckUpdate {
   
   constructor(callback) {
     
-    console.log('👀 ' + chalk.blue('looking for updates'));
+    console.log('👀' + chalk.blue('Looking for updates'));
     
     this.getCurrentVersion((currentVersion) => {
       this.getNewVersion((newVersion) => {

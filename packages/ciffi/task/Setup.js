@@ -14,7 +14,7 @@ const CreateHiddenFiles = require('../core/CreateHiddenFiles');
 const CreateSSL = require('../core/CreateSSL');
 const MoveApp = require('../core/MoveApp');
 const Dependencies = require('../core/Dependencies');
-const {showGreetings} = require('../core/Messages');
+const { showGreetings } = require('../core/Messages');
 
 class Setup {
   constructor(config) {
@@ -29,11 +29,12 @@ class Setup {
   
   init() {
     this.checkUpdates(() => {
-      this.beforeStart(({buildPath, features, livereload, https}) => {
+      this.beforeStart(({ buildPath, features, livereload, https, bundler }) => {
         this.config.features = features;
         this.config.livereload = livereload;
         this.config.buildPath = buildPath;
         this.config.https = https;
+        this.config.bundler = bundler;
         
         new TempApp(this.config.modulePath, () => {
           this.start();
@@ -45,18 +46,18 @@ class Setup {
   checkUpdates(callback) {
     const updateChecker = new CheckUpdate(hasUpdate => {
       if (hasUpdate) {
-        this.askForUpdate(wantUpdate => {
-          if (!wantUpdate) {
-            CiffiJsWebpack.check(callback);
-          } else {
-            updateChecker.update(() => {
-              CiffiJsWebpack.check(callback);
-            });
-          }
+        console.log('🚀 ' + chalk.green('New version found'));
+        console.log();
+        
+        updateChecker.update(() => {
+          console.log('😎 ' + chalk.green('Latest version installed'));
+          console.log('🦄 ' + chalk.yellow('Restart setup task'));
+          console.log();
         });
       } else {
         console.log('😎 ' + chalk.green('Latest version installed️'));
-        CiffiJsWebpack.check(callback);
+        console.log();
+        callback();
       }
     });
   }
@@ -99,17 +100,17 @@ class Setup {
       });
   }
   
-  askForFeatures(callback) {
+  askForBundler(callback) {
     inquirer
       .prompt({
-        type: 'checkbox',
-        name: 'features',
-        message: 'What features do you want to include in this project?',
-        default: false,
-        choices: ['router']
+        type: 'list',
+        name: 'bundler',
+        message: 'What bundler do you want to use for this project?',
+        default: 0,
+        choices: ['webpack', 'parcel']
       })
       .then(res => {
-        callback(res.features);
+        callback(res.bundler);
       });
   }
   
@@ -311,6 +312,7 @@ class Setup {
             pathName: pathName,
             https: this.config.https,
             features: this.config.features,
+            bundler: this.config.bundler,
             livereload: this.config.livereload,
             modulePath: this.config.modulePath
           },
@@ -407,13 +409,16 @@ class Setup {
           if (result) {
             this.askForProjectName(() => {
               this.askForSSL((https) => {
-                this.askForLiveReload(livereload => {
-                  this.askForBuildPath(buildPath => {
-                    callback({
-                      buildPath,
-                      livereload,
-                      https,
-                      features: []
+                this.askForBundler(bundler => {
+                  this.askForLiveReload(livereload => {
+                    this.askForBuildPath(buildPath => {
+                      callback({
+                        buildPath,
+                        livereload,
+                        https,
+                        bundler,
+                        features: []
+                      });
                     });
                   });
                 });

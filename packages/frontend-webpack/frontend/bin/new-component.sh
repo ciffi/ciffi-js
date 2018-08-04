@@ -88,7 +88,7 @@ touch $COMPONENT_FILE_STYLE
 echo "Done"
 
 echo "import styled from 'styled-components';"                >> $COMPONENT_FILE_STYLE
-echo "import { BP, Colors, Fonts } from 'Theme';"                >> $COMPONENT_FILE_STYLE
+echo "import { BP, Colors, Fonts, Rem } from 'Theme';"                >> $COMPONENT_FILE_STYLE
 echo ""                                                             >> $COMPONENT_FILE_STYLE
 echo "const Styled$COMPONENT_NAME = styled.div\`\`;"  >> $COMPONENT_FILE_STYLE
 echo ""                                                             >> $COMPONENT_FILE_STYLE

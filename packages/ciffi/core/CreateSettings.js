@@ -80,10 +80,12 @@ class CreateSettings {
   
   replaceAll(callback) {
     this.replaceBuildPath(() => {
-      this.replaceConfig(() => {
-        this.replaceHTTPS(() => {
-          this.replaceFeatures(() => {
-            callback();
+      this.replaceBundler(() => {
+        this.replaceConfig(() => {
+          this.replaceHTTPS(() => {
+            this.replaceFeatures(() => {
+              callback();
+            });
           });
         });
       });
@@ -109,6 +111,19 @@ class CreateSettings {
         }
         callback();
       });
+    });
+  }
+  
+  replaceBundler(callback) {
+    replace({
+      files: [this.tempFile],
+      from: /@REPLACE__BUNDLER@/g,
+      to: this.config.bundler
+    }, (error) => {
+      if (error) {
+        return console.error('Error occurred:', error);
+      }
+      callback();
     });
   }
   

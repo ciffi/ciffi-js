@@ -61,7 +61,7 @@ let Loading = (function () {
 	Loading.prototype.stop = function (text) {
 		this.current.stopAndPersist({
 			text: text,
-			symbol: '🦄 '
+			symbol: '🦄'
 		});
 		
 		clearTimeout(this.timeoutBike);

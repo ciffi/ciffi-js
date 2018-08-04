@@ -88,14 +88,7 @@ module.exports = {
     ]
   },
   resolve: {
-    alias: {
-      Config: path.resolve(
-        path.join(__dirname, ConfigFile.srcPathName, 'scripts', 'config', 'config.js')
-      ),
-      Theme: path.resolve(
-        path.join(__dirname, ConfigFile.srcPathName, 'scripts', 'config', 'theme.js')
-      )
-    }
+    alias: {}
   },
   plugins: [
     new UglifyJSPlugin({

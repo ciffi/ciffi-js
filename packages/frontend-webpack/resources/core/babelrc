@@ -6,6 +6,33 @@
     "stage-0"
   ],
   "plugins": [
-    "syntax-dynamic-import"
+    "syntax-dynamic-import",
+    [
+      "babel-plugin-styled-components",
+      {
+        "displayName": false,
+        //set true when debug only
+        "fileName": false
+      }
+    ],
+    [
+      "transform-runtime",
+      {
+        "polyfill": false,
+        "regenerator": true
+      }
+    ],
+    [
+      "module-resolver",
+      {
+        "root": [
+          "./src"
+        ],
+        "alias": {
+          "Config": "./src/scripts/config/config.js",
+          "Theme": "./src/scripts/config/theme.js"
+        }
+      }
+    ]
   ]
 }
