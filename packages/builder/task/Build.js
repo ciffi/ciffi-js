@@ -6,6 +6,9 @@ const ConfigFile = path.join(process.cwd(), '.ciffisettings');
 const Assets = require('./Assets');
 const Config = require('./Config');
 
+const Errors = {
+  build: new Error('🏗  frontend build error!!')
+};
 
 class Build {
   
@@ -17,7 +20,8 @@ class Build {
       this.init();
     } else {
       console.error(chalk.red.bold('☠️ Project build failed:') + ' ' + chalk.blue('can\'t find .ciffisettings file ☠️'));
-      return console.log('');
+      console.error(Errors.build.message);
+      return console.error('');
     }
   }
   
@@ -44,18 +48,16 @@ class Build {
       const process = spawnCommand(cleanDist + concat + styles + concat + js);
       
       process.stdout.on('data', (res) => {
-        if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0) {
-          console.error(chalk.red(res));
-        } else {
-          console.log('🏗  ' + chalk.blue(res));
+        if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0 || res.indexOf('error ') >= 0 || res.indexOf('Errors:') >= 0) {
+          console.error(new Error(res));
+        } else if (res.indexOf('Built at: ') >= 0 || res.indexOf('Built in ') >= 0) {
+          console.log(chalk.blue(res));
         }
       });
       
       process.stderr.on('data', (res) => {
-        if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0) {
-          console.error(chalk.red(res));
-        } else {
-          console.log('🏗  ' + chalk.blue(res));
+        if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0 || res.indexOf('error ') >= 0 || res.indexOf('Errors:') >= 0) {
+          console.error(new Error(res));
         }
       });
       
@@ -63,6 +65,8 @@ class Build {
         if (res === 0) {
           console.log(chalk.blue('🏗 Project build for ') + this.env + chalk.blue(' in ') + assetPath + ' ' + chalk.green.bold(' OK'));
           new Assets();
+        } else if (res === null) {
+          console.error(new Error(res));
         }
         console.log('');
       });
