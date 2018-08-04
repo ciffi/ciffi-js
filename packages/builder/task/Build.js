@@ -31,10 +31,16 @@ class Build {
     const autoprefixer = `${path.join('node_modules', '.bin', 'postcss')} --use autoprefixer --autoprefixer.browsers "${autoprefixerConfig}" -o ${path.join(assetPath, this.config.stylesOutputName)} ${path.join(assetPath, this.config.stylesOutputName)}`;
     const cleancss = `${path.join('node_modules', '.bin', 'cleancss')} -o ${path.join(assetPath, this.config.stylesOutputName,)} ${path.join(assetPath, this.config.stylesOutputName,)}`;
     const styles = css + concat + autoprefixer + concat + cleancss;
-    const js = `${path.join('node_modules', '.bin', 'webpack')} --config build.config.js --progress`;
+    
+    const bundlerJs = {
+      webpack: `${path.join('node_modules', '.bin', 'webpack')} --config build.config.js --progress`,
+      parcel: `${path.join('node_modules', '.bin', 'parcel')} build ${path.join(assetPathName, 'scripts', 'main.js')} -d ${assetPath} --public-url ${assetPath} --no-source-maps`
+    };
+    
+    const js = bundlerJs[this.config.bundle];
     
     new Config(this.env, () => {
-  
+      
       const process = spawnCommand(cleanDist + concat + styles + concat + js);
       
       process.stdout.on('data', (res) => {
