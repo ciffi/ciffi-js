@@ -55,7 +55,7 @@ class Setup {
           console.log();
         });
       } else {
-        console.log('😎 ' + chalk.green('Latest version installed️'));
+        console.log('😎 ' + chalk.green('Latest version installed'));
         console.log();
         callback();
       }
@@ -101,6 +101,9 @@ class Setup {
   }
   
   askForBundler(callback) {
+    if (this.config.silent) {
+      return callback('parcel');
+    }
     inquirer
       .prompt({
         type: 'list',

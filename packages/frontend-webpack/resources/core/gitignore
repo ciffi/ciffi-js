@@ -1,6 +1,7 @@
 .DS_STORE
 .ciffi/
 .idea/
+.cache(
 node_modules/
 coverage/
 src/scripts/config/config.js

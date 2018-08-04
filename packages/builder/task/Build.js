@@ -50,8 +50,8 @@ class Build {
       process.stdout.on('data', (res) => {
         if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0 || res.indexOf('error ') >= 0 || res.indexOf('Errors:') >= 0) {
           console.error(new Error(res));
-        } else if (res.indexOf('Built at: ') >= 0 || res.indexOf('Built in ') >= 0) {
-          console.log(chalk.blue(res));
+        } else if (res.indexOf('Built at: ') >= 0 || res.indexOf('Built in ') >= 0 || res.indexOf('.css') > 0 || res.indexOf('CSS') > 0) {
+          console.log('🏗' + chalk.blue(res));
         }
       });
       
