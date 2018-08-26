@@ -16,14 +16,16 @@ class Config {
       this.env = env;
     } else {
       console.error(chalk.red.bold('☠️ Project build failed:') + ' ' + chalk.blue('can\'t find .ciffisettings file ☠️'));
-      return console.log('');
+      console.log('');
+      return process.exit(1);
     }
     
     if (fileExists.sync(`${path.join(process.cwd(), 'src', 'scripts', 'config', 'env', this.env)}.js`)) {
       this.init(callback);
     } else {
       console.error(chalk.red.bold('☠️ Project build failed:') + ' ' + chalk.blue('can\'t find src/scripts/config/env/' + this.env + '.js file ☠️'));
-      return console.log('');
+      console.log('');
+      return process.exit(1);
     }
   }
   

@@ -11,11 +11,11 @@ const Config = require('./Config');
 class Dev {
   
   
-  constructor(withServer) {
+  constructor(env, withServer) {
     
     if (fileExists.sync(ConfigFile)) {
       this.config = require(ConfigFile);
-      this.env = 'dev';
+      this.env = env;
       this.withServer = withServer;
       this.init();
     } else {

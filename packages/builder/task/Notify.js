@@ -2,7 +2,7 @@ const notifier = require('node-notifier');
 const path = require('path');
 const ConfigFile = require(path.resolve(process.cwd(), '.ciffisettings'));
 const exec = require('child_process').exec;
-const canSend = process.platform === 'darwin';
+const canSend = process.platform === 'darwin' && ConfigFile.wantNotify;
 
 class Notify {
   

@@ -18,7 +18,8 @@ const CiffiSettings = {
 	sslKey: 'sslcert/local.server.key',
 	sslCrt: 'sslcert/local.server.crt',
 	staticFolders: ['fonts','images'],
-	stylesOutputName: 'main.css'
+	stylesOutputName: 'main.css',
+	wantNotify: true
 };
 
 module.exports = CiffiSettings;

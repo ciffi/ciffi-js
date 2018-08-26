@@ -21,7 +21,8 @@ class Build {
     } else {
       console.error(chalk.red.bold('☠️ Project build failed:') + ' ' + chalk.blue('can\'t find .ciffisettings file ☠️'));
       console.error(Errors.build.message);
-      return console.error('');
+      console.error('');
+      return process.exit(1);
     }
   }
   
@@ -50,6 +51,7 @@ class Build {
       process.stdout.on('data', (res) => {
         if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0 || res.indexOf('error ') >= 0 || res.indexOf('Errors:') >= 0) {
           console.error(new Error(res));
+          return process.exit(1);
         } else if (res.indexOf('Built at: ') >= 0 || res.indexOf('Built in ') >= 0 || res.indexOf('.css') > 0 || res.indexOf('CSS') > 0) {
           console.log('🏗' + chalk.blue(res));
         }
@@ -58,6 +60,7 @@ class Build {
       process.stderr.on('data', (res) => {
         if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0 || res.indexOf('error ') >= 0 || res.indexOf('Errors:') >= 0) {
           console.error(new Error(res));
+          return process.exit(1);
         }
       });
       
@@ -67,6 +70,7 @@ class Build {
           new Assets();
         } else if (res === null) {
           console.error(new Error(res));
+          return process.exit(1);
         }
         console.log('');
       });
