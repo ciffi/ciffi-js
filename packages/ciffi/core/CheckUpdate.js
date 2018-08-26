@@ -65,7 +65,7 @@ class CheckUpdate {
       }
     }
     
-    callback(hasNewVersion > 0);
+    callback(hasNewVersion > 0, currentVersion, newVersion);
   }
 }
 
