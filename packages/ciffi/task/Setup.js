@@ -14,7 +14,7 @@ const CreateHiddenFiles = require('../core/CreateHiddenFiles');
 const CreateSSL = require('../core/CreateSSL');
 const MoveApp = require('../core/MoveApp');
 const Dependencies = require('../core/Dependencies');
-const { showGreetings } = require('../core/Messages');
+const { showGreetings, showUpdate } = require('../core/Messages');
 
 class Setup {
   constructor(config) {
@@ -44,16 +44,17 @@ class Setup {
   }
   
   checkUpdates(callback) {
-    const updateChecker = new CheckUpdate(hasUpdate => {
+    const updateChecker = new CheckUpdate((hasUpdate, oldVersion, newVersion) => {
       if (hasUpdate) {
-        console.log('🚀 ' + chalk.green('New version found'));
+        showUpdate(oldVersion, newVersion);
+        //console.log('🚀 ' + chalk.green('New version found'));
         console.log();
         
-        updateChecker.update(() => {
+        /*updateChecker.update(() => {
           console.log('😎 ' + chalk.green('Latest version installed'));
           console.log('🦄 ' + chalk.yellow('Restart setup task'));
           console.log();
-        });
+        });*/
       } else {
         console.log('😎 ' + chalk.green('Latest version installed'));
         console.log();

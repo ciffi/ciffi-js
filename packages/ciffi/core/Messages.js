@@ -70,9 +70,20 @@ const showCommands = () => {
   console.log('');
 };
 
+const showUpdate = (oldVersion, newVersion) => {
+  console.log(chalk.blue('╭───────────────────────────────────────────╮'));
+  console.log(`${chalk.blue('│')}      New version of ciffi available!      ${chalk.blue('│')}`);
+  console.log(chalk.blue('│                                           │'));
+  console.log(`${chalk.blue('│')}             ${chalk.yellow(oldVersion.trim())} → ${chalk.green(newVersion.trim())}              ${chalk.blue('│')}`);
+  console.log(chalk.blue('│                                           │'));
+  console.log(`${chalk.blue('│')}    Run ${chalk.green('npm install -g ciffi')} to update!    ${chalk.blue('│')}`);
+  console.log(chalk.blue('╰───────────────────────────────────────────╯'));
+};
+
 module.exports = {
   showCommandErrorMessage,
   showCommandListMsg,
   showGreetings,
-  showLogo
+  showLogo,
+  showUpdate
 };
