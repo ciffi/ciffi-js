@@ -46,9 +46,9 @@ class Build {
     
     new Config(this.env, () => {
       
-      const process = spawnCommand(cleanDist + concat + styles + concat + js);
+      const spawnProcess = spawnCommand(cleanDist + concat + styles + concat + js);
       
-      process.stdout.on('data', (res) => {
+      spawnProcess.stdout.on('data', (res) => {
         if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0 || res.indexOf('error ') >= 0 || res.indexOf('Errors:') >= 0) {
           console.error(new Error(res));
           return process.exit(1);
@@ -57,14 +57,14 @@ class Build {
         }
       });
       
-      process.stderr.on('data', (res) => {
+      spawnProcess.stderr.on('data', (res) => {
         if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0 || res.indexOf('error ') >= 0 || res.indexOf('Errors:') >= 0) {
           console.error(new Error(res));
           return process.exit(1);
         }
       });
       
-      process.on('close', (res) => {
+      spawnProcess.on('close', (res) => {
         if (res === 0) {
           console.log(chalk.blue('🏗 Project build for ') + this.env + chalk.blue(' in ') + assetPath + ' ' + chalk.green.bold(' OK'));
           new Assets();
