@@ -48,7 +48,7 @@ class Builder {
           new Build(env);
           break;
         case 'dev':
-          new Dev();
+          new Dev(devEnv);
           break;
         case 'config':
           new Config(env);
