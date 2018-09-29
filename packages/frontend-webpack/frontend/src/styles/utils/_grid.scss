@@ -4,7 +4,7 @@
 
 .grid {
   width: 100%;
-  max-width: $grid-max-width;
+  max-width: $breakpoint-grid-max-width;
   margin: 0 auto;
   padding: 0;
   overflow: hidden;
@@ -17,7 +17,7 @@
 .col {
   float: left;
 
-  @include breakpoint($ipad) {
+  @include breakpoint($breakpoint-ipad) {
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -47,13 +47,13 @@
   }
 
   .col--#{$i}--desk {
-    @include breakpoint($ipad) {
+    @include breakpoint($breakpoint-ipad) {
       width: grid(12, $i) !important;
     }
   }
 
   .col-gap--#{$i}--desk {
-    @include breakpoint($ipad) {
+    @include breakpoint($breakpoint-ipad) {
       margin-left: grid(12, $i) !important;
     }
   }
