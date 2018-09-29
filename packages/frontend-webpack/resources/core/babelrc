@@ -31,7 +31,8 @@
         ],
         "alias": {
           "Config": "./src/scripts/config/config.js",
-          "Theme": "./src/scripts/config/theme.js"
+          "Theme": "./src/scripts/config/theme.js",
+          "Routes": "./src/scripts/config/routes.js",
         }
       }
     ]

@@ -103,7 +103,7 @@ class Setup {
   
   askForBundler(callback) {
     if (this.config.silent) {
-      return callback('parcel');
+      return callback('webpack');
     }
     inquirer
       .prompt({
