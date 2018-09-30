@@ -7,7 +7,6 @@
   ],
   "plugins": [
     "syntax-dynamic-import",
-    "babel-plugin-dynamic-import-node",
     [
       "babel-plugin-styled-components",
       {
@@ -32,9 +31,14 @@
         "alias": {
           "Config": "./src/scripts/config/config.js",
           "Theme": "./src/scripts/config/theme.js",
-          "Routes": "./src/scripts/config/routes.js",
+          "Routes": "./src/scripts/config/routes.js"
         }
       }
     ]
-  ]
+  ],
+  "env": {
+    "test": {
+      "plugins": ["dynamic-import-node"]
+    }
+  }
 }
