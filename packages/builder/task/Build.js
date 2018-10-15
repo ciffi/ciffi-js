@@ -50,11 +50,11 @@ class Build {
       
       if (this.config.useNodeSass === false) {
         
-        spawnProcess = spawnCommand(cleanDist + concat + styles + concat + js);
+        spawnProcess = spawnCommand(cleanDist + concat + js);
         
       } else {
         
-        spawnProcess = spawnCommand(cleanDist + concat + js);
+        spawnProcess = spawnCommand(cleanDist + concat + styles + concat + js);
         
       }
       
