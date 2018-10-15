@@ -19,6 +19,7 @@ const CiffiSettings = {
     sslCrt: 'sslcert/local.server.crt',
     staticFolders: ['fonts','images'],
     stylesOutputName: 'main.css',
+    useNodeSass: true,
     wantNotify: true
 };
 

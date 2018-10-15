@@ -46,7 +46,17 @@ class Build {
     
     new Config(this.env, () => {
       
-      const spawnProcess = spawnCommand(cleanDist + concat + styles + concat + js);
+      let spawnProcess;
+      
+      if (this.config.useNodeSass === false) {
+        
+        spawnProcess = spawnCommand(cleanDist + concat + styles + concat + js);
+        
+      } else {
+        
+        spawnProcess = spawnCommand(cleanDist + concat + js);
+        
+      }
       
       spawnProcess.stdout.on('data', (res) => {
         if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0 || res.indexOf('error ') >= 0 || res.indexOf('Errors:') >= 0) {

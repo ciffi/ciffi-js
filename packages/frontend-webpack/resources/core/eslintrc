@@ -39,5 +39,11 @@
       2,
       "always"
     ]
+  },
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "16.2.0"
+    }
   }
 }

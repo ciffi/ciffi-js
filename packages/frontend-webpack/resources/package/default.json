@@ -70,13 +70,15 @@
     "newcomponent": "./bin/new-component.sh $1 $2",
     "prettier": "prettier --write --single-quote '**/*.{jsx,js,json,scss}'",
     "precommit": "pretty-quick --staged",
-    "test": "jest --watchAll",
+    "test-dev": "jest --watchAll",
+    "test": "jest",
     "coverage": "jest --coverage"
   },
   "jest": {
     "moduleNameMapper": {
       "Config": "<rootDir>/src/scripts/config/config.js",
-      "Theme": "<rootDir>/src/scripts/config/theme.js"
+      "Theme": "<rootDir>/src/scripts/config/theme.js",
+      "^.+\\.(css|scss)$": "babel-jest"
     },
     "collectCoverageFrom": [
       "<rootDir>/src/scripts/**/*.{js,jsx}",

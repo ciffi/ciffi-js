@@ -45,11 +45,21 @@ class Dev {
     
     new Config(this.env, () => {
       new Assets(() => {
-        const processServer = spawnCommand(liveCssFirst + liveServer);
-        const processCss = spawnCommand(liveCss);
-        const processJS = spawnCommand(liveJs);
         
-        this.logger([processServer, processCss, processJS]);
+        if (this.config.useNodeSass === false) {
+  
+          const processServer = spawnCommand(liveServer);
+          const processJS = spawnCommand(liveJs);
+          this.logger([processServer, processJS]);
+          
+        } else {
+  
+          const processServer = spawnCommand(`${liveCssFirst} && ${liveServer}`);
+          const processCss = spawnCommand(liveCss);
+          const processJS = spawnCommand(liveJs);
+          this.logger([processServer, processCss, processJS]);
+          
+        }
       });
     });
   }
@@ -59,10 +69,8 @@ class Dev {
     const assetPath = process.platform === 'win32' ? this.config.assetsPath.replace(/\//g, '\\') : this.config.assetsPath;
     
     switch (liveServerFeature) {
-      case 'browsersync':
-        return `' && ${path.join('node_modules', '.bin', 'browser-sync')} start --config ${this.config.serverConfig}`;
       case 'livereload':
-        return `&& ${path.join('node_modules', '.bin', 'livereload')} ${assetPath}`
+        return `${path.join('node_modules', '.bin', 'livereload')} ${assetPath}`
       default:
         return '';
     }
