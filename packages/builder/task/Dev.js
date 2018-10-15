@@ -39,25 +39,36 @@ class Dev {
     
     const liveJs = bundlerJs[this.config.bundle];
     
-    if (this.withServer) {
-      require('@ciffi-js/dev-server');
-    }
-    
     new Config(this.env, () => {
       new Assets(() => {
         
-        if (this.config.useNodeSass === false) {
-  
-          const processServer = spawnCommand(liveServer);
-          const processJS = spawnCommand(liveJs);
-          this.logger([processServer, processJS]);
+        if (this.withServer && this.config.useHMR) {
+          
+          const ciffiDevServer = `${path.join('node_modules', '.bin', 'ciffi-dev-server')}`;
+          const process = spawnCommand(ciffiDevServer);
+          
+          this.logger([process]);
           
         } else {
-  
-          const processServer = spawnCommand(`${liveCssFirst} && ${liveServer}`);
-          const processCss = spawnCommand(liveCss);
-          const processJS = spawnCommand(liveJs);
-          this.logger([processServer, processCss, processJS]);
+          
+          if (this.withServer) {
+            require('@ciffi-js/dev-server');
+          }
+          
+          if (this.config.useNodeSass === false) {
+            
+            const processServer = spawnCommand(liveServer);
+            const processJS = spawnCommand(liveJs);
+            this.logger([processServer, processJS]);
+            
+          } else {
+            
+            const processServer = spawnCommand(`${liveCssFirst} && ${liveServer}`);
+            const processCss = spawnCommand(liveCss);
+            const processJS = spawnCommand(liveJs);
+            this.logger([processServer, processCss, processJS]);
+            
+          }
           
         }
       });

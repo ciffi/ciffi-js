@@ -3,6 +3,10 @@ const fs = require('fs');
 const fileExists = require('file-exists');
 const express = require('express');
 const path = require('path');
+
+const webpack = require('webpack');
+const webpackConfig = require(path.join(process.cwd(), 'server.config.js'));
+const compiler = webpack(webpackConfig);
 const ConfigFile = path.join(process.cwd(), '.ciffisettings');
 
 class Server {
@@ -26,11 +30,20 @@ class Server {
     this.app = express();
     this.app.use(express.static(this.config.serverPublicPath));
     
+    if (this.config.useHMR) {
+      this.app.use(require('webpack-dev-middleware')(compiler, {
+        noInfo: true,
+        publicPath: webpackConfig.output.publicPath
+      }));
+      
+      this.app.use(require('webpack-hot-middleware')(compiler));
+    }
+    
     if (this.config.https) {
       
       const privateKey = fs.readFileSync(`${process.env.PWD}/${this.config.sslKey}`, 'utf8');
       const certificate = fs.readFileSync(`${process.env.PWD}/${this.config.sslCrt}`, 'utf8');
-      const credentials = {key: privateKey, cert: certificate};
+      const credentials = { key: privateKey, cert: certificate };
       
       this.server = require('https').Server(credentials, this.app);
       
