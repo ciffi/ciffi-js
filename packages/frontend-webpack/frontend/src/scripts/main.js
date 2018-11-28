@@ -1,5 +1,7 @@
 // styles
-import "../styles/main.scss";
+import(/*webpackChunkName: 'Styles' */ "../styles/main.scss").then(() => {
+  document.body.style.opacity = 1;
+});
 
 // device
 import "@ciffi-js/device";
