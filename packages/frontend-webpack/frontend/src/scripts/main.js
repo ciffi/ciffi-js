@@ -1,10 +1,10 @@
 // styles
-// import '../styles/main.scss';
+import "../styles/main.scss";
 
 // device
-import '@ciffi-js/device';
+import "@ciffi-js/device";
 
-import Application from './controllers/Application';
+import Application from "./controllers/Application";
 
 new Application();
 

@@ -20,7 +20,7 @@ const CiffiSettings = {
     staticFiles: [],
     staticFolders: ['fonts','images'],
     stylesOutputName: 'main.css',
-    useNodeSass: true,
+    useNodeSass: false,
     useHMR: true,
     wantNotify: true
 };
