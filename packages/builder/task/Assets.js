@@ -60,6 +60,7 @@ class Assets {
 
   getAssets() {
     const staticFolders = this.config.staticFolders;
+    const staticFiles = this.config.staticFiles;
     const assetPath =
       process.platform === "win32"
         ? this.config.assetsPath.replace(/\//g, "\\")
@@ -67,22 +68,36 @@ class Assets {
     const assetPathName = this.config.assetsPathName;
     const pathsArray =
       staticFolders && staticFolders.length ? staticFolders : false;
+    const filesArray = staticFiles && staticFiles.length ? staticFiles : false;
 
-    if (!pathsArray) {
-      return false;
+    if (pathsArray) {
+      let temp = "";
+
+      for (let i = 0; i < pathsArray.length; i++) {
+        temp +=
+          "'" + path.join(assetPathName, pathsArray[i], "**", "*.*") + "' ";
+      }
+
+      return `${path.join(
+        "node_modules",
+        ".bin",
+        "copyfiles"
+      )} -u 1 ${temp} ${assetPath}`;
     }
 
-    let temp = "";
+    if (filesArray) {
+      let temp = "";
 
-    for (let i = 0; i < pathsArray.length; i++) {
-      temp += "'" + path.join(assetPathName, pathsArray[i], "**", "*.*") + "' ";
+      for (let i = 0; i < filesArray.length; i++) {
+        temp += "'" + path.join(assetPathName, filesArray[i]) + "' ";
+      }
+
+      return `${path.join(
+        "node_modules",
+        ".bin",
+        "copyfiles"
+      )} ${temp} ${assetPath}`;
     }
-
-    return `${path.join(
-      "node_modules",
-      ".bin",
-      "copyfiles"
-    )} -u 1 ${temp} ${assetPath}`;
   }
 }
 
