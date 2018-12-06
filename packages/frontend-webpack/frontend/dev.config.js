@@ -1,9 +1,13 @@
+const path = require('path');
 const ConfigFile = require(__dirname + "/.ciffisettings");
-const path = require("path");
 const baseConfig = require("./config/webpack");
 
 module.exports = {
   ...baseConfig,
+  output: {
+    ...baseConfig.output,
+    publicPath: path.normalize(ConfigFile.publicBuildPath),
+  },
   mode: "development",
   performance: {
     hints: false

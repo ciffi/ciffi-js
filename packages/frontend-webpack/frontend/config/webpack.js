@@ -4,7 +4,6 @@ const scssAssets = ConfigFile.useNodeSass ? '.' : '..';
 
 module.exports = {
   output: {
-    publicPath: path.normalize(ConfigFile.publicPath),
     path: path.normalize(
       path.join(__dirname, '..', ConfigFile.assetsPath + '/')
     ),

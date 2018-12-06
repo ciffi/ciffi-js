@@ -1,10 +1,14 @@
-const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
+const path = require('path');
 const ConfigFile = require(__dirname + "/.ciffisettings");
-const path = require("path");
+const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const baseConfig = require("./config/webpack");
 
 module.exports = {
   ...baseConfig,
+  output: {
+    ...baseConfig.output,
+    publicPath: path.normalize(ConfigFile.publicBuildPath),
+  },
   mode: "production",
   performance: {
     hints: false
