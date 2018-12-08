@@ -14,6 +14,7 @@ const CreateHiddenFiles = require("../core/CreateHiddenFiles");
 const CreateSSL = require("../core/CreateSSL");
 const MoveApp = require("../core/MoveApp");
 const Dependencies = require("../core/Dependencies");
+const path = require('path');
 const { showGreetings, showUpdate } = require("../core/Messages");
 
 class Setup {
@@ -405,7 +406,7 @@ class Setup {
 
   beforeStart(callback) {
     this.testNpm5(() => {
-      emptyDir(process.env.PWD + "/", this.filter, (err, result) => {
+      emptyDir(path.normalize(process.env.PWD + "/"), this.filter, (err, result) => {
         if (err) {
           console.log(err);
         } else {
