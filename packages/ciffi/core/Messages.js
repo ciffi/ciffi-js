@@ -80,10 +80,15 @@ const showUpdate = (oldVersion, newVersion) => {
   console.log(chalk.blue('╰───────────────────────────────────────────╯'));
 };
 
+const showWindowsSetupError = () => {
+  console.log(chalk.cyan('Sorry, the setup process on windows platform is not yet available'));
+};
+
 module.exports = {
   showCommandErrorMessage,
   showCommandListMsg,
   showGreetings,
   showLogo,
-  showUpdate
+  showUpdate,
+  showWindowsSetupError
 };

@@ -15,7 +15,7 @@ const CreateSSL = require("../core/CreateSSL");
 const MoveApp = require("../core/MoveApp");
 const Dependencies = require("../core/Dependencies");
 const path = require('path');
-const { showGreetings, showUpdate } = require("../core/Messages");
+const { showGreetings, showUpdate, showWindowsSetupError } = require("../core/Messages");
 
 class Setup {
   constructor(config) {
@@ -414,6 +414,10 @@ class Setup {
           console.log("");
           console.log(chalk.green.bold("-- Ciffi Frontend Generator --"));
           console.log("");
+  
+          if (process.platform === 'win32') {
+            return showWindowsSetupError();
+          }
 
           if (result) {
             this.askForProjectName(() => {
