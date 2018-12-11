@@ -15,7 +15,7 @@ class CreateHiddenFiles {
     };
     
     this.files = ['babelrc', 'editorconfig', 'eslintrc', 'gitignore', 'prettierignore', 'prettierrc'];
-    this.tempPath = `${process.env.PWD}/.ciffi/`;
+    this.tempPath = `${process.cwd()}/.ciffi/`;
     
     const loadingString = this.files.map((fileName, index) => {
       const withAnd = index === this.files.length - 1 ? '' : ' and';
@@ -65,8 +65,8 @@ class CreateHiddenFiles {
     
     const tempFile = `${this.tempPath}${fileName}`;
     const resource = `${this.config.modulePath}/lib/node_modules/ciffi/node_modules/ciffi-js-webpack/resources/core/${fileName}`;
-    const projectRoot = `${process.env.PWD}/`;
-    const projectFile = `${process.env.PWD}/.${fileName}`;
+    const projectRoot = `${process.cwd()}/`;
+    const projectFile = `${process.cwd()}/.${fileName}`;
     
     this.checkPath(() => {
       if (fileExists.sync(projectFile)) {

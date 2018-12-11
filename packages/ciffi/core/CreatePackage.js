@@ -16,11 +16,11 @@ class CreatePackage {
     
     this.defaultFileName = 'default.json';
     this.fileName = 'package.json';
-    this.tempPath = `${process.env.PWD}/.ciffi/`;
+    this.tempPath = `${process.cwd()}/.ciffi/`;
     this.tempFile = `${this.tempPath}${this.fileName}`;
     this.resource = `${this.config.modulePath}/lib/node_modules/ciffi/node_modules/ciffi-js-webpack/resources/package/${this.defaultFileName}`;
-    this.projectRoot = `${process.env.PWD}/`;
-    this.projectFile = `${process.env.PWD}/${this.fileName}`;
+    this.projectRoot = `${process.cwd()}/`;
+    this.projectFile = `${process.cwd()}/${this.fileName}`;
     
     Loading.start('Generate ' + chalk.blue(this.fileName));
     

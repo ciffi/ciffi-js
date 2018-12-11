@@ -182,27 +182,27 @@ class Setup {
 
   replaceBuildPath(newString, callback) {
     const files = [
-      process.env.PWD +
+      process.cwd() +
         "/" +
         this.config.ciffiSrc +
         "/scripts/config/config.js",
-      process.env.PWD +
+      process.cwd() +
         "/" +
         this.config.ciffiSrc +
         "/scripts/config/env/dev.js",
-      process.env.PWD +
+      process.cwd() +
         "/" +
         this.config.ciffiSrc +
         "/scripts/config/env/local.js",
-      process.env.PWD +
+      process.cwd() +
         "/" +
         this.config.ciffiSrc +
         "/scripts/config/env/stage.js",
-      process.env.PWD +
+      process.cwd() +
         "/" +
         this.config.ciffiSrc +
         "/scripts/config/env/prod.js",
-      process.env.PWD + "/.ciffi/package.json"
+      process.cwd() + "/.ciffi/package.json"
     ];
 
     replace(
@@ -237,23 +237,23 @@ class Setup {
     replace(
       {
         files: [
-          process.env.PWD +
+          process.cwd() +
             "/" +
             this.config.ciffiSrc +
             "/scripts/config/config.js",
-          process.env.PWD +
+          process.cwd() +
             "/" +
             this.config.ciffiSrc +
             "/scripts/config/env/dev.js",
-          process.env.PWD +
+          process.cwd() +
             "/" +
             this.config.ciffiSrc +
             "/scripts/config/env/local.js",
-          process.env.PWD +
+          process.cwd() +
             "/" +
             this.config.ciffiSrc +
             "/scripts/config/env/stage.js",
-          process.env.PWD +
+          process.cwd() +
             "/" +
             this.config.ciffiSrc +
             "/scripts/config/env/prod.js"
@@ -302,8 +302,8 @@ class Setup {
 
         if (pathName !== "src") {
           new ProcessManager({
-            process: `${process.env.PWD}/${this.config.ciffiSrc}/, ${
-              process.env.PWD
+            process: `${process.cwd()}/${this.config.ciffiSrc}/, ${
+              process.cwd()
             }/.ciffi/${this.config.ciffiSrc}/`
           });
         }
@@ -406,7 +406,7 @@ class Setup {
 
   beforeStart(callback) {
     this.testNpm5(() => {
-      emptyDir(path.normalize(process.env.PWD + "/"), this.filter, (err, result) => {
+      emptyDir(path.normalize(process.cwd() + "/"), this.filter, (err, result) => {
         if (err) {
           console.log(err);
         } else {

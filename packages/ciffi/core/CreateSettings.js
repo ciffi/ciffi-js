@@ -10,7 +10,7 @@ class CreateSettings {
     console.log("");
 
     this.config = config;
-    this.tempPath = `${process.env.PWD}/.ciffi/`;
+    this.tempPath = `${process.cwd()}/.ciffi/`;
     this.fileName = `ciffisettings`;
     this.hiddenFileName = `.${this.fileName}`;
     this.tempFile = `${this.tempPath}${this.fileName}`;
@@ -19,7 +19,7 @@ class CreateSettings {
     }/lib/node_modules/ciffi/node_modules/ciffi-js-webpack/resources/core/${
       this.fileName
     }`;
-    this.projectRoot = `${process.env.PWD}/`;
+    this.projectRoot = `${process.cwd()}/`;
     this.projectFile = `${this.projectRoot}${this.hiddenFileName}`;
 
     Loading.start("Generate " + chalk.blue(this.hiddenFileName));

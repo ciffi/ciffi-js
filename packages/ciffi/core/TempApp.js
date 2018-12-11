@@ -8,7 +8,7 @@ class TempApp {
     this.config = {
       callback: callback,
       modulePath: modulePath + '/lib/node_modules/ciffi/node_modules/ciffi-js-webpack/frontend/*',
-      tempPath: process.env.PWD + '/.ciffi/'
+      tempPath: process.cwd() + '/.ciffi/'
     };
     
     pathExists(this.config.tempPath).then((res) => {

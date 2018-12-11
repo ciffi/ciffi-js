@@ -2,7 +2,7 @@ let chalk = require('chalk');
 let exec = require('child_process').exec;
 let Log = require('single-line-log').stdout;
 let fileExists = require('file-exists');
-let ConfigFile = process.env.PWD + '/.ciffisettings';
+let ConfigFile = process.cwd() + '/.ciffisettings';
 let npm = require('npm');
 
 let Dev = (function () {

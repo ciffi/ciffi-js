@@ -4,8 +4,8 @@ class MoveApp {
   
   constructor(callback) {
     
-    const tempPath = `${process.env.PWD}/.ciffi/*`;
-    const projectPath = `${process.env.PWD}/`;
+    const tempPath = `${process.cwd()}/.ciffi/*`;
+    const projectPath = `${process.cwd()}/`;
     
     new ProcessManager({
       process: `cp -R ${tempPath} ${projectPath} && rm -rf ${tempPath}`,
