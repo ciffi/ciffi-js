@@ -3,6 +3,7 @@ let fileExists = require('file-exists');
 let pathExists = require('path-exists');
 let Loading = require('./Loading');
 let ProcessManager = require('./ProcessManager');
+const path = require('path');
 
 class CreatePackage {
   
@@ -16,11 +17,11 @@ class CreatePackage {
     
     this.defaultFileName = 'default.json';
     this.fileName = 'package.json';
-    this.tempPath = `${process.cwd()}/.ciffi/`;
-    this.tempFile = `${this.tempPath}${this.fileName}`;
-    this.resource = `${this.config.modulePath}/lib/node_modules/ciffi/node_modules/ciffi-js-webpack/resources/package/${this.defaultFileName}`;
-    this.projectRoot = `${process.cwd()}/`;
-    this.projectFile = `${process.cwd()}/${this.fileName}`;
+    this.tempPath = path.normalize(`${process.cwd()}/.ciffi/`);
+    this.tempFile = path.normalize(`${this.tempPath}${this.fileName}`);
+    this.resource = path.normalize(`${this.config.modulePath}/lib/node_modules/ciffi/node_modules/ciffi-js-webpack/resources/package/${this.defaultFileName}`);
+    this.projectRoot = path.normalize(`${process.cwd()}/`);
+    this.projectFile = path.normalize(`${process.cwd()}/${this.fileName}`);
     
     Loading.start('Generate ' + chalk.blue(this.fileName));
     

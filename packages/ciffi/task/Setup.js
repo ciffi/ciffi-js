@@ -3,7 +3,6 @@ const inquirer = require("inquirer");
 const replace = require("replace-in-file");
 const emptyDir = require("empty-dir");
 const cliCursor = require("cli-cursor");
-const CiffiJsWebpack = require("ciffi-js-webpack");
 const Loading = require("../core/Loading");
 const CheckUpdate = require("../core/CheckUpdate");
 const ProcessManager = require("../core/ProcessManager");
@@ -51,14 +50,7 @@ class Setup {
       (hasUpdate, oldVersion, newVersion) => {
         if (hasUpdate) {
           showUpdate(oldVersion, newVersion);
-          //console.log('🚀 ' + chalk.green('New version found'));
           console.log();
-
-          /*updateChecker.update(() => {
-          console.log('😎 ' + chalk.green('Latest version installed'));
-          console.log('🦄 ' + chalk.yellow('Restart setup task'));
-          console.log();
-        });*/
         } else {
           console.log("😎 " + chalk.green("Latest version installed"));
           console.log();
@@ -66,25 +58,6 @@ class Setup {
         }
       }
     );
-  }
-
-  askForUpdate(callback) {
-    if (this.config.silent) {
-      return callback(true);
-    }
-
-    console.log("");
-    inquirer
-      .prompt({
-        type: "list",
-        name: "wantUpdate",
-        message: "Update ciffi before setup?",
-        default: 0,
-        choices: ["yes", "no"]
-      })
-      .then(res => {
-        callback(res.wantUpdate === "yes");
-      });
   }
 
   askForSSL(callback) {
@@ -103,23 +76,6 @@ class Setup {
       })
       .then(res => {
         callback(res.wantHTTPS === "yes");
-      });
-  }
-
-  askForBundler(callback) {
-    if (this.config.silent) {
-      return callback("webpack");
-    }
-    inquirer
-      .prompt({
-        type: "list",
-        name: "bundler",
-        message: "What bundler do you want to use for this project?",
-        default: 0,
-        choices: ["webpack", "parcel"]
-      })
-      .then(res => {
-        callback(res.bundler);
       });
   }
 
@@ -182,27 +138,27 @@ class Setup {
 
   replaceBuildPath(newString, callback) {
     const files = [
-      process.cwd() +
+      path.normalize(process.cwd() +
         "/" +
         this.config.ciffiSrc +
-        "/scripts/config/config.js",
-      process.cwd() +
+        "/scripts/config/config.js"),
+      path.normalize(process.cwd() +
         "/" +
         this.config.ciffiSrc +
-        "/scripts/config/env/dev.js",
-      process.cwd() +
+        "/scripts/config/env/dev.js"),
+      path.normalize(process.cwd() +
         "/" +
         this.config.ciffiSrc +
-        "/scripts/config/env/local.js",
-      process.cwd() +
+        "/scripts/config/env/local.js"),
+      path.normalize(process.cwd() +
         "/" +
         this.config.ciffiSrc +
-        "/scripts/config/env/stage.js",
-      process.cwd() +
+        "/scripts/config/env/stage.js"),
+      path.normalize(process.cwd() +
         "/" +
         this.config.ciffiSrc +
-        "/scripts/config/env/prod.js",
-      process.cwd() + "/.ciffi/package.json"
+        "/scripts/config/env/prod.js"),
+      path.normalize(process.cwd() + "/.ciffi/package.json")
     ];
 
     replace(
@@ -237,26 +193,26 @@ class Setup {
     replace(
       {
         files: [
-          process.cwd() +
+          path.normalize(process.cwd() +
             "/" +
             this.config.ciffiSrc +
-            "/scripts/config/config.js",
-          process.cwd() +
+            "/scripts/config/config.js"),
+          path.normalize(process.cwd() +
             "/" +
             this.config.ciffiSrc +
-            "/scripts/config/env/dev.js",
-          process.cwd() +
+            "/scripts/config/env/dev.js"),
+          path.normalize(process.cwd() +
             "/" +
             this.config.ciffiSrc +
-            "/scripts/config/env/local.js",
-          process.cwd() +
+            "/scripts/config/env/local.js"),
+          path.normalize(process.cwd() +
             "/" +
             this.config.ciffiSrc +
-            "/scripts/config/env/stage.js",
-          process.cwd() +
+            "/scripts/config/env/stage.js"),
+          path.normalize(process.cwd() +
             "/" +
             this.config.ciffiSrc +
-            "/scripts/config/env/prod.js"
+            "/scripts/config/env/prod.js")
         ],
         from: /@REPLACE__CONFIG@/g,
         to: newString
@@ -302,9 +258,9 @@ class Setup {
 
         if (pathName !== "src") {
           new ProcessManager({
-            process: `${process.cwd()}/${this.config.ciffiSrc}/, ${
+            process: path.normalize(`${process.cwd()}/${this.config.ciffiSrc}/, ${
               process.cwd()
-            }/.ciffi/${this.config.ciffiSrc}/`
+            }/.ciffi/${this.config.ciffiSrc}/`)
           });
         }
 

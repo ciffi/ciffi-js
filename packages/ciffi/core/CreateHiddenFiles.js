@@ -3,6 +3,7 @@ let fileExists = require('file-exists');
 let pathExists = require('path-exists');
 let Loading = require('./Loading');
 let ProcessManager = require('./ProcessManager');
+const path = require('path');
 
 class CreateHiddenFiles {
   
@@ -15,7 +16,7 @@ class CreateHiddenFiles {
     };
     
     this.files = ['babelrc', 'editorconfig', 'eslintrc', 'gitignore', 'prettierignore', 'prettierrc'];
-    this.tempPath = `${process.cwd()}/.ciffi/`;
+    this.tempPath = path.normalize(`${process.cwd()}/.ciffi/`);
     
     const loadingString = this.files.map((fileName, index) => {
       const withAnd = index === this.files.length - 1 ? '' : ' and';
@@ -63,10 +64,10 @@ class CreateHiddenFiles {
   
   createFile(fileName) {
     
-    const tempFile = `${this.tempPath}${fileName}`;
-    const resource = `${this.config.modulePath}/lib/node_modules/ciffi/node_modules/ciffi-js-webpack/resources/core/${fileName}`;
-    const projectRoot = `${process.cwd()}/`;
-    const projectFile = `${process.cwd()}/.${fileName}`;
+    const tempFile = path.normalize(`${this.tempPath}${fileName}`);
+    const resource = path.normalize(`${this.config.modulePath}/lib/node_modules/ciffi/node_modules/ciffi-js-webpack/resources/core/${fileName}`);
+    const projectRoot = path.normalize(`${process.cwd()}/`);
+    const projectFile = path.normalize(`${process.cwd()}/.${fileName}`);
     
     this.checkPath(() => {
       if (fileExists.sync(projectFile)) {

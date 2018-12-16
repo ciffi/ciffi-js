@@ -4,35 +4,36 @@ let fileExists = require("file-exists");
 let pathExists = require("path-exists");
 let Loading = require("./Loading");
 let ProcessManager = require("./ProcessManager");
+const path = require('path');
 
 class CreateSettings {
   constructor(config, callback) {
     console.log("");
-
+    
     this.config = config;
-    this.tempPath = `${process.cwd()}/.ciffi/`;
+    this.tempPath = path.normalize(`${process.cwd()}/.ciffi/`);
     this.fileName = `ciffisettings`;
     this.hiddenFileName = `.${this.fileName}`;
-    this.tempFile = `${this.tempPath}${this.fileName}`;
-    this.resource = `${
+    this.tempFile = path.normalize(`${this.tempPath}${this.fileName}`);
+    this.resource = path.normalize(`${
       this.config.modulePath
-    }/lib/node_modules/ciffi/node_modules/ciffi-js-webpack/resources/core/${
+      }/lib/node_modules/ciffi/node_modules/ciffi-js-webpack/resources/core/${
       this.fileName
-    }`;
-    this.projectRoot = `${process.cwd()}/`;
-    this.projectFile = `${this.projectRoot}${this.hiddenFileName}`;
-
+      }`);
+    this.projectRoot = path.normalize(`${process.cwd()}/`);
+    this.projectFile = path.normalize(`${this.projectRoot}${this.hiddenFileName}`);
+    
     Loading.start("Generate " + chalk.blue(this.hiddenFileName));
-
+    
     this.init(() => {
       Loading.stop(
         "Generate " + chalk.blue(this.hiddenFileName) + chalk.green.bold(" OK")
       );
-
+      
       callback();
     });
   }
-
+  
   init(callback) {
     this.createTempPath(() => {
       new ProcessManager({
@@ -48,9 +49,7 @@ class CreateSettings {
                 if (res) {
                   const copy = `cp ${this.tempFile} ${this.projectFile}`;
                   const removeTempFile = `rm -rf ${this.tempFile}`;
-                  const removeNewFile = `rm -rf ${this.projectRoot}/${
-                    this.fileName
-                  }`;
+                  const removeNewFile = `rm -rf ${path.normalize(this.projectRoot + '/' + this.fileName)}`;
                   const copyAndClear = `${copy} && ${removeTempFile} && ${removeNewFile}`;
                   new ProcessManager({
                     process: copyAndClear,
@@ -64,7 +63,7 @@ class CreateSettings {
       });
     });
   }
-
+  
   createTempPath(callback) {
     pathExists(this.tempPath).then(res => {
       if (!res) {
@@ -77,7 +76,7 @@ class CreateSettings {
       }
     });
   }
-
+  
   replaceAll(callback) {
     this.replaceBuildPath(() => {
       this.replaceBundler(() => {
@@ -91,7 +90,7 @@ class CreateSettings {
       });
     });
   }
-
+  
   replaceBuildPath(callback) {
     replace(
       {
@@ -119,7 +118,7 @@ class CreateSettings {
       }
     );
   }
-
+  
   replaceBundler(callback) {
     replace(
       {
@@ -135,7 +134,7 @@ class CreateSettings {
       }
     );
   }
-
+  
   replaceConfig(callback) {
     replace(
       {
@@ -151,7 +150,7 @@ class CreateSettings {
       }
     );
   }
-
+  
   replaceHTTPS(callback) {
     replace(
       {
@@ -179,13 +178,13 @@ class CreateSettings {
       }
     );
   }
-
+  
   replaceFeatures(callback) {
     const feature = this.config.features;
     const livereload = this.config.livereload;
-
+    
     feature.push(livereload);
-
+    
     replace(
       {
         files: [this.tempFile],
