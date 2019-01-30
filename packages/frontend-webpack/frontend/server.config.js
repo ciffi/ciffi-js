@@ -7,7 +7,7 @@ module.exports = {
   ...baseConfig,
   output: {
     ...baseConfig.output,
-    publicPath: path.normalize(ConfigFile.publicLocalServerPath)
+    publicPath: path.normalize(ConfigFile.localServer.absoluteBuildPath)
   },
   mode: 'development',
   performance: {
@@ -16,7 +16,7 @@ module.exports = {
   entry: {
     main: [
       'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-      path.join(__dirname, ConfigFile.srcPathName, 'scripts', 'main.js')
+      path.join(__dirname, ConfigFile.build.srcPathName, 'scripts', 'main.js')
     ]
   },
   devtool: 'source-map',

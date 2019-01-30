@@ -1,12 +1,12 @@
 const path = require('path');
 const ConfigFile = require(path.join('..', '.ciffisettings'));
-const scssAssets = ConfigFile.useNodeSass ? '.' : '..';
+const scssAssets = ConfigFile.general.useNodeSass ? '.' : '..';
 const workboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
   output: {
     path: path.normalize(
-      path.join(__dirname, '..', ConfigFile.assetsPath + '/')
+      path.join(__dirname, '..', ConfigFile.build.path + '/')
     ),
     filename: '[name].js',
     chunkFilename: '[name].js',
@@ -95,13 +95,13 @@ module.exports = {
   plugins: [
     new workboxPlugin.InjectManifest({
       swSrc: path.normalize(
-        path.join(__dirname, '..', ConfigFile.srcPathName, 'sw.js')
+        path.join(__dirname, '..', ConfigFile.build.srcPathName, 'sw.js')
       ),
       swDest: path.normalize(
-        path.join(__dirname, '..', ConfigFile.assetsPath + '/..', 'sw.js')
+        path.join(__dirname, '..', ConfigFile.build.path + '/..', 'sw.js')
       ),
       globDirectory: path.normalize(
-        path.join(__dirname, '..', ConfigFile.assetsPath + '/..')
+        path.join(__dirname, '..', ConfigFile.build.path + '/..')
       ),
       globPatterns: ['*.html']
     })

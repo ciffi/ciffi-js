@@ -1,9 +1,9 @@
-const chalk = require("chalk");
-const fileExists = require("file-exists");
-const exec = require("child_process").exec;
-const Log = require("single-line-log").stdout;
-const path = require("path");
-const ConfigFile = path.join(process.cwd(), ".ciffisettings");
+const chalk = require('chalk');
+const fileExists = require('file-exists');
+const exec = require('child_process').exec;
+const Log = require('single-line-log').stdout;
+const path = require('path');
+const ConfigFile = path.join(process.cwd(), '.ciffisettings');
 
 const emptyCallback = () => {};
 
@@ -13,11 +13,11 @@ class Assets {
       this.config = require(ConfigFile);
     } else {
       console.error(
-        chalk.red.bold("☠️ Project build failed:") +
-          " " +
+        chalk.red.bold('☠️ Project build failed:') +
+          ' ' +
           chalk.blue("can't find .ciffisettings file ☠️")
       );
-      return console.log("");
+      return console.log('');
     }
 
     if (!this.getAssets()) {
@@ -27,51 +27,51 @@ class Assets {
 
     let process = exec(this.getAssets());
 
-    process.stdout.on("data", res => {
-      if (res.indexOf("ERROR in") >= 0 || res.indexOf("Error:") >= 0) {
+    process.stdout.on('data', res => {
+      if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0) {
         console.log(chalk.red(res));
       } else {
-        Log("🦄 " + chalk.blue(res));
+        Log('🦄 ' + chalk.blue(res));
       }
     });
 
-    process.stderr.on("data", res => {
-      if (res.indexOf("ERROR in") >= 0 || res.indexOf("Error:") >= 0) {
+    process.stderr.on('data', res => {
+      if (res.indexOf('ERROR in') >= 0 || res.indexOf('Error:') >= 0) {
         console.log(chalk.red(res));
       } else {
-        Log("🦄 " + chalk.blue(res));
+        Log('🦄 ' + chalk.blue(res));
       }
     });
 
-    process.on("close", res => {
+    process.on('close', res => {
       if (res === 0) {
         Log(
-          chalk.blue("🦄 Assets copied in ") +
-            " " +
-            this.config.assetsPath +
-            "/ " +
-            chalk.green.bold(" OK")
+          chalk.blue('🦄 Assets copied in ') +
+            ' ' +
+            this.config.build.path +
+            '/ ' +
+            chalk.green.bold(' OK')
         );
-        console.log("");
+        console.log('');
         callback();
       }
     });
   }
 
   getAssets() {
-    const staticFolders = this.config.staticFolders;
-    const staticFiles = this.config.staticFiles;
+    const staticFolders = this.config.general.staticFolders;
+    const staticFiles = this.config.general.staticFiles;
     const assetPath =
-      process.platform === "win32"
-        ? this.config.assetsPath.replace(/\//g, "\\")
-        : this.config.assetsPath;
-    const assetPathName = this.config.assetsPathName;
+      process.platform === 'win32'
+        ? this.config.build.path.replace(/\//g, '\\')
+        : this.config.build.path;
+    const assetPathName = this.config.build.srcPathName;
     const pathsArray =
       staticFolders && staticFolders.length ? staticFolders : false;
     const filesArray = staticFiles && staticFiles.length ? staticFiles : false;
 
     if (filesArray) {
-      let temp = "";
+      let temp = '';
 
       for (let i = 0; i < filesArray.length; i++) {
         temp += "'" + path.join(assetPathName, filesArray[i]) + "' ";
@@ -79,25 +79,25 @@ class Assets {
 
       exec(
         `${path.join(
-          "node_modules",
-          ".bin",
-          "copyfiles"
+          'node_modules',
+          '.bin',
+          'copyfiles'
         )} -f ${temp} ${assetPath}`
       );
     }
 
     if (pathsArray) {
-      let temp = "";
+      let temp = '';
 
       for (let i = 0; i < pathsArray.length; i++) {
         temp +=
-          "'" + path.join(assetPathName, pathsArray[i], "**", "*.*") + "' ";
+          "'" + path.join(assetPathName, pathsArray[i], '**', '*.*') + "' ";
       }
 
       return `${path.join(
-        "node_modules",
-        ".bin",
-        "copyfiles"
+        'node_modules',
+        '.bin',
+        'copyfiles'
       )} -u 1 ${temp} ${assetPath}`;
     }
 

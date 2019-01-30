@@ -1,30 +1,37 @@
 const CiffiSettings = {
-    autoprefixer: 'last 12 versions',
-    assetsPath: '@REPLACE__ASSETS@',
-    assetsPathName: '@REPLACE__ASSETS__NAME@',
-    bundle: '@REPLACE__BUNDLER@',
-    defaultBuildEnv: 'local',
-    defaultDevEnv: 'dev',
-    devServerPort: '3000',
-    devStartUrl: 'http@REPLACE__HTTPS__PROTOCOL@://localhost:3000/',
-    features: @REPLACE__FEATURES@,
-    https: @REPLACE__HTTPS@,
-    offline: false,
-    projectName: '@REPLACE__CONFIG@',
-    publicBuildPath: '/static/',
-    publicLocalServerPath: '/static/',
-    scriptsOutputName: 'main.js',
-    serverConfig: 'server.config.js',
-    serverPublicPath: '@REPLACE__ASSETS@',
-    srcPathName: '@REPLACE__ASSETS__NAME@',
-    sslKey: 'sslcert/local.server.key',
-    sslCrt: 'sslcert/local.server.crt',
-    staticFiles: [],
-    staticFolders: ['fonts','images'],
-    stylesOutputName: 'main.css',
-    useNodeSass: false,
-    useHMR: true,
-    wantNotify: true
+    dev: {
+      env: 'dev',
+      https: @REPLACE__HTTPS@,
+      sslKey: 'sslcert/local.server.key',
+      sslCrt: 'sslcert/local.server.crt',
+      startUrl: 'http@REPLACE__HTTPS__PROTOCOL@://localhost:3000/',
+      wantNotify: true
+    },
+    build: {
+      absoluteBuildPath: '/static/',
+      env: 'local',
+      path: '@REPLACE__ASSETS@',
+      srcPathName: '@REPLACE__ASSETS__NAME@'
+    },
+    general: {
+      autoprefixer: 'last 12 versions',
+      bundle: '@REPLACE__BUNDLER@',
+      features: @REPLACE__FEATURES@,
+      offline: true,
+      projectName: '@REPLACE__CONFIG@',
+      scriptsOutputName: 'main.js',
+      staticFiles: [],
+      staticFolders: ['fonts','images'],
+      stylesOutputName: 'main.css',
+      useNodeSass: false
+    },
+    localServer: {
+      absoluteBuildPath: '/static/',
+      config: 'server.config.js',
+      port: '3000',
+      publicPath: '@REPLACE__LOCAL__SERVER__PATH@',
+      useHMR: true
+    }
 };
 
 module.exports = CiffiSettings;

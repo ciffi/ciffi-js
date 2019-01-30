@@ -10,7 +10,7 @@ const minifyOpts = {
 };
 const plugins = [new UglifyJSPlugin(minifyOpts)]
 
-if (ConfigFile.offline) {
+if (ConfigFile.general.offline) {
   plugins.push(baseConfig.plugins[0])
 }
 
@@ -18,14 +18,14 @@ module.exports = {
   ...baseConfig,
   output: {
     ...baseConfig.output,
-    publicPath: path.normalize(ConfigFile.publicBuildPath),
+    publicPath: path.normalize(ConfigFile.build.absoluteBuildPath),
   },
   mode: "production",
   performance: {
     hints: false
   },
   entry: {
-    main: path.join(__dirname, ConfigFile.srcPathName, "scripts", "main.js")
+    main: path.join(__dirname, ConfigFile.build.srcPathName, "scripts", "main.js")
   },
   plugins: plugins
 };
