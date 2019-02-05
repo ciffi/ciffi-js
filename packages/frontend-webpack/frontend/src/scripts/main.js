@@ -1,21 +1,21 @@
 // styles
 import(/*webpackChunkName: 'Styles' */ '../styles/main.scss').then(() => {
-  document.body.style.opacity = 1;
-});
+  document.body.style.opacity = 1
+})
 
 // device
-import '@ciffi-js/device';
+import '@ciffi-js/device'
 
-import Application from './controllers/Application';
+import Application from './controllers/Application'
 
-new Application();
+new Application()
 
 // webpack HMR support
 if (module.hot) {
-  module.hot.accept();
+  module.hot.accept()
 }
 
 // offline support
-import { offline } from './modules/Offline';
+import { offline } from './modules/Offline'
 
-offline();
+offline()
