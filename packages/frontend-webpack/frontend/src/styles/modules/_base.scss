@@ -23,7 +23,7 @@ body {
   margin: 0 auto;
   padding: 0;
   background-color: transparent;
-  transition: visibility .4s linear 0s, opacity .4s linear 0s;
+  transition: opacity 0.25s ease-out 0s;
 
   .touch & {
     overflow-x: hidden;
@@ -32,10 +32,9 @@ body {
   }
 
   &.app-is-ready {
-    visibility: visible !important;
     opacity: 1 !important;
     pointer-events: all !important;
-    transition: visibility .4s linear 0s, opacity .4s linear 0s;
+    transition: opacity 0.25s ease-out 0s;
   }
 
   c-view {
