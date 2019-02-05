@@ -17,11 +17,11 @@ const CiffiSettings = {
       autoprefixer: 'last 12 versions',
       bundle: '@REPLACE__BUNDLER@',
       features: @REPLACE__FEATURES@,
-      offline: true,
+      offline: false,
       projectName: '@REPLACE__CONFIG@',
       scriptsOutputName: 'main.js',
       staticFiles: [],
-      staticFolders: ['fonts','images'],
+      staticFolders: [],
       stylesOutputName: 'main.css',
       useNodeSass: false
     },
@@ -30,7 +30,7 @@ const CiffiSettings = {
       config: 'server.config.js',
       port: '3000',
       publicPath: '@REPLACE__LOCAL__SERVER__PATH@',
-      useHMR: true
+      useHMR: false
     }
 };
 
