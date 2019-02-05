@@ -7,7 +7,7 @@ module.exports = {
   ...baseConfig,
   output: {
     ...baseConfig.output,
-    publicPath: path.normalize(ConfigFile.build.path),
+    publicPath: path.normalize(ConfigFile.build.absoluteBuildPath),
   },
   mode: "development",
   performance: {
