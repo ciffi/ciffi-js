@@ -1,30 +1,30 @@
-const chalk = require('chalk');
-const spawnCommand = require('spawn-command');
-const Log = require('single-line-log').stdout;
-const fileExists = require('file-exists');
-const path = require('path');
-const ConfigFile = path.join(process.cwd(), '.ciffisettings');
-const Notify = require('./Notify');
-const Assets = require('./Assets');
-const Config = require('./Config');
+const chalk = require('chalk')
+const spawnCommand = require('spawn-command')
+const fileExists = require('file-exists')
+const path = require('path')
+const ConfigFile = path.join(process.cwd(), '.ciffisettings')
+const Notify = require('./Notify')
+const Assets = require('./Assets')
+const Config = require('./Config')
+const Logger = require('../utils/Logger')
 
 class Dev {
   constructor(env, withServer) {
     if (fileExists.sync(ConfigFile)) {
-      this.config = require(ConfigFile);
-      this.env = env;
-      this.withServer = withServer;
-      this.init();
+      this.config = require(ConfigFile)
+      this.env = env
+      this.withServer = withServer
+      this.init()
     } else {
       console.log(
         chalk.red.bold('☠️ Project dev failed:') +
           ' ' +
           chalk.blue("can't find .ciffisettings file ☠️")
-      );
+      )
       Notify.sendError(
         "☠️ Project dev failed: can't find .ciffisettings file ☠️"
-      );
-      return console.log('');
+      )
+      return console.log('')
     }
   }
 
@@ -32,12 +32,12 @@ class Dev {
     const assetPath =
       process.platform === 'win32'
         ? this.config.build.path.replace(/\//g, '\\')
-        : this.config.build.path;
-    const assetPathName = this.config.build.srcPathName;
+        : this.config.build.path
+    const assetPathName = this.config.build.srcPathName
     const cleanDist =
       process.platform === 'win32'
         ? 'rd / s / q ' + assetPath
-        : 'rm -rf ' + assetPath + '/*';
+        : 'rm -rf ' + assetPath + '/*'
     const liveCssFirst = `${path.join(
       'node_modules',
       '.bin',
@@ -45,8 +45,8 @@ class Dev {
     )} ${path.join(assetPathName, 'styles', 'main.scss')} ${path.join(
       assetPath,
       this.config.general.stylesOutputName
-    )} --source-map true`;
-    const liveServer = this.defineLiveServer();
+    )} --source-map true`
+    const liveServer = this.defineLiveServer()
     const liveCss = `${path.join(
       'node_modules',
       '.bin',
@@ -54,7 +54,7 @@ class Dev {
     )} ${path.join(assetPathName, 'styles', 'main.scss')} ${path.join(
       assetPath,
       this.config.general.stylesOutputName
-    )} --watch --source-map true`;
+    )} --watch --source-map true`
     const bundlerJs = {
       webpack: `${path.join(
         'node_modules',
@@ -66,23 +66,21 @@ class Dev {
         'scripts',
         'main.js'
       )} -d ${assetPath} --public-url ${assetPath}`
-    };
+    }
 
-    const liveJs = bundlerJs[this.config.general.bundle];
+    const liveJs = bundlerJs[this.config.general.bundle]
 
-    this.logger(spawnCommand(cleanDist), 'clean-dist');
+    new Logger(spawnCommand(cleanDist), 'clean-dist')
 
     new Config(this.env, () => {
       new Assets(() => {
         if (this.config.general.useNodeSass === false) {
-          const processServer = spawnCommand(liveServer);
-          this.logger([processServer], 'live-server');
+          const processServer = spawnCommand(liveServer)
+          new Logger([processServer], 'live-server')
         } else {
-          const processServer = spawnCommand(
-            `${liveCssFirst} && ${liveServer}`
-          );
-          const processCss = spawnCommand(liveCss);
-          this.logger([processServer, processCss], 'node-sass');
+          const processServer = spawnCommand(`${liveCssFirst} && ${liveServer}`)
+          const processCss = spawnCommand(liveCss)
+          new Logger([processServer, processCss], 'node-sass')
         }
 
         if (this.withServer && this.config.localServer.useHMR) {
@@ -90,88 +88,38 @@ class Dev {
             'node_modules',
             '.bin',
             'ciffi-dev-server'
-          )}`;
-          const process = spawnCommand(ciffiDevServer);
+          )}`
+          const process = spawnCommand(ciffiDevServer)
 
-          this.logger([process], 'ciffi-dev-server');
+          new Logger([process], 'ciffi-dev-server')
         } else {
           if (this.withServer) {
-            require('@ciffi-js/dev-server');
+            require('@ciffi-js/dev-server')
           }
 
-          const processJS = spawnCommand(liveJs);
-          this.logger([processJS], this.config.general.bundle);
+          const processJS = spawnCommand(liveJs)
+          new Logger([processJS], this.config.general.bundle)
         }
-      });
-    });
+      })
+    })
   }
 
   defineLiveServer() {
     const liveServerFeature = this.config.general.features[
       this.config.general.features.length - 1
-    ];
+    ]
     const assetPath =
       process.platform === 'win32'
         ? this.config.build.path.replace(/\//g, '\\')
-        : this.config.build.path;
+        : this.config.build.path
 
     switch (liveServerFeature) {
       case 'livereload':
-        return `${path.join(
-          'node_modules',
-          '.bin',
-          'livereload'
-        )} ${assetPath}`;
+        return `${path.join('node_modules', '.bin', 'livereload')} ${assetPath}`
       default:
-        return '';
-    }
-  }
-
-  logger(processes, prefix = '') {
-    for (let i = 0; i < processes.length; i++) {
-      processes[i].stdout.on('data', res => {
-        if (
-          res.indexOf('ERROR in') >= 0 ||
-          res.indexOf('Error:') >= 0 ||
-          res.indexOf('error ') >= 0 ||
-          res.indexOf('Errors:') >= 0
-        ) {
-          console.log(
-            chalk.bgRed(' ' + prefix + ' -->') + ' ' + chalk.red(res)
-          );
-          Notify.sendObjError(res);
-        } else {
-          Log(chalk.green(prefix + ' --> ') + chalk.blue(res));
-
-          if (res.indexOf('Built at: ') >= 0 || res.indexOf('Built in ') >= 0) {
-            Notify.sendReady('🏗 DEV ready - click to open');
-          }
-        }
-      });
-
-      processes[i].stderr.on('data', res => {
-        if (
-          res.indexOf('ERROR in') >= 0 ||
-          res.indexOf('Error:') >= 0 ||
-          res.indexOf('error ') >= 0 ||
-          res.indexOf('Errors:') >= 0
-        ) {
-          console.log(
-            chalk.bgRed(' ' + prefix + ' -->') + ' ' + chalk.red(res)
-          );
-          Notify.sendObjError(chalk(res));
-        } else {
-          Log(chalk.green(prefix + ' --> ') + chalk.blue(res));
-        }
-      });
-
-      processes[i].on('close', res => {
-        if (res !== 0) {
-          Log(chalk.green(prefix + ' --> ') + chalk.green(res));
-        }
-      });
+        return ''
     }
   }
 }
 
-module.exports = Dev;
+module.exports = Dev

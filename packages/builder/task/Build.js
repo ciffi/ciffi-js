@@ -1,30 +1,31 @@
-const chalk = require('chalk');
-const fileExists = require('file-exists');
-const spawnCommand = require('spawn-command');
-const path = require('path');
-const ConfigFile = path.join(process.cwd(), '.ciffisettings');
-const Assets = require('./Assets');
-const Config = require('./Config');
+const chalk = require('chalk')
+const fileExists = require('file-exists')
+const spawnCommand = require('spawn-command')
+const path = require('path')
+const ConfigFile = path.join(process.cwd(), '.ciffisettings')
+const Assets = require('./Assets')
+const Config = require('./Config')
 
 const Errors = {
   build: new Error('🏗  frontend build error!!')
-};
+}
 
 class Build {
-  constructor(env) {
+  constructor(env, withServer) {
     if (fileExists.sync(ConfigFile)) {
-      this.config = require(ConfigFile);
-      this.env = env;
-      this.init();
+      this.config = require(ConfigFile)
+      this.env = env
+      this.withServer = withServer
+      this.init()
     } else {
       console.error(
         chalk.red.bold('☠️ Project build failed:') +
           ' ' +
           chalk.blue("can't find .ciffisettings file ☠️")
-      );
-      console.error(Errors.build.message);
-      console.error('');
-      return process.exit(1);
+      )
+      console.error(Errors.build.message)
+      console.error('')
+      return process.exit(1)
     }
   }
 
@@ -32,20 +33,20 @@ class Build {
     const assetPath =
       process.platform === 'win32'
         ? this.config.build.path.replace(/\//g, '\\')
-        : this.config.build.path;
-    const assetPathName = this.config.build.srcPathName;
+        : this.config.build.path
+    const assetPathName = this.config.build.srcPathName
     const autoprefixerConfig =
-      this.config.general.autoprefixer || 'last 12 versions';
-    const concat = ' && ';
+      this.config.general.autoprefixer || 'last 12 versions'
+    const concat = ' && '
     const cleanDist =
       process.platform === 'win32'
         ? 'rd / s / q ' + assetPath
-        : 'rm -rf ' + assetPath + '/*';
+        : 'rm -rf ' + assetPath + '/*'
     const css = `${path.join('node_modules', '.bin', 'node-sass')} ${path.join(
       assetPathName,
       'styles',
       'main.scss'
-    )} ${path.join(assetPath, this.config.general.stylesOutputName)}`;
+    )} ${path.join(assetPath, this.config.general.stylesOutputName)}`
     const autoprefixer = `${path.join(
       'node_modules',
       '.bin',
@@ -53,7 +54,7 @@ class Build {
     )} --use autoprefixer --autoprefixer.browsers "${autoprefixerConfig}" -o ${path.join(
       assetPath,
       this.config.general.stylesOutputName
-    )} ${path.join(assetPath, this.config.general.stylesOutputName)}`;
+    )} ${path.join(assetPath, this.config.general.stylesOutputName)}`
     const cleancss = `${path.join(
       'node_modules',
       '.bin',
@@ -61,8 +62,8 @@ class Build {
     )} -o ${path.join(
       assetPath,
       this.config.general.stylesOutputName
-    )} ${path.join(assetPath, this.config.general.stylesOutputName)}`;
-    const styles = css + concat + autoprefixer + concat + cleancss;
+    )} ${path.join(assetPath, this.config.general.stylesOutputName)}`
+    const styles = css + concat + autoprefixer + concat + cleancss
 
     const bundlerJs = {
       webpack: `${path.join(
@@ -75,17 +76,17 @@ class Build {
         'scripts',
         'main.js'
       )} -d ${assetPath} --public-url ${assetPath} --no-source-maps`
-    };
+    }
 
-    const js = bundlerJs[this.config.general.bundle];
+    const js = bundlerJs[this.config.general.bundle]
 
     new Config(this.env, () => {
-      let spawnProcess;
+      let spawnProcess
 
       if (this.config.general.useNodeSass === false) {
-        spawnProcess = spawnCommand(cleanDist + concat + js);
+        spawnProcess = spawnCommand(cleanDist + concat + js)
       } else {
-        spawnProcess = spawnCommand(cleanDist + concat + styles + concat + js);
+        spawnProcess = spawnCommand(cleanDist + concat + styles + concat + js)
       }
 
       spawnProcess.stdout.on('data', res => {
@@ -95,17 +96,17 @@ class Build {
           res.indexOf('error ') >= 0 ||
           res.indexOf('Errors:') >= 0
         ) {
-          console.error(new Error(res));
-          return process.exit(1);
+          console.error(new Error(res))
+          return process.exit(1)
         } else if (
           res.indexOf('Built at: ') >= 0 ||
           res.indexOf('Built in ') >= 0 ||
           res.indexOf('.css') > 0 ||
           res.indexOf('CSS') > 0
         ) {
-          console.log('🏗' + chalk.blue(res));
+          console.log('🏗' + chalk.blue(res))
         }
-      });
+      })
 
       spawnProcess.stderr.on('data', res => {
         if (
@@ -114,10 +115,10 @@ class Build {
           res.indexOf('error ') >= 0 ||
           res.indexOf('Errors:') >= 0
         ) {
-          console.error(new Error(res));
-          return process.exit(1);
+          console.error(new Error(res))
+          return process.exit(1)
         }
-      });
+      })
 
       spawnProcess.on('close', res => {
         if (res === 0) {
@@ -128,16 +129,20 @@ class Build {
               assetPath +
               ' ' +
               chalk.green.bold(' OK')
-          );
-          new Assets();
+          )
+          new Assets()
+
+          if (this.withServer) {
+            require('@ciffi-js/dev-server')
+          }
         } else if (res === null) {
-          console.error(new Error(res));
-          return process.exit(1);
+          console.error(new Error(res))
+          return process.exit(1)
         }
-        console.log('');
-      });
-    });
+        console.log('')
+      })
+    })
   }
 }
 
-module.exports = Build;
+module.exports = Build
