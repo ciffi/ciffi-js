@@ -21,7 +21,7 @@ const CiffiSettings = {
       projectName: '@REPLACE__CONFIG@',
       scriptsOutputName: 'main.js',
       staticFiles: [],
-      staticFolders: [],
+      staticFolders: ['images'],
       stylesOutputName: 'main.css',
       useNodeSass: false
     },
