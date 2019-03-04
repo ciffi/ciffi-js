@@ -2,6 +2,8 @@ FROM node:10-alpine
 
 RUN apk add --no-cache bash
 
+RUN npm install -g npm
+
 RUN npm install -g ciffi@latest
 
 RUN ciffi -v
