@@ -1,7 +1,7 @@
-const path = require('path');
-const ConfigFile = require(path.join('..', '.ciffisettings'));
-const scssAssets = ConfigFile.general.useNodeSass ? '.' : '..';
-const workboxPlugin = require('workbox-webpack-plugin');
+const path = require('path')
+const ConfigFile = require(path.join('..', '.ciffisettings'))
+const scssAssets = ConfigFile.general.useNodeSass ? '.' : '..'
+const workboxPlugin = require('workbox-webpack-plugin')
 
 module.exports = {
   output: {
@@ -82,7 +82,10 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: '[path][name].[ext]'
+              name: '[path][name].[ext]',
+              outputPath: url => {
+                return url.replace('src/', '')
+              }
             }
           }
         ]
@@ -107,4 +110,4 @@ module.exports = {
       globPatterns: ['*.html']
     })
   ]
-};
+}
