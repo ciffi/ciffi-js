@@ -1,6 +1,6 @@
 {
   "name": "@ciffi-js/builder",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Builder for ciffi js webbpack project",
   "main": "./builder.js",
   "repository": {
@@ -33,7 +33,6 @@
     "file-exists": "^4.0.0",
     "meow": "^3.7.0",
     "node-notifier": "^5.2.1",
-    "single-line-log": "^1.1.2",
     "spawn-command": "0.0.2-1"
   }
 }
