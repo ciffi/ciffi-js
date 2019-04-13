@@ -1,7 +1,7 @@
-const path = require('path');
-const ConfigFile = require(__dirname + "/.ciffisettings");
-const TerserPlugin = require('terser-webpack-plugin');
-const baseConfig = require("./config/webpack");
+const path = require('path')
+const ConfigFile = require(path.join('..', '.ciffisettings'))
+const baseConfig = require('./config.js')
+const TerserPlugin = require('terser-webpack-plugin')
 
 const plugins = []
 
@@ -13,9 +13,9 @@ module.exports = {
   ...baseConfig,
   output: {
     ...baseConfig.output,
-    publicPath: path.normalize(ConfigFile.build.absoluteBuildPath),
+    publicPath: path.normalize(ConfigFile.build.absoluteBuildPath)
   },
-  mode: "production",
+  mode: 'production',
   performance: {
     hints: false
   },
@@ -32,7 +32,13 @@ module.exports = {
     ]
   },
   entry: {
-    main: path.join(__dirname, ConfigFile.build.srcPathName, "scripts", "main.js")
+    main: path.join(
+      __dirname,
+      '..',
+      ConfigFile.build.srcPathName,
+      'scripts',
+      'main.js'
+    )
   },
   plugins: plugins
-};
+}

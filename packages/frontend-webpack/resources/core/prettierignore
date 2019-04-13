@@ -1,5 +1,5 @@
-build.config.js
-dev.config.js
+config.build.js
+config.dev.js
 package.json
 package-lock.json
 src/styles/font-awesome/

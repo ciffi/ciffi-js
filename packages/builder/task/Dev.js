@@ -60,7 +60,7 @@ class Dev {
         'node_modules',
         '.bin',
         'webpack'
-      )} --config dev.config.js --progress`,
+      )} --config ${path.join('builder', 'config.dev.js')} --progress`,
       parcel: `${path.join('node_modules', '.bin', 'parcel')} watch ${path.join(
         assetPathName,
         'scripts',

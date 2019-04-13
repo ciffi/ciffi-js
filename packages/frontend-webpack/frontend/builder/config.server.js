@@ -1,7 +1,7 @@
-const path = require('path');
-const ConfigFile = require(__dirname + '/.ciffisettings');
-const webpack = require('webpack');
-const baseConfig = require('./config/webpack');
+const path = require('path')
+const ConfigFile = require(path.join('..', '.ciffisettings'))
+const webpack = require('webpack')
+const baseConfig = require('./config.js')
 
 module.exports = {
   ...baseConfig,
@@ -16,10 +16,16 @@ module.exports = {
   entry: {
     main: [
       'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-      path.join(__dirname, ConfigFile.build.srcPathName, 'scripts', 'main.js')
+      path.join(
+        __dirname,
+        '..',
+        ConfigFile.build.srcPathName,
+        'scripts',
+        'main.js'
+      )
     ]
   },
   devtool: 'source-map',
   watch: true,
   plugins: [new webpack.HotModuleReplacementPlugin()]
-};
+}

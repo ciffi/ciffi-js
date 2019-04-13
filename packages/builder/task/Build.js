@@ -70,7 +70,7 @@ class Build {
         'node_modules',
         '.bin',
         'webpack'
-      )} --config build.config.js --progress`,
+      )} --config ${path.join('builder', 'config.build.js')} --progress`,
       parcel: `${path.join('node_modules', '.bin', 'parcel')} build ${path.join(
         assetPathName,
         'scripts',

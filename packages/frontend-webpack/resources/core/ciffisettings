@@ -27,7 +27,7 @@ const CiffiSettings = {
     },
     localServer: {
       absoluteBuildPath: '/static/',
-      config: 'server.config.js',
+      config: 'config.server.js',
       port: '3000',
       publicPath: '@REPLACE__LOCAL__SERVER__PATH@',
       useHMR: false
