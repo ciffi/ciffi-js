@@ -5,7 +5,11 @@ const express = require('express')
 const path = require('path')
 
 const webpack = require('webpack')
-const webpackConfig = require(path.join(process.cwd(), 'server.config.js'))
+const webpackConfig = require(path.join(
+  process.cwd(),
+  'builder',
+  'config.server.js'
+))
 const compiler = webpack(webpackConfig)
 const ConfigFile = path.join(process.cwd(), '.ciffisettings')
 
