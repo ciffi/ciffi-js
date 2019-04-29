@@ -66,7 +66,7 @@ class Build {
     const styles = css + concat + autoprefixer + concat + cleancss
 
     const bundlerJs = {
-      webpack: `${path.join(
+      webpack: `NODE_ENV=production ${path.join(
         'node_modules',
         '.bin',
         'webpack'

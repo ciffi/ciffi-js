@@ -2,6 +2,7 @@ const path = require('path')
 const ConfigFile = require(path.join('..', '.ciffisettings'))
 const scssAssets = ConfigFile.general.useNodeSass ? '.' : '..'
 const workboxPlugin = require('workbox-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   output: {
@@ -41,7 +42,10 @@ module.exports = {
         test: /\.scss$/,
         loaders: [
           {
-            loader: 'style-loader',
+            loader:
+              process.env.NODE_ENV !== 'production'
+                ? 'style-loader'
+                : MiniCssExtractPlugin.loader,
             options: {
               insertAt: 'top'
             }

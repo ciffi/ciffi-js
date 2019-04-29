@@ -2,8 +2,9 @@ const path = require('path')
 const ConfigFile = require(path.join('..', '.ciffisettings'))
 const baseConfig = require('./config.js')
 const TerserPlugin = require('terser-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-const plugins = []
+const plugins = [new MiniCssExtractPlugin()]
 
 if (ConfigFile.general.offline) {
   plugins.push(baseConfig.plugins[0])
