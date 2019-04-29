@@ -16,6 +16,9 @@ const CiffiSettings = {
     general: {
       autoprefixer: 'last 12 versions',
       bundle: '@REPLACE__BUNDLER@',
+      designToken: true,
+      designTokenInputFile: '@REPLACE__ASSETS__NAME@/config/design-token.json',
+      designTokenOutputFile: '@REPLACE__ASSETS__NAME@/styles/config/_design-token.scss',
       features: @REPLACE__FEATURES@,
       offline: false,
       projectName: '@REPLACE__CONFIG@',

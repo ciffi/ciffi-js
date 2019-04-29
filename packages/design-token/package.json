@@ -1,8 +1,8 @@
 {
-  "name": "@ciffi-js/builder",
-  "version": "4.0.4",
-  "description": "Builder for ciffi js webbpack project",
-  "main": "./builder.js",
+  "name": "@ciffi-js/design-token",
+  "version": "0.0.1",
+  "description": "It generates scss file with variables from design token json file",
+  "main": "./index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ciffi/ciffi-js/"
@@ -19,21 +19,19 @@
     "web",
     "module",
     "javascript utility",
-    "javascript builder"
+    "javascript builder",
+    "json",
+    "scss",
+    "design token",
+    "json to scss"
   ],
   "license": "MIT",
   "homepage": "https://github.com/ciffi/ciffi-js",
   "preferGlobal": false,
   "bin": {
-    "ciffi-builder": "./builder.js"
+    "ciffi-design-token": "./index.js"
   },
   "dependencies": {
-    "@ciffi-js/design-token": "^0.0.1",
-    "@ciffi-js/dev-server": "^2.0.2",
-    "chalk": "^2.1.0",
-    "file-exists": "^4.0.0",
-    "meow": "^3.7.0",
-    "node-notifier": "^5.2.1",
-    "spawn-command": "0.0.2-1"
+    "chalk": "^2.1.0"
   }
 }

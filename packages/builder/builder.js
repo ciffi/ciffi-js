@@ -41,6 +41,8 @@ class Builder {
             : 'dev'
       }
 
+      require('@ciffi-js/design-token')
+
       switch (cmd) {
         case 'start':
           new Dev(devEnv, true)
