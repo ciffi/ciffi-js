@@ -2,7 +2,10 @@ const fs = require('fs')
 const chalk = require('chalk')
 const path = require('path')
 const ConfigFile = require(path.resolve(process.cwd(), '.ciffisettings'))
-const input = require(ConfigFile.general.designTokenInputFile)
+const input = require(path.resolve(
+  process.cwd(),
+  ConfigFile.general.designTokenInputFile
+))
 
 const transformNodes = input => {
   return Object.keys(input).map(node => {
