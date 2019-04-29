@@ -2,28 +2,30 @@
 
 JSON file generator with list of all files in paths
 
-install ad dev dependencies 
+install as dev dependencies
+
 ```
 npm i -D @ciffi-js/jsonize-path
 ```
 
 use
+
 ```
 ./node_modules/.bin/ciffi-jsonize [options=value]
 ```
 
 available options
 
-```fileName=fileName```
+`fileName=fileName`
 
-default is ```images.json```
+default is `images.json`
 
-```pathsArray=[path1, path2, ...]```
+`pathsArray=[path1, path2, ...]`
 
 default is `[./src/images]`
 
-```contentType=array||obj```
+`contentType=array||obj`
 
-default is ```array```
+default is `array`
 
-__full documentation available at [ciffi.it/ciffi-js](https://www.ciffi.it/ciffi-js/docs/router)__
+**full documentation available at [ciffi.it/ciffi-js](https://www.ciffi.it/ciffi-js/docs/router)**

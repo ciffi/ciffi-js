@@ -35,7 +35,7 @@
     "@babel/preset-env": "7.4.4",
     "@babel/preset-react": "7.0.0",
     "@babel/runtime": "7.4.4",
-    "@ciffi-js/builder": "4.1.0",
+    "@ciffi-js/builder": "4.1.1",
     "@ciffi-js/jsonize-path": "1.1.0",
     "autoprefixer": "9.5.1",
     "babel-core": "7.0.0-bridge.0",

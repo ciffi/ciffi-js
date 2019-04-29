@@ -1,6 +1,7 @@
 # ciffi-js/design-token
 
 scss variables file generator from design token json file
+use with ciffi-design-token plugin for sketch
 
 install as dev dependencie
 
