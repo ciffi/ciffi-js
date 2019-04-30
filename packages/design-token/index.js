@@ -2,6 +2,11 @@ const fs = require('fs')
 const chalk = require('chalk')
 const path = require('path')
 const ConfigFile = require(path.resolve(process.cwd(), '.ciffisettings'))
+
+if (!ConfigFile.general.designToken) {
+  return
+}
+
 const input = require(path.resolve(
   process.cwd(),
   ConfigFile.general.designTokenInputFile
@@ -18,9 +23,6 @@ const transformNodes = input => {
 }
 
 const writeFile = input => {
-  if (!ConfigFile.general.designToken) {
-    return
-  }
   const result = transformNodes(input)
     .join(',')
     .replace(/,/g, '')
