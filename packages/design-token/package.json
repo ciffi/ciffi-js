@@ -1,6 +1,6 @@
 {
   "name": "@ciffi-js/design-token",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "It generates scss file with variables from design token json file",
   "main": "./index.js",
   "repository": {
