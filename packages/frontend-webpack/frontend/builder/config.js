@@ -39,6 +39,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.wcs$/,
+        loader: '@ciffi-js/webpack-wcs-loader'
+      },
+      {
         test: /\.scss$/,
         loaders: [
           {

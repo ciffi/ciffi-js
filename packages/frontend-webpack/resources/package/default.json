@@ -35,8 +35,9 @@
     "@babel/preset-env": "7.4.4",
     "@babel/preset-react": "7.0.0",
     "@babel/runtime": "7.4.4",
-    "@ciffi-js/builder": "4.1.3",
+    "@ciffi-js/builder": "4.1.4",
     "@ciffi-js/jsonize-path": "1.1.1",
+    "@ciffi-js/webpack-wcs-loader": "0.0.2",
     "autoprefixer": "9.5.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-loader": "8.0.5",
@@ -89,10 +90,13 @@
     "assets": "ciffi-builder assets",
     "newcomponent": "./bin/new-component.sh $1 $2",
     "prettier": "prettier --write --single-quote '**/*.{jsx,js,json,scss}'",
-    "precommit": "pretty-quick --staged",
     "test-dev": "jest --watchAll",
     "test": "jest",
     "coverage": "jest --coverage"
+  },
+  "browserslist": ["last 4 versions"],
+  "husky": {
+    "hooks": "pretty-quick --staged"
   },
   "jest": {
     "moduleNameMapper": {

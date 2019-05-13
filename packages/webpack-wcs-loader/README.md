@@ -13,7 +13,7 @@ add to webpack.config.js
 ```javascript
 {
     test: /\.wcs$/,
-    loader: 'wcs-loader'
+    loader: '@ciffi-js/webpack-wcs-loader'
 }
 ```
 

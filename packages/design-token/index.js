@@ -42,6 +42,7 @@ const writeFile = input => {
           } generated`
         )
       )
+      console.log('')
     }
   )
 }
