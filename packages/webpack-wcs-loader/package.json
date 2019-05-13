@@ -1,0 +1,39 @@
+{
+  "name": "@ciffi-js/webpack-wcs-loader",
+  "version": "0.0.1",
+  "description": "Webpack WebComponents Style Loader",
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ciffi/ciffi-js/"
+  },
+  "author": {
+    "name": "Ciffi"
+  },
+  "keywords": [
+    "ciffi",
+    "ciffi-js",
+    "javascript",
+    "front-end",
+    "development",
+    "web",
+    "module",
+    "javascript utility",
+    "webcomponents",
+    "scss"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ciffi/ciffi-js",
+  "preferGlobal": false,
+  "bin": {
+    "wcs-loader": "./index.js"
+  },
+  "dependencies": {
+    "autoprefixer": "9.5.1",
+    "clean-css-cli": "4.3.0",
+    "loader-utils": "1.2.3",
+    "node-sass": "4.12.0",
+    "postcss-cli": "6.1.2",
+    "schema-utils": "1.0.0"
+  }
+}
