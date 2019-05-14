@@ -51,7 +51,9 @@ const processResult = (options, input) => {
 function generateStyle(source, map, meta) {
   const options = getOptions(this)
 
-  validateOptions(schema, options, 'WebComponentsStyle Loader')
+  if (options) {
+    validateOptions(schema, options, 'WebComponentsStyle Loader')
+  }
 
   const callback = this.async()
 
