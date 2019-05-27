@@ -282,7 +282,7 @@ class Setup {
                     })
                   })
               } else {
-                this.config.projectName = 'test'
+                this.config.projectName = this.config.projectName || 'test'
                 callback({
                   buildPath: '../static',
                   livereload: 'none',
