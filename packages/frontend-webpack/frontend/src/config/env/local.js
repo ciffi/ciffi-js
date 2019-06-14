@@ -1,5 +1,5 @@
 const Config = {
-  projectName: 'refactoring',
+  projectName: '@REPLACE__CONFIG@',
   env: 'local',
   baseUrl: `${window.location.protocol}//${window.location.host}`,
   apiUrl: `${window.location.protocol}//${window.location.host}/`,
