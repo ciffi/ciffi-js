@@ -1,9 +1,7 @@
-import Page from '../Page';
+import Page from '../Page'
 
-class Editorial extends Page {
+export default class Editorial extends Page {
   static init(props) {
-    console.log(props);
+    console.log(props)
   }
 }
-
-export default Editorial;

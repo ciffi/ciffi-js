@@ -1,7 +1,5 @@
-class Page {
+export default class Page {
   static init(props) {
-    console.log(props);
+    console.log(props)
   }
 }
-
-export default Page;

@@ -1,9 +1,7 @@
-import Page from '../Page';
+import Page from '../Page'
 
-class Home extends Page {
+export default class Home extends Page {
   static init(props) {
-    console.log(props);
+    console.log(props)
   }
 }
-
-export default Home;

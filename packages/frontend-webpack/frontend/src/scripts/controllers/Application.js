@@ -1,15 +1,16 @@
-import Config from 'Config';
+// config
+import Config from 'Config'
+// device
+import '@ciffi-js/device'
+// router
+import Router from '../modules/Router'
 
-import Router from '../modules/Router';
-
-class Application {
+export default new class Application {
   constructor() {
-    this.config = Config;
+    this.config = Config
     
     new Router({
       config: this.config
-    });
+    })
   }
 }
-
-export default Application;

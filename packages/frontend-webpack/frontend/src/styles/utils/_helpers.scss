@@ -56,3 +56,27 @@
 @function rem($size) {
   @return #{$size / 16}rem;
 }
+
+@mixin responsive($rule, $mobile, $tablet: null, $ipad: null, $desktop: null, $big: null) {
+  #{$rule}: $mobile;
+  @if $tablet != null {
+    @include breakpoint($breakpoint-tablet) {
+      #{$rule}: #{$tablet};
+    }
+  }
+  @if $ipad != null {
+    @include breakpoint($breakpoint-ipad) {
+      #{$rule}: #{$ipad};
+    }
+  }
+  @if $desktop != null {
+    @include breakpoint($breakpoint-desktop) {
+      #{$rule}: #{$desktop};
+    }
+  }
+  @if $big != null {
+    @include breakpoint($breakpoint-big) {
+      #{$rule}: #{$big};
+    }
+  }
+}

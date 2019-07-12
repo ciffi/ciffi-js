@@ -3,12 +3,8 @@ import(/*webpackChunkName: 'Styles' */ '../styles/main.scss').then(() => {
   document.body.style.opacity = 1
 })
 
-// device
-import '@ciffi-js/device'
-
-import Application from './controllers/Application'
-
-new Application()
+// application
+import(/* webpackChunkName: 'Application' */ './controllers/Application').then()
 
 // webpack HMR support
 if (module.hot) {
