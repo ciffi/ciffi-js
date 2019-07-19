@@ -1,3 +1,5 @@
+import { general } from 'Settings'
+
 // styles
 import(/*webpackChunkName: 'Styles' */ '../styles/main.scss').then(() => {
   document.body.style.opacity = 1
@@ -12,6 +14,6 @@ if (module.hot) {
 }
 
 // offline support
-import { offline } from './modules/Offline'
-
-offline()
+if (general.offline) {
+  import(/* webpackChunkName: 'Offline' */ './modules/Offline').then()
+}
