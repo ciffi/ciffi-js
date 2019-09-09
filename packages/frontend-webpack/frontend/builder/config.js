@@ -3,6 +3,19 @@ const ConfigFile = require(path.join('..', '.ciffisettings'))
 const scssAssets = ConfigFile.general.useNodeSass ? '.' : '..'
 const workboxPlugin = require('workbox-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const insertAtTop = (element) => {
+  const parent = document.querySelector('head');
+  const lastInsertedElement =
+    window._lastElementInsertedByStyleLoader;
+  if (!lastInsertedElement) {
+    parent.insertBefore(element, parent.firstChild);
+  } else if (lastInsertedElement.nextSibling) {
+    parent.insertBefore(element, lastInsertedElement.nextSibling);
+  } else {
+    parent.appendChild(element);
+  }
+  window._lastElementInsertedByStyleLoader = element;
+}
 
 module.exports = {
   output: {
@@ -51,7 +64,7 @@ module.exports = {
                 ? 'style-loader'
                 : MiniCssExtractPlugin.loader,
             options: {
-              insertAt: 'top'
+              insert: insertAtTop
             }
           },
           'css-loader',
@@ -65,7 +78,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              data: `$assets: '${scssAssets}';`
+              prependData: `$assets: '${scssAssets}';`
             }
           }
         ]

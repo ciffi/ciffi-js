@@ -41,7 +41,7 @@ fi
 
 1. create folder (I usually use frontend in the root of project), then browse inside it and run setup task
 2. answer the setup process questions
-3. define your config files in src/scripts/config/env/envName.js
+3. define your config files in src/config/env/envName.js
 4. finish project's configuration by edit the .ciffisettings file 
 5. link main.css and main.js to your project
 6. each new project contains all tasks for develop, test and build 

@@ -1,4 +1,4 @@
 .idea/
 node_modules
-src/scripts/config/config.js
+src/config/config.js
 .DS_STORE
