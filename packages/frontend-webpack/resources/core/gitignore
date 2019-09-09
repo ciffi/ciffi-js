@@ -4,4 +4,4 @@
 .cache/
 node_modules/
 coverage/
-src/scripts/config.js
+src/config/config.js

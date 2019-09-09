@@ -4,3 +4,5 @@ lerna-debug.log
 /frontend
 /static
 .DS_Store
+docker-compose.yml
+fe_ssh
