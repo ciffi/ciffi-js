@@ -2,7 +2,7 @@ class Questions {
   constructor(projectName) {
     const questions = [
       this.projectName(),
-      this.wantHTTPS(),
+      // this.wantHTTPS(),
       this.livereload(),
       this.buildPath()
     ];

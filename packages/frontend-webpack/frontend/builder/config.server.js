@@ -27,5 +27,5 @@ module.exports = {
   },
   devtool: 'source-map',
   watch: true,
-  plugins: [new webpack.HotModuleReplacementPlugin()]
+  plugins: [baseConfig.plugins[1], new webpack.HotModuleReplacementPlugin()]
 }

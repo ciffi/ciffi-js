@@ -1,7 +1,7 @@
 import { general } from 'Settings'
 
 // styles
-import(/*webpackChunkName: 'Styles' */ '../styles/main.scss').then(() => {
+import(/* webpackChunkName: 'Styles' */ '../styles/main.scss').then(() => {
   document.body.style.opacity = 1
 })
 

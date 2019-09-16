@@ -18,8 +18,8 @@ class Dev {
     } else {
       console.log(
         chalk.red.bold('☠️ Project dev failed:') +
-          ' ' +
-          chalk.blue("can't find .ciffisettings file ☠️")
+        ' ' +
+        chalk.blue("can't find .ciffisettings file ☠️")
       )
       Notify.sendError(
         "☠️ Project dev failed: can't find .ciffisettings file ☠️"
@@ -27,7 +27,7 @@ class Dev {
       return console.log('')
     }
   }
-
+  
   init() {
     const assetPath =
       process.platform === 'win32'
@@ -56,22 +56,24 @@ class Dev {
       this.config.general.stylesOutputName
     )} --watch --source-map true`
     const bundlerJs = {
-      webpack: `${path.join(
+      webpack: `node ${path.join(
         'node_modules',
-        '.bin',
-        'webpack'
-      )} --config ${path.join('builder', 'config.dev.js')} --progress`,
+        '@ciffi-js',
+        'builder',
+        'task',
+        'WebpackWatch.js'
+      )}`,
       parcel: `${path.join('node_modules', '.bin', 'parcel')} watch ${path.join(
         assetPathName,
         'scripts',
         'main.js'
       )} -d ${assetPath} --public-url ${assetPath}`
     }
-
+    
     const liveJs = bundlerJs[this.config.general.bundle]
-
+    
     new Logger(spawnCommand(cleanDist), 'clean-dist')
-
+    
     new Config(this.env, () => {
       new Assets(() => {
         if (this.config.general.useNodeSass === false) {
@@ -82,7 +84,7 @@ class Dev {
           const processCss = spawnCommand(liveCss)
           new Logger([processServer, processCss], 'node-sass')
         }
-
+        
         if (this.withServer && this.config.localServer.useHMR) {
           const ciffiDevServer = `${path.join(
             'node_modules',
@@ -90,29 +92,29 @@ class Dev {
             'ciffi-dev-server'
           )}`
           const process = spawnCommand(ciffiDevServer)
-
+          
           new Logger([process], 'ciffi-dev-server')
         } else {
           if (this.withServer) {
             require('@ciffi-js/dev-server')
           }
-
+          
           const processJS = spawnCommand(liveJs)
           new Logger([processJS], this.config.general.bundle)
         }
       })
     })
   }
-
+  
   defineLiveServer() {
     const liveServerFeature = this.config.general.features[
-      this.config.general.features.length - 1
-    ]
+    this.config.general.features.length - 1
+      ]
     const assetPath =
       process.platform === 'win32'
         ? this.config.build.path.replace(/\//g, '\\')
         : this.config.build.path
-
+    
     switch (liveServerFeature) {
       case 'livereload':
         return `${path.join('node_modules', '.bin', 'livereload')} ${assetPath}`

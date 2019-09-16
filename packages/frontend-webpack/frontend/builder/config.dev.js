@@ -1,7 +1,7 @@
 const path = require('path')
 const ConfigFile = require(path.join('..', '.ciffisettings'))
 const baseConfig = require('./config.js')
-const plugins = ConfigFile.general.offline ? [baseConfig.plugins[0]] : []
+const plugins = ConfigFile.general.offline ? baseConfig.plugins : [baseConfig.plugins[1]]
 
 module.exports = {
   ...baseConfig,

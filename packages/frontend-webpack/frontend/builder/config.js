@@ -3,6 +3,7 @@ const ConfigFile = require(path.join('..', '.ciffisettings'))
 const scssAssets = ConfigFile.general.useNodeSass ? '.' : '..'
 const workboxPlugin = require('workbox-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
 const insertAtTop = (element) => {
   const parent = document.querySelector('head');
   const lastInsertedElement =
@@ -86,12 +87,17 @@ module.exports = {
       {
         test: /\.(js|jsx)?$/,
         exclude: /(node_modules)/,
-        use: {
+        loaders: [{
           loader: 'babel-loader',
           options: {
             babelrc: true
           }
-        }
+        }, {
+          loader: 'eslint-loader',
+          options: {
+            configFile: '.eslintrc.json'
+          }
+        }]
       },
       {
         test: /\.twig$/,
@@ -129,6 +135,7 @@ module.exports = {
         path.join(__dirname, '..', ConfigFile.build.path + '/..')
       ),
       globPatterns: ['*.html']
-    })
+    }),
+    new ErrorOverlayPlugin()
   ]
 }
