@@ -1,4 +1,4 @@
-import { general } from 'Settings'
+import { general, localServer } from 'Settings'
 
 // styles
 import(/* webpackChunkName: 'Styles' */ '../styles/main.scss').then(() => {
@@ -9,7 +9,7 @@ import(/* webpackChunkName: 'Styles' */ '../styles/main.scss').then(() => {
 import(/* webpackChunkName: 'Application' */ './controllers/Application').then()
 
 // webpack HMR support
-if (module.hot) {
+if (localServer.useHMR && module.hot) {
   module.hot.accept()
 }
 

@@ -7,6 +7,7 @@ const Notify = require('./Notify')
 const Assets = require('./Assets')
 const Config = require('./Config')
 const Logger = require('../utils/Logger')
+const watch = require('./WebpackWatch')
 
 class Dev {
   constructor(env, withServer) {
@@ -78,7 +79,7 @@ class Dev {
       new Assets(() => {
         if (this.config.general.useNodeSass === false) {
           const processServer = spawnCommand(liveServer)
-          new Logger([processServer], 'live-server')
+          //new Logger([processServer], 'live-server')
         } else {
           const processServer = spawnCommand(`${liveCssFirst} && ${liveServer}`)
           const processCss = spawnCommand(liveCss)
@@ -95,12 +96,18 @@ class Dev {
           
           new Logger([process], 'ciffi-dev-server')
         } else {
-          if (this.withServer) {
-            require('@ciffi-js/dev-server')
-          }
+          /*const processJS = spawnCommand(liveJs)
+          new Logger([processJS], this.config.general.bundle)*/
           
-          const processJS = spawnCommand(liveJs)
-          new Logger([processJS], this.config.general.bundle)
+          let counter = 0
+          
+          watch((res) => {
+            console.log('🏗' + chalk.blue(res) + '\n')
+            
+            if (this.withServer && counter++ === 0) {
+              require('@ciffi-js/dev-server')
+            }
+          })
         }
       })
     })

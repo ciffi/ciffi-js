@@ -22,7 +22,7 @@ const transformNodes = input => {
   })
 }
 
-const writeFile = input => {
+const writeFile = (input, callback) => {
   const result = transformNodes(input)
     .join(',')
     .replace(/,/g, '')
@@ -34,17 +34,13 @@ const writeFile = input => {
       if (err) {
         return console.log(err)
       }
-
-      console.log(
-        chalk.blue(
-          `🦄 Design token file ${
-            ConfigFile.general.designTokenOutputFile
-          } generated`
-        )
-      )
-      console.log('')
+      
+      console.log(`${chalk.blue('🦄 Generate design token file in')} ${ConfigFile.general.designTokenOutputFile} ${chalk.green.bold('OK')}`)
+      callback()
     }
   )
 }
 
-writeFile(input)
+module.exports = (callback) => {
+  writeFile(input, callback)
+}

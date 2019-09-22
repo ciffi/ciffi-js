@@ -58,7 +58,6 @@ class Config {
         chalk.green.bold(' OK')
     )
     console.log('')
-    console.log('')
 
     callback()
   }

@@ -1,10 +1,12 @@
 const chalk = require('chalk')
 const fileExists = require('file-exists')
 const spawnCommand = require('spawn-command')
+const { exec } = require('child_process')
 const path = require('path')
 const ConfigFile = path.join(process.cwd(), '.ciffisettings')
 const Assets = require('./Assets')
 const Config = require('./Config')
+const build = require('./Webpack')
 
 const Errors = {
   build: new Error('🏗  frontend build error!!')
@@ -86,7 +88,28 @@ class Build {
       let spawnProcess
       
       if (this.config.general.useNodeSass === false) {
-        spawnProcess = spawnCommand(cleanDist + concat + js)
+        return exec(cleanDist, () => {
+          build((res) => {
+            
+            console.log('🏗' + chalk.blue(res) + '\n')
+            
+            console.log(
+              chalk.blue('🏗  Project build for ') +
+              this.env +
+              chalk.blue(' in ') +
+              assetPath +
+              ' ' +
+              chalk.green.bold(' OK') +
+              '\n'
+            )
+            
+            new Assets(() => {
+              if (this.withServer) {
+                require('@ciffi-js/dev-server')
+              }
+            })
+          })
+        })
       } else {
         spawnProcess = spawnCommand(cleanDist + concat + styles + concat + js)
       }
