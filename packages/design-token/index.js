@@ -3,10 +3,6 @@ const chalk = require('chalk')
 const path = require('path')
 const ConfigFile = require(path.resolve(process.cwd(), '.ciffisettings'))
 
-if (!ConfigFile.general.designToken) {
-  return
-}
-
 const input = require(path.resolve(
   process.cwd(),
   ConfigFile.general.designTokenInputFile
@@ -42,5 +38,8 @@ const writeFile = (input, callback) => {
 }
 
 module.exports = (callback) => {
+  if (!ConfigFile.general.designToken) {
+    return callback()
+  }
   writeFile(input, callback)
 }

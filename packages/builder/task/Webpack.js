@@ -1,3 +1,4 @@
+const { red } = require('chalk')
 const path = require('path')
 const webpack = require('webpack')
 const config = require(path.join(process.cwd(), 'builder', 'config.build.js'))
@@ -18,7 +19,7 @@ module.exports = (callback) => {
     const errors = stats.toString('errors-only')
     
     if (stats.hasErrors()) {
-      console.error(errors)
+      console.error(red(stats.toString('errors-only')))
       console.error('\n')
       return
     }
