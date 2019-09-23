@@ -29,7 +29,7 @@ module.exports = class ProgressBar {
     const empty_bar = this.get_bar(empty_bar_length, '-')
     const percentage_progress = (current_progress * 100).toFixed(2)
     
-    if (typeof process.stdout.clearLine() === 'function') {
+    if (typeof process.stdout.clearLine === 'function') {
       process.stdout.clearLine()
       process.stdout.cursorTo(0)
       process.stdout.write(
