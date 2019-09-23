@@ -29,15 +29,17 @@ module.exports = class ProgressBar {
     const empty_bar = this.get_bar(empty_bar_length, '-')
     const percentage_progress = (current_progress * 100).toFixed(2)
     
-    process.stdout.clearLine()
-    process.stdout.cursorTo(0)
-    process.stdout.write(
-      `${blue('🏗  Project building: ')} [${filled_bar}${empty_bar}] | ${green.bold(`${percentage_progress}% `)}`
-    )
-    
-    if (percentage_progress === '100.00') {
+    if (typeof process.stdout.clearLine() === 'function') {
       process.stdout.clearLine()
       process.stdout.cursorTo(0)
+      process.stdout.write(
+        `${blue('🏗  Project building: ')} [${filled_bar}${empty_bar}] | ${green.bold(`${percentage_progress}% `)}`
+      )
+      
+      if (percentage_progress === '100.00') {
+        process.stdout.clearLine()
+        process.stdout.cursorTo(0)
+      }
     }
   }
   
