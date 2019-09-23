@@ -1,6 +1,6 @@
 {
   "name": "@ciffi-js/builder",
-  "version": "4.4.0",
+  "version": "4.5.0",
   "description": "Builder for ciffi js webbpack project",
   "main": "./builder.js",
   "repository": {
