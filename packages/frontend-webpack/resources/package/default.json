@@ -74,7 +74,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "7.6.0",
-    "@ciffi-js/device": "1.1.1",
+    "@ciffi-js/device": "1.1.2",
     "breakpoint-sass": "2.7.1",
     "react": "16.9.0",
     "react-dom": "16.9.0",

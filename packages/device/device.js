@@ -22,8 +22,10 @@ module.exports = (function () {
 
 	function checkSafari() {
     var _ua = window.navigator.userAgent;
-    if (_ua.indexOf('Safari') != -1 && !_ua.indexOf('chrome') > -1) {
+    if (_ua.indexOf('Safari') != -1 && _ua.indexOf('Chrome') === -1 && _ua.indexOf('Mobile') === -1 && _ua.indexOf('iPhone') === -1) {
       return 'safari';
+    } else {
+      return '';
     }
   }
 
