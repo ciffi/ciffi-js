@@ -180,7 +180,7 @@ class Setup {
             process: path.normalize(
               `${process.cwd()}/${
                 this.config.ciffiSrc
-                }/, ${process.cwd()}/.ciffi/${this.config.ciffiSrc}/`
+              }/, ${process.cwd()}/.ciffi/${this.config.ciffiSrc}/`
             )
           })
         }
@@ -275,7 +275,7 @@ class Setup {
                     }
                     callback({
                       buildPath: res.buildPath,
-                      livereload: res.livereload,
+                      livereload: true,//res.livereload,
                       https: false,//res.wantHTTPS === 'yes',
                       features: [],
                       bundler: 'webpack'

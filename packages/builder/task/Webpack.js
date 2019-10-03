@@ -3,8 +3,9 @@ const path = require('path')
 const webpack = require('webpack')
 const config = require(path.join(process.cwd(), 'builder', 'config.build.js'))
 const ProgressBar = require('../utils/ProgressBar')
+const ConfigFile = require(path.join(process.cwd(), '.ciffisettings'))
 
-const progressBar = new ProgressBar()
+const progressBar = new ProgressBar({ ...ConfigFile.custom.progressBar })
 
 module.exports = (callback) => {
   const compiler = webpack(config)

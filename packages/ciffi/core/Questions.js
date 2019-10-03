@@ -3,41 +3,41 @@ class Questions {
     const questions = [
       this.projectName(),
       // this.wantHTTPS(),
-      this.livereload(),
+      //this.livereload(),
       this.buildPath()
     ];
-
+    
     if (projectName) {
       questions.shift();
     }
-
+    
     return questions;
   }
-
+  
   projectName() {
     return {
       type: 'input',
       name: 'projectName',
       message: 'Specify project name',
-      default: 'test',
-      validate: function(res) {
+      default: 'my-project',
+      validate: function (res) {
         const done = this.async();
-
+        
         setTimeout(() => {
           const test = new RegExp(/^$|\s+|\w\s+|[\/]|^\.|\.$/);
           const testResult = test.test(res);
-
+          
           if (typeof res !== 'string' || testResult) {
             done('☠️  Project must have real name ☠️');
             return;
           }
-
+          
           done(null, true);
         }, 10);
       }
     };
   }
-
+  
   wantHTTPS() {
     return {
       type: 'list',
@@ -47,7 +47,7 @@ class Questions {
       choices: ['yes', 'no']
     };
   }
-
+  
   livereload() {
     return {
       type: 'list',
@@ -57,25 +57,25 @@ class Questions {
       choices: ['none', 'livereload']
     };
   }
-
+  
   buildPath() {
     return {
       type: 'input',
       name: 'buildPath',
       message: 'Specify relative build path',
       default: '../public/static',
-      validate: function(res) {
+      validate: function (res) {
         const done = this.async();
-
+        
         setTimeout(() => {
           const test = new RegExp(/^(\.\.\/){1,}\w/);
           const testResult = test.test(res);
-
+          
           if (typeof res !== 'string' || !testResult) {
             done('☠️  Build path must be out of this project setup folder ☠️');
             return;
           }
-
+          
           done(null, true);
         }, 10);
       }
