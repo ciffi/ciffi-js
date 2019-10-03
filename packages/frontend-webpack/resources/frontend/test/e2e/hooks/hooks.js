@@ -1,12 +1,11 @@
-var {defineSupportCode} = require('cucumber');
+var { defineSupportCode } = require('cucumber')
 
-defineSupportCode(function ({After, Before}) {
-	
-	Before(function () {
-		console.log('start test');
-	});
-	
-	After(function () {
-		console.log('end test');
-	});
-});
+defineSupportCode(function({ After, Before }) {
+  Before(function() {
+    console.log('start test')
+  })
+
+  After(function() {
+    console.log('end test')
+  })
+})

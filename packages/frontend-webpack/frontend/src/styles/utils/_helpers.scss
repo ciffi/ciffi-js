@@ -1,4 +1,4 @@
-@mixin ratio($w,$h) {
+@mixin ratio($w, $h) {
   @if $w == 0 {
     &:before {
       display: none;
@@ -8,30 +8,34 @@
       display: block;
       content: '';
       width: 100%;
-      padding-bottom: ($h/$w)*100%;
+      padding-bottom: ($h/$w) * 100%;
     }
   }
 }
 
 @mixin placeholder() {
-  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
     @content;
   }
 
-  ::-moz-placeholder { /* Firefox 19+ */
+  ::-moz-placeholder {
+    /* Firefox 19+ */
     @content;
   }
 
-  :-ms-input-placeholder { /* IE 10+ */
+  :-ms-input-placeholder {
+    /* IE 10+ */
     @content;
   }
 
-  :-moz-placeholder { /* Firefox 18- */
+  :-moz-placeholder {
+    /* Firefox 18- */
     @content;
   }
 }
 
-@mixin autofill($bg,$text) {
+@mixin autofill($bg, $text) {
   *:-webkit-autofill,
   *:-webkit-autofill:hover,
   *:-webkit-autofill:focus,
@@ -57,7 +61,14 @@
   @return #{$size / 16}rem;
 }
 
-@mixin responsive($rule, $mobile, $tablet: null, $ipad: null, $desktop: null, $big: null) {
+@mixin responsive(
+  $rule,
+  $mobile,
+  $tablet: null,
+  $ipad: null,
+  $desktop: null,
+  $big: null
+) {
   #{$rule}: $mobile;
   @if $tablet != null {
     @include breakpoint($breakpoint-tablet) {

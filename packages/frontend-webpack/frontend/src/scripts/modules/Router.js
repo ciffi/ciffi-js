@@ -19,16 +19,16 @@ export const getCurrentRoute = el => {
 export default class Router {
   constructor(props = {}) {
     const { el = '.js-app', currentRoute } = props
-    
+
     this.el = el
     this.currentRoute = currentRoute || getCurrentRoute(this.el)
-    
+
     const pageProps = {
       ...props,
       el: this.el,
       currentRoute: this.currentRoute
     }
-    
+
     Routes.load(this.currentRoute, pageProps)
   }
 }

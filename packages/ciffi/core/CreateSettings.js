@@ -1,41 +1,41 @@
-let chalk = require('chalk');
-let replace = require('replace-in-file');
-let fileExists = require('file-exists');
-let pathExists = require('path-exists');
-let Loading = require('./Loading');
-let ProcessManager = require('./ProcessManager');
-const path = require('path');
+let chalk = require('chalk')
+let replace = require('replace-in-file')
+let fileExists = require('file-exists')
+let pathExists = require('path-exists')
+let Loading = require('./Loading')
+let ProcessManager = require('./ProcessManager')
+const path = require('path')
 
 class CreateSettings {
   constructor(config, callback) {
-    console.log('');
+    console.log('')
 
-    this.config = config;
-    this.tempPath = path.normalize(`${process.cwd()}/.ciffi/`);
-    this.fileName = `ciffisettings`;
-    this.hiddenFileName = `.${this.fileName}`;
-    this.tempFile = path.normalize(`${this.tempPath}${this.fileName}`);
+    this.config = config
+    this.tempPath = path.normalize(`${process.cwd()}/.ciffi/`)
+    this.fileName = `ciffisettings`
+    this.hiddenFileName = `.${this.fileName}`
+    this.tempFile = path.normalize(`${this.tempPath}${this.fileName}`)
     this.resource = path.normalize(
       `${
         this.config.modulePath
       }/lib/node_modules/ciffi/node_modules/ciffi-js-webpack/resources/core/${
         this.fileName
       }`
-    );
-    this.projectRoot = path.normalize(`${process.cwd()}/`);
+    )
+    this.projectRoot = path.normalize(`${process.cwd()}/`)
     this.projectFile = path.normalize(
       `${this.projectRoot}${this.hiddenFileName}`
-    );
+    )
 
-    Loading.start('Generate ' + chalk.blue(this.hiddenFileName));
+    Loading.start('Generate ' + chalk.blue(this.hiddenFileName))
 
     this.init(() => {
       Loading.stop(
         'Generate ' + chalk.blue(this.hiddenFileName) + chalk.green.bold(' OK')
-      );
+      )
 
-      callback();
-    });
+      callback()
+    })
   }
 
   init(callback) {
@@ -45,29 +45,27 @@ class CreateSettings {
         onClose: () => {
           this.replaceAll(() => {
             if (fileExists.sync(this.projectFile)) {
-              console.log(
-                chalk.red('File already exists: ' + this.projectFile)
-              );
+              console.log(chalk.red('File already exists: ' + this.projectFile))
             } else {
               pathExists(this.projectRoot).then(res => {
                 if (res) {
-                  const copy = `cp ${this.tempFile} ${this.projectFile}`;
-                  const removeTempFile = `rm -rf ${this.tempFile}`;
+                  const copy = `cp ${this.tempFile} ${this.projectFile}`
+                  const removeTempFile = `rm -rf ${this.tempFile}`
                   const removeNewFile = `rm -rf ${path.normalize(
                     this.projectRoot + '/' + this.fileName
-                  )}`;
-                  const copyAndClear = `${copy} && ${removeTempFile} && ${removeNewFile}`;
+                  )}`
+                  const copyAndClear = `${copy} && ${removeTempFile} && ${removeNewFile}`
                   new ProcessManager({
                     process: copyAndClear,
                     onClose: callback
-                  });
+                  })
                 }
-              });
+              })
             }
-          });
+          })
         }
-      });
-    });
+      })
+    })
   }
 
   createTempPath(callback) {
@@ -76,11 +74,11 @@ class CreateSettings {
         new ProcessManager({
           process: `mkdir ${this.tempPath}`,
           onClose: callback
-        });
+        })
       } else {
-        callback();
+        callback()
       }
-    });
+    })
   }
 
   replaceAll(callback) {
@@ -89,12 +87,12 @@ class CreateSettings {
         this.replaceConfig(() => {
           this.replaceHTTPS(() => {
             this.replaceFeatures(() => {
-              callback();
-            });
-          });
-        });
-      });
-    });
+              callback()
+            })
+          })
+        })
+      })
+    })
   }
 
   replaceBuildPath(callback) {
@@ -106,7 +104,7 @@ class CreateSettings {
       },
       error => {
         if (error) {
-          return console.error('Error occurred:', error);
+          return console.error('Error occurred:', error)
         }
         replace(
           {
@@ -116,7 +114,7 @@ class CreateSettings {
           },
           error => {
             if (error) {
-              return console.error('Error occurred:', error);
+              return console.error('Error occurred:', error)
             }
             replace(
               {
@@ -129,15 +127,15 @@ class CreateSettings {
               },
               error => {
                 if (error) {
-                  return console.error('Error occurred:', error);
+                  return console.error('Error occurred:', error)
                 }
-                callback();
+                callback()
               }
-            );
+            )
           }
-        );
+        )
       }
-    );
+    )
   }
 
   replaceBundler(callback) {
@@ -149,11 +147,11 @@ class CreateSettings {
       },
       error => {
         if (error) {
-          return console.error('Error occurred:', error);
+          return console.error('Error occurred:', error)
         }
-        callback();
+        callback()
       }
-    );
+    )
   }
 
   replaceConfig(callback) {
@@ -165,11 +163,11 @@ class CreateSettings {
       },
       error => {
         if (error) {
-          return console.error('Error occurred:', error);
+          return console.error('Error occurred:', error)
         }
-        callback();
+        callback()
       }
-    );
+    )
   }
 
   replaceHTTPS(callback) {
@@ -181,7 +179,7 @@ class CreateSettings {
       },
       error => {
         if (error) {
-          return console.error('Error occurred:', error);
+          return console.error('Error occurred:', error)
         }
         replace(
           {
@@ -191,20 +189,20 @@ class CreateSettings {
           },
           error => {
             if (error) {
-              return console.error('Error occurred:', error);
+              return console.error('Error occurred:', error)
             }
-            callback();
+            callback()
           }
-        );
+        )
       }
-    );
+    )
   }
 
   replaceFeatures(callback) {
-    const feature = this.config.features;
-    const livereload = this.config.livereload;
+    const feature = this.config.features
+    const livereload = this.config.livereload
 
-    feature.push(livereload);
+    feature.push(livereload)
 
     replace(
       {
@@ -214,12 +212,12 @@ class CreateSettings {
       },
       error => {
         if (error) {
-          return console.error('Error occurred:', error);
+          return console.error('Error occurred:', error)
         }
-        callback();
+        callback()
       }
-    );
+    )
   }
 }
 
-module.exports = CreateSettings;
+module.exports = CreateSettings

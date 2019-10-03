@@ -22,15 +22,15 @@ class Build {
     } else {
       console.error(
         chalk.red.bold('☠️ Project build failed:') +
-        ' ' +
-        chalk.blue("can't find .ciffisettings file ☠️")
+          ' ' +
+          chalk.blue("can't find .ciffisettings file ☠️")
       )
       console.error(Errors.build.message)
       console.error('')
       return process.exit(1)
     }
   }
-  
+
   init() {
     const assetPath =
       process.platform === 'win32'
@@ -66,7 +66,7 @@ class Build {
       this.config.general.stylesOutputName
     )} ${path.join(assetPath, this.config.general.stylesOutputName)}`
     const styles = css + concat + autoprefixer + concat + cleancss
-    
+
     const bundlerJs = {
       webpack: `NODE_ENV=production node ${path.join(
         'node_modules',
@@ -81,28 +81,27 @@ class Build {
         'main.js'
       )} -d ${assetPath} --public-url ${assetPath} --no-source-maps`
     }
-    
+
     const js = bundlerJs[this.config.general.bundle]
-    
+
     new Config(this.env, () => {
       let spawnProcess
-      
+
       if (this.config.general.useNodeSass === false) {
         return exec(cleanDist, () => {
-          build((res) => {
-            
+          build(res => {
             console.log('🏗' + chalk.blue(res) + '\n')
-            
+
             console.log(
               chalk.blue('🏗  Project build for ') +
-              this.env +
-              chalk.blue(' in ') +
-              assetPath +
-              ' ' +
-              chalk.green.bold(' OK') +
-              '\n'
+                this.env +
+                chalk.blue(' in ') +
+                assetPath +
+                ' ' +
+                chalk.green.bold(' OK') +
+                '\n'
             )
-            
+
             new Assets(() => {
               if (this.withServer) {
                 require('@ciffi-js/dev-server')
@@ -113,7 +112,7 @@ class Build {
       } else {
         spawnProcess = spawnCommand(cleanDist + concat + styles + concat + js)
       }
-      
+
       spawnProcess.stdout.on('data', res => {
         if (
           res.indexOf('ERROR in') >= 0 ||
@@ -132,7 +131,7 @@ class Build {
           console.log('🏗' + chalk.blue(res))
         }
       })
-      
+
       spawnProcess.stderr.on('data', res => {
         if (
           res.indexOf('ERROR in') >= 0 ||
@@ -144,19 +143,19 @@ class Build {
           return process.exit(1)
         }
       })
-      
+
       spawnProcess.on('close', res => {
         if (res === 0) {
           console.log(
             chalk.blue('🏗  Project build for ') +
-            this.env +
-            chalk.blue(' in ') +
-            assetPath +
-            ' ' +
-            chalk.green.bold(' OK')
+              this.env +
+              chalk.blue(' in ') +
+              assetPath +
+              ' ' +
+              chalk.green.bold(' OK')
           )
           new Assets()
-          
+
           if (this.withServer) {
             require('@ciffi-js/dev-server')
           }

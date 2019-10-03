@@ -30,14 +30,18 @@ const writeFile = (input, callback) => {
       if (err) {
         return console.log(err)
       }
-      
-      console.log(`${chalk.blue('🦄 Generate design token file in')} ${ConfigFile.general.designTokenOutputFile} ${chalk.green.bold('OK')}`)
+
+      console.log(
+        `${chalk.blue('🦄 Generate design token file in')} ${
+          ConfigFile.general.designTokenOutputFile
+        } ${chalk.green.bold('OK')}`
+      )
       callback()
     }
   )
 }
 
-module.exports = (callback) => {
+module.exports = callback => {
   if (!ConfigFile.general.designToken) {
     return callback()
   }

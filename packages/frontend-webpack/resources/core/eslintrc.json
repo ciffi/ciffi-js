@@ -7,34 +7,19 @@
     "mocha": true,
     "es6": true
   },
-  "plugins": [
-    "react"
-  ],
+  "plugins": ["react"],
   "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module"
   },
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended"
-  ],
-  "globals": {
-  },
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "globals": {},
   "rules": {
     "no-console": 0,
     "react/prop-types": 0,
-    "strict": [
-      2,
-      "safe"
-    ],
-    "linebreak-style": [
-      2,
-      "unix"
-    ],
-    "quotes": [
-      2,
-      "single"
-    ],
+    "strict": [2, "safe"],
+    "linebreak-style": [2, "unix"],
+    "quotes": [2, "single"],
     "semi": 0
   },
   "settings": {

@@ -4,18 +4,17 @@ const scssAssets = ConfigFile.general.useNodeSass ? '.' : '..'
 const workboxPlugin = require('workbox-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
-const insertAtTop = (element) => {
-  const parent = document.querySelector('head');
-  const lastInsertedElement =
-    window._lastElementInsertedByStyleLoader;
+const insertAtTop = element => {
+  const parent = document.querySelector('head')
+  const lastInsertedElement = window._lastElementInsertedByStyleLoader
   if (!lastInsertedElement) {
-    parent.insertBefore(element, parent.firstChild);
+    parent.insertBefore(element, parent.firstChild)
   } else if (lastInsertedElement.nextSibling) {
-    parent.insertBefore(element, lastInsertedElement.nextSibling);
+    parent.insertBefore(element, lastInsertedElement.nextSibling)
   } else {
-    parent.appendChild(element);
+    parent.appendChild(element)
   }
-  window._lastElementInsertedByStyleLoader = element;
+  window._lastElementInsertedByStyleLoader = element
 }
 
 module.exports = {
@@ -87,17 +86,20 @@ module.exports = {
       {
         test: /\.(js|jsx)?$/,
         exclude: /(node_modules)/,
-        loaders: [{
-          loader: 'babel-loader',
-          options: {
-            babelrc: true
+        loaders: [
+          {
+            loader: 'babel-loader',
+            options: {
+              babelrc: true
+            }
+          },
+          {
+            loader: 'eslint-loader',
+            options: {
+              configFile: '.eslintrc.json'
+            }
           }
-        }, {
-          loader: 'eslint-loader',
-          options: {
-            configFile: '.eslintrc.json'
-          }
-        }]
+        ]
       },
       {
         test: /\.twig$/,

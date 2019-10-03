@@ -95,9 +95,7 @@
     "test": "jest",
     "coverage": "jest --coverage"
   },
-  "browserslist": [
-    "last 4 versions"
-  ],
+  "browserslist": ["last 4 versions"],
   "husky": {
     "hooks": "pretty-quick --staged"
   },

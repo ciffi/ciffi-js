@@ -12,8 +12,8 @@ Object.keys(BPSizes).map(item => {
   BP[item] = `min-width: ${BPSizes[item]}px`
 })
 
-BP.smartphone = `max-width: ${BPSizes.tablet - 1}px`;
-BP.portrait = `max-width: ${BPSizes.ipad - 1}px`;
+BP.smartphone = `max-width: ${BPSizes.tablet - 1}px`
+BP.portrait = `max-width: ${BPSizes.ipad - 1}px`
 
 export const Colors = {
   black: '#000000',
@@ -31,11 +31,10 @@ export const Weights = {}
 
 export const Sizes = {}
 
-export const Ratio = (w, h) => (
+export const Ratio = (w, h) =>
   `&:before {
     content: '';
     display: block;
     width: 100%;
     padding-bottom: ${(w / h) * 100}%;
   }`
-)

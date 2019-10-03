@@ -1,10 +1,10 @@
 // device
-require('@ciffi-js/device');
+require('@ciffi-js/device')
 
 // router
-require('@ciffi-js/router').pushState(false);
+require('@ciffi-js/router').pushState(false)
 
 // config example
-import Config from 'Config';
+import Config from 'Config'
 
-console.log(Config);
+console.log(Config)

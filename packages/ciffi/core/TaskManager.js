@@ -1,6 +1,6 @@
-const ProcessManager = require('./ProcessManager');
-const { showCommandErrorMessage } = require('./Messages');
-const Setup = require('../task/Setup');
+const ProcessManager = require('./ProcessManager')
+const { showCommandErrorMessage } = require('./Messages')
+const Setup = require('../task/Setup')
 
 class TaskManager {
   constructor({ cmd, opts, projectName }) {
@@ -11,33 +11,33 @@ class TaskManager {
             modulePath,
             projectName,
             silent: opts.s
-          });
-          break;
+          })
+          break
         case 'dev-old':
-          require('../task/DevOld');
-          break;
+          require('../task/DevOld')
+          break
         case 'build-old':
-          require('../task/BuildProd');
-          break;
+          require('../task/BuildProd')
+          break
         default:
-          showCommandErrorMessage();
-          break;
+          showCommandErrorMessage()
+          break
       }
-    });
+    })
   }
 
   getNPMLocation(callback) {
-    let modulePath;
+    let modulePath
     new ProcessManager({
       process: 'npm config get prefix',
       onMessage: res => {
-        modulePath = res.trim();
+        modulePath = res.trim()
       },
       onClose: () => {
-        callback(modulePath);
+        callback(modulePath)
       }
-    });
+    })
   }
 }
 
-module.exports = TaskManager;
+module.exports = TaskManager

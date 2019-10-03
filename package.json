@@ -22,6 +22,7 @@
   },
   "scripts": {
     "test": "node ./test.js",
-    "lerna": "./node_modules/.bin/lerna $1"
+    "lerna": "./node_modules/.bin/lerna $1",
+    "prettier": "prettier --write --single-quote '**/**/*.{jsx,js,json,scss}'"
   }
 }

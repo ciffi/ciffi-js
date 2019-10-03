@@ -28,10 +28,10 @@ class Setup {
       ciffiSrc: '.ciffi/src',
       ciffiSrcName: 'src'
     }
-    
+
     this.init()
   }
-  
+
   init() {
     this.checkUpdates(() => {
       this.beforeStart(
@@ -41,7 +41,7 @@ class Setup {
           this.config.buildPath = buildPath
           this.config.https = https
           this.config.bundler = bundler
-          
+
           new TempApp(this.config.modulePath, () => {
             this.start()
           })
@@ -49,7 +49,7 @@ class Setup {
       )
     })
   }
-  
+
   checkUpdates(callback) {
     const updateChecker = new CheckUpdate(
       (hasUpdate, oldVersion, newVersion) => {
@@ -64,7 +64,7 @@ class Setup {
       }
     )
   }
-  
+
   replaceBuildPath(newString, callback) {
     const files = [
       path.normalize(
@@ -84,7 +84,7 @@ class Setup {
       ),
       path.normalize(process.cwd() + '/.ciffi/package.json')
     ]
-    
+
     replace(
       {
         files,
@@ -95,7 +95,7 @@ class Setup {
         if (error) {
           return console.error('Error occurred:', error)
         }
-        
+
         replace(
           {
             files,
@@ -112,7 +112,7 @@ class Setup {
       }
     )
   }
-  
+
   replaceConfig(newString, callback) {
     replace(
       {
@@ -144,14 +144,14 @@ class Setup {
       }
     )
   }
-  
+
   filter(filepath) {
     return !/(^|\/)\.[^\/\.]/g.test(filepath)
   }
-  
+
   start() {
     let fixedAssetsUrl = this.config.buildPath
-    
+
     if (
       fixedAssetsUrl.substring(
         fixedAssetsUrl.length - 1,
@@ -160,21 +160,21 @@ class Setup {
     ) {
       fixedAssetsUrl = fixedAssetsUrl.substring(0, fixedAssetsUrl.length - 1)
     }
-    
+
     this.replaceBuildPath(fixedAssetsUrl, () => {
       cliCursor.hide()
-      
+
       console.log('')
-      
+
       Loading.start(
         'Generate project tree for ' + chalk.blue(this.config.projectName)
       )
-      
+
       this.replaceConfig(this.config.projectName, () => {
         const pathName = fixedAssetsUrl.split('/')[
-        fixedAssetsUrl.split('/').length - 1
-          ]
-        
+          fixedAssetsUrl.split('/').length - 1
+        ]
+
         if (pathName !== 'src') {
           new ProcessManager({
             process: path.normalize(
@@ -184,13 +184,13 @@ class Setup {
             )
           })
         }
-        
+
         Loading.stop(
           'Generate project tree for ' +
-          chalk.blue(this.config.projectName) +
-          chalk.green.bold(' OK')
+            chalk.blue(this.config.projectName) +
+            chalk.green.bold(' OK')
         )
-        
+
         new CreateSettings(
           {
             projectName: this.config.projectName,
@@ -219,7 +219,7 @@ class Setup {
       })
     })
   }
-  
+
   testNpm5(callback) {
     let version
     new ProcessManager({
@@ -236,17 +236,17 @@ class Setup {
         } else {
           console.log(
             chalk.red.bold('☠️ Setup error: ') +
-            chalk.red('npm@5.0.0 is required ☠️')
+              chalk.red('npm@5.0.0 is required ☠️')
           )
           console.log(
             chalk.blue.bold('update with: ') +
-            chalk.blue('npm install -g npm@latest')
+              chalk.blue('npm install -g npm@latest')
           )
         }
       }
     })
   }
-  
+
   beforeStart(callback) {
     this.testNpm5(() => {
       emptyDir(
@@ -260,11 +260,11 @@ class Setup {
             console.log('')
             console.log(chalk.green.bold('-- Ciffi Frontend Generator --'))
             console.log('')
-            
+
             if (process.platform === 'win32') {
               return showWindowsSetupError()
             }
-            
+
             if (result) {
               if (!this.config.silent) {
                 inquirer
@@ -275,8 +275,8 @@ class Setup {
                     }
                     callback({
                       buildPath: res.buildPath,
-                      livereload: true,//res.livereload,
-                      https: false,//res.wantHTTPS === 'yes',
+                      livereload: true, //res.livereload,
+                      https: false, //res.wantHTTPS === 'yes',
                       features: [],
                       bundler: 'webpack'
                     })
@@ -294,8 +294,8 @@ class Setup {
             } else {
               console.log(
                 chalk.red.bold('☠️  Project setup failed:') +
-                ' ' +
-                chalk.blue('the path must be empty ☠️')
+                  ' ' +
+                  chalk.blue('the path must be empty ☠️')
               )
               console.log('')
             }

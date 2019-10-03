@@ -19,8 +19,8 @@ class Dev {
     } else {
       console.log(
         chalk.red.bold('☠️ Project dev failed:') +
-        ' ' +
-        chalk.blue("can't find .ciffisettings file ☠️")
+          ' ' +
+          chalk.blue("can't find .ciffisettings file ☠️")
       )
       Notify.sendError(
         "☠️ Project dev failed: can't find .ciffisettings file ☠️"
@@ -28,7 +28,7 @@ class Dev {
       return console.log('')
     }
   }
-  
+
   init() {
     const assetPath =
       process.platform === 'win32'
@@ -70,11 +70,11 @@ class Dev {
         'main.js'
       )} -d ${assetPath} --public-url ${assetPath}`
     }
-    
+
     const liveJs = bundlerJs[this.config.general.bundle]
-    
+
     new Logger(spawnCommand(cleanDist), 'clean-dist')
-    
+
     new Config(this.env, () => {
       new Assets(() => {
         if (this.config.general.useNodeSass === false) {
@@ -85,7 +85,7 @@ class Dev {
           const processCss = spawnCommand(liveCss)
           new Logger([processServer, processCss], 'node-sass')
         }
-        
+
         if (this.withServer && this.config.localServer.useHMR) {
           const ciffiDevServer = `${path.join(
             'node_modules',
@@ -93,17 +93,17 @@ class Dev {
             'ciffi-dev-server'
           )}`
           const process = spawnCommand(ciffiDevServer)
-          
+
           new Logger([process], 'ciffi-dev-server')
         } else {
           /*const processJS = spawnCommand(liveJs)
           new Logger([processJS], this.config.general.bundle)*/
-          
+
           let counter = 0
-          
-          watch((res) => {
+
+          watch(res => {
             console.log('🏗' + chalk.blue(res) + '\n')
-            
+
             if (this.withServer && counter++ === 0) {
               require('@ciffi-js/dev-server')
             }
@@ -112,16 +112,16 @@ class Dev {
       })
     })
   }
-  
+
   defineLiveServer() {
     const liveServerFeature = this.config.general.features[
-    this.config.general.features.length - 1
-      ]
+      this.config.general.features.length - 1
+    ]
     const assetPath =
       process.platform === 'win32'
         ? this.config.build.path.replace(/\//g, '\\')
         : this.config.build.path
-    
+
     switch (liveServerFeature) {
       case 'livereload':
         return `${path.join('node_modules', '.bin', 'livereload')} ${assetPath}`

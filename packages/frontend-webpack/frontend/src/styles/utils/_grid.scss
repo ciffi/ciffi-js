@@ -37,7 +37,6 @@
 }
 
 @for $i from 0 through 12 {
-
   .col--#{$i} {
     width: grid(12, $i);
   }

@@ -9,27 +9,27 @@ const { Assets, Build, Config, Dev } = require('./task')
 class Builder {
   constructor() {
     const cli = meow()
-    
+
     const opts = cli.flags
     const args = cli.input
     const cmd = args[0]
-    
+
     Object.keys(opts).forEach(key => {
       const legacyKey = key.replace(/[A-Z]/g, m => {
         return '-' + m.toLowerCase()
       })
-      
+
       opts[legacyKey] = opts[key]
     })
-    
+
     this.init(cmd, opts)
   }
-  
+
   init(cmd, opts) {
     if (cmd) {
       let env = typeof opts.env === 'string' ? opts.env : false
       let devEnv = typeof opts.env === 'string' ? opts.env : false
-      
+
       if (!env) {
         env =
           fileExists.sync(ConfigFile) && require(ConfigFile).defaultBuildEnv
@@ -40,7 +40,7 @@ class Builder {
             ? require(ConfigFile).defaultDevEnv
             : 'dev'
       }
-      
+
       require('@ciffi-js/design-token')(() => {
         switch (cmd) {
           case 'start':
@@ -68,7 +68,7 @@ class Builder {
       })
     }
   }
-  
+
   showCommandErrorMessage() {
     console.log('')
     console.log('')

@@ -1,23 +1,18 @@
 .button {
-
   .no-touch & {
     &:hover {
-
     }
 
     &:active {
-
     }
   }
 
   .touch & {
     &:active {
-
     }
   }
 
   &.disabled,
   &[disabled] {
-
   }
 }

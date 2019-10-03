@@ -1,61 +1,61 @@
-"use strict";
+'use strict'
 
-let Ora = require("ora");
+let Ora = require('ora')
 
 let Loading = (function() {
   function Loading() {
-    this.current = false;
+    this.current = false
     this.spinners = {
       bike: {
         interval: 300,
-        frames: ["    🚲 ", "   🚲  ", "  🚲   ", " 🚲    ", "🚲     "]
+        frames: ['    🚲 ', '   🚲  ', '  🚲   ', ' 🚲    ', '🚲     ']
       },
       turtle: {
         interval: 600,
-        frames: ["     🐢", "    🐢 ", "   🐢  ", "  🐢   ", " 🐢    "]
+        frames: ['     🐢', '    🐢 ', '   🐢  ', '  🐢   ', ' 🐢    ']
       },
       track: {
         interval: 280,
-        frames: ["     🚚", "    🚚 ", "   🚚  ", "  🚚   ", " 🚚    "]
+        frames: ['     🚚', '    🚚 ', '   🚚  ', '  🚚   ', ' 🚚    ']
       }
-    };
+    }
   }
 
   Loading.prototype.start = function(text) {
-    let _spinners = this.spinners;
+    let _spinners = this.spinners
     this.current = Ora({
       text: text,
       spinner: _spinners.track
-    }).start();
+    }).start()
 
     this.timeoutBike = setTimeout(
       function() {
-        this.current.text = text + " -- don't worry";
-        this.current.spinner = _spinners.bike;
+        this.current.text = text + " -- don't worry"
+        this.current.spinner = _spinners.bike
       }.bind(this),
       25000
-    );
+    )
 
     this.timeoutTurtle = setTimeout(
       function() {
-        this.current.text = text + " -- almost finished";
-        this.current.spinner = _spinners.turtle;
+        this.current.text = text + ' -- almost finished'
+        this.current.spinner = _spinners.turtle
       }.bind(this),
       45000
-    );
-  };
+    )
+  }
 
   Loading.prototype.stop = function(text) {
     this.current.stopAndPersist({
       text: text,
-      symbol: "🦄"
-    });
+      symbol: '🦄'
+    })
 
-    clearTimeout(this.timeoutBike);
-    clearTimeout(this.timeoutTurtle);
-  };
+    clearTimeout(this.timeoutBike)
+    clearTimeout(this.timeoutTurtle)
+  }
 
-  return new Loading();
-})();
+  return new Loading()
+})()
 
-module.exports = Loading;
+module.exports = Loading

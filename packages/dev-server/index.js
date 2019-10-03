@@ -1,4 +1,4 @@
 #! /usr/bin/env node
-const Server = require('./src/Server');
+const Server = require('./src/Server')
 
-new Server();
+new Server()
