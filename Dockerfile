@@ -16,7 +16,7 @@ RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -
 RUN touch ~/.zshrc
 RUN echo "PROMPT='%(?:%{%}🔥 %{\$fg_bold[green]%}➜%{\$reset_color%} :%{%}☠️  %{\$fg_bold[red]%}➜%{\$reset_color%}) %{\$fg_bold[cyan]%}%c%{\$reset_color%} $(git_prompt_info)'" >> ~/.zshrc
 RUN echo "" >> ~/.zshrc
-RUN echo "alias \"ciffi\"=\"/usr/local/lib/node_modules/.bin/ciffi\"" >> ~/.zshrc
+RUN echo "alias \"ciffi\"=\"/usr/local/bin/ciffi\"" >> ~/.zshrc
 RUN echo "function _ciffi() {" >> ~/.zshrc
 RUN echo "  _arguments '1: :((build-old\:\"build old project\" dev-old\:\"dev old project\" setup\:\"setup frontend project\"))'" >> ~/.zshrc
 RUN echo "}" >> ~/.zshrc
