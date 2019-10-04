@@ -1,6 +1,6 @@
 {
   "name": "@ciffi-js/jsonize-path",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "It generates json file with list of all files in path recursively",
   "main": "./main.js",
   "repository": {
