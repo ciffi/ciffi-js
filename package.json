@@ -24,5 +24,8 @@
     "test": "node ./test.js",
     "lerna": "./node_modules/.bin/lerna $1",
     "prettier": "prettier --write --single-quote '**/**/*.{jsx,js,json,scss}'"
+  },
+  "husky": {
+    "hooks": "pretty-quick --staged"
   }
 }
