@@ -97,7 +97,9 @@
   },
   "browserslist": ["last 4 versions"],
   "husky": {
-    "hooks": "pretty-quick --staged"
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   },
   "jest": {
     "moduleNameMapper": {
