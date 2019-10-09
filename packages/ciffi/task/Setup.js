@@ -275,7 +275,7 @@ class Setup {
                     }
                     callback({
                       buildPath: res.buildPath,
-                      livereload: true, //res.livereload,
+                      livereload: 'livereload', //res.livereload,
                       https: false, //res.wantHTTPS === 'yes',
                       features: [],
                       bundler: 'webpack'

@@ -1,9 +1,6 @@
 const CiffiSettings = {
     dev: {
       env: 'dev',
-      https: @REPLACE__HTTPS@,
-      sslKey: 'sslcert/local.server.key',
-      sslCrt: 'sslcert/local.server.crt',
       startUrl: 'http@REPLACE__HTTPS__PROTOCOL@://localhost:3000/',
       wantNotify: true
     },

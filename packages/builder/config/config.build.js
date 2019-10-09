@@ -1,5 +1,5 @@
 const path = require('path')
-const ConfigFile = require(path.join('..', '.ciffisettings'))
+const ConfigFile = require(path.resolve(process.cwd(), '.ciffisettings'))
 const baseConfig = require('./config.js')
 const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -34,8 +34,7 @@ module.exports = {
   },
   entry: {
     main: path.join(
-      __dirname,
-      '..',
+      process.cwd(),
       ConfigFile.build.srcPathName,
       'scripts',
       'main.js'

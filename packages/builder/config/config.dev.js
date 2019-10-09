@@ -1,5 +1,5 @@
 const path = require('path')
-const ConfigFile = require(path.join('..', '.ciffisettings'))
+const ConfigFile = require(path.join(process.cwd(), '.ciffisettings'))
 const baseConfig = require('./config.js')
 const plugins = ConfigFile.general.offline
   ? baseConfig.plugins
@@ -17,8 +17,7 @@ module.exports = {
   },
   entry: {
     main: path.join(
-      __dirname,
-      '..',
+      process.cwd(),
       ConfigFile.build.srcPathName,
       'scripts',
       'main.js'

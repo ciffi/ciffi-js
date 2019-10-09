@@ -1,7 +1,7 @@
 const { red } = require('chalk')
 const path = require('path')
 const webpack = require('webpack')
-const config = require(path.join(process.cwd(), 'builder', 'config.build.js'))
+const config = require('../config/config.build')
 const ProgressBar = require('../utils/ProgressBar')
 const ConfigFile = require(path.join(process.cwd(), '.ciffisettings'))
 

@@ -1,9 +1,10 @@
 const path = require('path')
-const ConfigFile = require(path.join('..', '.ciffisettings'))
+const ConfigFile = require(path.join(process.cwd(), '.ciffisettings'))
 const scssAssets = ConfigFile.general.useNodeSass ? '.' : '..'
 const workboxPlugin = require('workbox-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
+
 const insertAtTop = element => {
   const parent = document.querySelector('head')
   const lastInsertedElement = window._lastElementInsertedByStyleLoader
@@ -19,9 +20,7 @@ const insertAtTop = element => {
 
 module.exports = {
   output: {
-    path: path.normalize(
-      path.join(__dirname, '..', ConfigFile.build.path + '/')
-    ),
+    path: path.normalize(path.join(process.cwd(), ConfigFile.build.path + '/')),
     filename: '[name].js',
     chunkFilename: '[name].js',
     hotUpdateChunkFilename: '.hot/[name].[hash].hot-update.js',
@@ -53,7 +52,7 @@ module.exports = {
     rules: [
       {
         test: /\.wcs$/,
-        loader: '@ciffi-js/webpack-wcs-loader'
+        loader: require.resolve('@ciffi-js/webpack-wcs-loader')
       },
       {
         test: /\.scss$/,
@@ -61,22 +60,22 @@ module.exports = {
           {
             loader:
               process.env.NODE_ENV !== 'production'
-                ? 'style-loader'
+                ? require.resolve('style-loader')
                 : MiniCssExtractPlugin.loader,
             options: {
               insert: insertAtTop
             }
           },
-          'css-loader',
+          require.resolve('css-loader'),
           {
-            loader: 'postcss-loader',
+            loader: require.resolve('postcss-loader'),
             options: {
               ident: 'postcss',
               plugins: [require('autoprefixer')({})]
             }
           },
           {
-            loader: 'sass-loader',
+            loader: require.resolve('sass-loader'),
             options: {
               prependData: `$assets: '${scssAssets}';`
             }
@@ -88,28 +87,30 @@ module.exports = {
         exclude: /(node_modules)/,
         loaders: [
           {
-            loader: 'babel-loader',
+            loader: require.resolve('babel-loader'),
             options: {
-              babelrc: true
+              babelrc: false,
+              configFile: path.join(__dirname, '..', '.babelrc'),
+              babelrcRoots: [path.join(__dirname, '..')]
             }
           },
           {
-            loader: 'eslint-loader',
+            loader: require.resolve('eslint-loader'),
             options: {
-              configFile: '.eslintrc.json'
+              configFile: path.join(__dirname, '..', '.eslintrc.json')
             }
           }
         ]
       },
       {
         test: /\.twig$/,
-        loader: 'twig-loader'
+        loader: require.resolve('twig-loader')
       },
       {
         test: /\.(png|jpg|gif|svg|woff2|woff|ttf|eot|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: require.resolve('file-loader'),
             options: {
               name: '[path][name].[ext]',
               outputPath: url => {
@@ -128,13 +129,13 @@ module.exports = {
   plugins: [
     new workboxPlugin.InjectManifest({
       swSrc: path.normalize(
-        path.join(__dirname, '..', ConfigFile.build.srcPathName, 'sw.js')
+        path.join(process.cwd(), ConfigFile.build.srcPathName, 'sw.js')
       ),
       swDest: path.normalize(
-        path.join(__dirname, '..', ConfigFile.build.path + '/..', 'sw.js')
+        path.join(process.cwd(), ConfigFile.build.path + '/..', 'sw.js')
       ),
       globDirectory: path.normalize(
-        path.join(__dirname, '..', ConfigFile.build.path + '/..')
+        path.join(process.cwd(), ConfigFile.build.path + '/..')
       ),
       globPatterns: ['*.html']
     }),

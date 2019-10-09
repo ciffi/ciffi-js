@@ -1,5 +1,5 @@
 const path = require('path')
-const ConfigFile = require(path.join('..', '.ciffisettings'))
+const ConfigFile = require(path.join(process.cwd(), '.ciffisettings'))
 const webpack = require('webpack')
 const baseConfig = require('./config.js')
 
@@ -17,8 +17,7 @@ module.exports = {
     main: [
       'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
       path.join(
-        __dirname,
-        '..',
+        process.cwd(),
         ConfigFile.build.srcPathName,
         'scripts',
         'main.js'

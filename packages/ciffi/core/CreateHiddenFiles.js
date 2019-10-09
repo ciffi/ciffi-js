@@ -14,9 +14,9 @@ class CreateHiddenFiles {
     }
 
     this.files = [
-      'babelrc',
+      // 'babelrc',
       'editorconfig',
-      'eslintrc.json',
+      // 'eslintrc.json',
       'gitignore',
       'prettierignore',
       'prettierrc'
@@ -67,9 +67,7 @@ class CreateHiddenFiles {
   createFile(fileName) {
     const tempFile = path.normalize(`${this.tempPath}${fileName}`)
     const resource = path.normalize(
-      `${
-        this.config.modulePath
-      }/lib/node_modules/ciffi/node_modules/ciffi-js-webpack/resources/core/${fileName}`
+      `${this.config.modulePath}/lib/node_modules/ciffi/node_modules/ciffi-js-webpack/resources/core/${fileName}`
     )
     const projectRoot = path.normalize(`${process.cwd()}/`)
     const projectFile = path.normalize(`${process.cwd()}/.${fileName}`)

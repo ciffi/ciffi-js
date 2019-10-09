@@ -7,7 +7,10 @@ const path = require('path')
 const webpack = require('webpack')
 const webpackConfig = require(path.join(
   process.cwd(),
+  'node_modules',
+  '@ciffi-js',
   'builder',
+  'config',
   'config.server.js'
 ))
 const compiler = webpack(webpackConfig)
