@@ -12,7 +12,7 @@
   "license": "MIT",
   "homepage": "https://github.com/ciffi/ciffi-js",
   "devDependencies": {
-    "@ciffi-js/builder": "5.0.0",
+    "@ciffi-js/builder": "5.0.1",
     "@ciffi-js/jsonize-path": "1.1.1",
     "husky": "3.0.8",
     "jest": "24.9.0",
