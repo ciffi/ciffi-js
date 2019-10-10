@@ -14,9 +14,9 @@ class CreateHiddenFiles {
     }
 
     this.files = [
-      // 'babelrc',
+      'babelrc',
       'editorconfig',
-      // 'eslintrc.json',
+      'eslintrc.json',
       'gitignore',
       'prettierignore',
       'prettierrc'

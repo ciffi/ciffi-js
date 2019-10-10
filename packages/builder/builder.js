@@ -4,7 +4,7 @@ const chalk = require('chalk')
 const fileExists = require('file-exists')
 const path = require('path')
 const ConfigFile = path.resolve(process.cwd(), '.ciffisettings')
-const { Assets, Build, Config, Dev } = require('./task')
+const { Assets, Build, Config, Dev, Test } = require('./task')
 
 class Builder {
   constructor() {
@@ -39,6 +39,10 @@ class Builder {
           fileExists.sync(ConfigFile) && require(ConfigFile).defaultDevEnv
             ? require(ConfigFile).defaultDevEnv
             : 'dev'
+      }
+
+      if (cmd === 'test') {
+        return new Test()
       }
 
       require('@ciffi-js/design-token')(() => {

@@ -89,16 +89,11 @@ module.exports = {
           {
             loader: require.resolve('babel-loader'),
             options: {
-              babelrc: false,
-              configFile: path.join(__dirname, '..', '.babelrc'),
-              babelrcRoots: [path.join(__dirname, '..')]
+              babelrc: true
             }
           },
           {
-            loader: require.resolve('eslint-loader'),
-            options: {
-              configFile: path.join(__dirname, '..', '.eslintrc.json')
-            }
+            loader: require.resolve('eslint-loader')
           }
         ]
       },
