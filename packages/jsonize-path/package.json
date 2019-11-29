@@ -30,7 +30,7 @@
     "ciffi-jsonize": "./main.js"
   },
   "dependencies": {
-    "chalk": "^2.1.0",
-    "file-exists": "^4.0.0"
+    "chalk": "3.0.0",
+    "file-exists": "5.0.1"
   }
 }

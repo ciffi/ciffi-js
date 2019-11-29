@@ -25,7 +25,7 @@
   "settings": {
     "react": {
       "pragma": "React",
-      "version": "16.10.2"
+      "version": "16.12.0"
     }
   }
 }

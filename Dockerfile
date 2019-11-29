@@ -18,7 +18,7 @@ COPY ./nyancat home/node/nyancat
 RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
 
 RUN touch ~/.zshrc
-RUN echo "PROMPT='%(?:%{%}🔥 %{\$fg_bold[green]%}➜%{\$reset_color%} :%{%}☠️  %{\$fg_bold[red]%}➜%{\$reset_color%}) %{\$fg_bold[cyan]%}%c%{\$reset_color%} $(git_prompt_info)'" >> ~/.zshrc
+RUN echo "PROMPT='%{\$fg_bold[yellow]%}docker%{\$reset_color%} %(?:%{%}🔥 %{\$fg_bold[green]%}➜%{\$reset_color%} :%{%}☠️  %{\$fg_bold[red]%}➜%{\$reset_color%}) %{\$fg_bold[cyan]%}%c%{\$reset_color%} $(git_prompt_info)'" >> ~/.zshrc
 RUN echo "" >> ~/.zshrc
 RUN echo "alias \"ciffi\"=\"/usr/local/bin/ciffi\"" >> ~/.zshrc
 RUN echo "alias \"nyan\"=\"node ~/nyancat/index\"" >> ~/.zshrc
