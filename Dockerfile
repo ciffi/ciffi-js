@@ -9,7 +9,7 @@ RUN npm install -g ciffi@latest
 
 RUN ciffi -v
 
-USER node
+#USER node
 
 RUN mkdir home/node/nyancat
 
@@ -33,4 +33,4 @@ RUN echo "  . /usr/local/lib/node_modules/ciffi/ciffi.bash" >> ~/.bashrc
 RUN echo "fi" >> ~/.bashrc
 RUN npm completion >> ~/.bashrc
 
-USER root
+#USER root
