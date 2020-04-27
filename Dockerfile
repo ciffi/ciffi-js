@@ -3,13 +3,12 @@ FROM node:10-alpine
 RUN apk add --no-cache bash
 RUN apk add --no-cache zsh
 RUN apk add --no-cache git
+RUN apk add --no-cache iputils
 
 RUN npm install -g npm
 RUN npm install -g ciffi@latest
 
 RUN ciffi -v
-
-#USER node
 
 RUN mkdir home/node/nyancat
 
@@ -32,5 +31,3 @@ RUN echo "if [ -f /usr/local/lib/node_modules/ciffi/ciffi.bash ]; then" >> ~/.ba
 RUN echo "  . /usr/local/lib/node_modules/ciffi/ciffi.bash" >> ~/.bashrc
 RUN echo "fi" >> ~/.bashrc
 RUN npm completion >> ~/.bashrc
-
-#USER root
