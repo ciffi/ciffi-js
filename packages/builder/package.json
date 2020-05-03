@@ -1,6 +1,6 @@
 {
   "name": "@ciffi-js/builder",
-  "version": "5.2.0",
+  "version": "5.3.0",
   "description": "Builder for ciffi js webbpack project",
   "main": "./builder.js",
   "repository": {
@@ -51,9 +51,9 @@
     "@babel/preset-env": "7.9.6",
     "@babel/preset-react": "7.9.4",
     "@babel/runtime": "7.9.6",
-    "@ciffi-js/design-token": "^1.2.0",
-    "@ciffi-js/dev-server": "^2.3.0",
-    "@ciffi-js/webpack-wcs-loader": "^1.0.0",
+    "@ciffi-js/design-token": "^1.2.1",
+    "@ciffi-js/dev-server": "^2.3.1",
+    "@ciffi-js/webpack-wcs-loader": "^1.0.1",
     "autoprefixer": "9.7.6",
     "babel-eslint": "10.1.0",
     "babel-jest": "25.5.1",
