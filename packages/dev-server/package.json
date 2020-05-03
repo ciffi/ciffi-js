@@ -30,7 +30,7 @@
     "ciffi-dev-server": "./index.js"
   },
   "dependencies": {
-    "chalk": "3.0.0",
+    "chalk": "4.0.0",
     "express": "4.17.1",
     "file-exists": "5.0.1"
   }

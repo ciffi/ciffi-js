@@ -32,6 +32,6 @@
     "ciffi-design-token": "./index.js"
   },
   "dependencies": {
-    "chalk": "3.0.0"
+    "chalk": "4.0.0"
   }
 }

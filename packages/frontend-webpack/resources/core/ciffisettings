@@ -30,6 +30,7 @@ const CiffiSettings = {
       config: 'config.server.js',
       port: '3000',
       publicPath: '@REPLACE__LOCAL__SERVER__PATH@',
+      pushState: false,
       useHMR: false
     },
     custom: {
