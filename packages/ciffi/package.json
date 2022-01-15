@@ -51,7 +51,7 @@
     "ora": "4.0.4",
     "path-exists": "4.0.0",
     "replace-in-file": "4.2.0",
-    "shelljs": "0.8.4",
+    "shelljs": "0.8.5",
     "single-line-log": "1.1.2"
   },
   "bin": {
