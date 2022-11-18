@@ -31,7 +31,7 @@
   "dependencies": {
     "autoprefixer": "9.7.6",
     "clean-css-cli": "4.3.0",
-    "loader-utils": "2.0.0",
+    "loader-utils": "1.4.2",
     "node-sass": "4.14.0",
     "postcss-cli": "7.1.1",
     "schema-utils": "2.6.6"
